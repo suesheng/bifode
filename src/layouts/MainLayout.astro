@@ -13,18 +13,54 @@ import CookieBanner from '../components/CookieBanner.astro';
                 <link rel="apple-touch-icon" href="/favicon.svg" />
                 <meta name="generator" content={Astro.generator} />
                 <title>BiFoDe - Bildung & Demokratie</title>
+
+                <!-- Preconnect to external font domains -->
                 <link rel="preconnect" href="https://fonts.googleapis.com">
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+                <!-- Async Google Fonts with display=swap -->
+                <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+                <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
+
+                <!-- Critical CSS - Inline for faster initial render (above-the-fold) -->
+                <style>
+                        *, *::before, *::after { box-sizing: border-box; }
+                        html, body { margin: 0; padding: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #f9fafb; color: #111827; scroll-behavior: smooth; }
+                        .app-container { display: flex; flex-direction: column; min-height: 100vh; }
+                        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+                        .navbar { background: white; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 50; }
+                        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+                        .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: #111827; font-weight: 700; font-size: 1.5rem; }
+                        .logo-img { height: 36px; width: auto; }
+                        .logo-light { display: block; }
+                        .logo-dark { display: none; }
+                        .nav-links { display: flex; gap: 2rem; }
+                        .nav-links a { color: #6b7280; text-decoration: none; font-weight: 500; }
+                        .burger-menu { display: none; flex-direction: column; background: none; border: none; cursor: pointer; padding: 0.5rem; gap: 0.4rem; }
+                        .burger-line { width: 24px; height: 3px; background-color: #111827; border-radius: 2px; transition: all 0.3s ease; }
+                        .main-content { flex: 1; padding: 2rem 0; }
+                        @media (max-width: 768px) {
+                                .burger-menu { display: flex; }
+                                .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; gap: 0; border-bottom: 1px solid #e5e7eb; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+                                .navbar.is-open .nav-links { max-height: 500px; }
+                                .nav-links a { padding: 0.75rem 1rem; border-bottom: 1px solid #f3f4f6; }
+                        }
+                </style>
         </head>
         <body>
                 <div class="app-container">
-                        <nav class="navbar">
+                        <nav class="navbar" id="navbar">
                                 <div class="container nav-wrapper">
                                         <a href="/" class="logo">
                                                 <img src="/logos/logo-light.svg" alt="BiFoDe Logo" class="logo-img logo-light" />
                                         </a>
-                                        <div class="nav-links">
+                                        <button class="burger-menu" id="burgerMenu" aria-label="Navigation menu" aria-expanded="false">
+                                                <span class="burger-line"></span>
+                                                <span class="burger-line"></span>
+                                                <span class="burger-line"></span>
+                                        </button>
+                                        <div class="nav-links" id="navLinks">
                                                 <a href="/">Startseite</a>
                                                 <a href="/ueber-uns">Über uns</a>
                                                 <a href="/unsere-arbeit">Unsere Arbeit</a>
@@ -64,7 +100,7 @@ import CookieBanner from '../components/CookieBanner.astro';
 
                                         <div class="footer-section">
                                                 <h4>Kontakt</h4>
-                                                <p>E-Mail: info@bifode-nrw.de</p>
+                                                <p>E-Mail: info@bifode.org</p>
                                                 <p>Standort: Nordrhein-Westfalen</p>
                                         </div>
 
@@ -87,6 +123,40 @@ import CookieBanner from '../components/CookieBanner.astro';
 
                 <!-- Cookie Banner -->
                 <CookieBanner client:load />
+
+                <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                                const burgerMenu = document.getElementById('burgerMenu');
+                                const navbar = document.getElementById('navbar');
+                                const navLinks = document.getElementById('navLinks');
+                                const navItems = navLinks.querySelectorAll('a');
+
+                                // Toggle menu on burger click
+                                burgerMenu.addEventListener('click', () => {
+                                        navbar.classList.toggle('is-open');
+                                        burgerMenu.classList.toggle('is-open');
+                                        burgerMenu.setAttribute('aria-expanded', burgerMenu.classList.contains('is-open'));
+                                });
+
+                                // Close menu when a link is clicked
+                                navItems.forEach(item => {
+                                        item.addEventListener('click', () => {
+                                                navbar.classList.remove('is-open');
+                                                burgerMenu.classList.remove('is-open');
+                                                burgerMenu.setAttribute('aria-expanded', 'false');
+                                        });
+                                });
+
+                                // Close menu when clicking outside
+                                document.addEventListener('click', (event) => {
+                                        if (!navbar.contains(event.target) && navbar.classList.contains('is-open')) {
+                                                navbar.classList.remove('is-open');
+                                                burgerMenu.classList.remove('is-open');
+                                                burgerMenu.setAttribute('aria-expanded', 'false');
+                                        }
+                                });
+                        });
+                </script>
         </body>
 </html>
 
@@ -184,6 +254,37 @@ import CookieBanner from '../components/CookieBanner.astro';
                 color: #111827;
         }
 
+        /* Burger Menu Button */
+        .burger-menu {
+                display: none;
+                flex-direction: column;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.5rem;
+                gap: 0.4rem;
+        }
+
+        .burger-line {
+                width: 24px;
+                height: 3px;
+                background-color: #111827;
+                border-radius: 2px;
+                transition: all 0.3s ease;
+        }
+
+        .burger-menu.is-open .burger-line:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .burger-menu.is-open .burger-line:nth-child(2) {
+                opacity: 0;
+        }
+
+        .burger-menu.is-open .burger-line:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         .main-content {
                 flex: 1;
                 padding: 2rem 0;
@@ -272,12 +373,51 @@ import CookieBanner from '../components/CookieBanner.astro';
 
         @media (max-width: 768px) {
                 .nav-wrapper {
-                        flex-direction: column;
-                        gap: 1rem;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 1rem 0;
+                }
+
+                .burger-menu {
+                        display: flex;
                 }
 
                 .nav-links {
-                        gap: 1rem;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background: white;
+                        flex-direction: column;
+                        padding: 1rem;
+                        gap: 0;
+                        border-bottom: 1px solid #e5e7eb;
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.3s ease;
+                }
+
+                .navbar.is-open .nav-links {
+                        max-height: 500px;
+                }
+
+                .nav-links a {
+                        padding: 0.75rem 1rem;
+                        border-bottom: 1px solid #f3f4f6;
+                        transition: background-color 0.2s ease, color 0.2s ease;
+                }
+
+                .nav-links a:last-child {
+                        border-bottom: none;
+                }
+
+                .nav-links a:hover {
+                        background-color: #f9fafb;
+                }
+
+                .navbar {
+                        position: relative;
                 }
         }
 
