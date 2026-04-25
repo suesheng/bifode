@@ -1,0 +1,237 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout title="Angebote für Schulen" description="Bildungsformate zu Antisemitismus, Vorurteilen, Medienkompetenz und demokratischem Zusammenhalt.">
+  <Hero centered={false} title="Angebote für Schulen" subtitle="Bildungsformate zu Antisemitismus, Vorurteilen, Medienkompetenz und demokratischem Zusammenhalt." />
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Warum dieses Angebot?</h2>
+    </div>
+    <p class="lead">Viele Schulen erleben, dass gesellschaftliche Konflikte, Vorurteile und Desinformation auch im Schulalltag sichtbar werden. Lehrkräfte brauchen Orientierung, Materialien und Formate, die praxisnah und altersgerecht sind.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Für wen?</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">👨‍🎓</div>
+        <h3>Sekundarstufe I</h3>
+        <p>Altersgerechte Formate für Jugendliche in der Mittelstufe, abgestimmt auf schulische Bedürfnisse.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">👩‍🎓</div>
+        <h3>Sekundarstufe II</h3>
+        <p>Vertiefende Angebote für ältere Schülerinnen und Schüler mit Fokus auf kritisch-reflexives Lernen.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">👩‍🏫</div>
+        <h3>Lehrkräfte</h3>
+        <p>Materialien und Begleitung für Lehrkräfte, um Unterricht sicher und selbstbewusst zu gestalten.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">👨‍💼</div>
+        <h3>Pädagogische Fachkräfte</h3>
+        <p>Professionelle Unterstützung für Schulsozialarbeit und pädagogische Beratung.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Themen</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🛡️</div>
+        <h3>Antisemitismus verstehen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">👀</div>
+        <h3>Vorurteile erkennen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📺</div>
+        <h3>Medienkompetenz stärken</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🔍</div>
+        <h3>Desinformation einordnen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🗳️</div>
+        <h3>Demokratische Werte vermitteln</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">💬</div>
+        <h3>Konflikte im Schulalltag besprechen</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Formate</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🛠️</div>
+        <h3>Workshops</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📅</div>
+        <h3>Projekttage</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">💻</div>
+        <h3>Digitale Module</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🖥️</div>
+        <h3>Interaktive Displays / Kiosk</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📚</div>
+        <h3>Fortbildungen für Lehrkräfte</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unser Ansatz</h2>
+    </div>
+    <p class="lead">Unsere Angebote sind keine religiösen oder gruppenspezifischen Inhalte, sondern Teil demokratischer Bildungsarbeit. Jüdisches Leben dient als realer Bezugspunkt, um aktuelle gesellschaftliche Fragen verständlich zu machen.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Ablauf</h2>
+    </div>
+    <div class="grid steps">
+      <article class="card">
+        <p>Anfrage</p>
+      </article>
+      <article class="card">
+        <p>Vorgespräch</p>
+      </article>
+      <article class="card">
+        <p>Format auswählen</p>
+      </article>
+      <article class="card">
+        <p>Durchführung</p>
+      </article>
+      <article class="card">
+        <p>Auswertung</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container cta-section">
+    <a class="button" href="/kontakt">Schulangebot anfragen</a>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+    background: #f8fafc;
+  }
+
+  .hero-content {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .grid,
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #1e3a8a;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .cta-section {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .steps .card {
+    text-align: center;
+    min-height: 120px;
+  }
+
+  .steps .card p {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0 2rem;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,153 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout title="Kooperation" description="Wir arbeiten mit Schulen, Bildungsträgern, Kommunen und zivilgesellschaftlichen Partnern zusammen.">
+  <Hero centered={false} title="Kooperation" subtitle="Wir arbeiten mit Schulen, Bildungsträgern, Kommunen und zivilgesellschaftlichen Partnern zusammen." />
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Warum Kooperation wichtig ist</h2>
+    </div>
+    <p class="lead">Prävention gelingt dort am besten, wo Bildung, Erfahrung und lokale Netzwerke zusammenkommen. BiFoDe verbindet praxisnahe Bildungsarbeit mit partnerschaftlicher Zusammenarbeit in Nordrhein-Westfalen.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Mit wem wir arbeiten</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🏫</div>
+        <h3>Schulen und Bildungseinrichtungen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🏛️</div>
+        <h3>Kommunen und öffentliche Stellen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🤝</div>
+        <h3>Zivilgesellschaftliche Organisationen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">⛪</div>
+        <h3>Religiöse Gemeinden</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">👩‍💼</div>
+        <h3>Fachstellen und Expertinnen / Experten</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Formen der Zusammenarbeit</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🛠️</div>
+        <h3>Workshops und Projekttage</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📅</div>
+        <h3>Gemeinsame Bildungsprojekte</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">💬</div>
+        <h3>Fachlicher Austausch</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🧪</div>
+        <h3>Pilotformate an Schulen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📚</div>
+        <h3>Materialien und digitale Module</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unser Kooperationsverständnis</h2>
+    </div>
+    <p class="lead">BiFoDe versteht Kooperation als praktische Zusammenarbeit auf Augenhöhe. Wir ergänzen bestehende Strukturen, bündeln Wissen und entwickeln Formate, die vor Ort konkret nutzbar sind.</p>
+  </section>
+
+  <section class="container cta-section">
+    <p class="lead">Sie möchten mit BiFoDe zusammenarbeiten oder ein Bildungsformat an Ihrer Einrichtung umsetzen? Sprechen Sie uns an.</p>
+    <a class="button" href="/kontakt">Kontakt aufnehmen</a>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    padding: 4rem 0 2.5rem;
+    background: #f8fafc;
+  }
+
+  .hero-content {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-section {
+    padding: 2.5rem 0;
+    text-align: center;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0 1.5rem;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>

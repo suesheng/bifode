@@ -1,0 +1,160 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout title="Unsere Arbeit" description="Bildung, Orientierung und Analyse – unsere Arbeit verbindet Prävention mit praktischer Unterstützung im Alltag.">
+  <Hero centered={false} title="Unsere Arbeit" subtitle="Bildung, Orientierung und Analyse – unsere Arbeit verbindet Prävention mit praktischer Unterstützung im Alltag." />
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Bildung & Prävention</h2>
+    </div>
+    <p class="lead">Wir entwickeln und realisieren Bildungsformate für Schulen und Bildungseinrichtungen. Ziel ist es, Antisemitismus einzuordnen, Vorurteile sichtbar zu machen und Medienkompetenz zu stärken.</p>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🛠️</div>
+        <h3>Workshops für Schulen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📅</div>
+        <h3>Projekttage und Module</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📺</div>
+        <h3>Medienkompetenz</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">👩‍🏫</div>
+        <h3>Lehrerfortbildungen</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unterstützung & Orientierung</h2>
+    </div>
+    <p class="lead">Wir bieten eine niedrigschwellige Anlaufstelle für die Einordnung von Vorfällen und unterstützen bei ersten Schritten im Umgang mit Konflikten und Diskriminierung.</p>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🔍</div>
+        <h3>Erste Einordnung von Vorfällen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📄</div>
+        <h3>Unterstützung bei Dokumentation</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">💬</div>
+        <h3>Orientierung im Umgang mit Konflikten</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🤝</div>
+        <h3>Weitervermittlung an Fachstellen</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Analyse & Hintergrund</h2>
+    </div>
+    <p class="lead">Wir beobachten gesellschaftliche Entwicklungen und öffentliche Diskurse auf Basis offener Quellen. Die Ergebnisse fließen in unsere Bildungsarbeit ein.</p>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">📊</div>
+        <h3>Analyse von gesellschaftlichen Trends</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📰</div>
+        <h3>Einordnung von Medieninhalten</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📚</div>
+        <h3>Hintergrundwissen für Bildungsarbeit</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Zusammenarbeit</h2>
+    </div>
+    <p class="lead">Unsere Arbeit erfolgt in enger Kooperation mit Schulen, zivilgesellschaftlichen Organisationen und öffentlichen Institutionen.</p>
+  </section>
+
+  <section class="container cta-section">
+    <a class="button" href="/kooperation">Mehr über Kooperation erfahren</a>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    padding: 4rem 0 2.5rem;
+    background: #f8fafc;
+  }
+
+  .hero-content {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-section {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0 1.5rem;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>

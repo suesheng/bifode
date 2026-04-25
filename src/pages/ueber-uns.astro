@@ -1,0 +1,152 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout title="Über BiFoDe e.V." description="BiFoDe e.V. stellt sich als gemeinnützige Migrantenselbstorganisation in NRW vor.">
+  <Hero centered={false} title="Über BiFoDe e.V." subtitle="Bildungsforum für Demokratie und Vielfalt NRW – eine Migrantenselbstorganisation mit Fokus auf Bildung, Prävention und gesellschaftlichen Zusammenhalt." />
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Wer wir sind</h2>
+    </div>
+    <p class="lead">BiFoDe e.V. ist eine Migrantenselbstorganisation (MSO) in Nordrhein-Westfalen. Wir entwickeln Bildungs- und Präventionsformate zur Stärkung von Demokratie, Medienkompetenz und gesellschaftlichem Zusammenhalt.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unsere Mission</h2>
+    </div>
+    <p class="lead">Wir unterstützen Menschen und Institutionen dabei, Vorurteile zu erkennen, Antisemitismus einzuordnen und demokratische Handlungssicherheit im Alltag zu stärken.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unsere Ziele</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🗳️</div>
+        <h3>Demokratiebildung stärken</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">📺</div>
+        <h3>Medienkompetenz fördern</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🛡️</div>
+        <h3>Antisemitismusprävention entwickeln</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🤝</div>
+        <h3>Schulen und Partner unterstützen</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🌍</div>
+        <h3>Gesellschaftlichen Zusammenhalt fördern</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unser Ansatz</h2>
+    </div>
+    <p class="lead">Wir arbeiten niedrigschwellig, praxisnah und kooperativ. Unsere Formate sind modular aufgebaut und können an die Bedürfnisse von Schulen, Bildungseinrichtungen und Partnern angepasst werden.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Team & Netzwerk</h2>
+    </div>
+    <p class="lead">Der Verein arbeitet mit einem wachsenden Netzwerk aus Fachleuten aus Bildung, Kommunikation, Recht und Zivilgesellschaft.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Transparenz</h2>
+    </div>
+    <p class="lead">Wir unterscheiden klar zwischen bestehenden Strukturen, Pilotprojekten und Konzepten in Entwicklung. Diese Transparenz ist Grundlage für Vertrauen und nachhaltige Zusammenarbeit.</p>
+  </section>
+
+  <section class="container cta-section">
+    <a class="button" href="/kooperation">Kooperation anfragen</a>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+    background: #f8fafc;
+  }
+
+  .hero-content {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .cta-section {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0 2rem;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>

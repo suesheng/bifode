@@ -1,0 +1,76 @@
+---
+// src/components/HeroSection.astro
+---
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Demokratie stärken. Vielfalt gestalten.</h1>
+            <p>
+                Praxisnahe Bildungsprogramme zur Prävention von Antisemitismus in Nordrhein-Westfalen.
+            </p>
+            <a href="/projekte" class="btn btn-primary">Unsere Formate</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        color: white;
+        padding: 6rem 2rem;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .btn-primary {
+        background: white;
+        color: #1e40af;
+    }
+
+    .btn-primary:hover {
+        background: #f3f4f6;
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+        }
+    }
+</style>

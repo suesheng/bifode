@@ -1,0 +1,293 @@
+---
+// src/pages/cookie-richtlinien.astro
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Cookie-Richtlinien | BiFoDe">
+  <div class="container">
+    <h1>Cookie-Richtlinien</h1>
+
+    <div class="content-section">
+      <h2>Was sind Cookies?</h2>
+      <p>
+        Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen.
+        Sie helfen uns, Ihnen ein besseres Nutzererlebnis zu bieten und unsere Website zu verbessern.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>Arten von Cookies, die wir verwenden</h2>
+
+      <div class="cookie-type">
+        <h3>Notwendige Cookies</h3>
+        <p>
+          Diese Cookies sind für den Betrieb unserer Website erforderlich. Sie ermöglichen grundlegende Funktionen
+          wie Sicherheit, Netzwerk-Management und Barrierefreiheit. Diese Cookies werden automatisch aktiviert
+          und können nicht deaktiviert werden.
+        </p>
+        <p><strong>Speicherdauer:</strong> Session oder bis zu 1 Jahr</p>
+        <p><strong>Beispiele:</strong> Session-Management, CSRF-Schutz, Load-Balancing</p>
+      </div>
+
+      <div class="cookie-type">
+        <h3>Funktionale Cookies</h3>
+        <p>
+          Diese Cookies ermöglichen der Website, erweiterte Funktionalität und Personalisierung anzubieten.
+          Sie speichern Informationen über Ihre Präferenzen und Einstellungen.
+        </p>
+        <p><strong>Speicherdauer:</strong> Bis zu 1 Jahr</p>
+        <p><strong>Beispiele:</strong> Spracheinstellungen, Schriftgröße, Standort-basierte Inhalte</p>
+      </div>
+
+      <div class="cookie-type">
+        <h3>Analyse-Cookies</h3>
+        <p>
+          Diese Cookies helfen uns zu verstehen, wie Besucher unsere Website nutzen. Sie sammeln Informationen
+          über die Anzahl der Besucher, die besuchten Seiten und die Zeit, die auf der Website verbracht wird.
+          Alle Informationen werden aggregiert und anonymisiert verwendet.
+        </p>
+        <p><strong>Speicherdauer:</strong> Bis zu 2 Jahre</p>
+        <p><strong>Dienste:</strong> Google Analytics, Matomo</p>
+      </div>
+
+      <div class="cookie-type">
+        <h3>Marketing-Cookies</h3>
+        <p>
+          Diese Cookies werden verwendet, um Werbung relevanter zu gestalten und Marketing-Kampagnen zu messen.
+          Sie können auch verwendet werden, um die Anzahl der Besuche auf unserer Website über verschiedene Websites hinweg zu verfolgen.
+        </p>
+        <p><strong>Speicherdauer:</strong> Bis zu 2 Jahre</p>
+        <p><strong>Dienste:</strong> Google Ads, Facebook Pixel, LinkedIn Insights</p>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Ihre Cookie-Einstellungen verwalten</h2>
+      <p>
+        Sie können Ihre Cookie-Einstellungen jederzeit ändern, indem Sie auf den "Einstellungen"-Button
+        in unserem Cookie-Banner klicken oder die Einstellungen unten anpassen.
+      </p>
+
+      <div class="cookie-settings">
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <h4>Notwendige Cookies</h4>
+            <input type="checkbox" id="settings-essential" checked disabled>
+            <span class="cookie-status">Immer aktiv</span>
+          </div>
+          <p>Diese Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.</p>
+        </div>
+
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <h4>Funktionale Cookies</h4>
+            <input type="checkbox" id="settings-functional">
+            <span class="cookie-status">Optional</span>
+          </div>
+          <p>Ermöglichen erweiterte Funktionalität und Personalisierung der Website.</p>
+        </div>
+
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <h4>Analyse-Cookies</h4>
+            <input type="checkbox" id="settings-analytics">
+            <span class="cookie-status">Optional</span>
+          </div>
+          <p>Helfen uns zu verstehen, wie Besucher unsere Website nutzen.</p>
+        </div>
+
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <h4>Marketing-Cookies</h4>
+            <input type="checkbox" id="settings-marketing">
+            <span class="cookie-status">Optional</span>
+          </div>
+          <p>Werden verwendet, um Werbung relevanter zu gestalten.</p>
+        </div>
+
+        <button id="save-cookie-settings" class="btn btn-primary">Einstellungen speichern</button>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Kontakt</h2>
+      <p>
+        Wenn Sie Fragen zu unserer Cookie-Richtlinie haben, kontaktieren Sie uns bitte:
+      </p>
+      <p>
+        Email: <a href="mailto:datenschutz@bifode.de">datenschutz@bifode.de</a><br>
+        Telefon: +49 (0) 123 456789
+      </p>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    color: #111827;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .content-section {
+    margin-bottom: 2rem;
+  }
+
+  .content-section h2 {
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .content-section p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .cookie-type {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .cookie-type h3 {
+    color: #111827;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .cookie-type p {
+    margin-bottom: 0.5rem;
+  }
+
+  .cookie-type p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cookie-settings {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .cookie-category {
+    margin-bottom: 1.5rem;
+  }
+
+  .cookie-category:last-child {
+    margin-bottom: 1rem;
+  }
+
+  .cookie-category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cookie-category-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .cookie-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .cookie-category p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .btn:hover {
+    background-color: #2563eb;
+  }
+
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  // Load current cookie settings
+  document.addEventListener('DOMContentLoaded', () => {
+    const cookieConsent = localStorage.getItem('cookie-consent');
+    if (cookieConsent) {
+      const settings = JSON.parse(cookieConsent);
+      (document.getElementById('settings-functional') as HTMLInputElement).checked = settings.functional || false;
+      (document.getElementById('settings-analytics') as HTMLInputElement).checked = settings.analytics || false;
+      (document.getElementById('settings-marketing') as HTMLInputElement).checked = settings.marketing || false;
+    }
+
+    // Save settings button
+    document.getElementById('save-cookie-settings')?.addEventListener('click', () => {
+      const settings = {
+        essential: true,
+        functional: (document.getElementById('settings-functional') as HTMLInputElement).checked,
+        analytics: (document.getElementById('settings-analytics') as HTMLInputElement).checked,
+        marketing: (document.getElementById('settings-marketing') as HTMLInputElement).checked,
+        timestamp: Date.now()
+      };
+
+      localStorage.setItem('cookie-consent', JSON.stringify(settings));
+
+      // Show success message
+      alert('Ihre Cookie-Einstellungen wurden gespeichert!');
+
+      // Reload page to apply settings
+      window.location.reload();
+    });
+  });
+</script>

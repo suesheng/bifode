@@ -1,0 +1,213 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout title="Kontakt" description="Sie möchten ein Bildungsformat umsetzen, eine Kooperation besprechen oder mehr über BiFoDe erfahren? Schreiben Sie uns.">
+  <Hero centered={false} title="Kontakt" subtitle="Sie möchten ein Bildungsformat umsetzen, eine Kooperation besprechen oder mehr über BiFoDe erfahren? Schreiben Sie uns." />
+
+  <section class="container">
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🏫</div>
+        <h3>Für Schulen</h3>
+        <p>Anfragen zu Workshops, Projekttagen, digitalen Modulen und Fortbildungen.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🤝</div>
+        <h3>Für Partner</h3>
+        <p>Kooperationen mit Bildungsträgern, Kommunen, NGOs und Fachstellen.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">✉️</div>
+        <h3>Allgemeine Anfragen</h3>
+        <p>Fragen zum Verein, zu Projekten oder zu Möglichkeiten der Zusammenarbeit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Kontaktinformationen</h2>
+    </div>
+    <div class="contact-info">
+      <p><strong>E-Mail:</strong> info@bifode-nrw.de</p>
+      <p><strong>Standort:</strong> Nordrhein-Westfalen</p>
+      <p><strong>Ansprechpartner:</strong> BiFoDe e.V.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Nachricht senden</h2>
+    </div>
+    <div class="card contact-form-card">
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="organization">Organisation / Einrichtung</label>
+          <input type="text" id="organization" name="organization">
+        </div>
+        <div class="form-group">
+          <label for="email">E-Mail *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Betreff *</label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Nachricht *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="privacy" name="privacy" required>
+          <label for="privacy">Ich habe die Datenschutzhinweise gelesen.</label>
+        </div>
+        <button type="submit" class="button">Nachricht senden</button>
+      </form>
+      <p class="form-note">Dieses Formular ist derzeit als statisches Formular vorbereitet. Alternativ erreichen Sie uns direkt per E-Mail.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Datenschutz</h2>
+    </div>
+    <p class="lead">Wir behandeln Anfragen vertraulich und verwenden personenbezogene Daten ausschließlich zur Bearbeitung der Anfrage.</p>
+  </section>
+</MainLayout>
+
+<style>
+  .hero {
+    padding: 4rem 0 2.5rem;
+    background: #f8fafc;
+  }
+
+  .hero-content {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .contact-info {
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .contact-info p {
+    margin: 0 0 0.5rem;
+    color: #374151;
+  }
+
+  .contact-form-card {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+
+  .checkbox-group {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .checkbox-group input {
+    width: auto;
+    margin-top: 0.25rem;
+  }
+
+  .checkbox-group label {
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 0 1.5rem;
+    }
+
+    .contact-form-card {
+      margin: 0;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>

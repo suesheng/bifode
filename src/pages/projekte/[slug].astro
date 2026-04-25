@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+// 1. Генерируем пути
+export async function getStaticPaths() {
+  const projectEntries = await getCollection('projekte');
+  return projectEntries.map(entry => ({
+    // В Astro 5 используем id вместо slug
+    params: { slug: entry.id }, 
+    props: { entry },
+  }));
+}
+
+// 2. Получаем данные
+const { entry } = Astro.props;
+const { Content } = await render(entry); // Важно: render(entry)
+---
+
+<MainLayout title={entry.data.title}>
+  <article style="max-width: 800px; margin: 3rem auto; padding: 0 1rem;">
+    <header style="border-bottom: 2px solid #1e40af; margin-bottom: 2rem; padding-bottom: 1rem;">
+      <h1 style="color: #1e40af;">{entry.data.title}</h1>
+      {entry.data.description && <p style="font-style: italic; color: #666;">{entry.data.description}</p>}
+    </header>
+    
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</MainLayout>
+
+<style is:global>
+  .prose h2 { color: #1e40af; margin-top: 2rem; border-bottom: 1px solid #eee; }
+  .prose p { line-height: 1.8; margin: 1rem 0; }
+  .prose ul { padding-left: 1.5rem; }
+  .prose pre { background: #f4f4f4; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+</style>

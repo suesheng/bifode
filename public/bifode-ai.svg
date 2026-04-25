@@ -1,0 +1,33 @@
+<svg width="120" height="150" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="none"/>
+
+  <!-- B shape -->
+  <path d="
+    M20 10
+    H70
+    C95 10 110 25 110 45
+    C110 60 100 70 85 75
+    C105 80 115 95 115 115
+    C115 135 95 145 70 145
+    H20
+    Z
+  " fill="#0b2a4a"/>
+
+  <!-- Bottom blue shape -->
+  <path d="
+    M20 100
+    Q60 120 90 140
+    L20 140
+    Z
+  " fill="#2f6fe4"/>
+
+  <!-- Star of David (left half visible) -->
+  <g transform="translate(10,35) scale(0.8)">
+    <!-- Triangle up -->
+    <polygon points="30,0 60,52 0,52"
+             fill="none" stroke="white" stroke-width="3"/>
+    <!-- Triangle down -->
+    <polygon points="30,60 60,8 0,8"
+             fill="none" stroke="white" stroke-width="3"/>
+  </g>
+</svg>

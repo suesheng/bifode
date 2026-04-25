@@ -1,0 +1,115 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<MainLayout 
+  title="Projekte" 
+  description="Unsere Projekte verbinden Bildungsarbeit, Prävention und praktische Orientierung für Schulen und Partner in Nordrhein-Westfalen."
+>
+
+  <!-- HERO -->
+  <Hero 
+    title="Projekte"
+    subtitle="Unsere Projekte verbinden Bildungsarbeit, Prävention und praktische Orientierung für Schulen und Partner in Nordrhein-Westfalen."
+  />
+
+  <!-- EINLEITUNG -->
+  <section class="container">
+    <div class="section-header">
+      <h2>Einleitung</h2>
+    </div>
+    <p class="lead">
+      BiFoDe setzt Bildungs- und Präventionsformate um, die auf konkrete Herausforderungen im Schul- und Bildungsalltag reagieren. 
+      Die Projekte sind modular aufgebaut und können an unterschiedliche Zielgruppen angepasst werden.
+    </p>
+  </section>
+
+  <!-- PROJEKTE -->
+  <section class="container">
+    <div class="card-grid">
+
+      <div class="card project-card">
+        <div class="card-icon">🏫</div>
+        <h3>Schulprogramm NRW</h3>
+        <p class="card-text">
+          Workshops und Projekttage zu Antisemitismusprävention, Vorurteilen, Medienkompetenz und demokratischem Zusammenhalt.
+        </p>
+        <a href="/schulen" class="card-link">Mehr erfahren →</a>
+      </div>
+
+      <div class="card project-card">
+        <div class="card-icon">💻</div>
+        <h3>Digitale Bildungsmodule</h3>
+        <p class="card-text">
+          Interaktive Inhalte für Schulen und Bildungseinrichtungen, die zentrale Themen verständlich und altersgerecht vermitteln.
+        </p>
+        <a href="/schulen" class="card-link">Mehr erfahren →</a>
+      </div>
+
+      <div class="card project-card">
+        <div class="card-icon">🖥️</div>
+        <h3>Interaktive Displays / Kiosk</h3>
+        <p class="card-text">
+          Digitale Informations- und Lernstationen für Schulen und öffentliche Räume zu demokratischen Werten und Medienkompetenz.
+        </p>
+        <a href="/schulen" class="card-link">Mehr erfahren →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LOGIK -->
+  <section class="container">
+    <div class="section-header">
+      <h2>Wie unsere Projekte aufgebaut sind</h2>
+    </div>
+
+    <ul class="project-logic">
+      <li>Praxisnah</li>
+      <li>Modular</li>
+      <li>Altersgerecht</li>
+      <li>Kooperativ</li>
+      <li>Auswertbar</li>
+    </ul>
+  </section>
+
+  <!-- CTA -->
+  <section class="container cta-section">
+    <p class="lead">Sie möchten ein Projekt gemeinsam mit BiFoDe umsetzen?</p>
+    <a class="button" href="/kooperation">Kooperation anfragen</a>
+  </section>
+
+</MainLayout>
+
+<style>
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .project-logic {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-logic li {
+    background: #f1f5f9;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: #334155;
+  }
+</style>

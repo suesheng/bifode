@@ -1,0 +1,434 @@
+---
+// src/components/CookieBanner.astro
+---
+
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-banner-content">
+    <div class="cookie-banner-text">
+      <h3>Cookies & Datenschutz</h3>
+      <p>
+        Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten.
+        Einige Cookies sind notwendig für den Betrieb der Website, andere helfen uns, die Nutzung zu analysieren
+        und unsere Inhalte zu verbessern.
+      </p>
+    </div>
+
+    <div class="cookie-banner-actions">
+      <button id="cookie-settings" class="btn btn-secondary">Einstellungen</button>
+      <button id="cookie-essential" class="btn btn-outline">Nur notwendige</button>
+      <button id="cookie-accept-all" class="btn btn-primary">Alle akzeptieren</button>
+    </div>
+
+    <div id="cookie-details" class="cookie-details" style="display: none;">
+      <div class="cookie-intro">
+        <p>Sie können Ihre Cookie-Einstellungen jederzeit ändern. Wählen Sie die Kategorien aus, die Sie akzeptieren möchten:</p>
+      </div>
+
+      <div class="cookie-category">
+        <div class="cookie-category-header">
+          <h4>Notwendige Cookies</h4>
+          <input type="checkbox" id="essential-cookies" checked disabled>
+          <span class="cookie-status">Immer aktiv</span>
+        </div>
+        <p>Diese Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden. Sie ermöglichen grundlegende Funktionen wie Sicherheit, Netzwerk-Management und Barrierefreiheit.</p>
+        <div class="cookie-examples">
+          <strong>Beispiele:</strong> Session-Management, CSRF-Schutz, Load-Balancing
+        </div>
+      </div>
+
+      <div class="cookie-category">
+        <div class="cookie-category-header">
+          <h4>Funktionale Cookies</h4>
+          <input type="checkbox" id="functional-cookies">
+          <span class="cookie-status">Optional</span>
+        </div>
+        <p>Diese Cookies ermöglichen der Website, erweiterte Funktionalität und Personalisierung anzubieten. Sie können ohne diese Cookies deaktiviert werden.</p>
+        <div class="cookie-examples">
+          <strong>Beispiele:</strong> Spracheinstellungen, Schriftgröße, Standort-basierte Inhalte
+        </div>
+      </div>
+
+      <div class="cookie-category">
+        <div class="cookie-category-header">
+          <h4>Analyse-Cookies</h4>
+          <input type="checkbox" id="analytics-cookies">
+          <span class="cookie-status">Optional</span>
+        </div>
+        <p>Diese Cookies helfen uns zu verstehen, wie Besucher unsere Website nutzen. Alle Informationen werden aggregiert und anonymisiert verwendet.</p>
+        <div class="cookie-examples">
+          <strong>Dienste:</strong> Google Analytics, Matomo
+          <br><strong>Zweck:</strong> Website-Performance, beliebte Inhalte, Fehlerbehebung
+        </div>
+      </div>
+
+      <div class="cookie-category">
+        <div class="cookie-category-header">
+          <h4>Marketing-Cookies</h4>
+          <input type="checkbox" id="marketing-cookies">
+          <span class="cookie-status">Optional</span>
+        </div>
+        <p>Diese Cookies werden verwendet, um Werbung relevanter zu gestalten und Marketing-Kampagnen zu messen. Sie können auch verwendet werden, um die Anzahl der Besuche über verschiedene Websites hinweg zu verfolgen.</p>
+        <div class="cookie-examples">
+          <strong>Dienste:</strong> Google Ads, Facebook Pixel, LinkedIn Insights
+          <br><strong>Zweck:</strong> Personalisierte Werbung, Conversion-Tracking, Retargeting
+        </div>
+      </div>
+
+      <div class="cookie-privacy-notice">
+        <p class="privacy-text">
+          <strong>Datenschutzhinweis:</strong> Ihre Cookie-Einstellungen werden lokal in Ihrem Browser gespeichert
+          und gelten nur für diese Website. Sie können Ihre Einstellungen jederzeit ändern.
+        </p>
+      </div>
+
+      <div class="cookie-details-actions">
+        <button id="cookie-save-settings" class="btn btn-primary">Einstellungen speichern</button>
+        <button id="cookie-accept-all-detailed" class="btn btn-primary">Alle akzeptieren</button>
+        <button id="cookie-reject-all" class="btn btn-outline">Alle ablehnen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .cookie-banner.show {
+    transform: translateY(0);
+  }
+
+  .cookie-banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .cookie-banner-text h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .cookie-banner-text p {
+    margin: 0 0 1rem 0;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+
+  .cookie-banner-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+
+  .btn-secondary {
+    background-color: #6b7280;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #4b5563;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+  }
+
+  .btn-outline:hover {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .cookie-details {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .cookie-intro {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .cookie-intro p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .cookie-category {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .cookie-category:last-child {
+    margin-bottom: 0;
+  }
+
+  .cookie-category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cookie-category-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .cookie-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .cookie-category p {
+    margin: 0 0 0.75rem 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .cookie-examples {
+    font-size: 0.8125rem;
+    color: #4b5563;
+    line-height: 1.4;
+  }
+
+  .cookie-privacy-notice {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 0.5rem;
+  }
+
+  .privacy-text {
+    margin: 0;
+    color: #92400e;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .cookie-details-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  @media (max-width: 640px) {
+    .cookie-banner-actions {
+      flex-direction: column;
+    }
+
+    .cookie-banner-actions .btn {
+      width: 100%;
+    }
+
+    .cookie-details-actions {
+      flex-direction: column;
+    }
+
+    .cookie-details-actions .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  class CookieBanner {
+    private banner: HTMLElement;
+    private settingsBtn: HTMLElement;
+    private essentialBtn: HTMLElement;
+    private acceptAllBtn: HTMLElement;
+    private details: HTMLElement;
+    private saveSettingsBtn: HTMLElement;
+    private acceptAllDetailedBtn: HTMLElement;
+    private rejectAllBtn: HTMLElement;
+    private functionalCheckbox: HTMLInputElement;
+    private analyticsCheckbox: HTMLInputElement;
+    private marketingCheckbox: HTMLInputElement;
+
+    constructor() {
+      this.banner = document.getElementById('cookie-banner')!;
+      this.settingsBtn = document.getElementById('cookie-settings')!;
+      this.essentialBtn = document.getElementById('cookie-essential')!;
+      this.acceptAllBtn = document.getElementById('cookie-accept-all')!;
+      this.details = document.getElementById('cookie-details')!;
+      this.saveSettingsBtn = document.getElementById('cookie-save-settings')!;
+      this.acceptAllDetailedBtn = document.getElementById('cookie-accept-all-detailed')!;
+      this.rejectAllBtn = document.getElementById('cookie-reject-all')!;
+      this.functionalCheckbox = document.getElementById('functional-cookies') as HTMLInputElement;
+      this.analyticsCheckbox = document.getElementById('analytics-cookies') as HTMLInputElement;
+      this.marketingCheckbox = document.getElementById('marketing-cookies') as HTMLInputElement;
+
+      this.init();
+    }
+
+    private init() {
+      // Check if user has already made a choice
+      const cookieConsent = localStorage.getItem('cookie-consent');
+      if (cookieConsent) {
+        this.applyCookieSettings(JSON.parse(cookieConsent));
+        return;
+      }
+
+      // Show banner
+      setTimeout(() => {
+        this.banner.classList.add('show');
+      }, 1000);
+
+      // Bind events
+      this.settingsBtn.addEventListener('click', () => this.showDetails());
+      this.essentialBtn.addEventListener('click', () => this.acceptEssential());
+      this.acceptAllBtn.addEventListener('click', () => this.acceptAll());
+      this.saveSettingsBtn.addEventListener('click', () => this.saveSettings());
+      this.acceptAllDetailedBtn.addEventListener('click', () => this.acceptAll());
+      this.rejectAllBtn.addEventListener('click', () => this.rejectAll());
+    }
+
+    private showDetails() {
+      this.details.style.display = this.details.style.display === 'none' ? 'block' : 'none';
+    }
+
+    private acceptEssential() {
+      const settings = {
+        essential: true,
+        functional: false,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      };
+      this.saveAndHide(settings);
+    }
+
+    private acceptAll() {
+      const settings = {
+        essential: true,
+        functional: true,
+        analytics: true,
+        marketing: true,
+        timestamp: Date.now()
+      };
+      this.saveAndHide(settings);
+    }
+
+    private rejectAll() {
+      const settings = {
+        essential: true, // Essential cookies are always enabled
+        functional: false,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now()
+      };
+      this.saveAndHide(settings);
+    }
+
+    private saveSettings() {
+      const settings = {
+        essential: true, // Always true
+        functional: this.functionalCheckbox.checked,
+        analytics: this.analyticsCheckbox.checked,
+        marketing: this.marketingCheckbox.checked,
+        timestamp: Date.now()
+      };
+      this.saveAndHide(settings);
+    }
+
+    private saveAndHide(settings: any) {
+      localStorage.setItem('cookie-consent', JSON.stringify(settings));
+      this.applyCookieSettings(settings);
+      this.banner.classList.remove('show');
+      setTimeout(() => {
+        this.banner.style.display = 'none';
+      }, 300);
+    }
+
+    private applyCookieSettings(settings: any) {
+      // Apply cookie settings based on user preferences
+      if (settings.functional) {
+        // Enable functional cookies/features
+        console.log('Functional cookies enabled');
+        // Here you would enable functional features like language preferences, etc.
+      }
+
+      if (settings.analytics) {
+        // Enable analytics tracking
+        console.log('Analytics cookies enabled');
+        // Here you would initialize Google Analytics, etc.
+      }
+
+      if (settings.marketing) {
+        // Enable marketing cookies
+        console.log('Marketing cookies enabled');
+        // Here you would enable marketing tracking
+      }
+
+      // Essential cookies are always enabled
+      console.log('Essential cookies enabled');
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new CookieBanner();
+  });
+
+  // Also initialize immediately if DOM is already loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new CookieBanner();
+    });
+  } else {
+    new CookieBanner();
+  }
+</script>

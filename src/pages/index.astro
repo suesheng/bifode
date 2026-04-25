@@ -1,11 +1,142 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// src/pages/index.astro
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="Startseite" description="BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW">
+  <Hero centered={true} title="Bildung stärken. Vorurteile abbauen. Demokratie leben." subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um." />
+
+  <section class="trust-section">
+    <div class="container trust-content">
+
+      <p class="trust-label">
+        Zusammenarbeit und Austausch mit Partnern aus Bildung und Zivilgesellschaft
+      </p>
+
+      <div class="trust-logos">
+        <img src="/logos/logo1.svg" alt="Partner Logo" />
+        <img src="/logos/logo2.svg" alt="Partner Logo" />
+        <img src="/logos/logo3.svg" alt="Partner Logo" />
+        <img src="/logos/logo4.svg" alt="Partner Logo" />
+        <img src="/logos/logo5.svg" alt="Partner Logo" />
+      </div>
+
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Wer wir sind</h2>
+    </div>
+    <p class="lead">Wir stärken Bildung und gesellschaftlichen Zusammenhalt in NRW. Wir bieten klare Formate für Schulen, Kommunen und zivilgesellschaftliche Partner.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Unsere Arbeit</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">📚</div>
+        <h3>Bildung & Prävention</h3>
+        <p>Wir entwickeln Programme, die zu respektvollem Miteinander beitragen und frühe Präventionsarbeit unterstützen.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🤝</div>
+        <h3>Unterstützung & Orientierung</h3>
+        <p>Lehrkräfte, Schulen und Partner erhalten klare, praxisnahe Begleitung für nachhaltige Bildungsprozesse.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🔍</div>
+        <h3>Analyse & Hintergrund</h3>
+        <p>Unsere Arbeit basiert auf verlässlichen Informationen und einer fundierten fachlichen Einordnung.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Für wen wir arbeiten</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon">🏫</div>
+        <h3>Schulen</h3>
+        <p>Programme für Lehrkräfte und Schulen, die demokratisches Lernen und Respekt fördern.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🤝</div>
+        <h3>Partner & NGOs</h3>
+        <p>Verlässliche Zusammenarbeit mit zivilgesellschaftlichen Organisationen und Bildungspartnern.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon">🏛️</div>
+        <h3>Öffentliche Stellen</h3>
+        <p>Beratung und Formate für kommunale Akteur:innen und institutionelle Partner.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Pilotprojekt NRW</h2>
+    </div>
+    <p class="lead">Im NRW-weiten Pilotprojekt führen wir Bildungsformate durch, die Praxisfragen aufnehmen und in engem Austausch mit Schulen und Partnern weitergeführt werden.</p>
+  </section>
+</MainLayout>
+
+<style>
+  .trust-section {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .trust-content {
+    text-align: center;
+  }
+
+  .trust-label {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+  }
+
+  .trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-logos img {
+    height: 40px;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.2s ease;
+  }
+
+  .trust-logos img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .lead {
+    max-width: 720px;
+    color: #475569;
+    line-height: 1.85;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .trust-logos img {
+      height: 32px;
+    }
+  }
+</style>

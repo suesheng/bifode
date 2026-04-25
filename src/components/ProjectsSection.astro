@@ -1,0 +1,131 @@
+---
+// src/components/ProjectsSection.astro
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+type Project = CollectionEntry<'projekte'>;
+
+const items: Project[] = await getCollection('projekte');
+---
+
+<section class="projects">
+    <div class="container">
+        <h2>Aktuelle Projekte</h2>
+
+        {items.length > 0 ? (
+            <div class="projects-grid">
+                {items.map(item => (
+                    <article class="project-card">
+                        <h3>
+                            <a href={`/projekte/${item.id}`}>
+                                {item.data.title}
+                            </a>
+                        </h3>
+                        {item.data.description && (
+                            <p>{item.data.description}</p>
+                        )}
+                        <a href={`/projekte/${item.id}`} class="read-more">
+                            Mehr erfahren →
+                        </a>
+                    </article>
+                ))}
+            </div>
+        ) : (
+            <p class="no-projects">
+                Aktuell sind keine Projekte verfügbar. Bitte prüfen Sie später erneut.
+            </p>
+        )}
+    </div>
+</section>
+
+<style>
+    .projects {
+        padding: 4rem 2rem;
+        background: white;
+    }
+
+    .projects h2 {
+        color: #1e40af;
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .project-card {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        transition: all 0.2s;
+    }
+
+    .project-card:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .project-card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .project-card h3 a {
+        color: #1e40af;
+        text-decoration: none;
+    }
+
+    .project-card h3 a:hover {
+        color: #3b82f6;
+    }
+
+    .project-card p {
+        color: #6b7280;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .read-more {
+        color: #3b82f6;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .read-more:hover {
+        color: #1e40af;
+    }
+
+    .no-projects {
+        text-align: center;
+        color: #6b7280;
+        font-style: italic;
+        padding: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .projects {
+            padding: 3rem 1rem;
+        }
+
+        .projects h2 {
+            font-size: 1.875rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+</style>
