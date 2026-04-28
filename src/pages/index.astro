@@ -2,28 +2,13 @@
 // src/pages/index.astro
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
+import TrustSection from '../components/TrustSection.astro';
 ---
 
 <MainLayout title="Startseite" description="BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW">
   <Hero centered={true} title="Bildung stärken. Antisemitismus entgegentreten. Demokratie leben." subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um." />
 
-  <section class="trust-section">
-    <div class="container trust-content">
-
-      <p class="trust-label">
-        Zusammenarbeit und Austausch mit Partnern aus Bildung und Zivilgesellschaft
-      </p>
-
-      <div class="trust-logos">
-        <img src="/logos/logo1.svg" alt="Partner Logo" />
-        <img src="/logos/logo2.svg" alt="Partner Logo" />
-        <img src="/logos/logo3.svg" alt="Partner Logo" />
-        <img src="/logos/logo4.svg" alt="Partner Logo" />
-        <img src="/logos/logo5.svg" alt="Partner Logo" />
-      </div>
-
-    </div>
-  </section>
+  <TrustSection label="Zusammenarbeit und Austausch mit Partnern aus Bildung und Zivilgesellschaft" />
 
   <section class="container">
     <div class="section-header">
@@ -123,40 +108,6 @@ import Hero from '../components/Hero.astro';
 </MainLayout>
 
 <style>
-  .trust-section {
-    padding: 2.5rem 0 3rem;
-  }
-
-  .trust-content {
-    text-align: center;
-  }
-
-  .trust-label {
-    font-size: 0.9rem;
-    color: #9ca3af;
-    margin-bottom: 1.5rem;
-  }
-
-  .trust-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-
-  .trust-logos img {
-    height: 40px;
-    opacity: 0.6;
-    filter: grayscale(100%);
-    transition: all 0.2s ease;
-  }
-
-  .trust-logos img:hover {
-    opacity: 1;
-    filter: grayscale(0%);
-  }
-
   .section-header h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -168,15 +119,5 @@ import Hero from '../components/Hero.astro';
     color: #475569;
     line-height: 1.85;
     margin-top: 0.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .trust-section {
-      display: none;
-    }
-
-    .trust-logos img {
-      height: 32px;
-    }
   }
 </style>

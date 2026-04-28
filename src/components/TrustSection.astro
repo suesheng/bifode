@@ -1,0 +1,62 @@
+---
+const { label, mobileHidden = true } = Astro.props;
+---
+
+<section class={`trust-section ${mobileHidden ? 'mobile-hidden' : ''}`}>
+  <div class="container trust-content">
+    <p class="trust-label">{label}</p>
+    <div class="trust-logos">
+      <img src="/logos/logo1.svg" alt="Partner logo" />
+      <img src="/logos/logo2.svg" alt="Partner logo" />
+      <img src="/logos/logo3.svg" alt="Partner logo" />
+      <img src="/logos/logo4.svg" alt="Partner logo" />
+      <img src="/logos/logo5.svg" alt="Partner logo" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-section {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .trust-content {
+    text-align: center;
+  }
+
+  .trust-label {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+  }
+
+  .trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-logos img {
+    height: 40px;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.2s ease;
+  }
+
+  .trust-logos img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  @media (max-width: 768px) {
+    .trust-section.mobile-hidden {
+      display: none;
+    }
+
+    .trust-logos img {
+      height: 32px;
+    }
+  }
+</style>
