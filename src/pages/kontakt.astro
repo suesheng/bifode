@@ -9,17 +9,32 @@ import Hero from '../components/Hero.astro';
   <section class="container">
     <div class="card-grid">
       <div class="card feature-card">
-        <div class="card-icon">🏫</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 10.5 12 5l9 5.5-9 5.5z" />
+            <path d="M7 12.5V16a5 3 0 0 0 10 0v-3.5" />
+          </svg>
+        </div>
         <h3>Für Schulen</h3>
         <p>Anfragen zu Workshops, Projekttagen, digitalen Modulen und Fortbildungen.</p>
       </div>
       <div class="card feature-card">
-        <div class="card-icon">🤝</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 14a3 3 0 1 1 0-6c1.2 0 2.2.7 2.7 1.7A3 3 0 1 1 13 14c-.9 0-1.6-.3-2.2-.8A3 3 0 0 1 8 14Z" />
+            <path d="M4.5 19a3.5 3.5 0 0 1 6.5-1.8A3.5 3.5 0 0 1 17.5 19" />
+          </svg>
+        </div>
         <h3>Für Partner</h3>
         <p>Kooperationen mit Bildungsträgern, Kommunen, NGOs und Fachstellen.</p>
       </div>
       <div class="card feature-card">
-        <div class="card-icon">✉️</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="6.5" width="18" height="11" rx="1.8" />
+            <path d="m4 8 8 6 8-6" />
+          </svg>
+        </div>
         <h3>Allgemeine Anfragen</h3>
         <p>Fragen zum Verein, zu Projekten oder zu Möglichkeiten der Zusammenarbeit.</p>
       </div>
@@ -42,7 +57,7 @@ import Hero from '../components/Hero.astro';
       <h2>Nachricht senden</h2>
     </div>
     <div class="card contact-form-card">
-      <form class="contact-form">
+      <form class="contact-form" id="contact-form" novalidate>
         <div class="form-group">
           <label for="name">Name *</label>
           <input type="text" id="name" name="name" required>
@@ -67,9 +82,13 @@ import Hero from '../components/Hero.astro';
           <input type="checkbox" id="privacy" name="privacy" required>
           <label for="privacy">Ich habe die Datenschutzhinweise gelesen.</label>
         </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
         <button type="submit" class="button">Nachricht senden</button>
       </form>
-      <p class="form-note">Dieses Formular ist derzeit als statisches Formular vorbereitet. Alternativ erreichen Sie uns direkt per E-Mail.</p>
+      <p class="form-note" id="contact-form-note">Alternativ erreichen Sie uns direkt per E-Mail: info@bifode.org</p>
     </div>
   </section>
 
@@ -197,6 +216,14 @@ import Hero from '../components/Hero.astro';
     text-align: center;
   }
 
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
   @media (max-width: 768px) {
     .hero {
       padding: 3rem 0 1.5rem;
@@ -211,3 +238,67 @@ import Hero from '../components/Hero.astro';
     }
   }
 </style>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const note = document.getElementById('contact-form-note');
+    if (!(form instanceof HTMLFormElement) || !(note instanceof HTMLElement)) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (!(submitButton instanceof HTMLButtonElement)) return;
+
+      const data = new FormData(form);
+      const payload = {
+        name: String(data.get('name') || ''),
+        organization: String(data.get('organization') || ''),
+        email: String(data.get('email') || ''),
+        subject: String(data.get('subject') || ''),
+        message: String(data.get('message') || ''),
+        privacyAccepted: data.get('privacy') === 'on',
+        website: String(data.get('website') || '')
+      };
+
+      submitButton.disabled = true;
+      const originalText = submitButton.textContent || 'Nachricht senden';
+      submitButton.textContent = 'Wird gesendet...';
+      note.textContent = 'Bitte kurz warten...';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result?.ok) {
+          throw new Error(result?.message || 'Versand fehlgeschlagen.');
+        }
+
+        form.reset();
+        note.textContent = result.message || 'Vielen Dank, wir haben Ihre Anfrage erhalten.';
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Versand fehlgeschlagen.';
+        note.textContent = `${message} Alternativ: info@bifode.org`;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm, { once: true });
+  } else {
+    initContactForm();
+  }
+</script>

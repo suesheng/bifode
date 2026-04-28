@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 ---
 
 <MainLayout title="Startseite" description="BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW">
-  <Hero centered={true} title="Bildung stärken. Vorurteile abbauen. Demokratie leben." subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um." />
+  <Hero centered={true} title="Bildung stärken. Antisemitismus entgegentreten. Demokratie leben." subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um." />
 
   <section class="trust-section">
     <div class="container trust-content">
@@ -29,7 +29,7 @@ import Hero from '../components/Hero.astro';
     <div class="section-header">
       <h2>Wer wir sind</h2>
     </div>
-    <p class="lead">Wir stärken Bildung und gesellschaftlichen Zusammenhalt in NRW. Wir bieten klare Formate für Schulen, Kommunen und zivilgesellschaftliche Partner.</p>
+    <p class="lead">Wir stärken Bildung und gesellschaftlichen Zusammenhalt in NRW. Wir bieten klare Formate für Schulen, Kommunen und zivilgesellschaftliche Partner mit einer eindeutigen Haltung gegen Antisemitismus.</p>
   </section>
 
   <section class="container">
@@ -38,17 +38,36 @@ import Hero from '../components/Hero.astro';
     </div>
     <div class="card-grid">
       <div class="card feature-card">
-        <div class="card-icon">📚</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H20v15.5A2.5 2.5 0 0 0 17.5 17H4z" />
+            <path d="M4 6.5V20h13.5A2.5 2.5 0 0 0 20 17" />
+            <path d="M8 8h8M8 11h8" />
+          </svg>
+        </div>
         <h3>Bildung & Prävention</h3>
         <p>Wir entwickeln Programme, die zu respektvollem Miteinander beitragen und frühe Präventionsarbeit unterstützen.</p>
       </div>
       <div class="card feature-card">
-        <div class="card-icon">🤝</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="9" cy="8" r="3" />
+            <circle cx="16" cy="10" r="2.5" />
+            <path d="M3.5 18a5.5 5.5 0 0 1 11 0" />
+            <path d="M13.5 18a4 4 0 0 1 7 0" />
+          </svg>
+        </div>
         <h3>Unterstützung & Orientierung</h3>
         <p>Lehrkräfte, Schulen und Partner erhalten klare, praxisnahe Begleitung für nachhaltige Bildungsprozesse.</p>
       </div>
       <div class="card feature-card">
-        <div class="card-icon">🔍</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <path d="m20 20-4.2-4.2" />
+            <path d="M11 8v6M8 11h6" />
+          </svg>
+        </div>
         <h3>Analyse & Hintergrund</h3>
         <p>Unsere Arbeit basiert auf verlässlichen Informationen und einer fundierten fachlichen Einordnung.</p>
       </div>
@@ -61,17 +80,34 @@ import Hero from '../components/Hero.astro';
     </div>
     <div class="card-grid">
       <div class="card feature-card">
-        <div class="card-icon">🏫</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 10.5 12 5l9 5.5-9 5.5z" />
+            <path d="M7 12.5V16a5 3 0 0 0 10 0v-3.5" />
+          </svg>
+        </div>
         <h3>Schulen</h3>
         <p>Programme für Lehrkräfte und Schulen, die demokratisches Lernen und Respekt fördern.</p>
       </div>
       <div class="card feature-card">
-        <div class="card-icon">🤝</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 14a3 3 0 1 1 0-6c1.2 0 2.2.7 2.7 1.7A3 3 0 1 1 13 14c-.9 0-1.6-.3-2.2-.8A3 3 0 0 1 8 14Z" />
+            <path d="M4.5 19a3.5 3.5 0 0 1 6.5-1.8A3.5 3.5 0 0 1 17.5 19" />
+          </svg>
+        </div>
         <h3>Partner & NGOs</h3>
         <p>Verlässliche Zusammenarbeit mit zivilgesellschaftlichen Organisationen und Bildungspartnern.</p>
       </div>
       <div class="card feature-card">
-        <div class="card-icon">🏛️</div>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 20h16" />
+            <path d="M5 20V9h14v11" />
+            <path d="M3 9h18L12 4z" />
+            <path d="M9 13h6v7H9z" />
+          </svg>
+        </div>
         <h3>Öffentliche Stellen</h3>
         <p>Beratung und Formate für kommunale Akteur:innen und institutionelle Partner.</p>
       </div>
@@ -135,6 +171,10 @@ import Hero from '../components/Hero.astro';
   }
 
   @media (max-width: 768px) {
+    .trust-section {
+      display: none;
+    }
+
     .trust-logos img {
       height: 32px;
     }

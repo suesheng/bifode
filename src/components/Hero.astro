@@ -29,7 +29,7 @@ const { title, subtitle, centered = true } = Astro.props;
   .hero {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+    background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 42%, #ffffff 100%);
   }
 
   .hero-centered {
@@ -47,19 +47,21 @@ const { title, subtitle, centered = true } = Astro.props;
     inset: 0;
     z-index: 0;
     background:
-      radial-gradient(circle at 20% 20%, rgba(59,130,246,0.18), transparent 40%),
-      radial-gradient(circle at 80% 30%, rgba(22,59,99,0.12), transparent 45%),
-      radial-gradient(circle at 50% 80%, rgba(99,102,241,0.10), transparent 50%);
-    filter: blur(40px);
+      radial-gradient(circle at 15% 20%, rgba(37,99,235,0.34), transparent 44%),
+      radial-gradient(circle at 85% 15%, rgba(14,116,144,0.26), transparent 42%),
+      radial-gradient(circle at 60% 85%, rgba(79,70,229,0.2), transparent 48%);
+    filter: blur(36px);
   }
 
   .hero-bg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.4;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.62) 100%),
+      linear-gradient(rgba(22,59,99,0.06) 1px, transparent 1px);
+    background-size: auto, 40px 40px;
+    opacity: 0.85;
   }
 
   .container {
@@ -84,17 +86,21 @@ const { title, subtitle, centered = true } = Astro.props;
 
   .hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    color: #0f172a;
+    font-weight: 800;
+    color: #0b1e35;
     margin-bottom: 1.5rem;
     line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 14px rgba(37, 99, 235, 0.15);
   }
 
   .hero-subtitle {
     font-size: 1.2rem;
-    color: #475569;
+    color: #1f3148;
     margin-bottom: 2rem;
     line-height: 1.6;
+    max-width: 64ch;
+    font-weight: 500;
   }
 
   .hero-actions {
@@ -108,33 +114,39 @@ const { title, subtitle, centered = true } = Astro.props;
   .button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: #3b82f6;
+    background: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
     color: #ffffff;
     text-decoration: none;
     font-weight: 600;
-    border-radius: 0.375rem;
-    transition: background-color 0.2s ease;
+    border-radius: 0.7rem;
+    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .button:hover {
-    background: #2563eb;
+    background: linear-gradient(135deg, #1e40af 0%, #0f2e50 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(29, 78, 216, 0.34);
   }
 
   .button.secondary {
-    background: transparent;
-    color: #3b82f6;
-    border: 1px solid #3b82f6;
+    background: rgba(255, 255, 255, 0.82);
+    color: #12365e;
+    border: 1px solid #89a6cc;
+    box-shadow: 0 8px 20px rgba(15, 46, 80, 0.1);
   }
 
   .button.secondary:hover {
-    background: #3b82f6;
+    background: #163b63;
     color: #ffffff;
+    box-shadow: 0 14px 30px rgba(15, 46, 80, 0.25);
   }
 
   .hero-trust {
     font-size: 0.9rem;
-    color: #9ca3af;
+    color: #334155;
     margin: 0;
+    font-weight: 500;
   }
 
   @media (max-width: 600px) {
