@@ -50,6 +50,28 @@ function createMessages(locale: Locale) {
   };
 }
 
+function mapSmtpError(error: unknown, locale: Locale): string {
+  const code = typeof error === 'object' && error && 'code' in error ? String((error as { code?: string }).code || '') : '';
+  const responseCode =
+    typeof error === 'object' && error && 'responseCode' in error
+      ? Number((error as { responseCode?: number }).responseCode || 0)
+      : 0;
+
+  if (code === 'EAUTH' || responseCode === 535) {
+    return locale === 'en'
+      ? 'SMTP authentication failed. Please check SMTP_USER and SMTP_PASS.'
+      : 'SMTP-Authentifizierung fehlgeschlagen. Bitte SMTP_USER und SMTP_PASS prüfen.';
+  }
+
+  if (code === 'ESOCKET' || code === 'ETIMEDOUT' || code === 'ECONNECTION') {
+    return locale === 'en'
+      ? 'SMTP connection failed. Please check SMTP_HOST, SMTP_PORT and network settings.'
+      : 'SMTP-Verbindung fehlgeschlagen. Bitte SMTP_HOST, SMTP_PORT und Netzwerkeinstellungen prüfen.';
+  }
+
+  return createMessages(locale).failure;
+}
+
 export const POST: APIRoute = async ({ request }) => {
   let locale: Locale = 'de';
   try {
@@ -98,7 +120,9 @@ export const POST: APIRoute = async ({ request }) => {
       host,
       port,
       secure: port === 465,
-      auth: { user, pass }
+      auth: { user, pass },
+      requireTLS: port !== 465,
+      connectionTimeout: 15000
     });
 
     const safe = (value: string) => value.replace(/[<>&]/g, '');
@@ -133,7 +157,6 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ ok: true, message: t.success });
   } catch (error) {
     console.error('Contact API error:', error);
-    const t = createMessages(locale);
-    return json({ ok: false, message: t.failure }, 500);
+    return json({ ok: false, message: mapSmtpError(error, locale) }, 500);
   }
 };
