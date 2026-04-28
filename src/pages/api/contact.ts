@@ -2,6 +2,9 @@ import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 3;
+const rateLimitStore = new Map<string, number[]>();
 
 function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -20,7 +23,7 @@ function createMessages(locale: Locale) {
       required: 'Please fill in all required fields.',
       invalidEmail: 'Please provide a valid email address.',
       mailNotConfigured: 'Mail service is not configured.',
-      mailPrefix: '[Contact Form]',
+      mailPrefix: '[EN Contact Form]',
       heading: 'New request via contact form',
       organization: 'Organization',
       email: 'Email',
@@ -28,7 +31,11 @@ function createMessages(locale: Locale) {
       message: 'Message',
       subject: 'Subject',
       success: 'Thank you, we have received your request.',
-      failure: 'Sending failed. Please try again later.'
+      failure: 'Sending failed. Please try again later.',
+      rateLimited: 'Too many requests. Please try again in a few minutes.',
+      autoReplySubject: 'We have received your request',
+      autoReplyText:
+        'Thank you for your message. We have received your request and will get back to you as soon as possible.'
     };
   }
 
@@ -46,8 +53,33 @@ function createMessages(locale: Locale) {
     message: 'Nachricht',
     subject: 'Betreff',
     success: 'Vielen Dank, wir haben Ihre Anfrage erhalten.',
-    failure: 'Versand fehlgeschlagen. Bitte später erneut versuchen.'
+    failure: 'Versand fehlgeschlagen. Bitte später erneut versuchen.',
+    rateLimited: 'Zu viele Anfragen. Bitte in einigen Minuten erneut versuchen.',
+    autoReplySubject: 'Wir haben Ihre Anfrage erhalten',
+    autoReplyText:
+      'Vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und melden uns schnellstmöglich bei Ihnen.'
   };
+}
+
+function getClientIp(request: Request): string {
+  const headerIp =
+    request.headers.get('x-forwarded-for') ||
+    request.headers.get('x-real-ip') ||
+    request.headers.get('cf-connecting-ip');
+  if (!headerIp) return 'unknown';
+  return headerIp.split(',')[0].trim() || 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (rateLimitStore.get(ip) || []).filter((ts) => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    rateLimitStore.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  rateLimitStore.set(ip, recent);
+  return false;
 }
 
 function mapSmtpError(error: unknown, locale: Locale): string {
@@ -79,6 +111,7 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     locale = body?.locale === 'en' ? 'en' : 'de';
     const t = createMessages(locale);
+    const clientIp = getClientIp(request);
 
     if (!contentType.includes('application/json')) {
       return json({ ok: false, message: t.invalidFormat }, 415);
@@ -94,6 +127,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (website) {
       return json({ ok: true, message: t.received });
+    }
+
+    if (isRateLimited(clientIp)) {
+      return json({ ok: false, message: t.rateLimited }, 429);
     }
 
     if (!name || !email || !subject || !message || !privacyAccepted) {
@@ -153,6 +190,17 @@ export const POST: APIRoute = async ({ request }) => {
         <p style="white-space: pre-wrap;">${safe(message)}</p>
       `
     });
+
+    try {
+      await transporter.sendMail({
+        from: `"BiFoDe e.V." <${fromEmail}>`,
+        to: email,
+        subject: t.autoReplySubject,
+        text: `${t.autoReplyText}\n\nBiFoDe e.V.\ninfo@bifode.org`
+      });
+    } catch (autoReplyError) {
+      console.warn('Auto-reply failed:', autoReplyError);
+    }
 
     return json({ ok: true, message: t.success });
   } catch (error) {
