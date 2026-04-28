@@ -1,0 +1,54 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<MainLayout lang="en" title="Home" description="BiFoDe e.V. develops educational and prevention formats for schools and partners in NRW.">
+  <Hero
+    lang="en"
+    centered={true}
+    title="Strengthen education. Counter antisemitism. Live democracy."
+    subtitle="BiFoDe e.V. implements educational and prevention formats across North Rhine-Westphalia."
+  />
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Who We Are</h2>
+    </div>
+    <p class="lead">We strengthen education and social cohesion in NRW. We provide practical formats for schools, municipalities, and civil society partners with a clear stance against antisemitism.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Our Work</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H20v15.5A2.5 2.5 0 0 0 17.5 17H4z" /><path d="M4 6.5V20h13.5A2.5 2.5 0 0 0 20 17" /><path d="M8 8h8M8 11h8" /></svg>
+        </div>
+        <h3>Education & Prevention</h3>
+        <p>Programs that support respectful coexistence and early prevention work.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" /><circle cx="16" cy="10" r="2.5" /><path d="M3.5 18a5.5 5.5 0 0 1 11 0" /><path d="M13.5 18a4 4 0 0 1 7 0" /></svg>
+        </div>
+        <h3>Support & Orientation</h3>
+        <p>Practical guidance for teachers, schools, and partner organizations.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m20 20-4.2-4.2" /><path d="M11 8v6M8 11h6" /></svg>
+        </div>
+        <h3>Analysis & Context</h3>
+        <p>Reliable background analysis that informs our educational work.</p>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
+  .lead { max-width: 720px; color: #475569; line-height: 1.85; margin-top: 0.5rem; }
+</style>

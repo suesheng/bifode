@@ -1,6 +1,8 @@
 ---
 // src/components/Hero.astro
 const { title, subtitle, centered = true } = Astro.props;
+const lang = Astro.props.lang === 'en' ? 'en' : 'de';
+const isEn = lang === 'en';
 ---
 
 <section class={`hero ${centered ? 'hero-centered' : 'hero-page'}`}>
@@ -13,12 +15,12 @@ const { title, subtitle, centered = true } = Astro.props;
     {centered && (
       <>
         <div class="hero-actions">
-          <a href="/schulen" class="button">Angebote für Schulen</a>
-          <a href="/kooperation" class="button secondary">Kooperation anfragen</a>
+          <a href={isEn ? '/en/schools' : '/schulen'} class="button">{isEn ? 'Programs for Schools' : 'Angebote für Schulen'}</a>
+          <a href={isEn ? '/en/cooperation' : '/kooperation'} class="button secondary">{isEn ? 'Request Cooperation' : 'Kooperation anfragen'}</a>
         </div>
 
         <p class="hero-trust">
-          Arbeit mit Schulen, Partnern und zivilgesellschaftlichen Organisationen in NRW
+          {isEn ? 'Working with schools, partners, and civil society organizations in NRW' : 'Arbeit mit Schulen, Partnern und zivilgesellschaftlichen Organisationen in NRW'}
         </p>
       </>
     )}

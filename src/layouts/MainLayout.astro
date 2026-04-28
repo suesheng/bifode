@@ -1,11 +1,65 @@
 ---
 // src/layouts/MainLayout.astro
 import CookieBanner from '../components/CookieBanner.astro';
-const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW' } = Astro.props;
+const {
+  title = 'Startseite',
+  description = 'BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW',
+  lang = 'de'
+} = Astro.props;
+
+const isEn = lang === 'en';
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const navItems = isEn
+  ? [
+      { href: '/en', label: 'Home' },
+      { href: '/en/about', label: 'About' },
+      { href: '/en/our-work', label: 'Our Work' },
+      { href: '/en/schools', label: 'Schools' },
+      { href: '/en/projects', label: 'Projects' },
+      { href: '/en/cooperation', label: 'Cooperation' },
+      { href: '/en/contact', label: 'Contact' }
+    ]
+  : [
+      { href: '/', label: 'Startseite' },
+      { href: '/ueber-uns', label: 'Über uns' },
+      { href: '/unsere-arbeit', label: 'Unsere Arbeit' },
+      { href: '/schulen', label: 'Schulen' },
+      { href: '/projekte', label: 'Projekte' },
+      { href: '/kooperation', label: 'Kooperation' },
+      { href: '/kontakt', label: 'Kontakt' }
+    ];
+
+const pathMap: Record<string, string> = {
+  '/': '/en',
+  '/ueber-uns': '/en/about',
+  '/unsere-arbeit': '/en/our-work',
+  '/schulen': '/en/schools',
+  '/projekte': '/en/projects',
+  '/kooperation': '/en/cooperation',
+  '/kontakt': '/en/contact',
+  '/impressum': '/en/legal-notice',
+  '/datenschutz': '/en/privacy',
+  '/cookie-richtlinien': '/en/cookie-policy',
+  '/en': '/',
+  '/en/about': '/ueber-uns',
+  '/en/our-work': '/unsere-arbeit',
+  '/en/schools': '/schulen',
+  '/en/projects': '/projekte',
+  '/en/cooperation': '/kooperation',
+  '/en/contact': '/kontakt',
+  '/en/legal-notice': '/impressum',
+  '/en/privacy': '/datenschutz',
+  '/en/cookie-policy': '/cookie-richtlinien'
+};
+
+const counterpartPath = pathMap[currentPath] || (isEn ? '/kontakt' : '/en/contact');
+const langDeHref = isEn ? counterpartPath : currentPath;
+const langEnHref = isEn ? currentPath : counterpartPath;
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={isEn ? 'en' : 'de'}>
         <head>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width" />
@@ -57,19 +111,27 @@ const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- un
                                         <a href="/" class="logo">
                                                 <img src="/logos/logo-light.svg" alt="BiFoDe Logo" class="logo-img logo-light" />
                                         </a>
+                                        <div class="nav-controls">
+                                                <div class="lang-switch-mobile">
+                                                        <a href={langDeHref} class="lang-link" aria-current={isEn ? undefined : 'page'}>DE</a>
+                                                        <span class="lang-divider">|</span>
+                                                        <a href={langEnHref} class="lang-link" aria-current={isEn ? 'page' : undefined}>EN</a>
+                                                </div>
                                         <button class="burger-menu" id="burgerMenu" aria-label="Navigation menu" aria-expanded="false">
                                                 <span class="burger-line"></span>
                                                 <span class="burger-line"></span>
                                                 <span class="burger-line"></span>
                                         </button>
+                                        </div>
                                         <div class="nav-links" id="navLinks">
-                                                <a href="/" data-nav-link>Startseite</a>
-                                                <a href="/ueber-uns" data-nav-link>Über uns</a>
-                                                <a href="/unsere-arbeit" data-nav-link>Unsere Arbeit</a>
-                                                <a href="/schulen" data-nav-link>Schulen</a>
-                                                <a href="/projekte" data-nav-link>Projekte</a>
-                                                <a href="/kooperation" data-nav-link>Kooperation</a>
-                                                <a href="/kontakt" data-nav-link>Kontakt</a>
+                                                {navItems.map((item) => (
+                                                        <a href={item.href} data-nav-link>{item.label}</a>
+                                                ))}
+                                                <div class="lang-switch" id="langSwitch">
+                                                        <a href={langDeHref} id="langDe" class="lang-link">DE</a>
+                                                        <span class="lang-divider">|</span>
+                                                        <a href={langEnHref} id="langEn" class="lang-link">EN</a>
+                                                </div>
                                         </div>
                                 </div>
                         </nav>
@@ -84,41 +146,37 @@ const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- un
                                                 <div class="footer-logo">
                                                         <img src="/logos/logo-dark.svg" alt="BiFoDe Logo" />
                                                 </div>
-                                                <p>Bildungsforum für Demokratie und Vielfalt NRW. Wir stärken demokratische Bildung und engagieren uns klar gegen Antisemitismus.</p>
+                                                <p>{isEn ? 'BiFoDe NRW. We strengthen democratic education and are clearly committed to combating antisemitism.' : 'Bildungsforum für Demokratie und Vielfalt NRW. Wir stärken demokratische Bildung und engagieren uns klar gegen Antisemitismus.'}</p>
                                         </div>
 
                                         <div class="footer-section footer-nav">
-                                                <h4>Navigation</h4>
+                                                <h4>{isEn ? 'Navigation' : 'Navigation'}</h4>
                                                 <ul>
-                                                        <li><a href="/">Startseite</a></li>
-                                                        <li><a href="/ueber-uns">Über uns</a></li>
-                                                        <li><a href="/unsere-arbeit">Unsere Arbeit</a></li>
-                                                        <li><a href="/schulen">Schulen</a></li>
-                                                        <li><a href="/projekte">Projekte</a></li>
-                                                        <li><a href="/kooperation">Kooperation</a></li>
-                                                        <li><a href="/kontakt">Kontakt</a></li>
+                                                        {navItems.map((item) => (
+                                                                <li><a href={item.href}>{item.label}</a></li>
+                                                        ))}
                                                 </ul>
                                         </div>
 
                                         <div class="footer-section footer-contact">
-                                                <h4>Kontakt</h4>
+                                                <h4>{isEn ? 'Contact' : 'Kontakt'}</h4>
                                                 <p>E-Mail: info@bifode.org</p>
-                                                <p>Standort: Nordrhein-Westfalen</p>
+                                                <p>{isEn ? 'Location: North Rhine-Westphalia' : 'Standort: Nordrhein-Westfalen'}</p>
                                         </div>
 
                                         <div class="footer-section footer-legal">
-                                                <h4>Rechtliches</h4>
+                                                <h4>{isEn ? 'Legal' : 'Rechtliches'}</h4>
                                                 <ul>
-                                                        <li><a href="/impressum">Impressum</a></li>
-                                                        <li><a href="/datenschutz">Datenschutz</a></li>
-                                                        <li><button type="button" class="footer-cookie-button" id="footer-cookie-settings">Cookie-Einstellungen</button></li>
+                                                        <li><a href={isEn ? '/en/legal-notice' : '/impressum'}>{isEn ? 'Legal Notice' : 'Impressum'}</a></li>
+                                                        <li><a href={isEn ? '/en/privacy' : '/datenschutz'}>{isEn ? 'Privacy Policy' : 'Datenschutz'}</a></li>
+                                                        <li><button type="button" class="footer-cookie-button" id="footer-cookie-settings">{isEn ? 'Cookie Settings' : 'Cookie-Einstellungen'}</button></li>
                                                 </ul>
                                         </div>
                                 </div>
 
                                 <div class="footer-bottom">
                                         <div class="container">
-                                                <p>&copy; 2026 BiFoDe e.V. Alle Rechte vorbehalten.</p>
+                                                <p>&copy; 2026 BiFoDe e.V. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}</p>
                                         </div>
                                 </div>
                         </footer>
@@ -134,8 +192,10 @@ const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- un
                                 const navLinks = document.getElementById('navLinks');
                                 if (!burgerMenu || !navbar || !navLinks) return;
 
-                                const navItems = navLinks.querySelectorAll('a');
+                                const navItems = navLinks.querySelectorAll('[data-nav-link]');
                                 const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+                                const langDe = document.getElementById('langDe');
+                                const langEn = document.getElementById('langEn');
 
                                 navItems.forEach(item => {
                                         const linkPath = (item.getAttribute('href') || '').replace(/\/$/, '') || '/';
@@ -143,6 +203,14 @@ const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- un
                                                 item.setAttribute('aria-current', 'page');
                                         }
                                 });
+
+                                if (langDe && langEn) {
+                                        if (currentPath.startsWith('/en')) {
+                                                langEn.setAttribute('aria-current', 'page');
+                                        } else {
+                                                langDe.setAttribute('aria-current', 'page');
+                                        }
+                                }
 
                                 // Toggle menu on burger click
                                 burgerMenu.addEventListener('click', () => {
@@ -292,6 +360,44 @@ const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- un
         .nav-links a[aria-current='page'] {
                 color: var(--primary);
                 border-bottom-color: var(--primary);
+        }
+
+        .lang-switch {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                margin-left: 0.5rem;
+                padding-left: 0.25rem;
+                border-left: 1px solid var(--line);
+        }
+
+        .lang-link {
+                color: var(--muted);
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 0.85rem;
+                letter-spacing: 0.04em;
+        }
+
+        .lang-link[aria-current='page'] {
+                color: var(--primary);
+        }
+
+        .lang-divider {
+                color: #94a3b8;
+                font-size: 0.8rem;
+        }
+
+        .nav-controls {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.9rem;
+        }
+
+        .lang-switch-mobile {
+                display: none;
+                align-items: center;
+                gap: 0.35rem;
         }
 
         /* Burger Menu Button */
@@ -464,6 +570,14 @@ const { title = 'Startseite', description = 'BiFoDe e.V. entwickelt Bildungs- un
 
                 .nav-links a:last-child {
                         border-bottom: none;
+                }
+
+                .lang-switch {
+                        display: none;
+                }
+
+                .lang-switch-mobile {
+                        display: inline-flex;
                 }
 
                 .nav-links a:hover {

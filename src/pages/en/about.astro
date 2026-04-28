@@ -1,0 +1,28 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<MainLayout lang="en" title="About" description="BiFoDe e.V. is a non-profit organization in NRW focused on education, prevention, and social cohesion.">
+  <Hero lang="en" centered={false} title="About BiFoDe e.V." subtitle="An organization in NRW focused on education, prevention, and democratic resilience." />
+
+  <section class="container">
+    <div class="section-header"><h2>Mission</h2></div>
+    <p class="lead">We support people and institutions in identifying prejudice, understanding antisemitism, and strengthening democratic action in everyday life.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>Goals</h2></div>
+    <div class="card-grid">
+      <div class="card feature-card"><h3>Strengthen Democratic Education</h3></div>
+      <div class="card feature-card"><h3>Promote Media Literacy</h3></div>
+      <div class="card feature-card"><h3>Develop Antisemitism Prevention</h3></div>
+      <div class="card feature-card"><h3>Support Schools and Partners</h3></div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
+  .lead { color: #475569; line-height: 1.8; max-width: 720px; }
+</style>

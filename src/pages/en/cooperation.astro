@@ -1,0 +1,35 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<MainLayout lang="en" title="Cooperation" description="We work with schools, education providers, municipalities, and civil society partners.">
+  <Hero lang="en" centered={false} title="Cooperation" subtitle="We work with schools, education providers, municipalities, and civil society partners." />
+
+  <section class="container">
+    <div class="section-header"><h2>Why Cooperation Matters</h2></div>
+    <p class="lead">Prevention works best where education, experience, and local networks come together.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>How We Cooperate</h2></div>
+    <div class="card-grid">
+      <div class="card feature-card"><h3>Workshops and Project Days</h3></div>
+      <div class="card feature-card"><h3>Joint Educational Projects</h3></div>
+      <div class="card feature-card"><h3>Professional Exchange</h3></div>
+      <div class="card feature-card"><h3>Materials and Digital Modules</h3></div>
+    </div>
+  </section>
+
+  <section class="container cta-section">
+    <p class="lead">Would you like to work with BiFoDe? Get in touch with us.</p>
+    <a class="button" href="/en/contact">Contact us</a>
+  </section>
+</MainLayout>
+
+<style>
+  .section-header h2 { font-size: clamp(1.8rem, 3vw, 2.2rem); margin-bottom: 1rem; color: #0f172a; }
+  .lead { color: #4b5563; line-height: 1.8; max-width: 720px; }
+  .cta-section { padding: 2.5rem 0; text-align: center; }
+  .button { display: inline-flex; align-items: center; justify-content: center; padding: 1rem 1.6rem; border-radius: 0.9rem; background: #163b63; color: #fff; text-decoration: none; font-weight: 600; }
+</style>

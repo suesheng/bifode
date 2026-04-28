@@ -1,0 +1,28 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<MainLayout lang="en" title="Our Work" description="Education, orientation, and analysis connected in practical prevention work.">
+  <Hero lang="en" centered={false} title="Our Work" subtitle="Education, orientation, and analysis connected in practical prevention work." />
+
+  <section class="container">
+    <div class="section-header"><h2>Education & Prevention</h2></div>
+    <p class="lead">We design formats for schools and education providers to address antisemitism, prejudice, and disinformation.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>Support & Orientation</h2></div>
+    <p class="lead">We provide low-threshold support for first assessments of incidents and practical next steps.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>Analysis & Context</h2></div>
+    <p class="lead">We monitor social developments and public discourse to strengthen educational responses.</p>
+  </section>
+</MainLayout>
+
+<style>
+  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
+  .lead { color: #475569; line-height: 1.8; max-width: 720px; }
+</style>
