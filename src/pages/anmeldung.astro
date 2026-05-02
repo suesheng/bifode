@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
+import JotformEmbed from '../components/JotformEmbed.astro';
 
 const rawUrl = import.meta.env.PUBLIC_JOTFORM_ANMELDUNG_URL;
 const formUrl =
@@ -21,17 +22,10 @@ const formUrl =
     {formUrl ? (
       <div class="embed-card">
         <p class="embed-note">
-          Das Formular wird von <strong>Jotform</strong> bereitgestellt. Hinweise zum Datenschutz finden Sie in unserer{' '}
-          <a href="/datenschutz">Datenschutzerklärung</a>.
+          Externes Formular (Jotform).{' '}
+          <a href="/datenschutz">Datenschutz</a>
         </p>
-        <div class="iframe-wrap">
-          <iframe
-            title="Anmeldung zu Veranstaltungen (Jotform)"
-            src={formUrl}
-            allow="geolocation; microphone; camera; fullscreen; payment"
-            loading="lazy"
-          />
-        </div>
+        <JotformEmbed formUrl={formUrl} title="Anmeldung zu Veranstaltungen (Jotform)" />
       </div>
     ) : (
       <div class="embed-card embed-fallback">
@@ -55,40 +49,24 @@ const formUrl =
   }
 
   .embed-card {
-    max-width: 900px;
+    max-width: 720px;
     margin: 0 auto;
     background: var(--surface, #fff);
     border: 1px solid var(--line, #dbe5f1);
     border-radius: var(--radius, 18px);
-    box-shadow: var(--shadow, 0 14px 34px rgba(16, 34, 62, 0.08));
-    padding: 1.25rem 1.25rem 1.5rem;
+    padding: 0.75rem 1rem 1.25rem;
   }
 
   .embed-note {
-    margin: 0 0 1rem;
-    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
     color: var(--muted, #4b5563);
-    line-height: 1.55;
+    line-height: 1.45;
   }
 
   .embed-note a {
     color: var(--primary, #163b63);
     font-weight: 600;
-  }
-
-  .iframe-wrap {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--line, #dbe5f1);
-    background: #f8fafc;
-    min-height: 560px;
-  }
-
-  .iframe-wrap iframe {
-    display: block;
-    width: 100%;
-    min-height: 720px;
-    border: 0;
   }
 
   .embed-fallback {
@@ -124,9 +102,4 @@ const formUrl =
     background: var(--primary-strong, #0f2e50);
   }
 
-  @media (max-width: 768px) {
-    .iframe-wrap iframe {
-      min-height: 640px;
-    }
-  }
 </style>
