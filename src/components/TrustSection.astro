@@ -1,9 +1,22 @@
 ---
-const { label, mobileHidden = true } = Astro.props;
+const {
+  label,
+  partnerTitle,
+  cooperationHref,
+  cooperationLabel,
+  mobileHidden = true,
+} = Astro.props as {
+  label: string;
+  partnerTitle?: string;
+  cooperationHref?: string;
+  cooperationLabel?: string;
+  mobileHidden?: boolean;
+};
 ---
 
 <section class={`trust-section ${mobileHidden ? 'mobile-hidden' : ''}`}>
   <div class="container trust-content">
+    {partnerTitle && <h2 class="trust-partner-title">{partnerTitle}</h2>}
     <p class="trust-label">{label}</p>
     <div class="trust-logos">
       <img src="/logos/logo1.png" alt="Partner logo" />
@@ -12,6 +25,11 @@ const { label, mobileHidden = true } = Astro.props;
       <img src="/logos/logo4.svg" alt="Partner logo" />
       <img src="/logos/logo5.svg" alt="Partner logo" />
     </div>
+    {cooperationHref && cooperationLabel && (
+      <p class="trust-cooperation">
+        <a href={cooperationHref}>{cooperationLabel}</a>
+      </p>
+    )}
   </div>
 </section>
 
@@ -22,6 +40,14 @@ const { label, mobileHidden = true } = Astro.props;
 
   .trust-content {
     text-align: center;
+  }
+
+  .trust-partner-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.02em;
   }
 
   .trust-label {
@@ -48,6 +74,23 @@ const { label, mobileHidden = true } = Astro.props;
   .trust-logos img:hover {
     opacity: 1;
     filter: grayscale(0%);
+  }
+
+  .trust-cooperation {
+    margin: 1.25rem 0 0;
+    font-size: 0.9rem;
+  }
+
+  .trust-cooperation a {
+    color: #163b63;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
+  }
+
+  .trust-cooperation a:hover {
+    color: #0f2e50;
+    border-bottom-color: #0f2e50;
   }
 
   @media (max-width: 768px) {

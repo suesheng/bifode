@@ -104,6 +104,17 @@ const pathMap: Record<string, string> = {
 const counterpartPath = pathMap[currentPath] || (isEn ? '/kontakt' : '/en/contact');
 const langDeHref = isEn ? counterpartPath : currentPath;
 const langEnHref = isEn ? currentPath : counterpartPath;
+
+const siteYear = new Date().getFullYear();
+const orgJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'BiFoDe e.V.',
+  alternateName: 'Bildungsforum für Demokratie und Vielfalt NRW e.V.',
+  url: 'https://www.bifode.org/',
+  logo: 'https://www.bifode.org/logos/logo-light.svg',
+  email: 'info@bifode.org',
+});
 ---
 
 <!doctype html>
@@ -117,6 +128,7 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                 <meta name="generator" content={Astro.generator} />
                 <title>{title} | BiFoDe</title>
                 <meta name="description" content={description} />
+                <script type="application/ld+json" set:html={orgJsonLd} />
 
                 <!-- Preconnect to external font domains -->
                 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,6 +165,7 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                 </style>
         </head>
         <body>
+                <a href="#main-content" class="skip-link">{isEn ? 'Skip to main content' : 'Zum Inhalt springen'}</a>
                 <div class="app-container">
                         <nav class="navbar" id="navbar">
                                 <div class="container nav-wrapper">
@@ -202,7 +215,7 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                                 </div>
                         </nav>
 
-                        <main class="main-content">
+                        <main id="main-content" class="main-content" tabindex="-1">
                                 <slot />
                         </main>
 
@@ -242,7 +255,7 @@ const langEnHref = isEn ? currentPath : counterpartPath;
 
                                 <div class="footer-bottom">
                                         <div class="container">
-                                                <p>&copy; 2026 BiFoDe e.V. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}</p>
+                                                <p>&copy; {siteYear} BiFoDe e.V. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}</p>
                                         </div>
                                 </div>
                         </footer>
@@ -350,6 +363,32 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                 background-color: var(--bg);
                 color: var(--text);
                 scroll-behavior: smooth;
+        }
+
+        .skip-link {
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 200;
+                padding: 0.65rem 1.1rem;
+                background: var(--primary);
+                color: #fff !important;
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-decoration: none;
+                border-radius: 0 0 10px 0;
+                transform: translateY(-120%);
+                transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus {
+                outline: none;
+                transform: translateY(0);
+        }
+
+        .skip-link:focus-visible {
+                outline: 2px solid #fff;
+                outline-offset: 2px;
         }
 
         .app-container {
@@ -529,6 +568,15 @@ const langEnHref = isEn ? currentPath : counterpartPath;
 
         .nav-drop-panel a:hover {
                 background: var(--surface-soft);
+        }
+
+        .nav-drop-summary:focus-visible,
+        .nav-top-link:focus-visible,
+        .nav-drop-panel a:focus-visible,
+        .lang-link:focus-visible,
+        .burger-menu:focus-visible {
+                outline: 2px solid var(--primary);
+                outline-offset: 2px;
         }
 
         .lang-switch {

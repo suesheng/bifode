@@ -2,15 +2,128 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
-<MainLayout lang="en" title="Privacy Policy" description="How we process personal data at BiFoDe e.V.">
-  <section class="container">
-    <div class="section-header"><h2>Privacy Policy</h2></div>
-    <p class="lead">We treat personal data confidentially and in accordance with applicable data protection regulations.</p>
-    <p class="lead">When you contact us via the form, your data is used solely to process your request.</p>
-  </section>
+<MainLayout lang="en" title="Privacy Policy" description="How BiFoDe e.V. processes personal data on this website.">
+  <div class="container">
+    <h1>Privacy Policy</h1>
+
+    <div class="content-section">
+      <h2>1. General</h2>
+      <p>
+        We process personal data only in accordance with applicable law (in particular the GDPR). This policy explains what data we collect on this website and for what purpose.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>2. Controller</h2>
+      <p>
+        <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V.</strong> (BiFoDe e.V.)<br />
+        Represented by: Denis Vilensky<br />
+        <strong>Email:</strong> info@bifode.org
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>3. Server log data & hosting</h2>
+      <p>
+        When you visit the site, technical data (e.g. IP address, time of request, browser type) may be processed to deliver and secure the website.
+      </p>
+      <p>
+        The site is hosted on <strong>Vercel Inc.</strong> (USA). Vercel processes access data as a processor; depending on configuration, EU data centres may be used. See{' '}
+        <a href="https://vercel.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Vercel’s privacy policy</a>.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>4. Contact</h2>
+      <p>
+        If you contact us by email or via the contact form, we use the information you provide solely to handle your request (Art. 6(1)(b) or (f) GDPR). Messages are sent through an SMTP provider you configure for the site.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>5. Cookies</h2>
+      <p>
+        We use cookies that are technically necessary for the site to function. Optional categories (e.g. functional, analytics) are only set if you consent via the cookie banner. Legal basis for necessary cookies: Art. 6(1)(f) GDPR.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>6. Embedded services</h2>
+      <p>
+        On the <strong>Registration</strong> page we embed a form from <strong>Jotform Inc.</strong> (USA) in an iframe. If you use that form, personal data is processed by Jotform under their terms. See{' '}
+        <a href="https://www.jotform.com/privacy/" rel="noopener noreferrer" target="_blank">Jotform’s privacy policy</a>. Embedding is based on our legitimate interest in offering a practical sign-up process (Art. 6(1)(f) GDPR).
+      </p>
+      <p>
+        We do not use external trackers such as Google Analytics unless you allow optional analytics cookies in the cookie settings.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>7. Your rights</h2>
+      <p>
+        You have the right to access, rectification, erasure, restriction of processing, objection, and data portability where applicable. Contact us informally at info@bifode.org.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>8. Complaints</h2>
+      <p>You may lodge a complaint with a supervisory authority in your country or state.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>9. Security</h2>
+      <p>We use appropriate technical and organisational measures to protect your data against loss, misuse, and unauthorised access.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>10. Last updated</h2>
+      <p>May 2026</p>
+    </div>
+  </div>
 </MainLayout>
 
 <style>
-  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
-  .lead { color: #475569; line-height: 1.8; max-width: 760px; }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    color: #111827;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .content-section {
+    margin-bottom: 2rem;
+  }
+
+  .content-section h2 {
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .content-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #374151;
+  }
+
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  strong {
+    font-weight: 600;
+  }
 </style>

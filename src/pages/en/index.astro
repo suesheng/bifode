@@ -10,9 +10,15 @@ import TrustSection from '../../components/TrustSection.astro';
     centered={true}
     title="Strengthen education. Counter antisemitism. Live democracy."
     subtitle="BiFoDe e.V. implements educational and prevention formats across North Rhine-Westphalia."
+    tertiary={{ href: '/en/events', label: 'Upcoming events →' }}
   />
 
-  <TrustSection label="Collaboration and exchange with partners from education and civil society" />
+  <TrustSection
+    partnerTitle="Our partners"
+    label="Collaboration and exchange with partners from education and civil society"
+    cooperationHref="/en/cooperation"
+    cooperationLabel="About cooperation →"
+  />
 
   <section class="container">
     <div class="section-header">
@@ -49,9 +55,53 @@ import TrustSection from '../../components/TrustSection.astro';
       </div>
     </div>
   </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Who we work with</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 10.5 12 5l9 5.5-9 5.5z" /><path d="M7 12.5V16a5 3 0 0 0 10 0v-3.5" /></svg>
+        </div>
+        <h3>Schools</h3>
+        <p>Programmes for teachers and schools that promote democratic learning and respect.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 14a3 3 0 1 1 0-6c1.2 0 2.2.7 2.7 1.7A3 3 0 1 1 13 14c-.9 0-1.6-.3-2.2-.8A3 3 0 0 1 8 14Z" /><path d="M4.5 19a3.5 3.5 0 0 1 6.5-1.8A3.5 3.5 0 0 1 17.5 19" /></svg>
+        </div>
+        <h3>Partners & NGOs</h3>
+        <p>Reliable cooperation with civil society organisations and education partners.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 20h16" /><path d="M5 20V9h14v11" /><path d="M3 9h18L12 4z" /><path d="M9 13h6v7H9z" /></svg>
+        </div>
+        <h3>Public bodies</h3>
+        <p>Consulting and formats for municipal actors and institutional partners.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>NRW pilot project</h2>
+    </div>
+    <p class="lead">
+      In our statewide pilot project we run educational formats that take up practical questions and are developed in close exchange with schools and partners.
+    </p>
+    <p class="pilot-link-wrap">
+      <a href="/en/projects" class="pilot-link">Browse our projects →</a>
+    </p>
+  </section>
 </MainLayout>
 
 <style>
   .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
   .lead { max-width: 720px; color: #475569; line-height: 1.85; margin-top: 0.5rem; }
+  .pilot-link-wrap { margin: 1rem 0 0; }
+  .pilot-link { font-weight: 600; color: #163b63; text-decoration: none; border-bottom: 1px solid rgba(22, 59, 99, 0.35); }
+  .pilot-link:hover { color: #0f2e50; border-bottom-color: #0f2e50; }
 </style>

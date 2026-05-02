@@ -6,9 +6,19 @@ import TrustSection from '../components/TrustSection.astro';
 ---
 
 <MainLayout title="Startseite" description="BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW">
-  <Hero centered={true} title="Bildung stärken. Antisemitismus entgegentreten. Demokratie leben." subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um." />
+  <Hero
+    centered={true}
+    title="Bildung stärken. Antisemitismus entgegentreten. Demokratie leben."
+    subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um."
+    tertiary={{ href: '/termine', label: 'Nächste Termine →' }}
+  />
 
-  <TrustSection label="Zusammenarbeit und Austausch mit Partnern aus Bildung und Zivilgesellschaft" />
+  <TrustSection
+    partnerTitle="Unsere Partner"
+    label="Zusammenarbeit und Austausch mit Partnern aus Bildung und Zivilgesellschaft"
+    cooperationHref="/kooperation"
+    cooperationLabel="Mehr zur Kooperation →"
+  />
 
   <section class="container">
     <div class="section-header">
@@ -104,6 +114,9 @@ import TrustSection from '../components/TrustSection.astro';
       <h2>Pilotprojekt NRW</h2>
     </div>
     <p class="lead">Im NRW-weiten Pilotprojekt führen wir Bildungsformate durch, die Praxisfragen aufnehmen und in engem Austausch mit Schulen und Partnern weitergeführt werden.</p>
+    <p class="pilot-link-wrap">
+      <a href="/projekte" class="pilot-link">Unsere Projekte im Überblick →</a>
+    </p>
   </section>
 </MainLayout>
 
@@ -119,5 +132,21 @@ import TrustSection from '../components/TrustSection.astro';
     color: #475569;
     line-height: 1.85;
     margin-top: 0.5rem;
+  }
+
+  .pilot-link-wrap {
+    margin: 1rem 0 0;
+  }
+
+  .pilot-link {
+    font-weight: 600;
+    color: #163b63;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
+  }
+
+  .pilot-link:hover {
+    color: #0f2e50;
+    border-bottom-color: #0f2e50;
   }
 </style>
