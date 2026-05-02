@@ -72,10 +72,15 @@ const {
   }
 
   .trust-logos img {
+    display: block;
     height: 80px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    flex: 0 0 auto;
     opacity: 0.6;
     filter: grayscale(100%);
-    transition: all 0.2s ease;
+    transition: opacity 0.2s ease, filter 0.2s ease;
   }
 
   .trust-logos img:hover {
@@ -107,6 +112,7 @@ const {
 
     .trust-logos img {
       height: 64px;
+      width: auto;
     }
   }
 </style>
