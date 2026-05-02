@@ -72,7 +72,7 @@ function formatRange(e: EventEntry) {
             class="ics-link"
             download={`bifode-${e.id.replace(/[^a-zA-Z0-9._-]/g, '-')}.ics`}
           >
-            {isEn ? 'Save this date to your calendar' : 'Termin im Kalender speichern'}
+            {isEn ? 'Download (.ics)' : 'Herunterladen (.ics)'}
           </a>
           {e.data.registrationUrl && (
             <a href={e.data.registrationUrl} class="event-cta">
