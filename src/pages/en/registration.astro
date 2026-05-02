@@ -1,0 +1,148 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+
+const rawUrl = import.meta.env.PUBLIC_JOTFORM_ANMELDUNG_URL;
+const formUrl =
+  typeof rawUrl === 'string' && /^https?:\/\//i.test(rawUrl.trim()) ? rawUrl.trim() : '';
+---
+
+<MainLayout
+  lang="en"
+  title="Registration"
+  description="Register for BiFoDe e.V. events. This page is in English; the linked registration form is in German."
+>
+  <Hero
+    lang="en"
+    centered={false}
+    title="Registration"
+    subtitle="Use the form below to sign up for our events. This website page is in English; the form itself is in German (one shared form for all participants)."
+  />
+
+  <section class="container anmeldung-section">
+    {formUrl ? (
+      <div class="embed-card">
+        <p class="embed-note embed-note-lang">
+          <strong>Form language:</strong> German — labels, event list, and confirmations follow the same wording as on{' '}
+          <a href="/anmeldung">Anmeldung</a> (DE). If you need help, contact us via the{' '}
+          <a href="/en/contact">contact form</a>.
+        </p>
+        <p class="embed-note">
+          The form is hosted by <strong>Jotform</strong>. For privacy information, see our{' '}
+          <a href="/en/privacy">privacy policy</a>.
+        </p>
+        <div class="iframe-wrap">
+          <iframe
+            title="Event registration — German form (Jotform)"
+            lang="de"
+            src={formUrl}
+            allow="geolocation; microphone; camera; fullscreen; payment"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    ) : (
+      <div class="embed-card embed-fallback">
+        <p>
+          Registration is not configured yet. Please set <code>PUBLIC_JOTFORM_ANMELDUNG_URL</code> (German Jotform
+          URL, shared with the DE page) in the environment, or email{' '}
+          <a href="mailto:info@bifode.org">info@bifode.org</a>.
+        </p>
+        <p>
+          <a class="button-link" href="/en/contact">Contact form</a>
+        </p>
+      </div>
+    )}
+  </section>
+</MainLayout>
+
+<style>
+  .anmeldung-section {
+    padding-bottom: 3rem;
+  }
+
+  .embed-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface, #fff);
+    border: 1px solid var(--line, #dbe5f1);
+    border-radius: var(--radius, 18px);
+    box-shadow: var(--shadow, 0 14px 34px rgba(16, 34, 62, 0.08));
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .embed-note {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: var(--muted, #4b5563);
+    line-height: 1.55;
+  }
+
+  .embed-note-lang {
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+    background: var(--surface-soft, #f8fbff);
+    border-radius: 10px;
+    border: 1px solid var(--line, #dbe5f1);
+    color: var(--text, #0f172a);
+  }
+
+  .embed-note a {
+    color: var(--primary, #163b63);
+    font-weight: 600;
+  }
+
+  .iframe-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line, #dbe5f1);
+    background: #f8fafc;
+    min-height: 560px;
+  }
+
+  .iframe-wrap iframe {
+    display: block;
+    width: 100%;
+    min-height: 720px;
+    border: 0;
+  }
+
+  .embed-fallback {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .embed-fallback p {
+    margin: 0 0 1rem;
+    color: var(--text, #0f172a);
+    line-height: 1.65;
+  }
+
+  .embed-fallback code {
+    font-size: 0.85em;
+    background: #f1f5f9;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+
+  .button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.9rem;
+    background: var(--primary, #163b63);
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .button-link:hover {
+    background: var(--primary-strong, #0f2e50);
+  }
+
+  @media (max-width: 768px) {
+    .iframe-wrap iframe {
+      min-height: 640px;
+    }
+  }
+</style>
