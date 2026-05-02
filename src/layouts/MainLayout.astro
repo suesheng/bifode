@@ -10,29 +10,69 @@ const {
 const isEn = lang === 'en';
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
-const navItems = isEn
+type NavHref = { href: string; label: string };
+type NavGroup = { kind: 'group'; label: string; items: NavHref[] };
+type NavLink = { kind: 'link'; href: string; label: string };
+type NavEntry = NavLink | NavGroup;
+
+const navStructure: NavEntry[] = isEn
   ? [
-      { href: '/en', label: 'Home' },
-      { href: '/en/about', label: 'About' },
-      { href: '/en/our-work', label: 'Our Work' },
-      { href: '/en/schools', label: 'Schools' },
-      { href: '/en/events', label: 'Events' },
-      { href: '/en/projects', label: 'Projects' },
-      { href: '/en/cooperation', label: 'Cooperation' },
-      { href: '/en/registration', label: 'Registration' },
-      { href: '/en/contact', label: 'Contact' }
+      { kind: 'link', href: '/en', label: 'Home' },
+      {
+        kind: 'group',
+        label: 'Who we are',
+        items: [
+          { href: '/en/about', label: 'About' },
+          { href: '/en/our-work', label: 'Our Work' },
+          { href: '/en/cooperation', label: 'Cooperation' }
+        ]
+      },
+      {
+        kind: 'group',
+        label: 'What we offer',
+        items: [
+          { href: '/en/schools', label: 'Schools' },
+          { href: '/en/projects', label: 'Projects' }
+        ]
+      },
+      { kind: 'link', href: '/en/events', label: 'Events' },
+      { kind: 'link', href: '/en/registration', label: 'Registration' },
+      { kind: 'link', href: '/en/contact', label: 'Contact' }
     ]
   : [
-      { href: '/', label: 'Startseite' },
-      { href: '/ueber-uns', label: 'Über uns' },
-      { href: '/unsere-arbeit', label: 'Unsere Arbeit' },
-      { href: '/schulen', label: 'Schulen' },
-      { href: '/termine', label: 'Termine' },
-      { href: '/projekte', label: 'Projekte' },
-      { href: '/kooperation', label: 'Kooperation' },
-      { href: '/anmeldung', label: 'Anmeldung' },
-      { href: '/kontakt', label: 'Kontakt' }
+      { kind: 'link', href: '/', label: 'Startseite' },
+      {
+        kind: 'group',
+        label: 'Wer wir sind',
+        items: [
+          { href: '/ueber-uns', label: 'Über uns' },
+          { href: '/unsere-arbeit', label: 'Unsere Arbeit' },
+          { href: '/kooperation', label: 'Kooperation' }
+        ]
+      },
+      {
+        kind: 'group',
+        label: 'Was wir anbieten',
+        items: [
+          { href: '/schulen', label: 'Schulen' },
+          { href: '/projekte', label: 'Projekte' }
+        ]
+      },
+      { kind: 'link', href: '/termine', label: 'Termine' },
+      { kind: 'link', href: '/anmeldung', label: 'Anmeldung' },
+      { kind: 'link', href: '/kontakt', label: 'Kontakt' }
     ];
+
+function flattenNav(entries: NavEntry[]): NavHref[] {
+  const out: NavHref[] = [];
+  for (const e of entries) {
+    if (e.kind === 'link') out.push({ href: e.href, label: e.label });
+    else for (const i of e.items) out.push(i);
+  }
+  return out;
+}
+
+const footerNavLinks = flattenNav(navStructure);
 
 const pathMap: Record<string, string> = {
   '/': '/en',
@@ -107,7 +147,7 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                         @media (max-width: 768px) {
                                 .burger-menu { display: flex; }
                                 .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; gap: 0; border-bottom: 1px solid #e5e7eb; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-                                .navbar.is-open .nav-links { max-height: 500px; }
+                                .navbar.is-open .nav-links { max-height: 920px; }
                                 .nav-links a { padding: 0.75rem 1rem; border-bottom: 1px solid #f3f4f6; }
                         }
                 </style>
@@ -132,9 +172,27 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                                         </button>
                                         </div>
                                         <div class="nav-links" id="navLinks">
-                                                {navItems.map((item) => (
-                                                        <a href={item.href} data-nav-link>{item.label}</a>
-                                                ))}
+                                                {navStructure.map((entry) =>
+                                                  entry.kind === 'link' ? (
+                                                    <a href={entry.href} class="nav-top-link" data-nav-link>
+                                                      {entry.label}
+                                                    </a>
+                                                  ) : (
+                                                    <details class="nav-drop">
+                                                      <summary class="nav-drop-summary">
+                                                        <span>{entry.label}</span>
+                                                        <span class="nav-drop-chevron" aria-hidden="true" />
+                                                      </summary>
+                                                      <div class="nav-drop-panel">
+                                                        {entry.items.map((item) => (
+                                                          <a href={item.href} data-nav-link>
+                                                            {item.label}
+                                                          </a>
+                                                        ))}
+                                                      </div>
+                                                    </details>
+                                                  )
+                                                )}
                                                 <div class="lang-switch" id="langSwitch">
                                                         <a href={langDeHref} id="langDe" class="lang-link">DE</a>
                                                         <span class="lang-divider">|</span>
@@ -160,7 +218,7 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                                         <div class="footer-section footer-nav">
                                                 <h4>{isEn ? 'Navigation' : 'Navigation'}</h4>
                                                 <ul>
-                                                        {navItems.map((item) => (
+                                                        {footerNavLinks.map((item) => (
                                                                 <li><a href={item.href}>{item.label}</a></li>
                                                         ))}
                                                 </ul>
@@ -212,6 +270,16 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                                         }
                                 });
 
+                                navLinks.querySelectorAll('details.nav-drop').forEach(details => {
+                                        const sub = details.querySelectorAll('.nav-drop-panel a[data-nav-link]');
+                                        let match = false;
+                                        sub.forEach(a => {
+                                                const p = (a.getAttribute('href') || '').replace(/\/$/, '') || '/';
+                                                if (p === currentPath) match = true;
+                                        });
+                                        if (match) details.classList.add('nav-drop--current');
+                                });
+
                                 if (langDe && langEn) {
                                         if (currentPath.startsWith('/en')) {
                                                 langEn.setAttribute('aria-current', 'page');
@@ -227,9 +295,10 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                                         burgerMenu.setAttribute('aria-expanded', burgerMenu.classList.contains('is-open') ? 'true' : 'false');
                                 });
 
-                                // Close menu when a link is clicked
+                                // Close menu when a link is clicked; collapse dropdowns
                                 navItems.forEach(item => {
                                         item.addEventListener('click', () => {
+                                                navLinks.querySelectorAll('details.nav-drop').forEach(d => d.removeAttribute('open'));
                                                 navbar.classList.remove('is-open');
                                                 burgerMenu.classList.remove('is-open');
                                                 burgerMenu.setAttribute('aria-expanded', 'false');
@@ -349,25 +418,117 @@ const langEnHref = isEn ? currentPath : counterpartPath;
 
         .nav-links {
                 display: flex;
-                gap: 2rem;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.35rem 1.35rem;
         }
 
-        .nav-links a {
+        .nav-links .nav-top-link,
+        .nav-links .nav-drop-panel a {
                 color: var(--muted);
                 text-decoration: none;
                 font-weight: 500;
-                transition: color 0.2s;
+                transition: color 0.2s, border-color 0.2s, background-color 0.2s;
                 padding-bottom: 0.3rem;
                 border-bottom: 2px solid transparent;
         }
 
-        .nav-links a:hover {
+        .nav-links .nav-top-link:hover,
+        .nav-links .nav-drop-panel a:hover {
                 color: var(--primary);
         }
 
-        .nav-links a[aria-current='page'] {
+        .nav-links .nav-top-link[aria-current='page'],
+        .nav-links .nav-drop-panel a[aria-current='page'] {
                 color: var(--primary);
                 border-bottom-color: var(--primary);
+        }
+
+        .nav-drop {
+                position: relative;
+        }
+
+        .nav-drop-summary {
+                list-style: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                color: var(--muted);
+                font-weight: 500;
+                font-size: inherit;
+                font-family: inherit;
+                padding: 0 0 0.3rem;
+                margin: 0;
+                border: 0;
+                border-bottom: 2px solid transparent;
+                background: transparent;
+                user-select: none;
+                transition: color 0.2s, border-color 0.2s;
+        }
+
+        .nav-drop-summary::-webkit-details-marker {
+                display: none;
+        }
+
+        .nav-drop-summary::marker {
+                content: '';
+        }
+
+        .nav-drop-summary:hover,
+        .nav-drop-summary:focus-visible {
+                color: var(--primary);
+                outline: none;
+        }
+
+        .nav-drop[open] > .nav-drop-summary,
+        .nav-drop.nav-drop--current > .nav-drop-summary {
+                color: var(--primary);
+                border-bottom-color: var(--primary);
+        }
+
+        .nav-drop-chevron {
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 5px solid currentColor;
+                margin-top: 2px;
+                transition: transform 0.2s ease;
+        }
+
+        .nav-drop[open] .nav-drop-chevron {
+                transform: rotate(180deg);
+        }
+
+        .nav-drop-panel {
+                position: absolute;
+                top: calc(100% + 0.35rem);
+                left: 0;
+                min-width: 12.5rem;
+                padding: 0.4rem 0;
+                margin: 0;
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                box-shadow: var(--shadow);
+                z-index: 80;
+                display: flex;
+                flex-direction: column;
+                gap: 0.1rem;
+        }
+
+        .nav-drop-panel a {
+                display: block;
+                padding: 0.5rem 1rem;
+                margin: 0 0.35rem;
+                border-radius: 8px;
+                border-bottom: none;
+        }
+
+        .nav-drop-panel a:hover {
+                background: var(--surface-soft);
         }
 
         .lang-switch {
@@ -567,16 +728,50 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                 }
 
                 .navbar.is-open .nav-links {
-                        max-height: 500px;
+                        max-height: 920px;
                 }
 
-                .nav-links a {
+                .nav-links .nav-top-link {
+                        display: block;
+                        width: 100%;
                         padding: 0.75rem 1rem;
                         border-bottom: 1px solid #f3f4f6;
+                        border-radius: 0;
                         transition: background-color 0.2s ease, color 0.2s ease;
                 }
 
-                .nav-links a:last-child {
+                .nav-drop {
+                        width: 100%;
+                        border-bottom: 1px solid #f3f4f6;
+                }
+
+                .nav-drop-summary {
+                        width: 100%;
+                        padding: 0.75rem 1rem;
+                        justify-content: space-between;
+                        border-bottom: none;
+                }
+
+                .nav-drop-panel {
+                        position: static;
+                        min-width: 0;
+                        width: 100%;
+                        padding: 0 0 0.35rem;
+                        margin: 0;
+                        border: 0;
+                        border-radius: 0;
+                        box-shadow: none;
+                        background: transparent;
+                }
+
+                .nav-drop-panel a {
+                        padding: 0.55rem 1rem 0.55rem 1.75rem;
+                        margin: 0;
+                        border-radius: 0;
+                        border-bottom: 1px solid #f9fafb;
+                }
+
+                .nav-drop-panel a:last-child {
                         border-bottom: none;
                 }
 
@@ -588,7 +783,8 @@ const langEnHref = isEn ? currentPath : counterpartPath;
                         display: inline-flex;
                 }
 
-                .nav-links a:hover {
+                .nav-links .nav-top-link:hover,
+                .nav-drop-panel a:hover {
                         background-color: #f9fafb;
                 }
 
