@@ -6,11 +6,9 @@ type EventEntry = CollectionEntry<'events'>;
 interface Props {
   entries: EventEntry[];
   lang: 'de' | 'en';
-  /** If set, show “Subscribe (.ics)” link */
-  icsHref?: string;
 }
 
-const { entries, lang, icsHref } = Astro.props;
+const { entries, lang } = Astro.props;
 const isEn = lang === 'en';
 
 function displayTitle(e: EventEntry) {
@@ -52,14 +50,6 @@ function formatRange(e: EventEntry) {
 }
 ---
 
-{icsHref && (
-  <div class="event-toolbar">
-    <a href={icsHref} class="ics-link" download="bifode-termine.ics">
-      {isEn ? 'Subscribe (.ics)' : 'Kalender abonnieren (.ics)'}
-    </a>
-  </div>
-)}
-
 {entries.length === 0 ? (
   <p class="empty">{isEn ? 'No upcoming dates at the moment.' : 'Aktuell sind keine Termine eingetragen.'}</p>
 ) : (
@@ -76,23 +66,32 @@ function formatRange(e: EventEntry) {
           <span class="loc-label">{isEn ? 'Where' : 'Ort'}</span>
           {displayLocation(e)}
         </p>
-        {e.data.registrationUrl && (
-          <a href={e.data.registrationUrl} class="event-cta">
-            {isEn ? 'Register' : 'Anmeldung'}
+        <div class="event-actions">
+          <a
+            href={`/events/${e.id}.ics`}
+            class="ics-link"
+            download={`bifode-${e.id.replace(/[^a-zA-Z0-9._-]/g, '-')}.ics`}
+          >
+            {isEn ? 'Save this date to your calendar' : 'Termin im Kalender speichern'}
           </a>
-        )}
+          {e.data.registrationUrl && (
+            <a href={e.data.registrationUrl} class="event-cta">
+              {isEn ? 'Register' : 'Anmeldung'}
+            </a>
+          )}
+        </div>
       </li>
     ))}
   </ul>
 )}
 
 <style>
-  .event-toolbar {
+  .event-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
     align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.25rem;
   }
 
   .ics-link {
