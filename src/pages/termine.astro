@@ -1,0 +1,62 @@
+---
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import EventList from '../components/EventList.astro';
+
+const all = await getCollection('events');
+const published = all.filter((e) => !e.data.draft);
+const tNow = Date.now();
+
+const upcoming = published
+  .filter((e) => new Date(e.data.start).getTime() >= tNow)
+  .sort((a, b) => new Date(a.data.start).getTime() - new Date(b.data.start).getTime());
+
+const past = published
+  .filter((e) => new Date(e.data.start).getTime() < tNow)
+  .sort((a, b) => new Date(b.data.start).getTime() - new Date(a.data.start).getTime())
+  .slice(0, 8);
+---
+
+<MainLayout
+  title="Termine"
+  description="Aktuelle Veranstaltungen, Workshops und Termine von BiFoDe e.V. in NRW — mit Kalenderfeed (.ics) zum Abonnieren."
+>
+  <Hero
+    centered={false}
+    title="Termine"
+    subtitle="Hier finden Sie unsere geplanten Veranstaltungen und Formate. Die Anmeldung erfolgt in der Regel über die Seite Anmeldung; pro Termin finden Sie den passenden Link oder Verweis."
+  />
+
+  <section class="container termine-section">
+    <EventList entries={upcoming} lang="de" icsHref="/events.ics" />
+
+    {past.length > 0 && (
+      <div class="past-block">
+        <h2 class="past-heading">Vergangene Termine</h2>
+        <EventList entries={past} lang="de" />
+      </div>
+    )}
+  </section>
+</MainLayout>
+
+<style>
+  .termine-section {
+    padding-bottom: 3rem;
+  }
+
+  .past-block {
+    margin-top: 2.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line, #dbe5f1);
+  }
+
+  .past-heading {
+    margin: 0 0 1.25rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text, #0f172a);
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type EventEntry = CollectionEntry<'events'>;
+
+interface Props {
+  entries: EventEntry[];
+  lang: 'de' | 'en';
+  /** If set, show “Subscribe (.ics)” link */
+  icsHref?: string;
+}
+
+const { entries, lang, icsHref } = Astro.props;
+const isEn = lang === 'en';
+
+function displayTitle(e: EventEntry) {
+  return isEn && e.data.titleEn ? e.data.titleEn : e.data.title;
+}
+
+function displaySummary(e: EventEntry) {
+  return isEn && e.data.summaryEn ? e.data.summaryEn : e.data.summary;
+}
+
+function displayLocation(e: EventEntry) {
+  return isEn && e.data.locationEn ? e.data.locationEn : e.data.location;
+}
+
+function formatRange(e: EventEntry) {
+  const start = new Date(e.data.start);
+  const end = e.data.end ? new Date(e.data.end) : null;
+  const locale = isEn ? 'en-GB' : 'de-DE';
+  const tz = 'Europe/Berlin';
+  const dOpts: Intl.DateTimeFormatOptions = {
+    timeZone: tz,
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+  const tOpts: Intl.DateTimeFormatOptions = { timeZone: tz, hour: '2-digit', minute: '2-digit' };
+  const dateStr = start.toLocaleDateString(locale, dOpts);
+  const t1 = start.toLocaleTimeString(locale, tOpts);
+  if (end && !Number.isNaN(end.getTime())) {
+    const t2 = end.toLocaleTimeString(locale, tOpts);
+    const sameDay =
+      start.toLocaleDateString('en-CA', { timeZone: tz }) === end.toLocaleDateString('en-CA', { timeZone: tz });
+    if (sameDay) return `${dateStr}, ${t1} – ${t2}`;
+    const date2 = end.toLocaleDateString(locale, dOpts);
+    return `${dateStr}, ${t1} – ${date2}, ${t2}`;
+  }
+  return `${dateStr}, ${t1}`;
+}
+---
+
+{icsHref && (
+  <div class="event-toolbar">
+    <a href={icsHref} class="ics-link" download="bifode-termine.ics">
+      {isEn ? 'Subscribe (.ics)' : 'Kalender abonnieren (.ics)'}
+    </a>
+  </div>
+)}
+
+{entries.length === 0 ? (
+  <p class="empty">{isEn ? 'No upcoming dates at the moment.' : 'Aktuell sind keine Termine eingetragen.'}</p>
+) : (
+  <ul class="event-list">
+    {entries.map((e) => (
+      <li class="event-card">
+        <div class="event-meta">
+          {e.data.online && <span class="pill">{isEn ? 'Online' : 'Online'}</span>}
+          <time datetime={e.data.start}>{formatRange(e)}</time>
+        </div>
+        <h3>{displayTitle(e)}</h3>
+        <p class="event-summary">{displaySummary(e)}</p>
+        <p class="event-loc">
+          <span class="loc-label">{isEn ? 'Where' : 'Ort'}</span>
+          {displayLocation(e)}
+        </p>
+        {e.data.registrationUrl && (
+          <a href={e.data.registrationUrl} class="event-cta">
+            {isEn ? 'Register' : 'Anmeldung'}
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .event-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
+  .ics-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary, #163b63);
+    text-decoration: none;
+    border: 1px solid var(--line, #dbe5f1);
+    border-radius: 10px;
+    background: var(--surface-soft, #f8fbff);
+  }
+
+  .ics-link:hover {
+    border-color: var(--primary, #163b63);
+    background: #fff;
+  }
+
+  .empty {
+    margin: 0;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    color: var(--muted, #4b5563);
+    background: var(--surface-soft, #f8fbff);
+    border-radius: var(--radius, 18px);
+    border: 1px dashed var(--line, #dbe5f1);
+  }
+
+  .event-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .event-card {
+    margin: 0;
+    padding: 1.35rem 1.5rem;
+    background: var(--surface, #fff);
+    border: 1px solid var(--line, #dbe5f1);
+    border-radius: var(--radius, 18px);
+    box-shadow: var(--shadow, 0 14px 34px rgba(16, 34, 62, 0.08));
+  }
+
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--muted, #4b5563);
+  }
+
+  .event-meta time {
+    font-weight: 600;
+    color: var(--text, #0f172a);
+  }
+
+  .pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: #e0ecf9;
+    color: var(--primary-strong, #0f2e50);
+  }
+
+  .event-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    color: var(--text, #0f172a);
+  }
+
+  .event-summary {
+    margin: 0 0 0.75rem;
+    line-height: 1.6;
+    color: var(--muted, #4b5563);
+    font-size: 0.95rem;
+  }
+
+  .event-loc {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: var(--text, #0f172a);
+  }
+
+  .loc-label {
+    font-weight: 600;
+    color: var(--muted, #4b5563);
+    margin-right: 0.35rem;
+  }
+
+  .event-cta {
+    display: inline-flex;
+    padding: 0.65rem 1.15rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #fff !important;
+    text-decoration: none;
+    background: var(--primary, #163b63);
+    border-radius: 10px;
+  }
+
+  .event-cta:hover {
+    background: var(--primary-strong, #0f2e50);
+  }
+</style>

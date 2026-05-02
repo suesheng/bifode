@@ -1,0 +1,104 @@
+<!--
+  Jotform: Einstellungen → E-Mail-Benachrichtigungen → HTML der Nachricht.
+  Gesamten Inhalt zwischen <body> und </body> in den Editor einfügen (oder als Basis).
+  Logo-URL anpassen, falls ihr später ein PNG für E-Mail nutzt.
+-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neue Anmeldung</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f7fb;-webkit-text-size-adjust:100%;">
+  <div style="width:100%;margin:0 auto;padding:24px 12px;background-color:#f4f7fb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:640px;margin:0 auto;">
+      <tr>
+        <td align="center" style="padding:0 0 20px;">
+          <a href="https://www.bifode.org" style="text-decoration:none;color:#163b63;font-size:20px;font-weight:700;letter-spacing:-0.02em;">BiFoDe e.V.</a>
+          <div style="font-size:12px;color:#4b5563;margin-top:4px;">Bildung gegen Antisemitismus · NRW</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="background-color:#ffffff;border-radius:18px;overflow:hidden;border:1px solid #dbe5f1;box-shadow:0 14px 34px rgba(16,34,62,0.08);">
+          <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="height:4px;line-height:4px;font-size:0;background-color:#163b63;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td style="padding:24px 28px 8px;">
+                <h1 style="margin:0;font-size:18px;font-weight:700;color:#0f172a;line-height:1.35;">{form_title}</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 16px;">
+                <p style="margin:0;font-size:13px;color:#4b5563;line-height:1.5;">Neue Anmeldung über die Website. Antworten Sie bei Rückfragen direkt an die angegebene E-Mail-Adresse.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 8px;">
+                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top:1px solid #dbe5f1;">
+                  <tr><td colspan="2" height="16" style="font-size:0;line-height:0;">&nbsp;</td></tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 24px;">
+                <table id="emailFieldsTable" role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:14px;color:#0f172a;">
+                  <tbody id="emailFieldsTableBody">
+                    <tr id="row_4" class="questionRow">
+                      <td id="question_4" class="questionColumn" valign="top" width="32%" style="padding:10px 12px 10px 0;color:#4b5563;font-weight:600;vertical-align:top;border-bottom:1px solid #f1f5f9;">Zu welcher Veranstaltung melden Sie sich an?</td>
+                      <td id="value_4" class="valueColumn" valign="top" width="68%" style="padding:10px 0 10px 0;color:#0f172a;font-weight:500;vertical-align:top;border-bottom:1px solid #f1f5f9;">{zuWelcher}</td>
+                    </tr>
+                    <tr id="row_5" class="questionRow">
+                      <td id="question_5" class="questionColumn" valign="top" style="padding:10px 12px 10px 0;color:#4b5563;font-weight:600;vertical-align:top;border-bottom:1px solid #f1f5f9;">Vorname und Nachname</td>
+                      <td id="value_5" class="valueColumn" valign="top" style="padding:10px 0 10px 0;color:#0f172a;font-weight:500;vertical-align:top;border-bottom:1px solid #f1f5f9;">{vornameUnd}</td>
+                    </tr>
+                    <tr id="row_6" class="questionRow">
+                      <td id="question_6" class="questionColumn" valign="top" style="padding:10px 12px 10px 0;color:#4b5563;font-weight:600;vertical-align:top;border-bottom:1px solid #f1f5f9;">E-Mail-Adresse (für die Zusendung des Zoom-Links bzw. der Teilnahmeinformationen)</td>
+                      <td id="value_6" class="valueColumn" valign="top" style="padding:10px 0 10px 0;color:#0f172a;font-weight:500;vertical-align:top;border-bottom:1px solid #f1f5f9;">{emailadressefur}</td>
+                    </tr>
+                    <tr id="row_7" class="questionRow">
+                      <td id="question_7" class="questionColumn" valign="top" style="padding:10px 12px 10px 0;color:#4b5563;font-weight:600;vertical-align:top;border-bottom:1px solid #f1f5f9;">Ich nehme teil als …</td>
+                      <td id="value_7" class="valueColumn" valign="top" style="padding:10px 0 10px 0;color:#0f172a;font-weight:500;vertical-align:top;border-bottom:1px solid #f1f5f9;">{ichNehme}</td>
+                    </tr>
+                    <tr id="row_8" class="questionRow">
+                      <td id="question_8" class="questionColumn" valign="top" style="padding:10px 12px 10px 0;color:#4b5563;font-weight:600;vertical-align:top;border-bottom:1px solid #f1f5f9;">Bitte kurz angeben</td>
+                      <td id="value_8" class="valueColumn" valign="top" style="padding:10px 0 10px 0;color:#0f172a;font-weight:500;vertical-align:top;border-bottom:1px solid #f1f5f9;">{bitteKurz}</td>
+                    </tr>
+                    <tr id="row_14" class="questionRow">
+                      <td id="question_14" class="questionColumn" valign="top" style="padding:10px 12px 10px 0;color:#4b5563;font-weight:600;vertical-align:top;">Datenschutz / Einwilligung</td>
+                      <td id="value_14" class="valueColumn" valign="top" style="padding:10px 0 10px 0;color:#0f172a;font-weight:500;vertical-align:top;">{typeA}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 24px;">
+                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top:1px solid #dbe5f1;">
+                  <tr><td height="16" style="font-size:0;line-height:0;">&nbsp;</td></tr>
+                  <tr class="line-show" style="display:none;">
+                    <td class="forward-text-show" style="display:none;font-size:13px;text-align:center;color:#0f172a;line-height:1.5;">You can <span style="color:#163b63;">{edit_submission}</span> and <span style="color:#163b63;">{all_submissions}</span> easily.</td>
+                  </tr>
+                  <tr class="line-show" style="display:none;"><td height="12">&nbsp;</td></tr>
+                </table>
+                <p style="margin:16px 0 0;font-size:12px;color:#6b7280;line-height:1.5;text-align:center;">
+                  <a href="https://www.bifode.org" style="color:#163b63;text-decoration:none;font-weight:600;">www.bifode.org</a>
+                  &nbsp;·&nbsp;
+                  <a href="https://www.bifode.org/datenschutz" style="color:#163b63;text-decoration:none;">Datenschutz</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:20px 12px 8px;font-size:11px;color:#94a3b8;line-height:1.45;">
+          Diese Nachricht wurde durch eine Anmeldung auf bifode.org ausgelöst.
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

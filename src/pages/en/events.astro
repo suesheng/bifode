@@ -1,0 +1,64 @@
+---
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+import EventList from '../../components/EventList.astro';
+
+const all = await getCollection('events');
+const published = all.filter((e) => !e.data.draft);
+const tNow = Date.now();
+
+const upcoming = published
+  .filter((e) => new Date(e.data.start).getTime() >= tNow)
+  .sort((a, b) => new Date(a.data.start).getTime() - new Date(b.data.start).getTime());
+
+const past = published
+  .filter((e) => new Date(e.data.start).getTime() < tNow)
+  .sort((a, b) => new Date(b.data.start).getTime() - new Date(a.data.start).getTime())
+  .slice(0, 8);
+---
+
+<MainLayout
+  lang="en"
+  title="Events"
+  description="Upcoming BiFoDe e.V. events and workshops in NRW — plus an .ics calendar feed to subscribe."
+>
+  <Hero
+    lang="en"
+    centered={false}
+    title="Events"
+    subtitle="Planned dates and formats are listed below. Registration is usually via our Registration page; each entry includes the link or pointer you need."
+  />
+
+  <section class="container termine-section">
+    <EventList entries={upcoming} lang="en" icsHref="/events.ics" />
+
+    {past.length > 0 && (
+      <div class="past-block">
+        <h2 class="past-heading">Past events</h2>
+        <EventList entries={past} lang="en" />
+      </div>
+    )}
+  </section>
+</MainLayout>
+
+<style>
+  .termine-section {
+    padding-bottom: 3rem;
+  }
+
+  .past-block {
+    margin-top: 2.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line, #dbe5f1);
+  }
+
+  .past-heading {
+    margin: 0 0 1.25rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text, #0f172a);
+  }
+</style>
