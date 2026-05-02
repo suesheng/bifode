@@ -2,6 +2,10 @@
 /**
  * Jotform iframe with official embed handler (auto height, scrolling="no").
  * Pass full publish URL, e.g. https://form.jotform.com/261212926350046
+ *
+ * Embed handler script loads only when the block is near the viewport and the user
+ * has scrolled, typed, tapped, or used the wheel; if the block stays in view without
+ * interaction, it loads after 5s so passive readers still get the form.
  */
 interface Props {
   formUrl: string;
@@ -45,23 +49,115 @@ const frameId = formId ? `JotFormIFrame-${formId}` : 'JotFormIFrame-embed';
 
 <script is:inline define:vars={{ frameId, originBase }}>
   (function () {
+    var iframe = document.getElementById(frameId);
+    var root = iframe && iframe.closest ? iframe.closest('.jotform-embed-root') : null;
+    var target = root || iframe;
+    if (!iframe || !target) return;
+
     function run() {
       if (typeof window.jotformEmbedHandler === 'function') {
         window.jotformEmbedHandler("iframe[id='" + frameId + "']", originBase);
       }
     }
-    var existing = document.querySelector('script[data-jotform-embed-handler]');
-    if (existing) {
-      run();
+
+    function injectScript() {
+      var existing = document.querySelector('script[data-jotform-embed-handler]');
+      if (existing) {
+        run();
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js';
+      s.async = true;
+      s.setAttribute('data-jotform-embed-handler', '1');
+      s.onload = run;
+      document.head.appendChild(s);
+      if (typeof window.jotformEmbedHandler === 'function') run();
+    }
+
+    /** Load only when embed is near viewport AND user has scrolled/typed/tapped (reduces main-thread work). Fallback: load after 5s in view for passive readers. */
+    var inView = false;
+    var engaged = false;
+    var done = false;
+    var fallbackTimer;
+    var io;
+
+    function clearFallback() {
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+    }
+
+    function detachEngagement() {
+      window.removeEventListener('pointerdown', onEngage, true);
+      window.removeEventListener('keydown', onEngage, true);
+      window.removeEventListener('scroll', onEngage, true);
+      window.removeEventListener('touchstart', onEngage, true);
+      window.removeEventListener('wheel', onEngage, true);
+    }
+
+    function onEngage() {
+      if (engaged) return;
+      engaged = true;
+      detachEngagement();
+      tryInject();
+    }
+
+    function tryInject() {
+      if (done) return;
+      if (!inView || !engaged) return;
+      done = true;
+      clearFallback();
+      detachEngagement();
+      if (io) {
+        io.disconnect();
+        io = null;
+      }
+      injectScript();
+    }
+
+    function onEnterViewport() {
+      inView = true;
+      tryInject();
+      if (done) return;
+      clearFallback();
+      fallbackTimer = setTimeout(function () {
+        engaged = true;
+        tryInject();
+      }, 5000);
+    }
+
+    function attachEngagement() {
+      window.addEventListener('pointerdown', onEngage, { capture: true, passive: true });
+      window.addEventListener('keydown', onEngage, { capture: true, passive: true });
+      window.addEventListener('scroll', onEngage, { capture: true, passive: true });
+      window.addEventListener('touchstart', onEngage, { capture: true, passive: true });
+      window.addEventListener('wheel', onEngage, { capture: true, passive: true });
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      inView = true;
+      engaged = true;
+      tryInject();
       return;
     }
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js';
-    s.async = true;
-    s.setAttribute('data-jotform-embed-handler', '1');
-    s.onload = run;
-    document.head.appendChild(s);
-    if (typeof window.jotformEmbedHandler === 'function') run();
+
+    io = new IntersectionObserver(
+      function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            io.disconnect();
+            io = null;
+            onEnterViewport();
+            return;
+          }
+        }
+      },
+      { rootMargin: '160px', threshold: 0.01 }
+    );
+    io.observe(target);
+    attachEngagement();
   })();
 </script>
 
