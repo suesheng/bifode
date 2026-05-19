@@ -109,6 +109,7 @@ const langDeHref = isEn ? counterpartPath : currentPath;
 const langEnHref = isEn ? currentPath : counterpartPath;
 
 const siteYear = new Date().getFullYear();
+const canonicalURL = new URL(Astro.url.pathname, 'https://www.bifode.org');
 const orgJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -131,6 +132,7 @@ const orgJsonLd = JSON.stringify({
                 <meta name="generator" content={Astro.generator} />
                 <title>{title} | BiFoDe</title>
                 <meta name="description" content={description} />
+                <link rel="canonical" href={canonicalURL} />
                 <script type="application/ld+json" set:html={orgJsonLd} />
 
                 <!-- Critical CSS - Inline for faster initial render (above-the-fold) -->

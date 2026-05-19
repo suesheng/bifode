@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.bifode.org/$1",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "bifode.de" }]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://www.bifode.org/$1",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "www.bifode.de" }]
+    }
+  ]
+}
