@@ -1,0 +1,108 @@
+---
+export const prerender = true;
+
+import { getCollection, render } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('aktuelles');
+  return entries
+    .filter((e) => !e.data.draft)
+    .map((entry) => ({
+      params: { slug: entry.id },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const formattedDate = entry.data.pubDate.toLocaleDateString('de-DE', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<MainLayout title={entry.data.title} description={entry.data.description}>
+  <article class="container article">
+    <header class="article-header">
+      <a class="back-link" href="/aktuelles">← Alle Beiträge</a>
+      <time datetime={entry.data.pubDate.toISOString()}>{formattedDate}</time>
+      <h1>{entry.data.title}</h1>
+      <p class="article-lead">{entry.data.description}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  .article {
+    max-width: 720px;
+    padding-bottom: 3rem;
+  }
+
+  .article-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #163b63;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .article-header time {
+    display: block;
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-header h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    color: #111827;
+    line-height: 1.2;
+  }
+
+  .article-lead {
+    margin: 0;
+    color: #475569;
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+
+  .prose :global(h2) {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.35rem;
+    color: #163b63;
+  }
+
+  .prose :global(p) {
+    line-height: 1.8;
+    color: #334155;
+    margin: 0 0 1rem;
+  }
+
+  .prose :global(a) {
+    color: #163b63;
+    font-weight: 600;
+  }
+
+  .prose :global(ul) {
+    padding-left: 1.25rem;
+    line-height: 1.8;
+    color: #334155;
+  }
+</style>

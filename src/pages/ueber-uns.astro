@@ -1,126 +1,87 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
+
+const team = [
+  { name: 'Name Vorname', role: 'Vorstand / Projektleitung' },
+  { name: 'Name Vorname', role: 'Bildungsarbeit & Workshops' },
+  { name: 'Name Vorname', role: 'Kooperationen & Netzwerk' },
+  { name: 'Name Vorname', role: 'Kommunikation & Öffentlichkeitsarbeit' },
+];
+
+const timeline = [
+  { year: '2024', text: 'Gründungsidee und erste Gespräche mit Schulen und Partnern in NRW.' },
+  { year: '2025', text: 'Aufbau der Vereinsstruktur, Entwicklung der Bildungsmodule und Netzwerkarbeit.' },
+  { year: '2026', text: 'Start des Pilotprojekts NRW mit ersten Workshops und Kooperationen vor Ort.' },
+];
 ---
 
-<MainLayout title="Über BiFoDe e.V." description="BiFoDe e.V. stellt sich als gemeinnützige Migrantenselbstorganisation in NRW vor.">
-  <Hero centered={false} title="Über BiFoDe e.V." subtitle="Bildungsforum für Demokratie und Vielfalt NRW – eine Migrantenselbstorganisation mit Fokus auf Bildung, Prävention und gesellschaftlichen Zusammenhalt." />
+<MainLayout
+  title="Über uns"
+  description="BiFoDe e.V. — Bildungsforum für Demokratie und Vielfalt in NRW. Mission, Team, Rechtsform und Gründungsgeschichte."
+>
+  <Hero
+    centered={false}
+    title="Über BiFoDe e.V."
+    subtitle="Bildungsforum für Demokratie und Vielfalt NRW — gemeinnützige Bildungs- und Präventionsarbeit für Schulen und Partner."
+  />
 
   <section class="container">
-    <div class="section-header">
-      <h2>Wer wir sind</h2>
-    </div>
-    <p class="lead">BiFoDe e.V. ist eine Migrantenselbstorganisation (MSO) in Nordrhein-Westfalen. Wir entwickeln Bildungs- und Präventionsformate zur Stärkung von Demokratie, Medienkompetenz und gesellschaftlichem Zusammenhalt.</p>
+    <div class="section-header"><h2>Unsere Mission</h2></div>
+    <p class="lead">
+      Wir stärken demokratische Bildung und Antisemitismusprävention in Nordrhein-Westfalen. BiFoDe entwickelt praxisnahe Formate für Schulen, Kommunen und zivilgesellschaftliche Partner — mit klarer Haltung, wissenschaftlicher Fundierung und respektvollem Miteinander.
+    </p>
   </section>
 
   <section class="container">
-    <div class="section-header">
-      <h2>Unsere Mission</h2>
-    </div>
-    <p class="lead">Wir unterstützen Menschen und Institutionen dabei, Vorurteile zu erkennen, Antisemitismus einzuordnen und demokratische Handlungssicherheit im Alltag zu stärken.</p>
-  </section>
-
-  <section class="container">
-    <div class="section-header">
-      <h2>Unsere Ziele</h2>
-    </div>
-    <div class="card-grid">
-      <div class="card feature-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 10h14v10H5z" />
-            <path d="M9 10V6h6v4" />
-            <path d="M9 14h6" />
-          </svg>
-        </div>
-        <h3>Demokratiebildung stärken</h3>
-      </div>
-      <div class="card feature-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <rect x="4" y="6" width="16" height="11" rx="2" />
-            <path d="M10 20h4M9 17h6" />
-            <path d="m10 10 2 1.4L14 10" />
-          </svg>
-        </div>
-        <h3>Medienkompetenz fördern</h3>
-      </div>
-      <div class="card feature-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 4 6 6.5V12c0 4.2 2.8 6.7 6 8 3.2-1.3 6-3.8 6-8V6.5z" />
-            <path d="m9.5 12 2 2 3-3.2" />
-          </svg>
-        </div>
-        <h3>Antisemitismusprävention entwickeln</h3>
-      </div>
-      <div class="card feature-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M8 14a3 3 0 1 1 0-6c1.2 0 2.2.7 2.7 1.7A3 3 0 1 1 13 14c-.9 0-1.6-.3-2.2-.8A3 3 0 0 1 8 14Z" />
-            <path d="M4.5 19a3.5 3.5 0 0 1 6.5-1.8A3.5 3.5 0 0 1 17.5 19" />
-          </svg>
-        </div>
-        <h3>Schulen und Partner unterstützen</h3>
-      </div>
-      <div class="card feature-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="8" />
-            <path d="M4.5 12h15" />
-            <path d="M12 4a12 12 0 0 1 0 16" />
-            <path d="M12 4a12 12 0 0 0 0 16" />
-          </svg>
-        </div>
-        <h3>Gesellschaftlichen Zusammenhalt fördern</h3>
-      </div>
+    <div class="section-header"><h2>Rechtsform & Status</h2></div>
+    <div class="card legal-card">
+      <p><strong>BiFoDe e.V.</strong> (Bildungsforum für Demokratie und Vielfalt NRW e.V.)</p>
+      <ul>
+        <li>Gemeinnütziger Verein <strong>in Gründung</strong></li>
+        <li>Sitz und Tätigkeit in <strong>Nordrhein-Westfalen</strong></li>
+        <li>Schwerpunkt: demokratische Bildung, Antisemitismusprävention, Medienkompetenz</li>
+      </ul>
+      <p class="legal-note">Angaben zur Eintragung und Satzung werden nach Abschluss des Gründungsverfahrens ergänzt.</p>
     </div>
   </section>
 
   <section class="container">
-    <div class="section-header">
-      <h2>Unser Ansatz</h2>
-    </div>
-    <p class="lead">Wir arbeiten niedrigschwellig, praxisnah und kooperativ. Unsere Formate sind modular aufgebaut und können an die Bedürfnisse von Schulen, Bildungseinrichtungen und Partnern angepasst werden.</p>
+    <div class="section-header"><h2>Gründungsgeschichte</h2></div>
+    <ol class="timeline">
+      {timeline.map((item) => (
+        <li>
+          <span class="timeline-year">{item.year}</span>
+          <p>{item.text}</p>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <section class="container">
-    <div class="section-header">
-      <h2>Team & Netzwerk</h2>
+    <div class="section-header"><h2>Team</h2></div>
+    <p class="lead">Unser Team wächst mit dem Pilotprojekt. Die folgenden Profile sind Platzhalter bis zur finalen Vorstellung.</p>
+    <div class="card-grid team-grid">
+      {team.map((member) => (
+        <article class="card team-card">
+          <span class="team-avatar" aria-hidden="true">{member.name.charAt(0)}</span>
+          <h3>{member.name}</h3>
+          <p>{member.role}</p>
+        </article>
+      ))}
     </div>
-    <p class="lead">Der Verein arbeitet mit einem wachsenden Netzwerk aus Fachleuten aus Bildung, Kommunikation, Recht und Zivilgesellschaft.</p>
-  </section>
-
-  <section class="container">
-    <div class="section-header">
-      <h2>Transparenz</h2>
-    </div>
-    <p class="lead">Wir unterscheiden klar zwischen bestehenden Strukturen, Pilotprojekten und Konzepten in Entwicklung. Diese Transparenz ist Grundlage für Vertrauen und nachhaltige Zusammenarbeit.</p>
   </section>
 
   <section class="container cta-section">
-    <a class="button" href="/kooperation">Kooperation anfragen</a>
+    <a class="btn-outline" href="/kooperation">Kooperation starten →</a>
   </section>
 </MainLayout>
 
 <style>
-  .hero {
-    padding: 4rem 0 3rem;
-    background: #f8fafc;
-  }
-
-  .hero-content {
-    max-width: 760px;
-    margin: 0 auto;
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
   }
 
   .lead {
@@ -129,53 +90,91 @@ import Hero from '../components/Hero.astro';
     max-width: 720px;
   }
 
-  .section-header h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #111827;
+  .legal-card ul {
+    margin: 0.75rem 0;
+    padding-left: 1.25rem;
+    line-height: 1.8;
+    color: #334155;
   }
 
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+  .legal-note {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 2px solid #dbeafe;
+    max-width: 720px;
+  }
+
+  .timeline li {
+    position: relative;
+    padding: 0 0 1.5rem 1.5rem;
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 0.35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #163b63;
+  }
+
+  .timeline-year {
+    display: block;
+    font-weight: 700;
+    color: #163b63;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.7;
+  }
+
+  .team-grid {
     margin-top: 1.5rem;
   }
 
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 1.6rem;
-    border-radius: 0.9rem;
-    background: #1e3a8a;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-
-  .button:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
-  }
-
-  .cta-section {
-    padding: 3rem 0;
+  .team-card {
     text-align: center;
   }
 
-  @media (max-width: 768px) {
-    .hero {
-      padding: 3rem 0 2rem;
-    }
+  .team-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8f1ff, #dbeafe);
+    color: #163b63;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
 
-    .hero-actions {
-      flex-direction: column;
-    }
+  .team-card h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+  }
 
-    .button {
-      width: 100%;
-    }
+  .team-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+
+  .cta-section {
+    padding: 2rem 0 3rem;
+    text-align: center;
   }
 </style>

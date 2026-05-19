@@ -1,0 +1,135 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<MainLayout
+  title="Für Schulen"
+  description="Workshops, Projekttage und Fortbildungen für Schulen in NRW — Antisemitismusprävention, Medienkompetenz und demokratische Bildung."
+>
+  <Hero
+    centered={false}
+    title="Für Schulen und Lehrkräfte"
+    subtitle="Praxisnahe Bildungsformate zu Antisemitismusprävention, Vorurteilen, Medienkompetenz und demokratischem Zusammenhalt."
+  />
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Was BiFoDe Schulen bietet</h2>
+    </div>
+    <p class="lead">
+      Wir begleiten Schulen in NRW mit modularen Formaten: von einstündigen Workshops bis zu Projekttagen und Fortbildungen für Lehrkräfte. Alle Angebote sind altersgerecht, wissenschaftlich fundiert und auf den Schulalltag ausgerichtet.
+    </p>
+    <ul class="offer-list">
+      <li>Antisemitismus verstehen und einordnen</li>
+      <li>Vorurteile und Desinformation im Unterricht thematisieren</li>
+      <li>Demokratische Werte und respektvolles Miteinander stärken</li>
+      <li>Materialien und Begleitung für nachhaltige Umsetzung</li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Workshop-Formate</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <h3>Workshops (90–180 Min.)</h3>
+        <p>Interaktive Einheiten für Klassen oder Jahrgangsstufen mit Gespräch, Gruppenarbeit und Reflexion.</p>
+      </div>
+      <div class="card feature-card">
+        <h3>Projekttage</h3>
+        <p>Ganztägige Formate mit mehreren Modulen, z. B. für Projektwochen oder thematische Schultage.</p>
+      </div>
+      <div class="card feature-card">
+        <h3>Fortbildungen</h3>
+        <p>Für Lehrkräfte und pädagogische Fachkräfte — mit Handreichungen und Follow-up-Material.</p>
+      </div>
+      <div class="card feature-card">
+        <h3>Digitale Module</h3>
+        <p>Ergänzende Online-Inhalte und Stationen für eigenständiges Lernen oder Blended Learning.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>So fordern Sie ein Programm an</h2>
+    </div>
+    <ol class="steps-list">
+      <li><strong>Anfrage</strong> — Kurze Nachricht mit Schule, Jahrgang und Wunschformat</li>
+      <li><strong>Vorgespräch</strong> — Abstimmung von Zielen, Rahmen und Terminen</li>
+      <li><strong>Planung</strong> — Modulauswahl und Materialien</li>
+      <li><strong>Durchführung</strong> — Vor Ort oder digital</li>
+      <li><strong>Nachbereitung</strong> — Optional mit Auswertung und Materialien</li>
+    </ol>
+  </section>
+
+  <section class="container cta-section">
+    <a class="button" href="/kontakt">Jetzt Programm anfragen</a>
+  </section>
+</MainLayout>
+
+<style>
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .offer-list {
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.85;
+  }
+
+  .steps-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.85;
+    max-width: 720px;
+  }
+
+  .steps-list li + li {
+    margin-top: 0.65rem;
+  }
+
+  .cta-section {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    border-radius: 0.9rem;
+    background: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(29, 78, 216, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .button {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

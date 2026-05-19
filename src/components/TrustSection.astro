@@ -1,10 +1,12 @@
 ---
+import PartnerGrid from './PartnerGrid.astro';
+
 const {
   label,
   partnerTitle,
   cooperationHref,
   cooperationLabel,
-  mobileHidden = true,
+  mobileHidden = false,
 } = Astro.props as {
   label: string;
   partnerTitle?: string;
@@ -18,20 +20,7 @@ const {
   <div class="container trust-content">
     {partnerTitle && <h2 class="trust-partner-title">{partnerTitle}</h2>}
     <p class="trust-label">{label}</p>
-    <div class="trust-logos">
-      <img
-        src="/logos/logo1.png"
-        alt="Partner logo"
-        width="402"
-        height="159"
-        loading="lazy"
-        decoding="async"
-      />
-      <img src="/logos/logo2.svg" alt="Partner logo" width="120" height="40" loading="lazy" decoding="async" />
-      <img src="/logos/logo3.svg" alt="Partner logo" width="120" height="40" loading="lazy" decoding="async" />
-      <img src="/logos/logo4.svg" alt="Partner logo" width="120" height="40" loading="lazy" decoding="async" />
-      <img src="/logos/logo5.svg" alt="Partner logo" width="120" height="40" loading="lazy" decoding="async" />
-    </div>
+    <PartnerGrid />
     {cooperationHref && cooperationLabel && (
       <p class="trust-cooperation">
         <a href={cooperationHref}>{cooperationLabel}</a>
@@ -51,45 +40,23 @@ const {
 
   .trust-partner-title {
     margin: 0 0 0.35rem;
-    font-size: 1.1rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: #0f172a;
     letter-spacing: -0.02em;
   }
 
   .trust-label {
-    font-size: 0.9rem;
-    color: #9ca3af;
-    margin-bottom: 1.5rem;
-  }
-
-  .trust-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-
-  .trust-logos img {
-    display: block;
-    height: 80px;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    flex: 0 0 auto;
-    opacity: 0.6;
-    filter: grayscale(100%);
-    transition: opacity 0.2s ease, filter 0.2s ease;
-  }
-
-  .trust-logos img:hover {
-    opacity: 1;
-    filter: grayscale(0%);
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .trust-cooperation {
-    margin: 1.25rem 0 0;
+    margin: 1.5rem 0 0;
     font-size: 0.9rem;
   }
 
@@ -108,11 +75,6 @@ const {
   @media (max-width: 768px) {
     .trust-section.mobile-hidden {
       display: none;
-    }
-
-    .trust-logos img {
-      height: 64px;
-      width: auto;
     }
   }
 </style>

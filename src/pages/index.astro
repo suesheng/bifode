@@ -3,9 +3,36 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 import TrustSection from '../components/TrustSection.astro';
+import StatsBar from '../components/StatsBar.astro';
+import NewsTeaser from '../components/NewsTeaser.astro';
+
+const orgHomeJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'BiFoDe e.V. — Startseite',
+  url: 'https://www.bifode.org/',
+  description:
+    'BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW.',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'BiFoDe e.V.',
+    url: 'https://www.bifode.org/',
+  },
+  about: {
+    '@type': 'Organization',
+    name: 'BiFoDe e.V.',
+    alternateName: 'Bildungsforum für Demokratie und Vielfalt NRW e.V.',
+    url: 'https://www.bifode.org/',
+  },
+});
 ---
 
-<MainLayout title="Startseite" description="BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW">
+<MainLayout
+  title="Startseite"
+  description="BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW"
+>
+  <script type="application/ld+json" set:html={orgHomeJsonLd} />
+
   <Hero
     centered={true}
     title="Bildung stärken. Antisemitismus entgegentreten. Demokratie leben."
@@ -13,18 +40,27 @@ import TrustSection from '../components/TrustSection.astro';
     tertiary={{ href: '/termine', label: 'Nächste Termine →' }}
   />
 
+  <StatsBar />
+
   <TrustSection
     partnerTitle="Unsere Partner"
     label="Zusammenarbeit und Austausch mit Partnern aus Bildung und Zivilgesellschaft"
     cooperationHref="/kooperation"
     cooperationLabel="Mehr zur Kooperation →"
+    mobileHidden={false}
   />
 
   <section class="container">
     <div class="section-header">
       <h2>Wer wir sind</h2>
     </div>
-    <p class="lead">Wir stärken Bildung und gesellschaftlichen Zusammenhalt in NRW. Wir bieten klare Formate für Schulen, Kommunen und zivilgesellschaftliche Partner mit einer eindeutigen Haltung gegen Antisemitismus.</p>
+    <p class="lead">
+      Wir stärken Bildung und gesellschaftlichen Zusammenhalt in NRW. Wir bieten klare Formate für Schulen,
+      Kommunen und zivilgesellschaftliche Partner mit einer eindeutigen Haltung gegen Antisemitismus.
+    </p>
+    <p class="section-cta-wrap">
+      <a class="btn-outline" href="/ueber-uns">Mehr über uns →</a>
+    </p>
   </section>
 
   <section class="container">
@@ -42,6 +78,7 @@ import TrustSection from '../components/TrustSection.astro';
         </div>
         <h3>Bildung & Prävention</h3>
         <p>Wir entwickeln Programme, die zu respektvollem Miteinander beitragen und frühe Präventionsarbeit unterstützen.</p>
+        <a href="/kontakt" class="btn-outline">Workshop anfragen →</a>
       </div>
       <div class="card feature-card">
         <div class="card-icon" aria-hidden="true">
@@ -54,6 +91,7 @@ import TrustSection from '../components/TrustSection.astro';
         </div>
         <h3>Unterstützung & Orientierung</h3>
         <p>Lehrkräfte, Schulen und Partner erhalten klare, praxisnahe Begleitung für nachhaltige Bildungsprozesse.</p>
+        <a href="/unsere-arbeit" class="btn-outline">Materialien ansehen →</a>
       </div>
       <div class="card feature-card">
         <div class="card-icon" aria-hidden="true">
@@ -65,6 +103,7 @@ import TrustSection from '../components/TrustSection.astro';
         </div>
         <h3>Analyse & Hintergrund</h3>
         <p>Unsere Arbeit basiert auf verlässlichen Informationen und einer fundierten fachlichen Einordnung.</p>
+        <a href="/projekte" class="btn-outline">Materialien ansehen →</a>
       </div>
     </div>
   </section>
@@ -83,6 +122,7 @@ import TrustSection from '../components/TrustSection.astro';
         </div>
         <h3>Schulen</h3>
         <p>Programme für Lehrkräfte und Schulen, die demokratisches Lernen und Respekt fördern.</p>
+        <a href="/fuer-schulen" class="btn-outline">Workshop anfragen →</a>
       </div>
       <div class="card feature-card">
         <div class="card-icon" aria-hidden="true">
@@ -93,6 +133,7 @@ import TrustSection from '../components/TrustSection.astro';
         </div>
         <h3>Partner & NGOs</h3>
         <p>Verlässliche Zusammenarbeit mit zivilgesellschaftlichen Organisationen und Bildungspartnern.</p>
+        <a href="/kooperation" class="btn-outline">Kooperation starten →</a>
       </div>
       <div class="card feature-card">
         <div class="card-icon" aria-hidden="true">
@@ -105,17 +146,23 @@ import TrustSection from '../components/TrustSection.astro';
         </div>
         <h3>Öffentliche Stellen</h3>
         <p>Beratung und Formate für kommunale Akteur:innen und institutionelle Partner.</p>
+        <a href="/kooperation" class="btn-outline">Kooperation starten →</a>
       </div>
     </div>
   </section>
+
+  <NewsTeaser limit={2} />
 
   <section class="container">
     <div class="section-header">
       <h2>Pilotprojekt NRW</h2>
     </div>
-    <p class="lead">Im NRW-weiten Pilotprojekt führen wir Bildungsformate durch, die Praxisfragen aufnehmen und in engem Austausch mit Schulen und Partnern weitergeführt werden.</p>
-    <p class="pilot-link-wrap">
-      <a href="/projekte" class="pilot-link">Unsere Projekte im Überblick →</a>
+    <p class="lead">
+      Im NRW-weiten Pilotprojekt führen wir Bildungsformate durch, die Praxisfragen aufnehmen und in engem Austausch
+      mit Schulen und Partnern weitergeführt werden.
+    </p>
+    <p class="pilot-cta-wrap">
+      <a href="/projekte" class="btn-outline">Unsere Projekte im Überblick →</a>
     </p>
   </section>
 </MainLayout>
@@ -134,19 +181,8 @@ import TrustSection from '../components/TrustSection.astro';
     margin-top: 0.5rem;
   }
 
-  .pilot-link-wrap {
-    margin: 1rem 0 0;
-  }
-
-  .pilot-link {
-    font-weight: 600;
-    color: #163b63;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
-  }
-
-  .pilot-link:hover {
-    color: #0f2e50;
-    border-bottom-color: #0f2e50;
+  .section-cta-wrap,
+  .pilot-cta-wrap {
+    margin: 1.25rem 0 0;
   }
 </style>

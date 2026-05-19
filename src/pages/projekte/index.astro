@@ -3,128 +3,141 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
 ---
 
-<MainLayout 
-  title="Projekte" 
-  description="Unsere Projekte verbinden Bildungsarbeit, Prävention und praktische Orientierung für Schulen und Partner in Nordrhein-Westfalen."
+<MainLayout
+  title="Projekte"
+  description="Pilotprojekt NRW und weitere Bildungsprojekte von BiFoDe e.V. — Antisemitismusprävention und demokratische Bildung für Schulen in Nordrhein-Westfalen."
 >
-
-  <!-- HERO -->
-  <Hero 
+  <Hero
+    centered={false}
     title="Projekte"
     subtitle="Unsere Projekte verbinden Bildungsarbeit, Prävention und praktische Orientierung für Schulen und Partner in Nordrhein-Westfalen."
   />
 
-  <!-- EINLEITUNG -->
-  <section class="container">
+  <section class="container pilot-section">
     <div class="section-header">
-      <h2>Einleitung</h2>
+      <h2>Pilotprojekt NRW</h2>
     </div>
     <p class="lead">
-      BiFoDe setzt Bildungs- und Präventionsformate um, die auf konkrete Herausforderungen im Schul- und Bildungsalltag reagieren. 
-      Die Projekte sind modular aufgebaut und können an unterschiedliche Zielgruppen angepasst werden.
+      Das <strong>Pilotprojekt NRW</strong> ist unser Hauptprojekt: In enger Zusammenarbeit mit Schulen und Bildungspartnern testen und verfeinern wir modulare Formate zu Antisemitismusprävention, Medienkompetenz und demokratischem Zusammenhalt.
     </p>
-  </section>
 
-  <!-- PROJEKTE -->
-  <section class="container">
-    <div class="card-grid">
+    <div class="card pilot-card">
+      <h3>Projektziele</h3>
+      <ul>
+        <li>Praxisnahe Workshops und Projekttage in Schulen etablieren</li>
+        <li>Lehrkräfte mit Materialien und fachlicher Einordnung unterstützen</li>
+        <li>Formate evaluieren und für NRW-weiten Roll-out vorbereiten</li>
+      </ul>
 
-      <div class="card project-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M3 10.5 12 5l9 5.5-9 5.5z" />
-            <path d="M7 12.5V16a5 3 0 0 0 10 0v-3.5" />
-          </svg>
-        </div>
-        <h3>Schulprogramm NRW</h3>
-        <p class="card-text">
-          Workshops und Projekttage zu Antisemitismusprävention, Vorurteilen, Medienkompetenz und demokratischem Zusammenhalt.
-        </p>
-        <a href="/schulen" class="card-link">Mehr erfahren →</a>
-      </div>
+      <h3>Zielgruppen</h3>
+      <ul>
+        <li>Schulen (Sekundarstufe I und II)</li>
+        <li>Lehrkräfte und pädagogische Fachkräfte</li>
+        <li>Kommunen und zivilgesellschaftliche Partner</li>
+      </ul>
 
-      <div class="card project-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <rect x="4" y="6" width="16" height="10" rx="2" />
-            <path d="M2.5 19h19" />
-          </svg>
-        </div>
-        <h3>Digitale Bildungsmodule</h3>
-        <p class="card-text">
-          Interaktive Inhalte für Schulen und Bildungseinrichtungen, die zentrale Themen verständlich und altersgerecht vermitteln.
-        </p>
-        <a href="/schulen" class="card-link">Mehr erfahren →</a>
-      </div>
+      <h3>Zeitplan (Pilotphase)</h3>
+      <ul class="timeline-inline">
+        <li><strong>Q1–Q2 2026:</strong> Vorgespräche und erste Workshops</li>
+        <li><strong>Q3 2026:</strong> Ausweitung auf weitere Standorte</li>
+        <li><strong>Q4 2026:</strong> Auswertung und Weiterentwicklung der Module</li>
+      </ul>
 
-      <div class="card project-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <rect x="3.5" y="5.5" width="17" height="11" rx="2" />
-            <path d="M10 19h4M8.5 16.5h7" />
-          </svg>
-        </div>
-        <h3>Interaktive Displays / Kiosk</h3>
-        <p class="card-text">
-          Digitale Informations- und Lernstationen für Schulen und öffentliche Räume zu demokratischen Werten und Medienkompetenz.
-        </p>
-        <a href="/schulen" class="card-link">Mehr erfahren →</a>
-      </div>
-
+      <a class="btn-outline" href="/fuer-schulen">Workshop anfragen →</a>
     </div>
   </section>
 
-  <!-- LOGIK -->
   <section class="container">
     <div class="section-header">
-      <h2>Wie unsere Projekte aufgebaut sind</h2>
+      <h2>Weitere Projekte</h2>
     </div>
-
-    <ul class="project-logic">
-      <li>Praxisnah</li>
-      <li>Modular</li>
-      <li>Altersgerecht</li>
-      <li>Kooperativ</li>
-      <li>Auswertbar</li>
-    </ul>
+    <p class="lead">Weitere Schwerpunkte sind in Planung und werden hier ergänzt, sobald sie starten.</p>
+    <div class="card-grid">
+      <article class="card project-card placeholder-card">
+        <h3>Digitale Bildungsmodule</h3>
+        <p>Interaktive Online-Inhalte für Schulen — in Vorbereitung.</p>
+        <span class="badge">Demnächst</span>
+      </article>
+      <article class="card project-card placeholder-card">
+        <h3>Interaktive Lernstationen</h3>
+        <p>Informations- und Lernstationen für Schulen und öffentliche Räume — Konzeptphase.</p>
+        <span class="badge">Demnächst</span>
+      </article>
+    </div>
   </section>
 
-  <!-- CTA -->
   <section class="container cta-section">
-    <p class="lead">Sie möchten ein Projekt gemeinsam mit BiFoDe umsetzen?</p>
-    <a class="button" href="/kooperation">Kooperation anfragen</a>
+    <p class="lead">Sie möchten das Pilotprojekt mit Ihrer Schule oder Institution begleiten?</p>
+    <a class="button" href="/kontakt">Kontakt aufnehmen</a>
   </section>
-
 </MainLayout>
 
 <style>
-  .lead {
-    color: #475569;
-    line-height: 1.8;
-    max-width: 720px;
-  }
-
   .section-header h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
     color: #111827;
   }
 
-  .project-logic {
-    list-style: none;
-    padding: 0;
-    margin-top: 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
   }
 
-  .project-logic li {
-    background: #f1f5f9;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    font-weight: 600;
+  .pilot-card {
+    margin-top: 1.5rem;
+    max-width: 720px;
+  }
+
+  .pilot-card h3 {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1.1rem;
+    color: #163b63;
+  }
+
+  .pilot-card h3:first-child {
+    margin-top: 0;
+  }
+
+  .pilot-card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    line-height: 1.8;
     color: #334155;
+  }
+
+  .pilot-card .btn-outline {
+    margin-top: 1.5rem;
+  }
+
+  .placeholder-card {
+    opacity: 0.92;
+  }
+
+  .badge {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #1e3a8a;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .cta-section {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+  }
+
+  .button {
+    display: inline-flex;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
   }
 </style>

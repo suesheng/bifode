@@ -57,10 +57,11 @@ const navStructure: NavEntry[] = isEn
         kind: 'group',
         label: 'Was wir anbieten',
         items: [
-          { href: '/schulen', label: 'Schulen' },
+          { href: '/fuer-schulen', label: 'Schulen' },
           { href: '/projekte', label: 'Projekte' }
         ]
       },
+      { kind: 'link', href: '/aktuelles', label: 'Aktuelles' },
       { kind: 'link', href: '/termine', label: 'Termine' },
       { kind: 'link', href: '/anmeldung', label: 'Anmeldung' },
       { kind: 'link', href: '/kontakt', label: 'Kontakt' }
@@ -81,7 +82,9 @@ const pathMap: Record<string, string> = {
   '/': '/en',
   '/ueber-uns': '/en/about',
   '/unsere-arbeit': '/en/our-work',
+  '/fuer-schulen': '/en/schools',
   '/schulen': '/en/schools',
+  '/aktuelles': '/en',
   '/termine': '/en/events',
   '/projekte': '/en/projects',
   '/kooperation': '/en/cooperation',
@@ -93,7 +96,7 @@ const pathMap: Record<string, string> = {
   '/en': '/',
   '/en/about': '/ueber-uns',
   '/en/our-work': '/unsere-arbeit',
-  '/en/schools': '/schulen',
+  '/en/schools': '/fuer-schulen',
   '/en/events': '/termine',
   '/en/projects': '/projekte',
   '/en/cooperation': '/kooperation',
@@ -961,6 +964,27 @@ const orgJsonLd = JSON.stringify({
 
         .card-link:hover {
                 text-decoration: underline;
+        }
+
+        .btn-outline {
+                display: inline-flex;
+                align-items: center;
+                margin-top: 1.25rem;
+                padding: 0.6rem 1.2rem;
+                border: 2px solid #163b63;
+                border-radius: 0.65rem;
+                color: #163b63;
+                font-weight: 600;
+                font-size: 0.95rem;
+                text-decoration: none;
+                background: transparent;
+                transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-outline:hover {
+                background: #163b63;
+                color: #ffffff;
+                border-color: #163b63;
         }
 
         @media (max-width: 768px) {

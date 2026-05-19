@@ -1,0 +1,96 @@
+---
+const stats = [
+  { value: 15, suffix: '+', label: 'Schulen erreicht' },
+  { value: 8, suffix: '', label: 'Workshops durchgeführt' },
+  { value: 3, suffix: '', label: 'Kommunen in NRW' },
+];
+---
+
+<section class="stats-bar" aria-label="Kennzahlen">
+  <div class="container stats-grid">
+    {stats.map((stat) => (
+      <div class="stat-item">
+        <p class="stat-value" data-target={stat.value} data-suffix={stat.suffix}>
+          0{stat.suffix}
+        </p>
+        <p class="stat-label">{stat.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  function animateCounter(el: HTMLElement) {
+    const target = Number(el.dataset.target ?? 0);
+    const suffix = el.dataset.suffix ?? '';
+    const duration = 1400;
+    const start = performance.now();
+
+    function tick(now: number) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      el.textContent = `${current}${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const items = document.querySelectorAll<HTMLElement>('.stat-value[data-target]');
+  if (items.length) {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          if (el.dataset.animated === 'true') continue;
+          el.dataset.animated = 'true';
+          animateCounter(el);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.35 }
+    );
+    items.forEach((el) => observer.observe(el));
+  }
+</script>
+
+<style>
+  .stats-bar {
+    padding: 2rem 0 2.5rem;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 800;
+    color: #163b63;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    margin: 0.35rem 0 0;
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>

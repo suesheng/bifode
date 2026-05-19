@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+
+const limit = Astro.props.limit ?? 2;
+
+const posts = (await getCollection('aktuelles'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, limit);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('de-DE', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+---
+
+<section class="container news-teaser">
+  <div class="section-header">
+    <h2>Aktuelles</h2>
+    <a class="news-teaser-all" href="/aktuelles">Alle Beiträge →</a>
+  </div>
+  {posts.length === 0 ? (
+    <p class="lead">Bald finden Sie hier Neuigkeiten aus unserer Arbeit.</p>
+  ) : (
+    <div class="news-teaser-grid">
+      {posts.map((post) => (
+        <article class="card news-teaser-card">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <h3>
+            <a href={`/aktuelles/${post.id}`}>{post.data.title}</a>
+          </h3>
+          <p>{post.data.description}</p>
+          <a class="btn-outline" href={`/aktuelles/${post.id}`}>Weiterlesen →</a>
+        </article>
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+  .news-teaser {
+    padding-bottom: 1rem;
+  }
+
+  .news-teaser .section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .news-teaser .section-header h2 {
+    font-size: 2rem;
+    margin: 0;
+    color: #111827;
+  }
+
+  .news-teaser-all {
+    color: #163b63;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
+  }
+
+  .news-teaser-all:hover {
+    color: #0f2e50;
+  }
+
+  .news-teaser-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .news-teaser-card time {
+    display: block;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-teaser-card h3 {
+    margin: 0 0 0.65rem;
+    font-size: 1.15rem;
+  }
+
+  .news-teaser-card h3 a {
+    color: #111827;
+    text-decoration: none;
+  }
+
+  .news-teaser-card h3 a:hover {
+    color: #163b63;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.7;
+  }
+</style>

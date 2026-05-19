@@ -9,6 +9,17 @@ const projekteCollection = defineCollection({
   }),
 });
 
+const aktuellesCollection = defineCollection({
+  loader: glob({ base: './src/content/aktuelles', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    /** ISO date, e.g. 2026-05-01 */
+    pubDate: z.coerce.date(),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
 const eventsCollection = defineCollection({
   loader: glob({ base: './src/content/events', pattern: '**/*.md' }),
   schema: z.object({
@@ -30,5 +41,6 @@ const eventsCollection = defineCollection({
 
 export const collections = {
   projekte: projekteCollection,
+  aktuelles: aktuellesCollection,
   events: eventsCollection,
 };

@@ -1,0 +1,86 @@
+---
+const partners = [
+  { name: 'Bildungsnetzwerk NRW', href: 'https://example.org', initial: 'BN' },
+  { name: 'Zivilgesellschaftliche Initiative', href: 'https://example.org', initial: 'ZI' },
+  { name: 'Kommunale Bildungsstelle', href: 'https://example.org', initial: 'KB' },
+  { name: 'Schulträger Kooperation', href: 'https://example.org', initial: 'SK' },
+  { name: 'Fachstelle Demokratie', href: 'https://example.org', initial: 'FD' },
+];
+---
+
+<div class="partner-grid">
+  {partners.map((partner) => (
+    <a class="partner-card" href={partner.href} rel="noopener noreferrer" target="_blank">
+      <span class="partner-logo" aria-hidden="true">{partner.initial}</span>
+      <span class="partner-name">{partner.name}</span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .partner-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    background: #fff;
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .partner-card:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 8px 24px rgba(15, 42, 69, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 140px;
+    height: 64px;
+    border-radius: 0.5rem;
+    background: #e2e8f0;
+    color: #64748b;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .partner-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 900px) {
+    .partner-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .partner-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .partner-logo {
+      height: 56px;
+    }
+  }
+</style>
