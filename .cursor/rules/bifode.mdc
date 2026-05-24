@@ -1,0 +1,52 @@
+---
+description: BiFoDe e.V. website (Astro 6, DE/EN, Vercel) — stack, i18n, build, workflow
+alwaysApply: true
+---
+
+# BiFoDe website (absent-altitude)
+
+NGO site for **BiFoDe e.V.** — production **https://www.bifode.org** (Vercel). Full details: `AGENTS.md`.
+
+## Stack & commands
+
+- Astro 6, `@astrojs/vercel`, `output: 'server'`
+- **Node 24** — `nvm use` (`.nvmrc`)
+- Root: `npm run dev` → http://localhost:4321 · `npm run build` before merge · no lint/test script
+- Rollup via `@rollup/wasm-node` (`package.json` overrides) — do not remove without reason
+
+## Layout
+
+- `src/pages/` — German routes; `src/pages/en/` — English mirror
+- `src/content/{projekte,aktuelles,events}/` — collections (`src/content.config.ts`)
+- `src/pages/api/contact.ts` — SMTP contact form
+- `vercel.json` — bifode.de → www.bifode.org redirects only
+
+## i18n
+
+- DE at root (`/kontakt`, `/aktuelles`, …); EN under `/en/`
+- Update **both** locales when a page has a pair; formal nonprofit tone
+- One language per page; `MainLayout` `lang`: `de` | `en`
+
+## Content collections
+
+| Collection | Key fields |
+|------------|------------|
+| `projekte` | `title`, `description` |
+| `aktuelles` | `pubDate`, optional `draft` |
+| `events` | ISO `start`/`end`, optional `titleEn`/`summaryEn`, `draft` |
+
+## Env (never commit `.env`)
+
+See `.env.example`: `SMTP_*`, `CONTACT_*`, `PUBLIC_JOTFORM_ANMELDUNG_URL`. Use `import.meta.env` in code.
+
+## Workflow
+
+- Minimal diffs; match neighboring files; no drive-by refactors
+- **No git commit/push** unless the user asks
+- **No new production deps** without confirmation
+- Legal pages (`impressum`, `datenschutz`, cookie policies): change carefully
+
+## Codex / agents
+
+- Verify with `nvm use && npm run build` (1–2 min; Vercel bundling may pause ~60s)
+- Codex: run build **outside sandbox** if it hangs; use Node 24, not only Codex.app Node for installs

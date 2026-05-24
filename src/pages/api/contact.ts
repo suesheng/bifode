@@ -90,15 +90,13 @@ function mapSmtpError(error: unknown, locale: Locale): string {
       : 0;
 
   if (code === 'EAUTH' || responseCode === 535) {
-    return locale === 'en'
-      ? 'SMTP authentication failed. Please check SMTP_USER and SMTP_PASS.'
-      : 'SMTP-Authentifizierung fehlgeschlagen. Bitte SMTP_USER und SMTP_PASS prüfen.';
+    console.error('SMTP authentication failed.');
+    return createMessages(locale).failure;
   }
 
   if (code === 'ESOCKET' || code === 'ETIMEDOUT' || code === 'ECONNECTION') {
-    return locale === 'en'
-      ? 'SMTP connection failed. Please check SMTP_HOST, SMTP_PORT and network settings.'
-      : 'SMTP-Verbindung fehlgeschlagen. Bitte SMTP_HOST, SMTP_PORT und Netzwerkeinstellungen prüfen.';
+    console.error('SMTP connection failed.');
+    return createMessages(locale).failure;
   }
 
   return createMessages(locale).failure;
@@ -108,14 +106,21 @@ export const POST: APIRoute = async ({ request }) => {
   let locale: Locale = 'de';
   try {
     const contentType = request.headers.get('content-type') || '';
-    const body = await request.json();
+
+    if (!contentType.includes('application/json')) {
+      return json({ ok: false, message: createMessages(locale).invalidFormat }, 415);
+    }
+
+    let body: Record<string, unknown>;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ ok: false, message: createMessages(locale).invalidFormat }, 400);
+    }
+
     locale = body?.locale === 'en' ? 'en' : 'de';
     const t = createMessages(locale);
     const clientIp = getClientIp(request);
-
-    if (!contentType.includes('application/json')) {
-      return json({ ok: false, message: t.invalidFormat }, 415);
-    }
 
     const name = String(body?.name || '').trim();
     const organization = String(body?.organization || '').trim();

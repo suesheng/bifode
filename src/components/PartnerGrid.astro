@@ -1,19 +1,19 @@
 ---
 const partners = [
-  { name: 'Bildungsnetzwerk NRW', href: 'https://example.org', initial: 'BN' },
-  { name: 'Zivilgesellschaftliche Initiative', href: 'https://example.org', initial: 'ZI' },
-  { name: 'Kommunale Bildungsstelle', href: 'https://example.org', initial: 'KB' },
-  { name: 'Schulträger Kooperation', href: 'https://example.org', initial: 'SK' },
-  { name: 'Fachstelle Demokratie', href: 'https://example.org', initial: 'FD' },
+  { name: 'Bildungsnetzwerk NRW', initial: 'BN' },
+  { name: 'Zivilgesellschaftliche Initiative', initial: 'ZI' },
+  { name: 'Kommunale Bildungsstelle', initial: 'KB' },
+  { name: 'Schulträger Kooperation', initial: 'SK' },
+  { name: 'Fachstelle Demokratie', initial: 'FD' },
 ];
 ---
 
 <div class="partner-grid">
   {partners.map((partner) => (
-    <a class="partner-card" href={partner.href} rel="noopener noreferrer" target="_blank">
+    <div class="partner-card">
       <span class="partner-logo" aria-hidden="true">{partner.initial}</span>
       <span class="partner-name">{partner.name}</span>
-    </a>
+    </div>
   ))}
 </div>
 

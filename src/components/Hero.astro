@@ -15,7 +15,7 @@ const isEn = lang === 'en';
     {centered && (
       <>
         <div class="hero-actions">
-          <a href={isEn ? '/en/schools' : '/fuer-schulen'} class="button">{isEn ? 'Programs for Schools' : 'Angebote für Schulen'}</a>
+          <a href={isEn ? '/en/schools' : '/fuer-schulen'} class="button">{isEn ? 'Programmes for Schools' : 'Angebote für Schulen'}</a>
           <a href={isEn ? '/en/cooperation' : '/kooperation'} class="button secondary">{isEn ? 'Request Cooperation' : 'Kooperation anfragen'}</a>
         </div>
 
@@ -26,7 +26,7 @@ const isEn = lang === 'en';
         )}
 
         <p class="hero-trust">
-          {isEn ? 'Working with schools, partners, and civil society organizations in NRW' : 'Arbeit mit Schulen, Partnern und zivilgesellschaftlichen Organisationen in NRW'}
+          {isEn ? 'Working with schools, partners, and civil society organisations in NRW' : 'Arbeit mit Schulen, Partnern und zivilgesellschaftlichen Organisationen in NRW'}
         </p>
       </>
     )}
@@ -38,6 +38,32 @@ const isEn = lang === 'en';
     position: relative;
     overflow: hidden;
     background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 42%, #ffffff 100%);
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(115deg, rgba(15, 46, 80, 0.05) 0 1px, transparent 1px 18px),
+      radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.32) 0 1px, transparent 1px),
+      radial-gradient(circle at 75% 65%, rgba(15, 46, 80, 0.08) 0 1px, transparent 1px);
+    background-size: auto, 7px 7px, 11px 11px;
+    opacity: 0.42;
+    mix-blend-mode: multiply;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+    height: 56px;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(249, 250, 251, 0.96) 0%, rgba(249, 250, 251, 0.58) 42%, rgba(249, 250, 251, 0) 100%);
+    backdrop-filter: blur(2px);
   }
 
   .hero-centered {
