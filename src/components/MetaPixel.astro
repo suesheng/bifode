@@ -1,0 +1,41 @@
+---
+/**
+ * Loads Meta Pixel only after marketing cookie consent.
+ * Set PUBLIC_META_PIXEL_ID in .env (not TODO_META_PIXEL_ID).
+ */
+import { getMetaPixelId } from '../lib/metaPixel';
+
+const pixelId = getMetaPixelId();
+---
+
+{pixelId && (
+  <script>
+    import {
+      ensureMetaPixelReady,
+      trackMetaPageView,
+      readMarketingConsent
+    } from '../lib/metaPixel.ts';
+
+    function onConsentMaybeActivate() {
+      if (!readMarketingConsent()) return;
+      if (!ensureMetaPixelReady()) return;
+      trackMetaPageView();
+    }
+
+    function initMetaPixelListener() {
+      onConsentMaybeActivate();
+      window.addEventListener('cookie-consent-changed', (event) => {
+        const detail = event.detail;
+        if (detail?.marketing) {
+          onConsentMaybeActivate();
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMetaPixelListener, { once: true });
+    } else {
+      initMetaPixelListener();
+    }
+  </script>
+)}

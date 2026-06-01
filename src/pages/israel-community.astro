@@ -1,0 +1,1025 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import IsraelCommunityTracking from '../components/IsraelCommunityTracking.astro';
+
+const pageTitle = 'Israel Community Deutschland | Ivrit, Ulpan, Aliyah & Bildung';
+const pageDescription =
+  'Israel Community Deutschland ist ein Bildungs- und Austauschprojekt von BiFoDe e.V. in Zusammenarbeit mit der WZO. Informationen zu Ivrit, Ulpan, Aliyah, Beruf, Studium und Leben in Israel.';
+
+const FB_PAGE = 'https://www.facebook.com/bifode/';
+const FB_GROUP = 'https://www.facebook.com/groups/israel.hub.deutschland';
+
+function envUrl(key: string): string | null {
+  const raw = import.meta.env[key];
+  if (!raw || typeof raw !== 'string') return null;
+  const v = raw.trim();
+  if (!v || v.startsWith('TODO')) return null;
+  return v;
+}
+
+const telegramUrl = envUrl('PUBLIC_TELEGRAM_ISRAEL_HUB_URL');
+const donationUrl = envUrl('PUBLIC_DONATION_URL');
+const spendenHref = donationUrl || '#kontakt';
+const spendenIsDonationLink = Boolean(donationUrl);
+
+const interestOptions = [
+  'Ulpan / Ivrit',
+  'Aliyah / Repatriierung',
+  'Dokumente & Konsulat',
+  'Berufsanerkennung',
+  'Ärztinnen & Ärzte',
+  'Studium / Ausbildung',
+  'Immobilien / Wohnen',
+  'Banken / Steuern',
+  'Leben in Israel',
+  'Veranstaltungen / Community',
+  'Mitgliedschaft bei BiFoDe e.V.',
+  'Spende / Unterstützung',
+  'Sonstiges'
+];
+
+const offerOptions = [
+  'Ulpan / Ivrit-Kurse',
+  'Online-Kurse',
+  'Präsenzkurse',
+  'Lernmaterialien',
+  'Gesprächsclub',
+  'Webinare',
+  'Community-Treffen',
+  'Feiertage & Kultur',
+  'Merch / Vereinsmaterialien',
+  'Aliyah-Informationen',
+  'Beruf & Anerkennung',
+  'Spenden / Unterstützung'
+];
+
+const themeTags = [
+  'Ivrit & Ulpan',
+  'Aliyah & erste Schritte',
+  'Konsulate & Dokumente',
+  'Berufsanerkennung',
+  'Ärztinnen & Ärzte in Israel',
+  'Studium & Ausbildung',
+  'Schule & Kinder',
+  'Immobilien & Wohnen',
+  'Bankkonto & Steuern',
+  'Gesundheitssystem',
+  'Jobs & Arbeitsmarkt',
+  'Alltag, Kultur & Integration'
+];
+
+const webPageJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageTitle,
+  url: 'https://www.bifode.org/israel-community',
+  description: pageDescription,
+  inLanguage: 'de-DE',
+  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
+  about: {
+    '@type': 'EducationalOrganization',
+    name: 'Israel Community Deutschland',
+    parentOrganization: { '@type': 'Organization', name: 'BiFoDe e.V.' }
+  }
+});
+---
+
+<MainLayout title={pageTitle} description={pageDescription} titleSuffix={false} mainClass="ic-main">
+  <IsraelCommunityTracking />
+  <script type="application/ld+json" set:html={webPageJsonLd} />
+
+  <div class="ic-page">
+    <!-- 1. Hero -->
+    <section class="ic-hero" id="top" aria-labelledby="ic-hero-title">
+      <div class="ic-hero-bg" aria-hidden="true"></div>
+      <div class="container ic-hero-inner">
+        <p class="ic-eyebrow">Ein Bildungs- und Austauschprojekt von BiFoDe e.V. in enger Zusammenarbeit mit der World Zionist Organization.</p>
+        <h1 id="ic-hero-title">Israel Community Deutschland</h1>
+        <p class="ic-hero-sub">Ivrit lernen. Israel verstehen. Zukunft planen.</p>
+        <p class="ic-lead">
+          Israel Community Deutschland ist ein Bildungs- und Austauschprojekt von BiFoDe e.V. in enger Zusammenarbeit mit der World Zionist Organization. Wir verbinden Menschen in Deutschland mit Bildungsangeboten, Ulpan-Formaten, Gesprächsgruppen und verlässlicher Orientierung rund um Israel, Aliyah, Studium, Beruf und Alltag — von <strong>Ulpan Deutschland</strong> bis zu Fragen zu <strong>Leben in Israel</strong> und <strong>Aliyah Deutschland</strong>.
+        </p>
+        <div class="ic-hero-actions">
+          <a href="#kontakt" class="ic-btn ic-btn-primary" data-track="contact_cta">Interesse anmelden</a>
+          <a href="#kontakt" class="ic-btn ic-btn-secondary" data-track="contact_cta">Direkt eine Frage stellen</a>
+          <a href="/mitglied-werden" class="ic-btn ic-btn-outline" data-track="membership_intent">Mitglied werden</a>
+          <a
+            href="#spenden"
+            class="ic-btn ic-btn-ghost"
+            data-track={spendenIsDonationLink ? 'donation_intent' : 'contact_cta'}
+          >
+            Projekt unterstützen
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Wer wir sind -->
+    <section class="ic-section" id="ueber-uns" aria-labelledby="ic-ueber-title">
+      <div class="container">
+        <h2 id="ic-ueber-title">Wer wir sind</h2>
+        <p class="ic-lead">
+          BiFoDe e.V. – Bildungsforum für Demokratie und Vielfalt NRW – ist eine gemeinnützige Bildungsinitiative mit Sitz in Nordrhein-Westfalen. Unser Ziel ist es, Menschen durch Bildung, Austausch und praktische Orientierung zu stärken. Im Rahmen von Israel Community Deutschland arbeiten wir eng mit der World Zionist Organization zusammen, um Bildungsangebote, Ulpan-Formate und Informationsveranstaltungen rund um Israel zugänglich zu machen.
+        </p>
+        <div class="card-grid ic-trust-grid">
+          <article class="card feature-card">
+            <h3>BiFoDe e.V.</h3>
+            <p>Bildung, Demokratie und Vielfalt in NRW — <strong>Bildungsverein NRW</strong> mit klarem Bildungsauftrag.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>In Zusammenarbeit mit der WZO</h3>
+            <p>Bildungs- und Austauschformate mit Israel-Bezug — <strong>WZO Deutschland</strong> als Partner.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Online & vor Ort</h3>
+            <p>Webinare, Gesprächsgruppen und Veranstaltungen in Deutschland — <strong>jüdische Bildung Deutschland</strong> mit Praxisbezug.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Community-Kanäle -->
+    <section class="ic-section ic-section-alt" id="community" aria-labelledby="ic-community-title">
+      <div class="container">
+        <h2 id="ic-community-title">Bleib mit uns verbunden</h2>
+        <p class="ic-lead">
+          Folge unseren Community-Kanälen und erhalte aktuelle Informationen zu Ulpan-Kursen, Ivrit-Angeboten, Veranstaltungen, Webinaren und Austauschformaten rund um Israel, jüdisches Leben und Aliyah — u.&nbsp;a. in der <strong>Israel Hub Deutschland</strong> Facebook-Gruppe.
+        </p>
+        <div class="card-grid ic-community-grid">
+          <article class="card feature-card">
+            <h3>Facebook-Seite BiFoDe</h3>
+            <p>Offizielle Informationen, Projekte und Updates von BiFoDe e.V.</p>
+            <a
+              href={FB_PAGE}
+              class="ic-btn ic-btn-primary ic-card-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook-Seite BiFoDe öffnen"
+              data-track="facebook_page_click"
+            >
+              Facebook-Seite besuchen
+            </a>
+          </article>
+          <article class="card feature-card">
+            <h3>Facebook-Gruppe Israel Hub Deutschland</h3>
+            <p>Austausch, Fragen, Community und Diskussionen rund um Ivrit, Israel, Aliyah und jüdisches Leben in Deutschland.</p>
+            <a
+              href={FB_GROUP}
+              class="ic-btn ic-btn-primary ic-card-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook-Gruppe Israel Hub Deutschland öffnen"
+              data-track="facebook_group_click"
+            >
+              Facebook-Gruppe öffnen
+            </a>
+          </article>
+          <article class="card feature-card">
+            <h3>Telegram-Kanal Israel Hub Deutschland</h3>
+            <p>Schnelle Updates, Kursankündigungen, Termine und Hinweise zu neuen Veranstaltungen.</p>
+            {telegramUrl ? (
+              <a
+                href={telegramUrl}
+                class="ic-btn ic-btn-primary ic-card-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram-Kanal Israel Hub Deutschland öffnen"
+                data-track="telegram_click"
+              >
+                Telegram-Kanal abonnieren
+              </a>
+            ) : (
+              <p class="ic-todo-note">Telegram-Link wird ergänzt. {/* TODO: add Telegram channel URL — PUBLIC_TELEGRAM_ISRAEL_HUB_URL */}</p>
+            )}
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Was wir anbieten -->
+    <section class="ic-section" id="angebote" aria-labelledby="ic-angebote-title">
+      <div class="container">
+        <h2 id="ic-angebote-title">Was wir anbieten</h2>
+        <div class="card-grid">
+          <article class="card feature-card">
+            <h3>Ulpan & Ivrit</h3>
+            <p>Online- und Präsenzformate zum <strong>Hebräisch lernen</strong> — von den ersten Schritten bis zu fortgeschrittenen Gesprächsgruppen. Ideal für alle, die <strong>Ivrit lernen Deutschland</strong> ernsthaft angehen möchten.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Gesprächs- und Diskussionsclubs</h3>
+            <p>Regelmäßige Treffen zu Sprache, Kultur, Gesellschaft, Alltag und jüdischem Leben in Israel und Deutschland.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Orientierung rund um Aliyah</h3>
+            <p>Informationsangebote zu ersten Schritten, Unterlagen, Konsulaten und relevanten Ansprechpartnern — <strong>Repatriierung nach Israel</strong> verständlich einordnen.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Beruf & Anerkennung</h3>
+            <p>Themenabende für Fachkräfte, zum Beispiel <strong>Ärzte in Israel</strong>, Pflegekräfte, Ingenieurinnen und Ingenieure, Lehrkräfte und andere Berufsgruppen — <strong>Berufsanerkennung Israel</strong> im Überblick.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Leben in Israel</h3>
+            <p>Praktische Informationen zu Wohnen, Immobilien, Banken, Steuern, Versicherungen, Bildung, Gesundheitssystem und Alltag.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Begegnungen mit Expertinnen und Experten</h3>
+            <p>Webinare und persönliche Treffen mit Menschen, die ihren Weg in Israel bereits erfolgreich gegangen sind.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Mitgliedschaft -->
+    <section class="ic-section ic-section-alt" id="mitgliedschaft" aria-labelledby="ic-mitglied-title">
+      <div class="container">
+        <h2 id="ic-mitglied-title">Mitgliedschaft als Zugang zu unseren Angeboten</h2>
+        <p class="ic-subhead">Werde Teil von BiFoDe e.V. und nutze die Bildungs-, Sprach- und Community-Angebote des Vereins.</p>
+        <p class="ic-lead">
+          Mit einer Mitgliedschaft bei BiFoDe e.V. unterstützt du unsere Bildungsarbeit und wirst Teil eines wachsenden Netzwerks für Ivrit, Israel-bezogene Bildung, Austausch und Community in Deutschland. Mitglieder erhalten Zugang zu ausgewählten Vereinsangeboten, werden frühzeitig über neue Kurse und Veranstaltungen informiert und können an internen Formaten teilnehmen — <strong>BiFoDe Mitgliedschaft</strong> als Zugang, nicht als pauschale Leistungsgarantie.
+        </p>
+        <p class="ic-note"><strong>Wichtig:</strong> Die konkrete Teilnahme an Kursen und Veranstaltungen erfolgt je nach Verfügbarkeit, Projektphase und organisatorischen Rahmenbedingungen. Für einzelne Angebote können zusätzliche Teilnahmebeiträge anfallen.</p>
+        <div class="card-grid ic-membership-grid">
+          <article class="card feature-card"><h3>Ulpan-Kurse</h3><p>Mitglieder werden bevorzugt über neue Online- und Präsenzkurse informiert und können sich für verfügbare Plätze anmelden.</p></article>
+          <article class="card feature-card"><h3>Lernmaterialien</h3><p>Zugang zu ausgewählten Lernmaterialien, Übungsunterlagen, Links und Empfehlungen rund um Ivrit und Israel-bezogene Bildung.</p></article>
+          <article class="card feature-card"><h3>Gesprächs- und Sprachclubs</h3><p>Teilnahme an Gesprächsrunden, Ivrit-Praxisgruppen und Diskussionsformaten für Austausch und Sprachpraxis.</p></article>
+          <article class="card feature-card"><h3>Webinare & Expertenformate</h3><p>Einladungen zu Online- und Präsenzveranstaltungen mit Expertinnen und Experten zu Israel, Aliyah, Beruf, Bildung und Alltag.</p></article>
+          <article class="card feature-card"><h3>Community & Feiertage</h3><p>Gemeinsame Treffen, kulturelle Formate, Feiertage und Begegnungen innerhalb der Community.</p></article>
+          <article class="card feature-card"><h3>Merch & Vereinsmaterialien</h3><p>Zugang zu ausgewählten Vereinsmaterialien und Community-Merch, sofern verfügbar und passend zum jeweiligen Projektformat.</p></article>
+        </div>
+        <p class="ic-cta-row">
+          <a href="/mitglied-werden" class="ic-btn ic-btn-primary" data-track="membership_intent">Mitglied werden und Angebote nutzen</a>
+        </p>
+        <p class="ic-small">Die Mitgliedschaft ist ein Beitrag zur Vereinsarbeit. Einzelne Kurse oder Veranstaltungen können zusätzliche Beiträge oder eine separate Anmeldung erfordern.</p>
+      </div>
+    </section>
+
+    <!-- 6. Zielgruppen -->
+    <section class="ic-section" id="zielgruppen" aria-labelledby="ic-ziel-title">
+      <div class="container ic-narrow">
+        <h2 id="ic-ziel-title">Für wen ist Israel Community Deutschland gedacht?</h2>
+        <ul class="ic-checklist">
+          <li>Für Menschen, die Ivrit lernen möchten.</li>
+          <li>Für Familien, die Israel besser verstehen wollen.</li>
+          <li>Für Jüdinnen und Juden in Deutschland, die sich mit Israel verbunden fühlen.</li>
+          <li>Für Menschen, die Aliyah oder einen längeren Aufenthalt in Israel prüfen.</li>
+          <li>Für Fachkräfte, die wissen möchten, wie Berufsanerkennung und Einstieg in Israel funktionieren.</li>
+          <li>Für Studierende und junge Erwachsene, die Bildungs- und Zukunftswege in Israel kennenlernen möchten.</li>
+          <li>Für alle, die Austausch, Orientierung und eine seriöse Community suchen.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Themenbereiche -->
+    <section class="ic-section ic-section-alt" id="themen" aria-labelledby="ic-themen-title">
+      <div class="container">
+        <h2 id="ic-themen-title">Unsere Themenbereiche</h2>
+        <ul class="ic-tag-grid">
+          {themeTags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. Formate -->
+    <section class="ic-section" id="veranstaltungen" aria-labelledby="ic-formate-title">
+      <div class="container">
+        <h2 id="ic-formate-title">Unsere Formate</h2>
+        <div class="card-grid">
+          <article class="card feature-card"><h3>Webinare</h3><p>Digitale Informationsabende mit Expertinnen und Experten aus Deutschland und Israel.</p></article>
+          <article class="card feature-card"><h3>Präsenztreffen</h3><p>Lokale Treffen, Gesprächsabende und Community-Events in Deutschland.</p></article>
+          <article class="card feature-card"><h3>Fachgespräche</h3><p>Spezielle Sessions für Berufsgruppen – zum Beispiel Medizin, Bildung, Technik, Medien und Wirtschaft.</p></article>
+          <article class="card feature-card"><h3>Erfahrungsberichte</h3><p>Menschen erzählen, wie sie ihren Weg nach Israel vorbereitet und gestaltet haben.</p></article>
+          <article class="card feature-card"><h3>Sprachpraxis</h3><p>Ivrit-Konversation, kleine Gruppen, Austausch und praktische Übungen.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Expertenthemen -->
+    <section class="ic-section ic-section-alt" id="expertenthemen" aria-labelledby="ic-expert-title">
+      <div class="container">
+        <h2 id="ic-expert-title">Beispiele für kommende Themen</h2>
+        <ul class="ic-bullet-list">
+          <li>Als Ärztin oder Arzt nach Israel: Anerkennung, Sprache, erste Schritte</li>
+          <li>Von Deutschland nach Israel: persönliche Erfahrung eines erfolgreichen beruflichen Neustarts</li>
+          <li>Arbeiten in Israel: Arbeitsmarkt, Bewerbungen, Netzwerke</li>
+          <li>Immobilien in Israel: Mieten, Kaufen, typische Fragen</li>
+          <li>Bankkonto, Steuern und Versicherungen in Israel</li>
+          <li>Studium und Ausbildung in Israel</li>
+          <li>Schule, Kinder und Familie</li>
+          <li>Hebräisch lernen: Wie man realistisch beginnt und dranbleibt</li>
+          <li>Medien, Kultur und Gesellschaft in Israel</li>
+        </ul>
+        <aside class="ic-highlight card">
+          <h3>Praxisnaher Einblick</h3>
+          <p>
+            Ein deutscher Sprecher und Medienprofi, der nach Israel gezogen ist und heute erfolgreich dort arbeitet, berichtet über seinen Weg, Herausforderungen und praktische Tipps.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 10. Warum teilnehmen -->
+    <section class="ic-section" id="warum" aria-labelledby="ic-warum-title">
+      <div class="container">
+        <h2 id="ic-warum-title">Warum teilnehmen?</h2>
+        <div class="card-grid">
+          <article class="card feature-card"><h3>Verlässliche Orientierung</h3><p>Wir helfen, Informationen zu strukturieren und die richtigen nächsten Schritte zu verstehen.</p></article>
+          <article class="card feature-card"><h3>Community statt Einzelkampf</h3><p>Du triffst Menschen mit ähnlichen Fragen, Erfahrungen und Zielen.</p></article>
+          <article class="card feature-card"><h3>Direkter Zugang zu Wissen</h3><p>Expertinnen, Experten und Menschen mit echter Erfahrung teilen konkrete Einblicke.</p></article>
+          <article class="card feature-card"><h3>Bildung mit Israel-Bezug</h3><p>Sprache, Kultur, Gesellschaft und praktische Lebensfragen werden miteinander verbunden.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. WZO -->
+    <section class="ic-section ic-section-alt" id="wzo" aria-labelledby="ic-wzo-title">
+      <div class="container ic-narrow">
+        <h2 id="ic-wzo-title">In Zusammenarbeit mit der WZO</h2>
+        <p class="ic-lead">
+          Israel Community Deutschland entsteht im Rahmen der Bildungsarbeit von BiFoDe e.V. und in enger Zusammenarbeit mit der World Zionist Organization. Gemeinsam möchten wir Menschen in Deutschland Zugang zu hochwertigen Bildungs-, Sprach- und Informationsangeboten rund um Israel ermöglichen.
+        </p>
+        <p class="ic-note">Die Angebote dienen der Bildung, Orientierung und allgemeinen Information. Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung.</p>
+      </div>
+    </section>
+
+    <!-- 12. Mitglied werden -->
+    <section class="ic-section" id="mitglied-werden" aria-labelledby="ic-mw-title">
+      <div class="container ic-narrow">
+        <h2 id="ic-mw-title">Mitglied bei BiFoDe e.V. werden</h2>
+        <p class="ic-lead">
+          Du möchtest unsere Bildungsarbeit langfristig unterstützen und Zugang zu unseren Vereinsangeboten erhalten? Als Mitglied wirst du Teil eines Netzwerks für Ivrit, Israel-bezogene Bildung, Austausch, Veranstaltungen und Community in Deutschland.
+        </p>
+        <p><strong>Als Mitglied kannst du:</strong></p>
+        <ul class="ic-checklist">
+          <li>frühzeitig Informationen zu neuen Ulpan-Kursen erhalten;</li>
+          <li>dich für Online- und Präsenzangebote anmelden;</li>
+          <li>an ausgewählten Sprach- und Gesprächsformaten teilnehmen;</li>
+          <li>Zugang zu Lernmaterialien und Empfehlungen erhalten;</li>
+          <li>Einladungen zu Webinaren und Expertenveranstaltungen bekommen;</li>
+          <li>an Community-Treffen und gemeinsamen Feiertagsformaten teilnehmen;</li>
+          <li>die Entwicklung neuer Bildungsangebote aktiv unterstützen.</li>
+        </ul>
+        <p class="ic-cta-row">
+          <a href="/mitglied-werden" class="ic-btn ic-btn-primary" data-track="membership_intent">Mitgliedschaft anfragen</a>
+        </p>
+        <div class="ic-tax-box">
+          <h3>Steuerlicher Vorteil</h3>
+          <p>
+            Mitgliedsbeiträge und Spenden an gemeinnützige Organisationen können in Deutschland grundsätzlich steuerlich berücksichtigt werden, sofern die gesetzlichen Voraussetzungen erfüllt sind. Nach entsprechender steuerlicher Anerkennung kann BiFoDe e.V. Zuwendungsbestätigungen ausstellen, soweit dies rechtlich zulässig ist.
+          </p>
+          <p class="ic-small">Die steuerliche Behandlung hängt von der persönlichen Situation, dem Status des Vereins und den geltenden gesetzlichen Vorgaben ab. Diese Information ersetzt keine steuerliche Beratung.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Spenden -->
+    <section class="ic-section ic-section-alt" id="spenden" aria-labelledby="ic-spenden-title">
+      <div class="container ic-narrow">
+        <h2 id="ic-spenden-title">Unsere Arbeit unterstützen</h2>
+        <p class="ic-lead">
+          Mit einer Spende unterstützt du Bildungsangebote, Ulpan-Formate, Informationsveranstaltungen, Community-Arbeit und Begegnungsformate zwischen Deutschland und Israel. Jeder Beitrag hilft, neue Angebote zugänglich zu machen.
+        </p>
+        <div class="ic-hero-actions">
+          <a
+            href={spendenHref}
+            class="ic-btn ic-btn-primary"
+            data-track={spendenIsDonationLink ? 'donation_intent' : 'contact_cta'}
+          >
+            Jetzt spenden
+          </a>
+          <a href="#kontakt" class="ic-btn ic-btn-secondary" data-track="contact_cta">Erst Kontakt aufnehmen</a>
+        </div>
+        {!donationUrl && (
+          <p class="ic-todo-note">{/* TODO: add donation link — PUBLIC_DONATION_URL */} Spendenlink wird ergänzt — bis dahin bitte über das Kontaktformular.</p>
+        )}
+        <p class="ic-note">Spenden können – bei Vorliegen der gesetzlichen Voraussetzungen – steuerlich berücksichtigt werden. Sobald die entsprechenden Voraussetzungen erfüllt sind, stellt BiFoDe e.V. Zuwendungsbestätigungen aus.</p>
+        <p class="ic-small">Bitte beachte: Eine steuerliche Absetzbarkeit darf erst kommuniziert werden, wenn der gemeinnützige Status und die formalen Voraussetzungen tatsächlich bestätigt sind.</p>
+      </div>
+    </section>
+
+    <!-- 14. Kontaktformular -->
+    <section class="ic-section" id="kontakt" aria-labelledby="ic-kontakt-title">
+      <div class="container">
+        <h2 id="ic-kontakt-title">Stell deine Frage direkt</h2>
+        <p class="ic-lead">
+          Du hast eine konkrete Frage zu Ivrit, Aliyah, Dokumenten, Berufsanerkennung, Studium, Immobilien, Banken, Steuern oder zum Leben in Israel? Schreib uns. Wir ordnen dein Anliegen ein und verbinden dich – wenn möglich – mit passenden Informationen, Veranstaltungen oder Ansprechpartnern.
+        </p>
+        <div class="card contact-form-card ic-form-card">
+          <form class="contact-form" id="ic-contact-form" novalidate>
+            <input type="hidden" name="utm_source" id="utm_source" />
+            <input type="hidden" name="utm_medium" id="utm_medium" />
+            <input type="hidden" name="utm_campaign" id="utm_campaign" />
+            <input type="hidden" name="utm_content" id="utm_content" />
+            <input type="hidden" name="utm_term" id="utm_term" />
+            <input type="hidden" name="page_source" id="page_source" value="israel_community_landing" />
+
+            <div class="ic-form-row">
+              <div class="form-group">
+                <label for="ic-firstName">Vorname *</label>
+                <input type="text" id="ic-firstName" name="firstName" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="ic-lastName">Nachname *</label>
+                <input type="text" id="ic-lastName" name="lastName" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ic-email">E-Mail *</label>
+              <input type="email" id="ic-email" name="email" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="ic-phone">Telefonnummer / WhatsApp</label>
+              <input type="tel" id="ic-phone" name="phone" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="ic-city">Stadt in Deutschland</label>
+              <input type="text" id="ic-city" name="city" autocomplete="address-level2" />
+            </div>
+            <div class="form-group">
+              <label for="ic-interest">Interessensbereich *</label>
+              <select id="ic-interest" name="interest" required>
+                <option value="">Bitte wählen</option>
+                {interestOptions.map((opt) => (
+                  <option value={opt}>{opt}</option>
+                ))}
+              </select>
+            </div>
+            <fieldset class="ic-fieldset">
+              <legend>Welche Angebote interessieren dich?</legend>
+              <div class="ic-checkbox-grid">
+                {offerOptions.map((opt) => (
+                  <label class="ic-checkbox-label">
+                    <input type="checkbox" name="offers" value={opt} />
+                    <span>{opt}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="form-group">
+              <label for="ic-message">Nachricht / Frage *</label>
+              <textarea id="ic-message" name="message" rows="5" required></textarea>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="ic-privacy" name="privacy" required />
+              <label for="ic-privacy">
+                Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden. Weitere Informationen finde ich in der <a href="/datenschutz">Datenschutzerklärung</a>.
+              </label>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="ic-newsletter" name="newsletter" />
+              <label for="ic-newsletter">Ich möchte Informationen zu Kursen, Veranstaltungen und Vereinsangeboten per E-Mail erhalten.</label>
+            </div>
+            <div class="hp-field" aria-hidden="true">
+              <label for="ic-website">Website</label>
+              <input type="text" id="ic-website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <button type="submit" class="ic-btn ic-btn-primary" data-track="form_submit">Frage absenden</button>
+          </form>
+          <p class="form-note" id="ic-form-note">Alternativ: <a href="mailto:info@bifode.org">info@bifode.org</a></p>
+        </div>
+        <div class="ic-privacy-box">
+          <p><strong>Hinweis zum Datenschutz:</strong> Wir verwenden deine Angaben ausschließlich zur Bearbeitung deiner Anfrage und zur Kommunikation im Rahmen der Vereinsarbeit. Personenbezogene Angaben aus dem Formular werden nicht an Meta Pixel übermittelt. Wenn du Marketing-Cookies akzeptierst, können allgemeine Interaktionen auf dieser Seite gemessen werden, um relevante Informationen zu unseren Bildungs- und Community-Angeboten anzeigen zu können.</p>
+          <p class="ic-small">{/* TODO: Datenschutzerklärung um Kontaktformular, CRM/Formularverarbeitung und Meta Pixel ergänzen. */}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Final CTA -->
+    <section class="ic-section ic-final-cta" aria-labelledby="ic-final-title">
+      <div class="container ic-narrow ic-final-inner">
+        <h2 id="ic-final-title">Du möchtest Ivrit lernen, Israel besser verstehen oder Teil unserer Community werden?</h2>
+        <p class="ic-lead">
+          Melde dich unverbindlich an, stelle deine Frage oder werde Mitglied bei BiFoDe e.V. Wir informieren dich über passende Kurse, Gesprächsformate, Veranstaltungen und Angebote.
+        </p>
+        <div class="ic-hero-actions">
+          <a href="#kontakt" class="ic-btn ic-btn-primary" data-track="contact_cta">Frage stellen</a>
+          <a href="/mitglied-werden" class="ic-btn ic-btn-secondary" data-track="membership_intent">Mitglied werden</a>
+          <a
+            href={FB_GROUP}
+            class="ic-btn ic-btn-outline"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="facebook_group_click"
+          >
+            Facebook-Gruppe öffnen
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  :global(.ic-main) {
+    padding: 0 !important;
+  }
+
+  .ic-page {
+    --ic-navy: #0c1e34;
+    --ic-blue: #163b63;
+    --ic-light: #d6e1fc;
+    --ic-bg: #f4f7fb;
+    --ic-white: #ffffff;
+    background: var(--ic-bg);
+  }
+
+  .ic-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 3.5rem 0 3rem;
+    background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 45%, var(--ic-white) 100%);
+  }
+
+  .ic-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 12% 25%, rgba(22, 59, 99, 0.12), transparent 45%),
+      radial-gradient(circle at 88% 20%, rgba(214, 225, 252, 0.9), transparent 40%),
+      linear-gradient(120deg, transparent 48%, rgba(12, 30, 52, 0.04) 48%, rgba(12, 30, 52, 0.04) 52%, transparent 52%);
+    opacity: 0.85;
+  }
+
+  .ic-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+  }
+
+  .ic-eyebrow {
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.55;
+    margin: 0 0 1rem;
+  }
+
+  .ic-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    color: var(--ic-navy);
+    margin: 0 0 0.5rem;
+    line-height: 1.1;
+  }
+
+  .ic-hero-sub {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ic-blue);
+    margin: 0 0 1.25rem;
+  }
+
+  .ic-section {
+    padding: 3rem 0;
+  }
+
+  .ic-section-alt {
+    background: var(--ic-white);
+  }
+
+  .ic-section h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    color: var(--ic-navy);
+    margin: 0 0 1rem;
+  }
+
+  .ic-subhead {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ic-blue);
+    margin: 0 0 0.75rem;
+  }
+
+  .ic-lead {
+    color: #334155;
+    line-height: 1.7;
+    max-width: 72ch;
+    margin: 0 0 1.25rem;
+  }
+
+  .ic-narrow {
+    max-width: 760px;
+  }
+
+  .ic-note {
+    background: #eef3fc;
+    border-left: 4px solid var(--ic-blue);
+    padding: 0.85rem 1rem;
+    border-radius: 0 10px 10px 0;
+    color: #1e293b;
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+
+  .ic-small {
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  .ic-todo-note {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-style: italic;
+    margin: 0.75rem 0 0;
+  }
+
+  .ic-community-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 900px) {
+    .ic-community-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .ic-card-btn {
+    margin-top: 1rem;
+  }
+
+  .ic-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .ic-cta-row {
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .ic-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .ic-btn-primary {
+    background: var(--ic-blue);
+    color: #fff;
+    border-color: var(--ic-blue);
+  }
+
+  .ic-btn-primary:hover {
+    background: #0f2e50;
+    transform: translateY(-1px);
+  }
+
+  .ic-btn-secondary {
+    background: #fff;
+    color: var(--ic-blue);
+    border-color: #89a6cc;
+  }
+
+  .ic-btn-secondary:hover {
+    background: var(--ic-light);
+  }
+
+  .ic-btn-outline {
+    background: transparent;
+    color: var(--ic-blue);
+    border-color: var(--ic-blue);
+  }
+
+  .ic-btn-outline:hover {
+    background: var(--ic-blue);
+    color: #fff;
+  }
+
+  .ic-btn-ghost {
+    background: transparent;
+    color: #475569;
+    border-color: #cbd5e1;
+  }
+
+  .ic-checklist,
+  .ic-bullet-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .ic-tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ic-tag-grid li {
+    background: var(--ic-white);
+    border: 1px solid #dbe5f1;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ic-blue);
+  }
+
+  .ic-section-alt .ic-tag-grid li {
+    background: var(--ic-bg);
+  }
+
+  .ic-highlight {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #eef4ff, #fff);
+    border: 1px solid #c7d9f5;
+    border-radius: var(--radius, 18px);
+  }
+
+  .ic-highlight h3 {
+    margin: 0 0 0.5rem;
+    color: var(--ic-navy);
+  }
+
+  .ic-tax-box {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .ic-tax-box h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .ic-form-card {
+    max-width: 640px;
+    margin-top: 1.5rem;
+    padding: 1.75rem !important;
+    background: var(--ic-white) !important;
+    border: 1px solid #dbe5f1 !important;
+    border-radius: var(--radius, 18px) !important;
+    box-shadow: var(--shadow) !important;
+  }
+
+  .ic-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .ic-form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.95rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 0.7rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: 2px solid var(--ic-blue);
+    outline-offset: 1px;
+    border-color: var(--ic-blue);
+  }
+
+  .checkbox-group {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .checkbox-group input {
+    width: auto;
+    margin-top: 0.2rem;
+  }
+
+  .checkbox-group label {
+    font-weight: normal;
+    margin: 0;
+  }
+
+  .ic-fieldset {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0;
+  }
+
+  .ic-fieldset legend {
+    font-weight: 600;
+    padding: 0 0.25rem;
+  }
+
+  .ic-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .ic-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .ic-privacy-box {
+    max-width: 640px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .ic-final-cta {
+    background: linear-gradient(180deg, var(--ic-navy) 0%, #0f2e50 100%);
+    color: #e2e8f0;
+    padding: 3.5rem 0;
+  }
+
+  .ic-final-inner h2 {
+    color: #fff;
+  }
+
+  .ic-final-inner .ic-lead {
+    color: #cbd5e1;
+  }
+
+  .ic-final-inner .ic-btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .ic-final-inner .ic-btn-outline {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .ic-final-inner .ic-btn-outline:hover {
+    background: #fff;
+    color: var(--ic-navy);
+  }
+
+  @media (max-width: 768px) {
+    .ic-hero {
+      padding: 2.5rem 0 2rem;
+    }
+
+    .ic-hero-actions .ic-btn {
+      width: 100%;
+    }
+
+    .ic-form-card {
+      padding: 1rem !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+  }
+</style>
+
+<script>
+  // TODO: Connect form to Make, Notion, Google Sheets, CRM, Formspree or existing backend endpoint.
+  // Currently posts to /api/contact with formSource=israel_community when SMTP is configured.
+
+  function readUtmParams() {
+    const params = new URLSearchParams(window.location.search);
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
+    for (const key of keys) {
+      const el = document.getElementById(key);
+      if (el instanceof HTMLInputElement) {
+        el.value = params.get(key) || '';
+      }
+    }
+  }
+
+  function initIsraelContactForm() {
+    readUtmParams();
+
+    const form = document.getElementById('ic-contact-form');
+    const note = document.getElementById('ic-form-note');
+    if (!(form instanceof HTMLFormElement) || !(note instanceof HTMLElement)) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (!(submitButton instanceof HTMLButtonElement)) return;
+
+      const data = new FormData(form);
+      const offers = data.getAll('offers').map((v) => String(v));
+
+      const payload = {
+        formSource: 'israel_community',
+        firstName: String(data.get('firstName') || ''),
+        lastName: String(data.get('lastName') || ''),
+        name: `${String(data.get('firstName') || '')} ${String(data.get('lastName') || '')}`.trim(),
+        email: String(data.get('email') || ''),
+        phone: String(data.get('phone') || ''),
+        city: String(data.get('city') || ''),
+        interest: String(data.get('interest') || ''),
+        offers,
+        message: String(data.get('message') || ''),
+        privacyAccepted: data.get('privacy') === 'on',
+        newsletter: data.get('newsletter') === 'on',
+        website: String(data.get('website') || ''),
+        utm_source: String(data.get('utm_source') || ''),
+        utm_medium: String(data.get('utm_medium') || ''),
+        utm_campaign: String(data.get('utm_campaign') || ''),
+        utm_content: String(data.get('utm_content') || ''),
+        utm_term: String(data.get('utm_term') || ''),
+        page_source: String(data.get('page_source') || 'israel_community_landing')
+      };
+
+      submitButton.disabled = true;
+      const originalText = submitButton.textContent || 'Frage absenden';
+      submitButton.textContent = 'Wird gesendet...';
+      note.textContent = 'Bitte kurz warten...';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result?.ok) {
+          throw new Error(result?.message || 'Versand fehlgeschlagen.');
+        }
+
+        form.reset();
+        readUtmParams();
+        note.textContent = result.message || 'Vielen Dank — wir haben deine Frage erhalten.';
+        window.dispatchEvent(new CustomEvent('ic-form-success'));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Versand fehlgeschlagen.';
+        note.textContent = `${message} Alternativ: info@bifode.org`;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIsraelContactForm, { once: true });
+  } else {
+    initIsraelContactForm();
+  }
+</script>

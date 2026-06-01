@@ -1,0 +1,128 @@
+---
+/** Page-specific Meta events for /israel-community — no PII in payloads. */
+import MetaPixel from './MetaPixel.astro';
+---
+
+<MetaPixel />
+
+<script>
+  import {
+    ensureMetaPixelReady,
+    trackMetaStandard,
+    trackMetaCustom,
+    readMarketingConsent
+  } from '../lib/metaPixel.ts';
+
+  const VIEW_CONTENT = { content_name: 'Israel Community Landing Page' };
+  let viewContentSent = false;
+
+  function sendViewContentOnce() {
+    if (viewContentSent || !readMarketingConsent()) return;
+    if (!ensureMetaPixelReady()) return;
+    viewContentSent = true;
+    trackMetaStandard('ViewContent', VIEW_CONTENT);
+  }
+
+  function initScrollViewContent() {
+    let halfScroll = false;
+    const onScroll = () => {
+      if (halfScroll) return;
+      const doc = document.documentElement;
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = doc.scrollHeight;
+      if (total > 0 && scrolled / total >= 0.5) {
+        halfScroll = true;
+        sendViewContentOnce();
+        window.removeEventListener('scroll', onScroll, { passive: true } as EventListenerOptions);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.setTimeout(() => sendViewContentOnce(), 30000);
+  }
+
+  function trackContactCta() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaStandard('Contact', { button_name: 'contact_cta' });
+  }
+
+  function trackMembershipIntent() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaCustom('MembershipIntent', { cta_name: 'membership' });
+  }
+
+  function trackDonationIntent() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaCustom('DonationIntent', { cta_name: 'donation' });
+  }
+
+  function trackSocialClick(channel: string) {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaCustom('SocialClick', { channel });
+  }
+
+  function trackFormStart() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaCustom('FormStart', { form_name: 'israel_community_contact' });
+  }
+
+  function trackLead() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaStandard('Lead', { form_name: 'israel_community_contact' });
+  }
+
+  function bindTracking() {
+    document.querySelectorAll('[data-track="contact_cta"]').forEach((el) => {
+      el.addEventListener('click', trackContactCta);
+    });
+    document.querySelectorAll('[data-track="membership_intent"]').forEach((el) => {
+      el.addEventListener('click', trackMembershipIntent);
+    });
+    document.querySelectorAll('[data-track="donation_intent"]').forEach((el) => {
+      el.addEventListener('click', trackDonationIntent);
+    });
+    document.querySelectorAll('[data-track="facebook_page_click"]').forEach((el) => {
+      el.addEventListener('click', () => trackSocialClick('facebook_page'));
+    });
+    document.querySelectorAll('[data-track="facebook_group_click"]').forEach((el) => {
+      el.addEventListener('click', () => trackSocialClick('facebook_group'));
+    });
+    document.querySelectorAll('[data-track="telegram_click"]').forEach((el) => {
+      el.addEventListener('click', () => trackSocialClick('telegram'));
+    });
+
+    const form = document.getElementById('ic-contact-form');
+    if (form instanceof HTMLFormElement) {
+      let formStartSent = false;
+      const onFormStart = () => {
+        if (formStartSent) return;
+        formStartSent = true;
+        trackFormStart();
+      };
+      form.addEventListener('focusin', onFormStart, { once: true });
+      form.addEventListener('submit', () => {
+        // Lead fires only after successful submit (see page script)
+        form.dataset.leadPending = '1';
+      });
+    }
+
+    window.addEventListener('ic-form-success', () => {
+      trackLead();
+    });
+  }
+
+  function initIsraelCommunityTracking() {
+    initScrollViewContent();
+    bindTracking();
+    window.addEventListener('cookie-consent-changed', (event) => {
+      if (event.detail?.marketing) {
+        initScrollViewContent();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIsraelCommunityTracking, { once: true });
+  } else {
+    initIsraelCommunityTracking();
+  }
+</script>

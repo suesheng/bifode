@@ -7,7 +7,9 @@ import CookieBanner from '../components/CookieBanner.astro';
 const {
   title = 'Startseite',
   description = 'BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW',
-  lang = 'de'
+  lang = 'de',
+  titleSuffix = true,
+  mainClass = ''
 } = Astro.props;
 
 const isEn = lang === 'en';
@@ -77,6 +79,7 @@ const navStructure: NavEntry[] = isEn
           { href: '/anmeldung', label: 'Anmeldung' }
         ]
       },
+      { kind: 'link', href: '/israel-community', label: 'Israel Community' },
       { kind: 'link', href: '/kontakt', label: 'Kontakt' }
     ];
 
@@ -147,7 +150,7 @@ const orgJsonLd = JSON.stringify({
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="apple-touch-icon" href="/favicon.svg" />
                 <meta name="generator" content={Astro.generator} />
-                <title>{title} | BiFoDe</title>
+                <title>{titleSuffix ? `${title} | BiFoDe` : title}</title>
                 <meta name="description" content={description} />
                 <link rel="canonical" href={canonicalURL} />
                 <script type="application/ld+json" set:html={orgJsonLd} />
@@ -228,7 +231,7 @@ const orgJsonLd = JSON.stringify({
                                 </div>
                         </nav>
 
-                        <main id="main-content" class="main-content" tabindex="-1">
+                        <main id="main-content" class:list={['main-content', mainClass]} tabindex="-1">
                                 <slot />
                         </main>
 
@@ -256,6 +259,19 @@ const orgJsonLd = JSON.stringify({
                                                 <p>{isEn ? 'Location: North Rhine-Westphalia' : 'Standort: Nordrhein-Westfalen'}</p>
                                         </div>
 
+                                        {!isEn && (
+                                                <div class="footer-section footer-community">
+                                                        <h4>Israel Community</h4>
+                                                        <ul>
+                                                                <li><a href="/israel-community">Israel Community</a></li>
+                                                                <li><a href="/mitglied-werden">Mitglied werden</a></li>
+                                                                <li><a href="https://www.facebook.com/bifode/" target="_blank" rel="noopener noreferrer">Facebook-Seite</a></li>
+                                                                <li><a href="https://www.facebook.com/groups/israel.hub.deutschland" target="_blank" rel="noopener noreferrer">Facebook-Gruppe Israel Hub</a></li>
+                                                                <li><span class="footer-todo">Telegram-Kanal (Link folgt)</span></li>
+                                                        </ul>
+                                                </div>
+                                        )}
+
                                         <div class="footer-section footer-legal">
                                                 <h4>{isEn ? 'Legal' : 'Rechtliches'}</h4>
                                                 <ul>
@@ -265,6 +281,15 @@ const orgJsonLd = JSON.stringify({
                                                 </ul>
                                         </div>
                                 </div>
+
+                                {!isEn && (
+                                        <div class="container footer-legal-note">
+                                                <p>
+                                                        Hinweis: Unsere Angebote dienen der Bildung, Orientierung und allgemeinen Information.
+                                                        Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung. Bei Bedarf verweisen wir auf zuständige Stellen oder qualifizierte Fachpersonen.
+                                                </p>
+                                        </div>
+                                )}
 
                                 <div class="footer-bottom">
                                         <div class="container">
@@ -676,8 +701,26 @@ const orgJsonLd = JSON.stringify({
 
         .footer-grid {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(5, 1fr);
                 gap: 2rem;
+        }
+
+        .footer-todo {
+                color: #94a3b8;
+                font-size: 0.9rem;
+        }
+
+        .footer-legal-note {
+                margin-top: 1.5rem;
+                padding-top: 1.25rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-legal-note p {
+                margin: 0;
+                font-size: 0.85rem;
+                line-height: 1.55;
+                color: #94a3b8;
         }
 
         .footer-logo {
@@ -869,9 +912,13 @@ const orgJsonLd = JSON.stringify({
                         display: none;
                 }
 
-                .footer-contact {
+                .footer-community {
                         grid-column: 1;
                         grid-row: 2;
+                }
+
+                .footer-contact {
+                        display: none;
                 }
 
                 .footer-legal {

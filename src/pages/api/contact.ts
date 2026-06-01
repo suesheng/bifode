@@ -122,13 +122,35 @@ export const POST: APIRoute = async ({ request }) => {
     const t = createMessages(locale);
     const clientIp = getClientIp(request);
 
-    const name = String(body?.name || '').trim();
+    const formSource = String(body?.formSource || '').trim();
+    const isIsraelCommunity = formSource === 'israel_community';
+
+    let name = String(body?.name || '').trim();
+    const firstName = String(body?.firstName || '').trim();
+    const lastName = String(body?.lastName || '').trim();
+    if (!name && firstName && lastName) {
+      name = `${firstName} ${lastName}`.trim();
+    }
     const organization = String(body?.organization || '').trim();
     const email = String(body?.email || '').trim();
-    const subject = String(body?.subject || '').trim();
+    let subject = String(body?.subject || '').trim();
     const message = String(body?.message || '').trim();
     const privacyAccepted = Boolean(body?.privacyAccepted);
     const website = String(body?.website || '').trim(); // honeypot
+
+    const phone = String(body?.phone || '').trim();
+    const city = String(body?.city || '').trim();
+    const interest = String(body?.interest || '').trim();
+    const offers = Array.isArray(body?.offers)
+      ? body.offers.map((o) => String(o).trim()).filter(Boolean)
+      : [];
+    const newsletter = Boolean(body?.newsletter);
+    const utmSource = String(body?.utm_source || '').trim();
+    const utmMedium = String(body?.utm_medium || '').trim();
+    const utmCampaign = String(body?.utm_campaign || '').trim();
+    const utmContent = String(body?.utm_content || '').trim();
+    const utmTerm = String(body?.utm_term || '').trim();
+    const pageSource = String(body?.page_source || '').trim();
 
     if (website) {
       return json({ ok: true, message: t.received });
@@ -138,7 +160,14 @@ export const POST: APIRoute = async ({ request }) => {
       return json({ ok: false, message: t.rateLimited }, 429);
     }
 
-    if (!name || !email || !subject || !message || !privacyAccepted) {
+    if (isIsraelCommunity) {
+      if (!firstName || !lastName || !email || !message || !privacyAccepted || !interest) {
+        return json({ ok: false, message: t.required }, 400);
+      }
+      if (!subject) {
+        subject = `[Israel Community] ${interest}`;
+      }
+    } else if (!name || !email || !subject || !message || !privacyAccepted) {
       return json({ ok: false, message: t.required }, 400);
     }
 
@@ -170,24 +199,64 @@ export const POST: APIRoute = async ({ request }) => {
     const safe = (value: string) => value.replace(/[<>&]/g, '');
     const sentAt = new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
 
+    const mailPrefix = isIsraelCommunity ? '[Israel Community]' : t.mailPrefix;
+
+    const israelExtraLines = isIsraelCommunity
+      ? [
+          `Vorname: ${firstName}`,
+          `Nachname: ${lastName}`,
+          `Telefon/WhatsApp: ${phone || '-'}`,
+          `Stadt: ${city || '-'}`,
+          `Interessensbereich: ${interest}`,
+          `Angebote: ${offers.length ? offers.join(', ') : '-'}`,
+          `Newsletter: ${newsletter ? 'ja' : 'nein'}`,
+          ...(utmSource || utmMedium || utmCampaign
+            ? [
+                '',
+                'UTM (intern):',
+                `utm_source: ${utmSource || '-'}`,
+                `utm_medium: ${utmMedium || '-'}`,
+                `utm_campaign: ${utmCampaign || '-'}`,
+                `utm_content: ${utmContent || '-'}`,
+                `utm_term: ${utmTerm || '-'}`,
+                `page_source: ${pageSource || '-'}`
+              ]
+            : [])
+        ]
+      : [];
+
+    const textBody = [
+      `Name: ${name}`,
+      ...(isIsraelCommunity ? israelExtraLines : [`${t.organization}: ${organization || '-'}`]),
+      `${t.email}: ${email}`,
+      `${t.time}: ${sentAt}`,
+      '',
+      `${t.message}:`,
+      message
+    ].join('\n');
+
+    const htmlExtra = isIsraelCommunity
+      ? `
+        <p><strong>Vorname:</strong> ${safe(firstName)}</p>
+        <p><strong>Nachname:</strong> ${safe(lastName)}</p>
+        <p><strong>Telefon/WhatsApp:</strong> ${safe(phone || '-')}</p>
+        <p><strong>Stadt:</strong> ${safe(city || '-')}</p>
+        <p><strong>Interessensbereich:</strong> ${safe(interest)}</p>
+        <p><strong>Angebote:</strong> ${safe(offers.length ? offers.join(', ') : '-')}</p>
+        <p><strong>Newsletter:</strong> ${newsletter ? 'ja' : 'nein'}</p>
+      `
+      : `<p><strong>${t.organization}:</strong> ${safe(organization || '-')}</p>`;
+
     await transporter.sendMail({
       from: `"BiFoDe Kontaktformular" <${fromEmail}>`,
       to: toEmail,
       replyTo: email,
-      subject: `${t.mailPrefix} ${subject}`,
-      text: [
-        `Name: ${name}`,
-        `${t.organization}: ${organization || '-'}`,
-        `${t.email}: ${email}`,
-        `${t.time}: ${sentAt}`,
-        '',
-        `${t.message}:`,
-        message
-      ].join('\n'),
+      subject: `${mailPrefix} ${subject}`,
+      text: textBody,
       html: `
-        <h2>${t.heading}</h2>
+        <h2>${isIsraelCommunity ? 'Neue Anfrage — Israel Community Deutschland' : t.heading}</h2>
         <p><strong>Name:</strong> ${safe(name)}</p>
-        <p><strong>${t.organization}:</strong> ${safe(organization || '-')}</p>
+        ${htmlExtra}
         <p><strong>${t.email}:</strong> ${safe(email)}</p>
         <p><strong>${t.time}:</strong> ${safe(sentAt)}</p>
         <p><strong>${t.subject}:</strong> ${safe(subject)}</p>
