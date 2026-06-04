@@ -1,13 +1,14 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import IsraelCommunityTracking from '../components/IsraelCommunityTracking.astro';
+import { FB_GROUP_ULPAN_NEXT, FB_PAGE_BIFODE } from '../lib/communityLinks';
 
-const pageTitle = 'Israel Community Deutschland | Ivrit, Ulpan, Aliyah & Bildung';
+const pageTitle = 'Community-Projekt | Sprache, Orientierung & Austausch | BiFoDe e.V.';
 const pageDescription =
-  'Israel Community Deutschland ist ein Bildungs- und Austauschprojekt von BiFoDe e.V. in Zusammenarbeit mit der WZO. Informationen zu Ivrit, Ulpan, Aliyah, Beruf, Studium und Leben in Israel.';
+  'Bildungs- und Community-Projekt von BiFoDe e.V.: Hebräisch und Ulpan, Orientierung zu Auslandsschritten, Beruf, Studium und Alltag — in Kooperation mit internationalen Partnern.';
 
-const FB_PAGE = 'https://www.facebook.com/bifode/';
-const FB_GROUP = 'https://www.facebook.com/groups/israel.hub.deutschland';
+const FB_PAGE = FB_PAGE_BIFODE;
+const FB_GROUP = FB_GROUP_ULPAN_NEXT;
 
 function envUrl(key: string): string | null {
   const raw = import.meta.env[key];
@@ -19,19 +20,19 @@ function envUrl(key: string): string | null {
 
 const telegramUrl = envUrl('PUBLIC_TELEGRAM_ISRAEL_HUB_URL');
 const donationUrl = envUrl('PUBLIC_DONATION_URL');
-const spendenHref = donationUrl || '#kontakt';
+const spendenHref = donationUrl || '/spenden';
 const spendenIsDonationLink = Boolean(donationUrl);
 
 const interestOptions = [
-  'Ulpan / Ivrit',
-  'Aliyah / Repatriierung',
+  'Hebräisch / Ulpan',
+  'Umzug / Orientierung im Ausland',
   'Dokumente & Konsulat',
   'Berufsanerkennung',
   'Ärztinnen & Ärzte',
   'Studium / Ausbildung',
   'Immobilien / Wohnen',
   'Banken / Steuern',
-  'Leben in Israel',
+  'Alltag & Leben im Ausland',
   'Veranstaltungen / Community',
   'Mitgliedschaft bei BiFoDe e.V.',
   'Spende / Unterstützung',
@@ -39,7 +40,7 @@ const interestOptions = [
 ];
 
 const offerOptions = [
-  'Ulpan / Ivrit-Kurse',
+  'Hebräisch- / Ulpan-Kurse',
   'Online-Kurse',
   'Präsenzkurse',
   'Lernmaterialien',
@@ -48,24 +49,24 @@ const offerOptions = [
   'Community-Treffen',
   'Feiertage & Kultur',
   'Merch / Vereinsmaterialien',
-  'Aliyah-Informationen',
+  'Orientierung Umzug / Ausland',
   'Beruf & Anerkennung',
   'Spenden / Unterstützung'
 ];
 
 const themeTags = [
-  'Ivrit & Ulpan',
-  'Aliyah & erste Schritte',
+  'Hebräisch & Sprachkurse',
+  'Erste Schritte im Ausland',
   'Konsulate & Dokumente',
-  'Berufsanerkennung',
-  'Ärztinnen & Ärzte in Israel',
+  'Beruf & Anerkennung',
+  'Medizin & Gesundheitsberufe',
   'Studium & Ausbildung',
-  'Schule & Kinder',
-  'Immobilien & Wohnen',
-  'Bankkonto & Steuern',
+  'Schule & Familie',
+  'Wohnen & Immobilien',
+  'Finanzen & Steuern',
   'Gesundheitssystem',
-  'Jobs & Arbeitsmarkt',
-  'Alltag, Kultur & Integration'
+  'Arbeit & Netzwerke',
+  'Kultur & Community'
 ];
 
 const webPageJsonLd = JSON.stringify({
@@ -78,7 +79,7 @@ const webPageJsonLd = JSON.stringify({
   isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
   about: {
     '@type': 'EducationalOrganization',
-    name: 'Israel Community Deutschland',
+    name: 'Community-Projekt BiFoDe e.V.',
     parentOrganization: { '@type': 'Organization', name: 'BiFoDe e.V.' }
   }
 });
@@ -93,11 +94,11 @@ const webPageJsonLd = JSON.stringify({
     <section class="ic-hero" id="top" aria-labelledby="ic-hero-title">
       <div class="ic-hero-bg" aria-hidden="true"></div>
       <div class="container ic-hero-inner">
-        <p class="ic-eyebrow">Ein Bildungs- und Austauschprojekt von BiFoDe e.V. in enger Zusammenarbeit mit der World Zionist Organization.</p>
-        <h1 id="ic-hero-title">Israel Community Deutschland</h1>
-        <p class="ic-hero-sub">Ivrit lernen. Israel verstehen. Zukunft planen.</p>
+        <p class="ic-eyebrow">BiFoDe e.V. · Bildungs- und Community-Projekt in NRW</p>
+        <h1 id="ic-hero-title">Sprache lernen. Orientierung finden. Gemeinschaft erleben.</h1>
+        <p class="ic-hero-sub">Israel Community Deutschland — ein Angebot von BiFoDe e.V.</p>
         <p class="ic-lead">
-          Israel Community Deutschland ist ein Bildungs- und Austauschprojekt von BiFoDe e.V. in enger Zusammenarbeit mit der World Zionist Organization. Wir verbinden Menschen in Deutschland mit Bildungsangeboten, Ulpan-Formaten, Gesprächsgruppen und verlässlicher Orientierung rund um Israel, Aliyah, Studium, Beruf und Alltag — von <strong>Ulpan Deutschland</strong> bis zu Fragen zu <strong>Leben in Israel</strong> und <strong>Aliyah Deutschland</strong>.
+          Wir verbinden Menschen in Deutschland mit Bildungsformaten, Sprachkursen, Gesprächsgruppen und verlässlicher Orientierung — von Hebräisch und Ulpan bis zu Fragen zu Beruf, Studium und Alltag im Ausland. Das Projekt wird von BiFoDe e.V. umgesetzt und mit internationalen Partnern, darunter der World Zionist Organization, weiterentwickelt.
         </p>
         <div class="ic-hero-actions">
           <a href="#kontakt" class="ic-btn ic-btn-primary" data-track="contact_cta">Interesse anmelden</a>
@@ -119,20 +120,20 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="ic-ueber-title">Wer wir sind</h2>
         <p class="ic-lead">
-          BiFoDe e.V. – Bildungsforum für Demokratie und Vielfalt NRW – ist eine gemeinnützige Bildungsinitiative mit Sitz in Nordrhein-Westfalen. Unser Ziel ist es, Menschen durch Bildung, Austausch und praktische Orientierung zu stärken. Im Rahmen von Israel Community Deutschland arbeiten wir eng mit der World Zionist Organization zusammen, um Bildungsangebote, Ulpan-Formate und Informationsveranstaltungen rund um Israel zugänglich zu machen.
+          BiFoDe e.V. – Bildungsforum für Demokratie und Vielfalt NRW – ist eine gemeinnützige Bildungsinitiative mit Sitz in Nordrhein-Westfalen. Wir stärken Menschen durch Bildung, Austausch und praktische Orientierung. Das Community-Projekt bündelt Sprachangebote, Informationsformate und Vernetzung — mit Schwerpunkt auf deutsch-israelischem Austausch, ohne politische Einordnung.
         </p>
         <div class="card-grid ic-trust-grid">
           <article class="card feature-card">
             <h3>BiFoDe e.V.</h3>
-            <p>Bildung, Demokratie und Vielfalt in NRW — <strong>Bildungsverein NRW</strong> mit klarem Bildungsauftrag.</p>
+            <p>Bildung, Demokratie und Vielfalt in NRW — gemeinnütziger Verein mit klarem Bildungsauftrag.</p>
           </article>
           <article class="card feature-card">
-            <h3>In Zusammenarbeit mit der WZO</h3>
-            <p>Bildungs- und Austauschformate mit Israel-Bezug — <strong>WZO Deutschland</strong> als Partner.</p>
+            <h3>Internationale Partnerschaft</h3>
+            <p>Entwicklung von Formaten mit erfahrenen Partnerorganisationen, u. a. der World Zionist Organization.</p>
           </article>
           <article class="card feature-card">
             <h3>Online & vor Ort</h3>
-            <p>Webinare, Gesprächsgruppen und Veranstaltungen in Deutschland — <strong>jüdische Bildung Deutschland</strong> mit Praxisbezug.</p>
+            <p>Webinare, Gesprächsgruppen und Veranstaltungen in Deutschland — niederschwellig und praxisnah.</p>
           </article>
         </div>
       </div>
@@ -143,7 +144,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="ic-community-title">Bleib mit uns verbunden</h2>
         <p class="ic-lead">
-          Folge unseren Community-Kanälen und erhalte aktuelle Informationen zu Ulpan-Kursen, Ivrit-Angeboten, Veranstaltungen, Webinaren und Austauschformaten rund um Israel, jüdisches Leben und Aliyah — u.&nbsp;a. in der <strong>Israel Hub Deutschland</strong> Facebook-Gruppe.
+          Folge unseren Kanälen für Kursankündigungen, Veranstaltungen, Webinare und Austausch — in der Facebook-Gruppe der Community und auf den offiziellen BiFoDe-Kanälen.
         </p>
         <div class="card-grid ic-community-grid">
           <article class="card feature-card">
@@ -161,8 +162,8 @@ const webPageJsonLd = JSON.stringify({
             </a>
           </article>
           <article class="card feature-card">
-            <h3>Facebook-Gruppe Israel Hub Deutschland</h3>
-            <p>Austausch, Fragen, Community und Diskussionen rund um Ivrit, Israel, Aliyah und jüdisches Leben in Deutschland.</p>
+            <h3>Facebook-Gruppe der Community</h3>
+            <p>Austausch, Fragen und Diskussionen zu Sprache, Orientierung, Alltag und persönlichen Erfahrungen — offen und respektvoll.</p>
             <a
               href={FB_GROUP}
               class="ic-btn ic-btn-primary ic-card-btn"
@@ -175,7 +176,7 @@ const webPageJsonLd = JSON.stringify({
             </a>
           </article>
           <article class="card feature-card">
-            <h3>Telegram-Kanal Israel Hub Deutschland</h3>
+            <h3>Telegram-Kanal</h3>
             <p>Schnelle Updates, Kursankündigungen, Termine und Hinweise zu neuen Veranstaltungen.</p>
             {telegramUrl ? (
               <a
@@ -202,28 +203,28 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="ic-angebote-title">Was wir anbieten</h2>
         <div class="card-grid">
           <article class="card feature-card">
-            <h3>Ulpan & Ivrit</h3>
-            <p>Online- und Präsenzformate zum <strong>Hebräisch lernen</strong> — von den ersten Schritten bis zu fortgeschrittenen Gesprächsgruppen. Ideal für alle, die <strong>Ivrit lernen Deutschland</strong> ernsthaft angehen möchten.</p>
+            <h3>Hebräisch & Ulpan</h3>
+            <p>Online- und Präsenzformate zum Sprachenlernen — von den ersten Schritten bis zu fortgeschrittenen Gesprächsgruppen.</p>
           </article>
           <article class="card feature-card">
             <h3>Gesprächs- und Diskussionsclubs</h3>
-            <p>Regelmäßige Treffen zu Sprache, Kultur, Gesellschaft, Alltag und jüdischem Leben in Israel und Deutschland.</p>
+            <p>Regelmäßige Treffen zu Sprache, Kultur, Gesellschaft und Alltag — in Deutschland und im Austausch mit Erfahrungen aus dem Ausland.</p>
           </article>
           <article class="card feature-card">
-            <h3>Orientierung rund um Aliyah</h3>
-            <p>Informationsangebote zu ersten Schritten, Unterlagen, Konsulaten und relevanten Ansprechpartnern — <strong>Repatriierung nach Israel</strong> verständlich einordnen.</p>
+            <h3>Orientierung bei Umzug & Ausland</h3>
+            <p>Informationsangebote zu ersten Schritten, Unterlagen, Konsulaten und Ansprechpartnern — persönliche Wege verständlich einordnen.</p>
           </article>
           <article class="card feature-card">
             <h3>Beruf & Anerkennung</h3>
-            <p>Themenabende für Fachkräfte, zum Beispiel <strong>Ärzte in Israel</strong>, Pflegekräfte, Ingenieurinnen und Ingenieure, Lehrkräfte und andere Berufsgruppen — <strong>Berufsanerkennung Israel</strong> im Überblick.</p>
+            <p>Themenabende für Fachkräfte — Medizin, Pflege, Technik, Bildung und weitere Berufsgruppen — mit Blick auf Anerkennung und Einstieg im Ausland.</p>
           </article>
           <article class="card feature-card">
-            <h3>Leben in Israel</h3>
-            <p>Praktische Informationen zu Wohnen, Immobilien, Banken, Steuern, Versicherungen, Bildung, Gesundheitssystem und Alltag.</p>
+            <h3>Alltag & Leben vor Ort</h3>
+            <p>Praktische Informationen zu Wohnen, Finanzen, Versicherungen, Bildung, Gesundheit und Alltag — ohne individuelle Rechts- oder Steuerberatung.</p>
           </article>
           <article class="card feature-card">
             <h3>Begegnungen mit Expertinnen und Experten</h3>
-            <p>Webinare und persönliche Treffen mit Menschen, die ihren Weg in Israel bereits erfolgreich gegangen sind.</p>
+            <p>Webinare und persönliche Treffen mit Menschen, die relevante Wege bereits erfolgreich gegangen sind.</p>
           </article>
         </div>
       </div>
@@ -235,14 +236,14 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="ic-mitglied-title">Mitgliedschaft als Zugang zu unseren Angeboten</h2>
         <p class="ic-subhead">Werde Teil von BiFoDe e.V. und nutze die Bildungs-, Sprach- und Community-Angebote des Vereins.</p>
         <p class="ic-lead">
-          Mit einer Mitgliedschaft bei BiFoDe e.V. unterstützt du unsere Bildungsarbeit und wirst Teil eines wachsenden Netzwerks für Ivrit, Israel-bezogene Bildung, Austausch und Community in Deutschland. Mitglieder erhalten Zugang zu ausgewählten Vereinsangeboten, werden frühzeitig über neue Kurse und Veranstaltungen informiert und können an internen Formaten teilnehmen — <strong>BiFoDe Mitgliedschaft</strong> als Zugang, nicht als pauschale Leistungsgarantie.
+          Mit einer Mitgliedschaft bei BiFoDe e.V. unterstützt du unsere Bildungsarbeit und wirst Teil eines Netzwerks für Sprache, Austausch und Community in Deutschland. Mitglieder erhalten Zugang zu ausgewählten Vereinsangeboten, Informationen zu Kursen und Veranstaltungen sowie Teilnahme an internen Formaten — je nach Verfügbarkeit und Projektphase.
         </p>
         <p class="ic-note"><strong>Wichtig:</strong> Die konkrete Teilnahme an Kursen und Veranstaltungen erfolgt je nach Verfügbarkeit, Projektphase und organisatorischen Rahmenbedingungen. Für einzelne Angebote können zusätzliche Teilnahmebeiträge anfallen.</p>
         <div class="card-grid ic-membership-grid">
           <article class="card feature-card"><h3>Ulpan-Kurse</h3><p>Mitglieder werden bevorzugt über neue Online- und Präsenzkurse informiert und können sich für verfügbare Plätze anmelden.</p></article>
-          <article class="card feature-card"><h3>Lernmaterialien</h3><p>Zugang zu ausgewählten Lernmaterialien, Übungsunterlagen, Links und Empfehlungen rund um Ivrit und Israel-bezogene Bildung.</p></article>
-          <article class="card feature-card"><h3>Gesprächs- und Sprachclubs</h3><p>Teilnahme an Gesprächsrunden, Ivrit-Praxisgruppen und Diskussionsformaten für Austausch und Sprachpraxis.</p></article>
-          <article class="card feature-card"><h3>Webinare & Expertenformate</h3><p>Einladungen zu Online- und Präsenzveranstaltungen mit Expertinnen und Experten zu Israel, Aliyah, Beruf, Bildung und Alltag.</p></article>
+          <article class="card feature-card"><h3>Lernmaterialien</h3><p>Zugang zu ausgewählten Lernmaterialien, Übungsunterlagen, Links und Empfehlungen rund um Sprache und Bildung.</p></article>
+          <article class="card feature-card"><h3>Gesprächs- und Sprachclubs</h3><p>Teilnahme an Gesprächsrunden, Sprachpraxisgruppen und Diskussionsformaten für Austausch.</p></article>
+          <article class="card feature-card"><h3>Webinare & Expertenformate</h3><p>Einladungen zu Online- und Präsenzveranstaltungen mit Expertinnen und Experten zu Beruf, Bildung und Alltag.</p></article>
           <article class="card feature-card"><h3>Community & Feiertage</h3><p>Gemeinsame Treffen, kulturelle Formate, Feiertage und Begegnungen innerhalb der Community.</p></article>
           <article class="card feature-card"><h3>Merch & Vereinsmaterialien</h3><p>Zugang zu ausgewählten Vereinsmaterialien und Community-Merch, sofern verfügbar und passend zum jeweiligen Projektformat.</p></article>
         </div>
@@ -256,14 +257,14 @@ const webPageJsonLd = JSON.stringify({
     <!-- 6. Zielgruppen -->
     <section class="ic-section" id="zielgruppen" aria-labelledby="ic-ziel-title">
       <div class="container ic-narrow">
-        <h2 id="ic-ziel-title">Für wen ist Israel Community Deutschland gedacht?</h2>
+        <h2 id="ic-ziel-title">Für wen ist das Angebot gedacht?</h2>
         <ul class="ic-checklist">
-          <li>Für Menschen, die Ivrit lernen möchten.</li>
-          <li>Für Familien, die Israel besser verstehen wollen.</li>
-          <li>Für Jüdinnen und Juden in Deutschland, die sich mit Israel verbunden fühlen.</li>
-          <li>Für Menschen, die Aliyah oder einen längeren Aufenthalt in Israel prüfen.</li>
-          <li>Für Fachkräfte, die wissen möchten, wie Berufsanerkennung und Einstieg in Israel funktionieren.</li>
-          <li>Für Studierende und junge Erwachsene, die Bildungs- und Zukunftswege in Israel kennenlernen möchten.</li>
+          <li>Für Menschen, die Hebräisch lernen möchten.</li>
+          <li>Für Familien, die sich mit Kultur und Alltag im Ausland vertraut machen wollen.</li>
+          <li>Für Menschen mit persönlicher oder familiärer Verbindung zur Region — unabhängig von Hintergrund oder Weltanschauung.</li>
+          <li>Für alle, die einen längeren Aufenthalt oder Umzug ins Ausland prüfen.</li>
+          <li>Für Fachkräfte mit Fragen zu Anerkennung und Berufseinstieg.</li>
+          <li>Für Studierende und junge Erwachsene, die Bildungs- und Zukunftswege kennenlernen möchten.</li>
           <li>Für alle, die Austausch, Orientierung und eine seriöse Community suchen.</li>
         </ul>
       </div>
@@ -290,7 +291,7 @@ const webPageJsonLd = JSON.stringify({
           <article class="card feature-card"><h3>Präsenztreffen</h3><p>Lokale Treffen, Gesprächsabende und Community-Events in Deutschland.</p></article>
           <article class="card feature-card"><h3>Fachgespräche</h3><p>Spezielle Sessions für Berufsgruppen – zum Beispiel Medizin, Bildung, Technik, Medien und Wirtschaft.</p></article>
           <article class="card feature-card"><h3>Erfahrungsberichte</h3><p>Menschen erzählen, wie sie ihren Weg nach Israel vorbereitet und gestaltet haben.</p></article>
-          <article class="card feature-card"><h3>Sprachpraxis</h3><p>Ivrit-Konversation, kleine Gruppen, Austausch und praktische Übungen.</p></article>
+          <article class="card feature-card"><h3>Sprachpraxis</h3><p>Hebräisch in kleinen Gruppen — Austausch und praktische Übungen.</p></article>
         </div>
       </div>
     </section>
@@ -327,7 +328,7 @@ const webPageJsonLd = JSON.stringify({
           <article class="card feature-card"><h3>Verlässliche Orientierung</h3><p>Wir helfen, Informationen zu strukturieren und die richtigen nächsten Schritte zu verstehen.</p></article>
           <article class="card feature-card"><h3>Community statt Einzelkampf</h3><p>Du triffst Menschen mit ähnlichen Fragen, Erfahrungen und Zielen.</p></article>
           <article class="card feature-card"><h3>Direkter Zugang zu Wissen</h3><p>Expertinnen, Experten und Menschen mit echter Erfahrung teilen konkrete Einblicke.</p></article>
-          <article class="card feature-card"><h3>Bildung mit Israel-Bezug</h3><p>Sprache, Kultur, Gesellschaft und praktische Lebensfragen werden miteinander verbunden.</p></article>
+          <article class="card feature-card"><h3>Bildung mit Kontext</h3><p>Sprache, Kultur, Gesellschaft und praktische Lebensfragen werden verständlich verbunden.</p></article>
         </div>
       </div>
     </section>
@@ -335,9 +336,9 @@ const webPageJsonLd = JSON.stringify({
     <!-- 11. WZO -->
     <section class="ic-section ic-section-alt" id="wzo" aria-labelledby="ic-wzo-title">
       <div class="container ic-narrow">
-        <h2 id="ic-wzo-title">In Zusammenarbeit mit der WZO</h2>
+        <h2 id="ic-wzo-title">Partner & Rahmen</h2>
         <p class="ic-lead">
-          Israel Community Deutschland entsteht im Rahmen der Bildungsarbeit von BiFoDe e.V. und in enger Zusammenarbeit mit der World Zionist Organization. Gemeinsam möchten wir Menschen in Deutschland Zugang zu hochwertigen Bildungs-, Sprach- und Informationsangeboten rund um Israel ermöglichen.
+          Das Projekt entsteht im Rahmen der Bildungsarbeit von BiFoDe e.V. und wird mit internationalen Partnern weiterentwickelt, darunter die World Zionist Organization. Gemeinsam ermöglichen wir Zugang zu Bildungs-, Sprach- und Informationsangeboten — sachlich, respektvoll und ohne politische Einordnung durch BiFoDe.
         </p>
         <p class="ic-note">Die Angebote dienen der Bildung, Orientierung und allgemeinen Information. Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung.</p>
       </div>
@@ -348,7 +349,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container ic-narrow">
         <h2 id="ic-mw-title">Mitglied bei BiFoDe e.V. werden</h2>
         <p class="ic-lead">
-          Du möchtest unsere Bildungsarbeit langfristig unterstützen und Zugang zu unseren Vereinsangeboten erhalten? Als Mitglied wirst du Teil eines Netzwerks für Ivrit, Israel-bezogene Bildung, Austausch, Veranstaltungen und Community in Deutschland.
+          Du möchtest unsere Bildungsarbeit langfristig unterstützen und Zugang zu unseren Vereinsangeboten erhalten? Als Mitglied wirst du Teil eines Netzwerks für Sprache, Austausch, Veranstaltungen und Community in Deutschland.
         </p>
         <p><strong>Als Mitglied kannst du:</strong></p>
         <ul class="ic-checklist">
@@ -378,7 +379,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container ic-narrow">
         <h2 id="ic-spenden-title">Unsere Arbeit unterstützen</h2>
         <p class="ic-lead">
-          Mit einer Spende unterstützt du Bildungsangebote, Ulpan-Formate, Informationsveranstaltungen, Community-Arbeit und Begegnungsformate zwischen Deutschland und Israel. Jeder Beitrag hilft, neue Angebote zugänglich zu machen.
+          Mit einer Spende unterstützt du Bildungsangebote, Sprachformate, Informationsveranstaltungen und Community-Arbeit. Jeder Beitrag hilft, neue Angebote zugänglich zu machen.
         </p>
         <div class="ic-hero-actions">
           <a
@@ -391,7 +392,7 @@ const webPageJsonLd = JSON.stringify({
           <a href="#kontakt" class="ic-btn ic-btn-secondary" data-track="contact_cta">Erst Kontakt aufnehmen</a>
         </div>
         {!donationUrl && (
-          <p class="ic-todo-note">{/* TODO: add donation link — PUBLIC_DONATION_URL */} Spendenlink wird ergänzt — bis dahin bitte über das Kontaktformular.</p>
+          <p class="ic-note">Online-Spenden über einen externen Anbieter folgen in Kürze — bis dahin Banküberweisung und Infos auf der <a href="/spenden">Spenden-Seite</a>.</p>
         )}
         <p class="ic-note">Spenden können – bei Vorliegen der gesetzlichen Voraussetzungen – steuerlich berücksichtigt werden. Sobald die entsprechenden Voraussetzungen erfüllt sind, stellt BiFoDe e.V. Zuwendungsbestätigungen aus.</p>
         <p class="ic-small">Bitte beachte: Eine steuerliche Absetzbarkeit darf erst kommuniziert werden, wenn der gemeinnützige Status und die formalen Voraussetzungen tatsächlich bestätigt sind.</p>
@@ -400,10 +401,10 @@ const webPageJsonLd = JSON.stringify({
 
     <!-- 14. Kontaktformular -->
     <section class="ic-section" id="kontakt" aria-labelledby="ic-kontakt-title">
-      <div class="container">
+      <div class="container ic-kontakt-stack">
         <h2 id="ic-kontakt-title">Stell deine Frage direkt</h2>
-        <p class="ic-lead">
-          Du hast eine konkrete Frage zu Ivrit, Aliyah, Dokumenten, Berufsanerkennung, Studium, Immobilien, Banken, Steuern oder zum Leben in Israel? Schreib uns. Wir ordnen dein Anliegen ein und verbinden dich – wenn möglich – mit passenden Informationen, Veranstaltungen oder Ansprechpartnern.
+        <p class="ic-lead ic-lead-centered">
+          Du hast eine Frage zu Sprache, einem möglichen Umzug, Dokumenten, Beruf, Studium, Wohnen, Finanzen oder Alltag im Ausland? Schreib uns. Wir ordnen dein Anliegen ein und verbinden dich – wenn möglich – mit passenden Informationen, Veranstaltungen oder Ansprechpartnern.
         </p>
         <div class="card contact-form-card ic-form-card">
           <form class="contact-form" id="ic-contact-form" novalidate>
@@ -488,9 +489,9 @@ const webPageJsonLd = JSON.stringify({
     <!-- 15. Final CTA -->
     <section class="ic-section ic-final-cta" aria-labelledby="ic-final-title">
       <div class="container ic-narrow ic-final-inner">
-        <h2 id="ic-final-title">Du möchtest Ivrit lernen, Israel besser verstehen oder Teil unserer Community werden?</h2>
+        <h2 id="ic-final-title">Sprache, Orientierung oder Community — worum geht es bei dir?</h2>
         <p class="ic-lead">
-          Melde dich unverbindlich an, stelle deine Frage oder werde Mitglied bei BiFoDe e.V. Wir informieren dich über passende Kurse, Gesprächsformate, Veranstaltungen und Angebote.
+          Melde dich unverbindlich an, stelle deine Frage oder werde Mitglied bei BiFoDe e.V. Wir informieren dich über passende Kurse, Gesprächsformate und Veranstaltungen.
         </p>
         <div class="ic-hero-actions">
           <a href="#kontakt" class="ic-btn ic-btn-primary" data-track="contact_cta">Frage stellen</a>
@@ -516,10 +517,10 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .ic-page {
-    --ic-navy: #0c1e34;
-    --ic-blue: #163b63;
-    --ic-light: #d6e1fc;
-    --ic-bg: #f4f7fb;
+    --ic-navy: #111827;
+    --ic-blue: #1e3a8a;
+    --ic-light: #e5e7eb;
+    --ic-bg: #f9fafb;
     --ic-white: #ffffff;
     background: var(--ic-bg);
   }
@@ -528,7 +529,7 @@ const webPageJsonLd = JSON.stringify({
     position: relative;
     overflow: hidden;
     padding: 3.5rem 0 3rem;
-    background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 45%, var(--ic-white) 100%);
+    background: linear-gradient(165deg, #f1f5f9 0%, #f9fafb 48%, var(--ic-white) 100%);
   }
 
   .ic-hero-bg {
@@ -536,10 +537,9 @@ const webPageJsonLd = JSON.stringify({
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 12% 25%, rgba(22, 59, 99, 0.12), transparent 45%),
-      radial-gradient(circle at 88% 20%, rgba(214, 225, 252, 0.9), transparent 40%),
-      linear-gradient(120deg, transparent 48%, rgba(12, 30, 52, 0.04) 48%, rgba(12, 30, 52, 0.04) 52%, transparent 52%);
-    opacity: 0.85;
+      radial-gradient(circle at 18% 22%, rgba(30, 58, 138, 0.08), transparent 42%),
+      radial-gradient(circle at 82% 18%, rgba(148, 163, 184, 0.2), transparent 38%);
+    opacity: 0.9;
   }
 
   .ic-hero-inner {
@@ -564,10 +564,11 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .ic-hero-sub {
-    font-size: 1.35rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    color: var(--ic-blue);
+    color: #475569;
     margin: 0 0 1.25rem;
+    letter-spacing: 0.01em;
   }
 
   .ic-section {
@@ -603,8 +604,8 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .ic-note {
-    background: #eef3fc;
-    border-left: 4px solid var(--ic-blue);
+    background: #f1f5f9;
+    border-left: 4px solid #94a3b8;
     padding: 0.85rem 1rem;
     border-radius: 0 10px 10px 0;
     color: #1e293b;
@@ -720,13 +721,13 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .ic-tag-grid li {
-    background: var(--ic-white);
-    border: 1px solid #dbe5f1;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
     padding: 0.45rem 0.85rem;
     border-radius: 999px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--ic-blue);
+    color: #334155;
   }
 
   .ic-section-alt .ic-tag-grid li {
@@ -736,8 +737,8 @@ const webPageJsonLd = JSON.stringify({
   .ic-highlight {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: linear-gradient(135deg, #eef4ff, #fff);
-    border: 1px solid #c7d9f5;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: var(--radius, 18px);
   }
 
@@ -759,10 +760,29 @@ const webPageJsonLd = JSON.stringify({
     font-size: 1.1rem;
   }
 
-  .ic-form-card {
+  .ic-kontakt-stack {
+    width: 100%;
     max-width: 640px;
-    margin-top: 1.5rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ic-kontakt-stack h2 {
+    margin-top: 0;
+  }
+
+  .ic-lead-centered {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 52ch;
+  }
+
+  .ic-form-card {
+    width: 100%;
+    max-width: none;
+    margin: 1.5rem auto 0;
     padding: 1.75rem !important;
+    text-align: left;
     background: var(--ic-white) !important;
     border: 1px solid #dbe5f1 !important;
     border-radius: var(--radius, 18px) !important;
@@ -875,15 +895,21 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .ic-privacy-box {
-    max-width: 640px;
-    margin-top: 1.5rem;
+    width: 100%;
+    max-width: none;
+    margin: 1.5rem auto 0;
     font-size: 0.9rem;
     color: #475569;
     line-height: 1.6;
+    text-align: left;
+  }
+
+  .ic-kontakt-stack .form-note {
+    text-align: center;
   }
 
   .ic-final-cta {
-    background: linear-gradient(180deg, var(--ic-navy) 0%, #0f2e50 100%);
+    background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
     color: #e2e8f0;
     padding: 3.5rem 0;
   }

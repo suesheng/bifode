@@ -1,28 +1,116 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import Hero from '../../../components/Hero.astro';
+import { PROJECT_CARDS } from '../../../lib/projectCards';
+import { PILOT_LANDING_PATH } from '../../../lib/projectCards';
+import { ULPAN_LANDING_PATH } from '../../../lib/communityLinks';
 ---
 
-<MainLayout lang="en" title="Projects" description="Our projects combine education, prevention, and practical guidance for schools and partners in NRW.">
-  <Hero lang="en" title="Projects" subtitle="Our projects combine education, prevention, and practical guidance for schools and partners in NRW." />
+<MainLayout
+  lang="en"
+  title="Projects"
+  description="NRW pilot project, Ulpan Next, and further education programmes by BiFoDe e.V."
+>
+  <Hero
+    lang="en"
+    title="Projects"
+    subtitle="Our projects combine education, prevention, and practical guidance for schools and partners in NRW."
+  />
 
-  <section class="container">
-    <div class="card-grid">
-      <div class="card project-card">
-        <h3>School Programme NRW</h3>
-        <p class="card-text">Workshops and project days on antisemitism prevention, prejudice, media literacy, and democratic cohesion.</p>
-        <a href="/en/schools" class="card-link">Learn more →</a>
-      </div>
-      <div class="card project-card">
-        <h3>Digital Education Modules</h3>
-        <p class="card-text">Interactive learning content for schools and educational institutions.</p>
-        <a href="/en/schools" class="card-link">Learn more →</a>
-      </div>
-      <div class="card project-card">
-        <h3>Interactive Displays / Kiosk</h3>
-        <p class="card-text">Digital information and learning stations for schools and public spaces.</p>
-        <a href="/en/schools" class="card-link">Learn more →</a>
-      </div>
+  <section class="container projects-overview">
+    <div class="section-header">
+      <h2>Project overview</h2>
+    </div>
+    <p class="lead">Choose a project — each programme has its own page with details and next steps.</p>
+
+    <div class="card-grid projects-grid">
+      {
+        PROJECT_CARDS.map((project) => {
+          const href =
+            project.id === 'ulpan-next'
+              ? ULPAN_LANDING_PATH
+              : project.id === 'pilotprojekt-nrw'
+                ? PILOT_LANDING_PATH
+                : project.href;
+
+          return project.status === 'soon' ? (
+            <article class="card project-card project-card--soon">
+              <h3>{project.titleEn}</h3>
+              <p>{project.descriptionEn}</p>
+              <span class="badge">Coming soon</span>
+            </article>
+          ) : (
+            <a class="card project-card project-card--link" href={href}>
+              <h3>{project.titleEn}</h3>
+              <p>{project.descriptionEn}</p>
+              <span class="project-card-cta">View project →</span>
+            </a>
+          );
+        })
+      }
     </div>
   </section>
 </MainLayout>
+
+<style>
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .projects-grid {
+    margin-top: 1.5rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .project-card p {
+    margin: 0;
+    flex: 1;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  .project-card--link:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px var(--accent-tint);
+  }
+
+  .project-card-cta {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .project-card--soon {
+    opacity: 0.92;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #1e3a8a;
+    font-size: 0.8rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+</style>

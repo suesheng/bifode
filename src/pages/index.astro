@@ -4,7 +4,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 import TrustSection from '../components/TrustSection.astro';
 import StatsBar from '../components/StatsBar.astro';
-import NewsTeaser from '../components/NewsTeaser.astro';
+import CommunityChannels from '../components/CommunityChannels.astro';
+import { ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { PILOT_LANDING_PATH } from '../lib/projectCards';
 
 const orgHomeJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -37,7 +39,7 @@ const orgHomeJsonLd = JSON.stringify({
     centered={true}
     title="Bildung stärken. Vorurteilen entgegentreten. Demokratie leben."
     subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um."
-    tertiary={{ href: '/termine', label: 'Nächste Termine →' }}
+    tertiary={{ href: ULPAN_LANDING_PATH, label: 'Ulpan Next →' }}
   />
 
   <StatsBar />
@@ -151,7 +153,7 @@ const orgHomeJsonLd = JSON.stringify({
     </div>
   </section>
 
-  <NewsTeaser limit={2} />
+  <CommunityChannels lang="de" />
 
   <section class="container">
     <div class="section-header">
@@ -162,7 +164,7 @@ const orgHomeJsonLd = JSON.stringify({
       mit Schulen und Partnern weitergeführt werden.
     </p>
     <p class="pilot-cta-wrap">
-      <a href="/projekte" class="btn-outline">Unsere Projekte im Überblick →</a>
+      <a href={PILOT_LANDING_PATH} class="btn-outline">Zum Pilotprojekt →</a>
     </p>
   </section>
 </MainLayout>

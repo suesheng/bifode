@@ -16,4 +16,4 @@ In einer Gesamtschule in Nordrhein-Westfalen haben wir einen ganztägigen Worksh
 
 ## Ausblick
 
-Die Ergebnisse fließen direkt in die Weiterentwicklung unserer Module für das Pilotprojekt NRW ein. Weitere Termine finden Sie unter [Termine](/termine).
+Die Ergebnisse fließen direkt in die Weiterentwicklung unserer Module für das Pilotprojekt NRW ein. Weitere Termine und Neuigkeiten finden Sie beim Bildungsprojekt [Ulpan Next](/projekte/ulpan-next) und auf der [Facebook-Seite von BiFoDe](https://www.facebook.com/bifode).

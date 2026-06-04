@@ -1,6 +1,7 @@
 ---
 title: "CV Denis Vilensky"
 description: "Полное описание проекта или резюме"
+draft: true
 ---
 # Dipl.-Ing. Denis Vilensky
 

@@ -2,6 +2,8 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
 import TrustSection from '../../components/TrustSection.astro';
+import CommunityChannels from '../../components/CommunityChannels.astro';
+import { ULPAN_LANDING_PATH } from '../../lib/communityLinks';
 ---
 
 <MainLayout lang="en" title="Home" description="BiFoDe e.V. develops education and prevention programmes for schools and partners in North Rhine-Westphalia.">
@@ -10,7 +12,7 @@ import TrustSection from '../../components/TrustSection.astro';
     centered={true}
     title="Strengthen education. Challenge prejudice. Put democracy into practice."
     subtitle="BiFoDe e.V. delivers education and prevention programmes across North Rhine-Westphalia."
-    tertiary={{ href: '/en/events', label: 'Upcoming events →' }}
+    tertiary={{ href: ULPAN_LANDING_PATH, label: 'Ulpan Next →' }}
   />
 
   <TrustSection
@@ -84,6 +86,8 @@ import TrustSection from '../../components/TrustSection.astro';
       </div>
     </div>
   </section>
+
+  <CommunityChannels lang="en" />
 
   <section class="container">
     <div class="section-header">

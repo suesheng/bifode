@@ -60,7 +60,7 @@ vercel.json        # Host redirects (bifode.de → www.bifode.org)
 
 ## Internationalization
 
-- **German** pages live at root paths (`/`, `/kontakt`, `/aktuelles`, …).
+- **German** pages live at root paths (`/`, `/kontakt`, `/israel-community`, …).
 - **English** pages live under `/en/` (`/en`, `/en/contact`, …).
 - When adding or changing copy, update **both** locales if the page has a pair; keep tone appropriate for a nonprofit (formal, clear).
 - Do not mix languages on a single page. Use `lang` prop on `MainLayout` (`de` | `en`).
@@ -82,7 +82,7 @@ List pages filter drafts where applicable. Event ICS routes: `src/pages/events.i
 Never commit `.env` or secrets. See `.env.example`:
 
 - **SMTP_***, **CONTACT_FROM_EMAIL**, **CONTACT_TO_EMAIL** — contact API
-- **PUBLIC_JOTFORM_ANMELDUNG_URL** — Jotform embed on `/anmeldung` and `/en/registration`
+- **PUBLIC_JOTFORM_ANMELDUNG_URL** — event registration (Jotform); `/anmeldung` and `/en/registration` redirect
 
 ## Coding conventions
 

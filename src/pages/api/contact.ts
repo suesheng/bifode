@@ -124,6 +124,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const formSource = String(body?.formSource || '').trim();
     const isIsraelCommunity = formSource === 'israel_community';
+    const isMembership = formSource === 'mitgliedschaft';
 
     let name = String(body?.name || '').trim();
     const firstName = String(body?.firstName || '').trim();
@@ -139,7 +140,15 @@ export const POST: APIRoute = async ({ request }) => {
     const website = String(body?.website || '').trim(); // honeypot
 
     const phone = String(body?.phone || '').trim();
+    const street = String(body?.street || '').trim();
+    const postalCode = String(body?.postalCode || '').trim();
     const city = String(body?.city || '').trim();
+    const membershipType = String(body?.membershipType || '').trim();
+    const billing = String(body?.billing || '').trim();
+    const isStudent = Boolean(body?.isStudent);
+    const interests = Array.isArray(body?.interests)
+      ? body.interests.map((o) => String(o).trim()).filter(Boolean)
+      : [];
     const interest = String(body?.interest || '').trim();
     const offers = Array.isArray(body?.offers)
       ? body.offers.map((o) => String(o).trim()).filter(Boolean)
@@ -166,6 +175,22 @@ export const POST: APIRoute = async ({ request }) => {
       }
       if (!subject) {
         subject = `[Israel Community] ${interest}`;
+      }
+    } else if (isMembership) {
+      if (
+        !firstName ||
+        !lastName ||
+        !email ||
+        !privacyAccepted ||
+        !membershipType ||
+        !billing ||
+        !postalCode ||
+        !city
+      ) {
+        return json({ ok: false, message: t.required }, 400);
+      }
+      if (!subject) {
+        subject = `[Mitgliedschaft] ${membershipType} · ${billing}${isStudent ? ' · mit Studierenden-Ermäßigung' : ''}`;
       }
     } else if (!name || !email || !subject || !message || !privacyAccepted) {
       return json({ ok: false, message: t.required }, 400);
@@ -199,7 +224,28 @@ export const POST: APIRoute = async ({ request }) => {
     const safe = (value: string) => value.replace(/[<>&]/g, '');
     const sentAt = new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
 
-    const mailPrefix = isIsraelCommunity ? '[Israel Community]' : t.mailPrefix;
+    const mailPrefix = isIsraelCommunity
+      ? '[Israel Community]'
+      : isMembership
+        ? '[Mitgliedschaft]'
+        : t.mailPrefix;
+
+    const membershipExtraLines = isMembership
+      ? [
+          `Vorname: ${firstName}`,
+          `Nachname: ${lastName}`,
+          `Telefon: ${phone || '-'}`,
+          `Straße: ${street || '-'}`,
+          `PLZ: ${postalCode}`,
+          `Ort: ${city}`,
+          `Mitgliedschaftsart: ${membershipType}`,
+          `Zahlungsweise: ${billing}`,
+          `Studierenden-Ermäßigung: ${isStudent ? 'ja (Nachweis folgt)' : 'nein'}`,
+          `Interessen: ${interests.length ? interests.join(', ') : '-'}`,
+          `Newsletter: ${newsletter ? 'ja' : 'nein'}`,
+          `Quelle: ${pageSource || '-'}`
+        ]
+      : [];
 
     const israelExtraLines = isIsraelCommunity
       ? [
@@ -227,12 +273,16 @@ export const POST: APIRoute = async ({ request }) => {
 
     const textBody = [
       `Name: ${name}`,
-      ...(isIsraelCommunity ? israelExtraLines : [`${t.organization}: ${organization || '-'}`]),
+      ...(isIsraelCommunity
+        ? israelExtraLines
+        : isMembership
+          ? membershipExtraLines
+          : [`${t.organization}: ${organization || '-'}`]),
       `${t.email}: ${email}`,
       `${t.time}: ${sentAt}`,
       '',
       `${t.message}:`,
-      message
+      message || '-'
     ].join('\n');
 
     const htmlExtra = isIsraelCommunity
@@ -245,7 +295,25 @@ export const POST: APIRoute = async ({ request }) => {
         <p><strong>Angebote:</strong> ${safe(offers.length ? offers.join(', ') : '-')}</p>
         <p><strong>Newsletter:</strong> ${newsletter ? 'ja' : 'nein'}</p>
       `
-      : `<p><strong>${t.organization}:</strong> ${safe(organization || '-')}</p>`;
+      : isMembership
+        ? `
+        <p><strong>Vorname:</strong> ${safe(firstName)}</p>
+        <p><strong>Nachname:</strong> ${safe(lastName)}</p>
+        <p><strong>Telefon:</strong> ${safe(phone || '-')}</p>
+        <p><strong>Adresse:</strong> ${safe(street || '-')}, ${safe(postalCode)} ${safe(city)}</p>
+        <p><strong>Mitgliedschaftsart:</strong> ${safe(membershipType)}</p>
+        <p><strong>Zahlungsweise:</strong> ${safe(billing)}</p>
+        <p><strong>Studierende (30 %):</strong> ${safe(isStudent ? 'ja (Nachweis folgt)' : 'nein')}</p>
+        <p><strong>Interessen:</strong> ${safe(interests.length ? interests.join(', ') : '-')}</p>
+        <p><strong>Newsletter:</strong> ${newsletter ? 'ja' : 'nein'}</p>
+      `
+        : `<p><strong>${t.organization}:</strong> ${safe(organization || '-')}</p>`;
+
+    const mailHeading = isIsraelCommunity
+      ? 'Neue Anfrage — Israel Community Deutschland'
+      : isMembership
+        ? 'Neue Mitgliedschaftsanfrage — BiFoDe e.V.'
+        : t.heading;
 
     await transporter.sendMail({
       from: `"BiFoDe Kontaktformular" <${fromEmail}>`,
@@ -254,14 +322,14 @@ export const POST: APIRoute = async ({ request }) => {
       subject: `${mailPrefix} ${subject}`,
       text: textBody,
       html: `
-        <h2>${isIsraelCommunity ? 'Neue Anfrage — Israel Community Deutschland' : t.heading}</h2>
+        <h2>${mailHeading}</h2>
         <p><strong>Name:</strong> ${safe(name)}</p>
         ${htmlExtra}
         <p><strong>${t.email}:</strong> ${safe(email)}</p>
         <p><strong>${t.time}:</strong> ${safe(sentAt)}</p>
         <p><strong>${t.subject}:</strong> ${safe(subject)}</p>
         <hr />
-        <p style="white-space: pre-wrap;">${safe(message)}</p>
+        <p style="white-space: pre-wrap;">${safe(message || '-')}</p>
       `
     });
 

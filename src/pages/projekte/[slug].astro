@@ -7,7 +7,9 @@ export const prerender = true;
 // 1. Генерируем пути
 export async function getStaticPaths() {
   const projectEntries = await getCollection('projekte');
-  return projectEntries.map(entry => ({
+  return projectEntries
+    .filter((entry) => !entry.data.draft)
+    .map((entry) => ({
     // В Astro 5 используем id вместо slug
     params: { slug: entry.id }, 
     props: { entry },

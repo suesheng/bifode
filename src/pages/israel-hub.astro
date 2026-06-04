@@ -1,0 +1,359 @@
+---
+/**
+ * Israel Hub DACH — community landing (no Meta Pixel / tracking yet).
+ * Future: cookie-consent-gated scripts can target [data-landing="israel-hub"].
+ */
+import MainLayout from '../layouts/MainLayout.astro';
+
+const pageTitle = 'Israel Hub DACH – Community für Israel, Hebräisch, Aliyah & Alltag';
+const pageDescription =
+  'Deutschsprachige Community rund um Israel, Hebräisch, Aliyah, Alltag, Dokumente, Banken, Wohnen, Kultur und jüdisch-israelisches Leben im DACH-Raum.';
+
+const FB_GROUP = 'https://www.facebook.com/groups/israel.hub.dach';
+const ulpanMailto =
+  'mailto:info@bifode.org?subject=Interesse%20an%20Ulpan%20Next';
+
+const topics = [
+  {
+    title: 'Hebräisch lernen',
+    text: 'Austausch zu modernem Ivrit, Lernwegen und Alltagssprache — auch im Blick auf Ulpan Next.'
+  },
+  {
+    title: 'Aliyah und Vorbereitung',
+    text: 'Erste Schritte, Planung und Erfahrungen rund um einen möglichen Umzug nach Israel.'
+  },
+  {
+    title: 'Dokumente und Behörden',
+    text: 'Praktische Hinweise zu Unterlagen, Konsulaten und typischen Abläufen — ohne Rechtsberatung.'
+  },
+  {
+    title: 'Banken und Finanzen',
+    text: 'Fragen zu Konten, Überweisungen, Steuern und finanziellem Alltag in Israel und im DACH-Raum.'
+  },
+  {
+    title: 'Wohnen und Immobilien',
+    text: 'Mieten, Kaufen und Orientierung zum Wohnungsmarkt — Erfahrungen aus der Community.'
+  },
+  {
+    title: 'Arbeit und Studium',
+    text: 'Beruf, Anerkennung, Studium und Netzwerke — von Deutschland, Österreich und der Schweiz nach Israel.'
+  },
+  {
+    title: 'Reisen und Alltag',
+    text: 'Reisetipps, Alltagsfragen und praktische Eindrücke aus Israel für Besucher und Einheimische.'
+  },
+  {
+    title: 'Kultur und Community',
+    text: 'Jüdisch-israelisches Leben, Feiertage, Gesellschaft und Begegnungen in einer offenen Gruppe.'
+  }
+];
+
+const audience = [
+  'Interessierte aus Deutschland, Österreich und der Schweiz',
+  'Menschen mit persönlicher, familiärer oder kultureller Verbindung zu Israel',
+  'Teilnehmerinnen und Teilnehmer zukünftiger Hebräischkurse',
+  'Menschen mit Fragen zu Alltag, Behörden, Banken, Wohnen oder Studium in Israel',
+  'Alle, die eine freundliche Community rund um Israel suchen'
+];
+
+const webPageJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageTitle,
+  url: 'https://www.bifode.org/israel-hub',
+  description: pageDescription,
+  inLanguage: 'de-DE',
+  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' }
+});
+---
+
+<MainLayout title={pageTitle} description={pageDescription} titleSuffix={false} mainClass="ih-main">
+  <script type="application/ld+json" set:html={webPageJsonLd} />
+
+  <div class="ih-page" data-landing="israel-hub">
+    <section class="ih-hero" aria-labelledby="ih-hero-title">
+      <div class="ih-hero-visual" aria-hidden="true"></div>
+      <div class="container ih-hero-inner">
+        <h1 id="ih-hero-title">Israel Hub DACH</h1>
+        <p class="ih-hero-sub">
+          Deutschsprachige Community rund um Israel, Hebräisch, Aliyah, Alltag & jüdisch-israelisches Leben.
+        </p>
+        <p class="ih-lead">
+          Israel Hub DACH ist ein Ort für Austausch, Fragen und praktische Informationen zu Israel – für Menschen im deutschsprachigen Raum.
+        </p>
+        <div class="ih-actions">
+          <a
+            href={FB_GROUP}
+            class="ih-btn ih-btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook-Gruppe Israel Hub DACH beitreten"
+          >
+            Facebook-Gruppe beitreten
+          </a>
+          <a href="#interest" class="ih-btn ih-btn-secondary">Interesse an Ulpan Next anmelden</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ih-section" id="themen" aria-labelledby="ih-topics-title">
+      <div class="container">
+        <h2 id="ih-topics-title">Worum geht es in der Community?</h2>
+        <div class="card-grid ih-topics-grid">
+          {topics.map((topic) => (
+            <article class="card feature-card">
+              <h3>{topic.title}</h3>
+              <p>{topic.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ih-section ih-section-alt" id="zielgruppe" aria-labelledby="ih-audience-title">
+      <div class="container ih-narrow">
+        <h2 id="ih-audience-title">Für wen ist Israel Hub DACH?</h2>
+        <p class="ih-lead">
+          Die Community richtet sich an Menschen im deutschsprachigen Raum, die Israel besser verstehen möchten, Hebräisch lernen wollen, sich mit Aliyah beschäftigen oder praktische Fragen zum Leben in Israel haben.
+        </p>
+        <ul class="ih-list">
+          {audience.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="ih-section" id="interest" aria-labelledby="ih-ulpan-title">
+      <div class="container ih-narrow ih-ulpan-box">
+        <h2 id="ih-ulpan-title">Ulpan Next – Hebräisch lernen mit Community</h2>
+        <p class="ih-lead">
+          Innerhalb von Israel Hub DACH entsteht mit Ulpan Next ein Bildungsangebot für modernes Hebräisch, Alltagssprache, Lernmaterialien und Community-Treffen.
+        </p>
+        <p class="ih-cta-row">
+          <a href={ulpanMailto} class="ih-btn ih-btn-primary">Interesse anmelden</a>
+        </p>
+        <p class="ih-note">Die Anmeldung über ein Online-Formular wird in Kürze ergänzt.</p>
+      </div>
+    </section>
+
+    <section class="ih-section ih-section-alt" id="bifode" aria-labelledby="ih-bifode-title">
+      <div class="container ih-narrow">
+        <h2 id="ih-bifode-title">Ein Projekt von BiFoDe e.V.</h2>
+        <p class="ih-lead">
+          BiFoDe e.V. entwickelt Bildungs- und Community-Projekte im deutschsprachigen Raum. Mit Israel Hub DACH entsteht ein offener Austauschraum rund um Israel, Hebräisch, Aliyah und jüdisch-israelisches Leben.
+        </p>
+        <p>
+          <a href="/ueber-uns" class="ih-link">Mehr über BiFoDe e.V.</a>
+          {' · '}
+          <a href="/israel-community" class="ih-link">Israel Community Deutschland</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="ih-section ih-final" aria-labelledby="ih-final-title">
+      <div class="container ih-narrow ih-final-inner">
+        <h2 id="ih-final-title">Werde Teil der Community</h2>
+        <p class="ih-lead">
+          Stelle Fragen, teile Erfahrungen oder lies einfach mit. Die Facebook-Gruppe ist der erste Treffpunkt für Austausch und Updates.
+        </p>
+        <p class="ih-cta-row">
+          <a
+            href={FB_GROUP}
+            class="ih-btn ih-btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Zur Facebook-Gruppe Israel Hub DACH"
+          >
+            Zur Facebook-Gruppe
+          </a>
+        </p>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  :global(.ih-main) {
+    padding: 0 !important;
+  }
+
+  .ih-page {
+    --ih-navy: #0c1e34;
+    --ih-blue: #163b63;
+    --ih-sky: #d6e1fc;
+    --ih-bg: #f4f7fb;
+    background: var(--ih-bg);
+  }
+
+  .ih-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 3.25rem 0 3rem;
+    background: linear-gradient(155deg, #e8f2ff 0%, #f0f6ff 40%, #ffffff 100%);
+  }
+
+  .ih-hero-visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 30%, rgba(22, 59, 99, 0.14), transparent),
+      radial-gradient(ellipse 55% 45% at 85% 25%, rgba(214, 225, 252, 0.95), transparent),
+      linear-gradient(105deg, transparent 62%, rgba(12, 30, 52, 0.05) 62%, rgba(12, 30, 52, 0.05) 64%, transparent 64%);
+  }
+
+  .ih-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  .ih-hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--ih-navy);
+    line-height: 1.1;
+  }
+
+  .ih-hero-sub {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ih-blue);
+    line-height: 1.45;
+  }
+
+  .ih-section {
+    padding: 2.75rem 0;
+  }
+
+  .ih-section-alt {
+    background: #fff;
+  }
+
+  .ih-section h2 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--ih-navy);
+  }
+
+  .ih-lead {
+    margin: 0 0 1rem;
+    color: #334155;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  .ih-narrow {
+    max-width: 720px;
+  }
+
+  .ih-actions,
+  .ih-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .ih-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .ih-btn-primary {
+    background: var(--ih-blue);
+    color: #fff;
+    border-color: var(--ih-blue);
+  }
+
+  .ih-btn-primary:hover {
+    background: #0f2e50;
+    transform: translateY(-1px);
+  }
+
+  .ih-btn-secondary {
+    background: #fff;
+    color: var(--ih-blue);
+    border-color: #89a6cc;
+  }
+
+  .ih-btn-secondary:hover {
+    background: var(--ih-sky);
+  }
+
+  .ih-topics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .ih-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .ih-ulpan-box {
+    padding: 1.75rem;
+    background: linear-gradient(135deg, #eef4ff, #fff);
+    border: 1px solid #c7d9f5;
+    border-radius: var(--radius, 18px);
+    box-shadow: var(--shadow);
+  }
+
+  .ih-note {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .ih-link {
+    color: var(--ih-blue);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .ih-link:hover {
+    text-decoration: underline;
+  }
+
+  .ih-final {
+    background: linear-gradient(180deg, var(--ih-navy) 0%, #0f2e50 100%);
+    color: #e2e8f0;
+    padding: 3rem 0;
+  }
+
+  .ih-final h2 {
+    color: #fff;
+  }
+
+  .ih-final .ih-lead {
+    color: #cbd5e1;
+  }
+
+  @media (max-width: 768px) {
+    .ih-hero {
+      padding: 2.25rem 0 2rem;
+    }
+
+    .ih-actions .ih-btn,
+    .ih-cta-row .ih-btn {
+      width: 100%;
+    }
+
+    .ih-ulpan-box {
+      padding: 1.25rem;
+      box-shadow: none;
+    }
+  }
+</style>

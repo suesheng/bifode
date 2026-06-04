@@ -1,0 +1,518 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getSpendenBankDetails } from '../lib/spendenBank';
+import { MONTHLY_EUR, formatEur, getMembershipFeeAmounts } from '../lib/membershipFees';
+
+const { monthlyStudent, annualStandard, annualStudent } = getMembershipFeeAmounts();
+const bank = getSpendenBankDetails('de');
+
+const pageDescription =
+  'Beitrittserklärung für BiFoDe e.V. — zum Ausfüllen im Browser und Speichern als PDF (Drucken).';
+---
+
+<MainLayout
+  title="Beitrittserklärung"
+  description={pageDescription}
+  mainClass="beitritt-main"
+>
+  <div class="beitritt-toolbar no-print" aria-label="Dokument-Aktionen">
+    <div class="container beitritt-toolbar-inner">
+      <a href="/mitglied-werden" class="beitritt-back">← Zurück zur Mitgliedschaft</a>
+      <div class="beitritt-toolbar-actions">
+        <button type="button" class="beitritt-btn" id="beitritt-print">Als PDF speichern / drucken</button>
+      </div>
+    </div>
+    <p class="container beitritt-toolbar-hint">
+      Tipp: Im Druckdialog „Als PDF speichern“ wählen (z. B. Chrome/Safari/Firefox). Felder vorher im Browser ausfüllen.
+    </p>
+  </div>
+
+  <article class="beitritt-doc container" id="beitritt-document" lang="de">
+    <header class="beitritt-header">
+      <p class="beitritt-org">BiFoDe e.V.</p>
+      <p class="beitritt-org-sub">Bildungsforum für Demokratie und Vielfalt NRW e.V.</p>
+      <h1>Beitrittserklärung</h1>
+      <p class="beitritt-draft">
+        <strong>Entwurf.</strong> Der Verein befindet sich in Gründung. Diese Erklärung dient der Aufnahme als Mitglied
+        nach Beschluss des Vorstands. Maßgeblich sind die jeweils gültige Satzung und Beschlüsse des Vereins.
+      </p>
+    </header>
+
+    <section>
+      <h2>1. Angaben zur antragstellenden Person</h2>
+      <div class="beitritt-grid">
+        <label class="beitritt-field">
+          <span>Vorname</span>
+          <input type="text" name="vorname" autocomplete="given-name" />
+        </label>
+        <label class="beitritt-field">
+          <span>Nachname</span>
+          <input type="text" name="nachname" autocomplete="family-name" />
+        </label>
+        <label class="beitritt-field beitritt-field-wide">
+          <span>Straße und Hausnummer</span>
+          <input type="text" name="strasse" autocomplete="street-address" />
+        </label>
+        <label class="beitritt-field">
+          <span>PLZ</span>
+          <input type="text" name="plz" autocomplete="postal-code" />
+        </label>
+        <label class="beitritt-field">
+          <span>Ort</span>
+          <input type="text" name="ort" autocomplete="address-level2" />
+        </label>
+        <label class="beitritt-field">
+          <span>E-Mail</span>
+          <input type="email" name="email" autocomplete="email" />
+        </label>
+        <label class="beitritt-field">
+          <span>Telefon (optional)</span>
+          <input type="tel" name="telefon" autocomplete="tel" />
+        </label>
+        <label class="beitritt-field">
+          <span>Geburtsdatum (optional)</span>
+          <input type="text" name="geburtsdatum" placeholder="TT.MM.JJJJ" />
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Mitgliedschaft und Beitrag</h2>
+      <p>Ich beantrage die Aufnahme als <strong>ordentliches Mitglied</strong> in BiFoDe e.V.</p>
+
+      <fieldset class="beitritt-fieldset">
+        <legend>Beitragsgruppe (bitte ankreuzen)</legend>
+        <label class="beitritt-check">
+          <input type="radio" name="beitragsgruppe" value="standard" />
+          Standard — {formatEur(MONTHLY_EUR)} € / Monat (Regelbeitrag)
+        </label>
+        <label class="beitritt-check">
+          <input type="radio" name="beitragsgruppe" value="studierende" />
+          Studierende — {formatEur(monthlyStudent)} € / Monat (mit Ermäßigung; Nachweis beifügen)
+        </label>
+      </fieldset>
+
+      <fieldset class="beitritt-fieldset">
+        <legend>Zahlungsweise (bitte ankreuzen)</legend>
+        <label class="beitritt-check">
+          <input type="radio" name="zahlungsweise" value="monatlich-standard" />
+          Monatlich (Standard) — {formatEur(MONTHLY_EUR)} €
+        </label>
+        <label class="beitritt-check">
+          <input type="radio" name="zahlungsweise" value="monatlich-studierende" />
+          Monatlich (Studierende) — {formatEur(monthlyStudent)} € (mit Ermäßigung)
+        </label>
+        <label class="beitritt-check">
+          <input type="radio" name="zahlungsweise" value="jaehrlich-standard" />
+          Jährlich (Standard) — {formatEur(annualStandard)} € (mit Rabatt bei Jahreszahlung)
+        </label>
+        <label class="beitritt-check">
+          <input type="radio" name="zahlungsweise" value="jaehrlich-studierende" />
+          Jährlich (Studierende) — {formatEur(annualStudent)} € (mit Ermäßigung und Rabatt)
+        </label>
+      </fieldset>
+
+      <p class="beitritt-small">
+        Der Beitrag ist ein Vereinsbeitrag gemäß der Satzung, keine Spende. Änderungen des Beitrags erfolgen nach
+        Satzung und Beschluss des Vereins.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Erklärungen</h2>
+      <ol class="beitritt-list">
+        <li>
+          Ich habe die Satzung von BiFoDe e.V. zur Kenntnis genommen und erkenne sie an, sobald sie mir vom Verein
+          übermittelt wurde bzw. veröffentlicht ist.
+        </li>
+        <li>
+          Ich verpflichte mich, den vom Verein festgelegten Mitgliedsbeitrag fristgerecht zu entrichten.
+        </li>
+        <li>
+          Ich bin damit einverstanden, dass meine Daten zum Zweck der Mitgliederverwaltung, Kommunikation und
+          Beitragsabrechnung verarbeitet werden. Details: <a href="/datenschutz">Datenschutzerklärung</a>.
+        </li>
+        <li>
+          Die Mitgliedschaft ist ein Zugang zu Vereinsangeboten gemäß Programm und Verfügbarkeit; sie begründet keinen
+          Anspruch auf einzelne Leistungen oder Termine.
+        </li>
+      </ol>
+      <label class="beitritt-check beitritt-check-block">
+        <input type="checkbox" name="erklaerung" />
+        Ich bestätige die vorstehenden Angaben und Erklärungen.
+      </label>
+    </section>
+
+    <section>
+      <h2>4. Zahlung / SEPA-Lastschrift (optional)</h2>
+      <p>
+        Alternativ zur Überweisung kann ein SEPA-Lastschriftmandat erteilt werden. Bis zur Einrichtung kann der Beitrag
+        per Überweisung oder Dauerauftrag auf folgendes Konto geleistet werden:
+      </p>
+      <dl class="beitritt-bank">
+        <div><dt>Kontoinhaber</dt><dd>{bank.accountHolder}</dd></div>
+        <div><dt>Bank</dt><dd>{bank.bankName}</dd></div>
+        <div><dt>IBAN</dt><dd>{bank.iban}</dd></div>
+        {bank.blz && (
+          <div><dt>BLZ</dt><dd>{bank.blz}</dd></div>
+        )}
+        <div><dt>Verwendungszweck</dt><dd>Mitgliedsbeitrag BiFoDe e.V.</dd></div>
+      </dl>
+
+      <label class="beitritt-check beitritt-check-block">
+        <input type="checkbox" name="sepa" />
+        Ich erteile ein SEPA-Lastschriftmandat (Mandat wird vom Verein nach Aufnahme bereitgestellt bzw. bestätigt).
+      </label>
+      <div class="beitritt-grid beitritt-sepa">
+        <label class="beitritt-field beitritt-field-wide">
+          <span>IBAN (Lastschrift)</span>
+          <input type="text" name="sepa-iban" />
+        </label>
+        <label class="beitritt-field">
+          <span>BIC (falls erforderlich)</span>
+          <input type="text" name="sepa-bic" />
+        </label>
+        <label class="beitritt-field beitritt-field-wide">
+          <span>Kontoinhaber (falls abweichend)</span>
+          <input type="text" name="sepa-inhaber" />
+        </label>
+      </div>
+    </section>
+
+    <section class="beitritt-sign">
+      <h2>5. Unterschrift</h2>
+      <div class="beitritt-grid">
+        <label class="beitritt-field">
+          <span>Ort</span>
+          <input type="text" name="ort_unterschrift" />
+        </label>
+        <label class="beitritt-field">
+          <span>Datum</span>
+          <input type="text" name="datum" placeholder="TT.MM.JJJJ" />
+        </label>
+      </div>
+      <p class="beitritt-line-label">Unterschrift Antragsteller/in</p>
+      <div class="beitritt-signature-line" aria-hidden="true"></div>
+      <p class="beitritt-small">
+        Bei Minderjährigen: zusätzlich Unterschrift der/des gesetzlichen Vertreters/in.
+      </p>
+    </section>
+
+    <section class="beitritt-verein only-print-block">
+      <h2>6. Für den Verein (wird vom Vorstand ausgefüllt)</h2>
+      <p>Aufnahme beschlossen am: _________________________</p>
+      <p>Mitgliedsnummer (optional): _________________________</p>
+      <p class="beitritt-line-label">Unterschrift Vorstand</p>
+      <div class="beitritt-signature-line" aria-hidden="true"></div>
+    </section>
+
+    <footer class="beitritt-footer">
+      <p>
+        Eingereicht werden kann die ausgefüllte Erklärung per E-Mail an{' '}
+        <a href="mailto:info@bifode.org?subject=Beitrittserkl%C3%A4rung%20BiFoDe%20e.V.">info@bifode.org</a>{' '}
+        (PDF-Anhang) oder postalisch an die vom Verein mitgeteilte Anschrift. Alternativ zuerst das{' '}
+        <a href="/mitglied-werden#anmeldung">Online-Formular</a> nutzen.
+      </p>
+      <p class="beitritt-small">BiFoDe e.V. · Standort: Nordrhein-Westfalen · www.bifode.org</p>
+    </footer>
+  </article>
+</MainLayout>
+
+<style>
+  .beitritt-main {
+    background: #eef2f7;
+    padding-bottom: 3rem;
+  }
+
+  .beitritt-toolbar {
+    padding: 1.25rem 0 0.5rem;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .beitritt-toolbar-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .beitritt-toolbar-hint {
+    margin: 0.5rem auto 0;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  .beitritt-back {
+    color: #1e3a8a;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .beitritt-btn {
+    padding: 0.6rem 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #1e3a8a;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .beitritt-btn:hover {
+    background: #1d4ed8;
+  }
+
+  .beitritt-doc {
+    max-width: 800px;
+    margin: 1.5rem auto 0;
+    padding: 2rem 2.25rem 2.5rem;
+    background: #fff;
+    border: 1px solid #dbe5f1;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+    color: #111827;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .beitritt-header h1 {
+    margin: 0.35rem 0 0.75rem;
+    font-size: 1.65rem;
+    color: #0c1e34;
+  }
+
+  .beitritt-org {
+    margin: 0;
+    font-weight: 700;
+    color: #1e3a8a;
+  }
+
+  .beitritt-org-sub {
+    margin: 0.15rem 0 0;
+    font-size: 0.9rem;
+    color: #475569;
+  }
+
+  .beitritt-draft {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    font-size: 0.88rem;
+  }
+
+  .beitritt-doc h2 {
+    margin: 1.75rem 0 0.65rem;
+    font-size: 1.1rem;
+    color: #0c1e34;
+    page-break-after: avoid;
+  }
+
+  .beitritt-doc section {
+    page-break-inside: avoid;
+  }
+
+  .beitritt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem 1rem;
+  }
+
+  .beitritt-field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .beitritt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .beitritt-field span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .beitritt-field input {
+    border: none;
+    border-bottom: 1px solid #94a3b8;
+    padding: 0.35rem 0;
+    font-size: 1rem;
+    font-family: inherit;
+    background: transparent;
+  }
+
+  .beitritt-field input:focus {
+    outline: none;
+    border-bottom-color: #1e3a8a;
+    box-shadow: 0 1px 0 #1e3a8a;
+  }
+
+  .beitritt-fieldset {
+    margin: 1rem 0 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+  }
+
+  .beitritt-fieldset legend {
+    font-weight: 600;
+    padding: 0 0.25rem;
+  }
+
+  .beitritt-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0.5rem 0 0;
+    cursor: pointer;
+  }
+
+  .beitritt-check-block {
+    margin-top: 1rem;
+  }
+
+  .beitritt-check input {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .beitritt-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .beitritt-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .beitritt-bank {
+    margin: 0.75rem 0;
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.92rem;
+  }
+
+  .beitritt-bank div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 0.5rem;
+  }
+
+  .beitritt-bank dt {
+    font-weight: 600;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .beitritt-bank dd {
+    margin: 0;
+  }
+
+  .beitritt-small {
+    font-size: 0.82rem;
+    color: #64748b;
+  }
+
+  .beitritt-line-label {
+    margin: 1.25rem 0 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .beitritt-signature-line {
+    height: 2.5rem;
+    border-bottom: 1px solid #334155;
+    max-width: 20rem;
+  }
+
+  .beitritt-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.88rem;
+    color: #475569;
+  }
+
+  .beitritt-footer a {
+    color: #1e3a8a;
+  }
+
+  @media (max-width: 600px) {
+    .beitritt-doc {
+      padding: 1.25rem 1rem 1.75rem;
+    }
+
+    .beitritt-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .beitritt-bank div {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media print {
+    .no-print,
+    .navbar,
+    .footer,
+    #cookie-banner,
+    .lang-switch {
+      display: none !important;
+    }
+
+    .beitritt-main,
+    html,
+    body {
+      background: #fff !important;
+    }
+
+    .beitritt-doc {
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      max-width: none;
+    }
+
+    .beitritt-field input {
+      border-bottom: 1px solid #000;
+    }
+
+    .beitritt-doc a[href]::after {
+      content: ' (' attr(href) ')';
+      font-size: 0.75rem;
+    }
+
+    .beitritt-doc a[href^='/']::after,
+    .beitritt-doc a[href^='mailto:']::after {
+      content: '';
+    }
+
+    @page {
+      margin: 1.5cm;
+      size: A4;
+    }
+  }
+</style>
+
+<script>
+  function initBeitrittPrint() {
+    const btn = document.getElementById('beitritt-print');
+    btn?.addEventListener('click', () => window.print());
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBeitrittPrint, { once: true });
+  } else {
+    initBeitrittPrint();
+  }
+</script>

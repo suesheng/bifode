@@ -1,11 +1,12 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
+import { PROJECT_CARDS } from '../../lib/projectCards';
 ---
 
 <MainLayout
   title="Projekte"
-  description="Pilotprojekt NRW und weitere Bildungsprojekte von BiFoDe e.V. — Antisemitismusprävention und demokratische Bildung für Schulen in Nordrhein-Westfalen."
+  description="Pilotprojekt NRW, Ulpan Next und weitere Bildungsprojekte von BiFoDe e.V. — Antisemitismusprävention und demokratische Bildung in Nordrhein-Westfalen."
 >
   <Hero
     centered={false}
@@ -13,62 +14,31 @@ import Hero from '../../components/Hero.astro';
     subtitle="Unsere Projekte verbinden Bildungsarbeit, Prävention und praktische Orientierung für Schulen und Partner in Nordrhein-Westfalen."
   />
 
-  <section class="container pilot-section">
+  <section class="container projects-overview">
     <div class="section-header">
-      <h2>Pilotprojekt NRW</h2>
+      <h2>Projektübersicht</h2>
     </div>
-    <p class="lead">
-      Das <strong>Pilotprojekt NRW</strong> ist unser Hauptprojekt: In enger Zusammenarbeit mit Schulen und Bildungspartnern testen und verfeinern wir modulare Formate zu Antisemitismusprävention, Medienkompetenz und demokratischem Zusammenhalt.
-    </p>
+    <p class="lead">Wählen Sie ein Projekt — jedes Format hat eine eigene Seite mit Details und nächsten Schritten.</p>
 
-    <div class="card pilot-card">
-      <h3>Projektziele</h3>
-      <ul>
-        <li>Praxisnahe Workshops und Projekttage in Schulen etablieren</li>
-        <li>Lehrkräfte mit Materialien und fachlicher Einordnung unterstützen</li>
-        <li>Formate evaluieren und für NRW-weiten Roll-out vorbereiten</li>
-      </ul>
-
-      <h3>Zielgruppen</h3>
-      <ul>
-        <li>Schulen (Sekundarstufe I und II)</li>
-        <li>Lehrkräfte und pädagogische Fachkräfte</li>
-        <li>Kommunen und zivilgesellschaftliche Partner</li>
-      </ul>
-
-      <h3>Zeitplan (Pilotphase)</h3>
-      <ul class="timeline-inline">
-        <li><strong>Q1–Q2 2026:</strong> Vorgespräche und erste Workshops</li>
-        <li><strong>Q3 2026:</strong> Ausweitung auf weitere Standorte</li>
-        <li><strong>Q4 2026:</strong> Auswertung und Weiterentwicklung der Module</li>
-      </ul>
-
-      <a class="btn-outline" href="/fuer-schulen">Workshop anfragen →</a>
+    <div class="card-grid projects-grid">
+      {
+        PROJECT_CARDS.map((project) =>
+          project.status === 'soon' ? (
+            <article class="card project-card project-card--soon">
+              <h3>{project.titleDe}</h3>
+              <p>{project.descriptionDe}</p>
+              <span class="badge">Demnächst</span>
+            </article>
+          ) : (
+            <a class="card project-card project-card--link" href={project.href}>
+              <h3>{project.titleDe}</h3>
+              <p>{project.descriptionDe}</p>
+              <span class="project-card-cta">Zum Projekt →</span>
+            </a>
+          )
+        )
+      }
     </div>
-  </section>
-
-  <section class="container">
-    <div class="section-header">
-      <h2>Weitere Projekte</h2>
-    </div>
-    <p class="lead">Weitere Schwerpunkte sind in Planung und werden hier ergänzt, sobald sie starten.</p>
-    <div class="card-grid">
-      <article class="card project-card placeholder-card">
-        <h3>Digitale Bildungsmodule</h3>
-        <p>Interaktive Online-Inhalte für Schulen — in Vorbereitung.</p>
-        <span class="badge">Demnächst</span>
-      </article>
-      <article class="card project-card placeholder-card">
-        <h3>Interaktive Lernstationen</h3>
-        <p>Informations- und Lernstationen für Schulen und öffentliche Räume — Konzeptphase.</p>
-        <span class="badge">Demnächst</span>
-      </article>
-    </div>
-  </section>
-
-  <section class="container cta-section">
-    <p class="lead">Sie möchten das Pilotprojekt mit Ihrer Schule oder Institution begleiten?</p>
-    <a class="button" href="/kontakt">Kontakt aufnehmen</a>
   </section>
 </MainLayout>
 
@@ -85,59 +55,62 @@ import Hero from '../../components/Hero.astro';
     max-width: 720px;
   }
 
-  .pilot-card {
+  .projects-overview {
+    padding-bottom: 3rem;
+  }
+
+  .projects-grid {
     margin-top: 1.5rem;
-    max-width: 720px;
   }
 
-  .pilot-card h3 {
-    margin: 1.25rem 0 0.5rem;
-    font-size: 1.1rem;
-    color: #163b63;
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
   }
 
-  .pilot-card h3:first-child {
-    margin-top: 0;
-  }
-
-  .pilot-card ul {
+  .project-card h3 {
     margin: 0;
-    padding-left: 1.25rem;
-    line-height: 1.8;
-    color: #334155;
+    font-size: 1.2rem;
+    color: #111827;
   }
 
-  .pilot-card .btn-outline {
-    margin-top: 1.5rem;
+  .project-card p {
+    margin: 0;
+    flex: 1;
+    color: #64748b;
+    line-height: 1.55;
   }
 
-  .placeholder-card {
+  .project-card--link:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px var(--accent-tint);
+  }
+
+  .project-card-cta {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--primary);
+  }
+
+  .project-card--soon {
     opacity: 0.92;
   }
 
   .badge {
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: 0.25rem;
     padding: 0.25rem 0.65rem;
     border-radius: 999px;
     background: #eef2ff;
     color: #1e3a8a;
     font-size: 0.8rem;
     font-weight: 600;
-  }
-
-  .cta-section {
-    padding: 2.5rem 0 3rem;
-    text-align: center;
-  }
-
-  .button {
-    display: inline-flex;
-    padding: 1rem 1.6rem;
-    border-radius: 0.9rem;
-    background: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
+    width: fit-content;
   }
 </style>

@@ -4,20 +4,28 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import CookieBanner from '../components/CookieBanner.astro';
+import FloatingCta from '../components/FloatingCta.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { buildBreadcrumbs, type BreadcrumbCrumb } from '../lib/breadcrumbs';
+import { FB_PAGE_BIFODE, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 const {
   title = 'Startseite',
   description = 'BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW',
   lang = 'de',
   titleSuffix = true,
-  mainClass = ''
+  mainClass = '',
+  breadcrumbs: breadcrumbsOverride
 } = Astro.props;
 
 const isEn = lang === 'en';
+const locale = isEn ? 'en' : 'de';
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const breadcrumbItems =
+  breadcrumbsOverride ?? buildBreadcrumbs(currentPath, locale, title);
 
 type NavHref = { href: string; label: string };
 type NavGroup = { kind: 'group'; label: string; items: NavHref[] };
-type NavLink = { kind: 'link'; href: string; label: string };
+type NavLink = { kind: 'link'; href: string; label: string; external?: boolean };
 type NavEntry = NavLink | NavGroup;
 
 const navStructure: NavEntry[] = isEn
@@ -38,15 +46,6 @@ const navStructure: NavEntry[] = isEn
         items: [
           { href: '/en/schools', label: 'Schools' },
           { href: '/en/projects', label: 'Projects' }
-        ]
-      },
-      { kind: 'link', href: '/en/news', label: 'News' },
-      {
-        kind: 'group',
-        label: 'Events & Registration',
-        items: [
-          { href: '/en/events', label: 'Events' },
-          { href: '/en/registration', label: 'Registration' }
         ]
       },
       { kind: 'link', href: '/en/contact', label: 'Contact' }
@@ -70,16 +69,6 @@ const navStructure: NavEntry[] = isEn
           { href: '/projekte', label: 'Projekte' }
         ]
       },
-      { kind: 'link', href: '/aktuelles', label: 'Aktuelles' },
-      {
-        kind: 'group',
-        label: 'Termine & Anmeldung',
-        items: [
-          { href: '/termine', label: 'Termine' },
-          { href: '/anmeldung', label: 'Anmeldung' }
-        ]
-      },
-      { kind: 'link', href: '/israel-community', label: 'Israel Community' },
       { kind: 'link', href: '/kontakt', label: 'Kontakt' }
     ];
 
@@ -100,25 +89,23 @@ const pathMap: Record<string, string> = {
   '/unsere-arbeit': '/en/our-work',
   '/fuer-schulen': '/en/schools',
   '/schulen': '/en/schools',
-  '/aktuelles': '/en/news',
-  '/termine': '/en/events',
   '/projekte': '/en/projects',
   '/kooperation': '/en/cooperation',
-  '/anmeldung': '/en/registration',
   '/kontakt': '/en/contact',
+  '/spenden': '/en/donate',
+  '/beitrittserklaerung': '/en/membership-declaration',
   '/impressum': '/en/legal-notice',
   '/datenschutz': '/en/privacy',
   '/cookie-richtlinien': '/en/cookie-policy',
   '/en': '/',
-  '/en/news': '/aktuelles',
   '/en/about': '/ueber-uns',
   '/en/our-work': '/unsere-arbeit',
   '/en/schools': '/fuer-schulen',
-  '/en/events': '/termine',
   '/en/projects': '/projekte',
   '/en/cooperation': '/kooperation',
-  '/en/registration': '/anmeldung',
   '/en/contact': '/kontakt',
+  '/en/donate': '/spenden',
+  '/en/membership-declaration': '/beitrittserklaerung',
   '/en/legal-notice': '/impressum',
   '/en/privacy': '/datenschutz',
   '/en/cookie-policy': '/cookie-richtlinien'
@@ -188,22 +175,17 @@ const orgJsonLd = JSON.stringify({
                                         <a href={isEn ? '/en' : '/'} class="logo">
                                                 <img src="/logos/logo-light.svg" alt="BiFoDe Logo" class="logo-img logo-light" width="1896" height="484" />
                                         </a>
-                                        <div class="nav-controls">
-                                                <div class="lang-switch-mobile">
-                                                        <a href={langDeHref} class="lang-link" aria-current={isEn ? undefined : 'page'}>DE</a>
-                                                        <span class="lang-divider">|</span>
-                                                        <a href={langEnHref} class="lang-link" aria-current={isEn ? 'page' : undefined}>EN</a>
-                                                </div>
-                                        <button class="burger-menu" id="burgerMenu" aria-label="Navigation menu" aria-expanded="false">
-                                                <span class="burger-line"></span>
-                                                <span class="burger-line"></span>
-                                                <span class="burger-line"></span>
-                                        </button>
-                                        </div>
                                         <div class="nav-links" id="navLinks">
                                                 {navStructure.map((entry) =>
                                                   entry.kind === 'link' ? (
-                                                    <a href={entry.href} class="nav-top-link" data-nav-link>
+                                                    <a
+                                                      href={entry.href}
+                                                      class="nav-top-link"
+                                                      data-nav-link
+                                                      {...(entry.external
+                                                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                                                        : {})}
+                                                    >
                                                       {entry.label}
                                                     </a>
                                                   ) : (
@@ -228,10 +210,23 @@ const orgJsonLd = JSON.stringify({
                                                         <a href={langEnHref} id="langEn" class="lang-link">EN</a>
                                                 </div>
                                         </div>
+                                        <div class="nav-controls">
+                                                <div class="lang-switch-mobile">
+                                                        <a href={langDeHref} class="lang-link" aria-current={isEn ? undefined : 'page'}>DE</a>
+                                                        <span class="lang-divider">|</span>
+                                                        <a href={langEnHref} class="lang-link" aria-current={isEn ? 'page' : undefined}>EN</a>
+                                                </div>
+                                                <button class="burger-menu" id="burgerMenu" aria-label="Navigation menu" aria-expanded="false">
+                                                        <span class="burger-line"></span>
+                                                        <span class="burger-line"></span>
+                                                        <span class="burger-line"></span>
+                                                </button>
+                                        </div>
                                 </div>
                         </nav>
 
                         <main id="main-content" class:list={['main-content', mainClass]} tabindex="-1">
+                                <Breadcrumbs items={breadcrumbItems} lang={locale} />
                                 <slot />
                         </main>
 
@@ -259,18 +254,22 @@ const orgJsonLd = JSON.stringify({
                                                 <p>{isEn ? 'Location: North Rhine-Westphalia' : 'Standort: Nordrhein-Westfalen'}</p>
                                         </div>
 
-                                        {!isEn && (
-                                                <div class="footer-section footer-community">
-                                                        <h4>Israel Community</h4>
-                                                        <ul>
-                                                                <li><a href="/israel-community">Israel Community</a></li>
-                                                                <li><a href="/mitglied-werden">Mitglied werden</a></li>
-                                                                <li><a href="https://www.facebook.com/bifode/" target="_blank" rel="noopener noreferrer">Facebook-Seite</a></li>
-                                                                <li><a href="https://www.facebook.com/groups/israel.hub.deutschland" target="_blank" rel="noopener noreferrer">Facebook-Gruppe Israel Hub</a></li>
-                                                                <li><span class="footer-todo">Telegram-Kanal (Link folgt)</span></li>
-                                                        </ul>
-                                                </div>
-                                        )}
+                                        <div class="footer-section footer-community">
+                                                <h4>{isEn ? 'Follow us' : 'Community'}</h4>
+                                                <ul>
+                                                        <li>
+                                                                <a href={FB_PAGE_BIFODE} target="_blank" rel="noopener noreferrer">
+                                                                        {isEn ? 'Facebook page' : 'Facebook-Seite BiFoDe'}
+                                                                </a>
+                                                        </li>
+                                                        <li>
+                                                                <a href={isEn ? '/en/ulpan' : ULPAN_LANDING_PATH}>
+                                                                        Ulpan Next
+                                                                </a>
+                                                        </li>
+                                                        {!isEn && <li><span class="footer-todo">Telegram-Kanal (Link folgt)</span></li>}
+                                                </ul>
+                                        </div>
 
                                         <div class="footer-section footer-legal">
                                                 <h4>{isEn ? 'Legal' : 'Rechtliches'}</h4>
@@ -285,8 +284,11 @@ const orgJsonLd = JSON.stringify({
                                 {!isEn && (
                                         <div class="container footer-legal-note">
                                                 <p>
-                                                        Hinweis: Unsere Angebote dienen der Bildung, Orientierung und allgemeinen Information.
-                                                        Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung. Bei Bedarf verweisen wir auf zuständige Stellen oder qualifizierte Fachpersonen.
+                                                        <span class="footer-legal-label">Hinweis</span>
+                                                        <span class="footer-legal-text">
+                                                          Unsere Angebote dienen der Bildung, Orientierung und allgemeinen Information.
+                                                          Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung. Bei Bedarf verweisen wir auf zuständige Stellen oder qualifizierte Fachpersonen.
+                                                        </span>
                                                 </p>
                                         </div>
                                 )}
@@ -301,6 +303,8 @@ const orgJsonLd = JSON.stringify({
 
                 <!-- Cookie Banner -->
                 <CookieBanner />
+
+                <FloatingCta lang={isEn ? 'en' : 'de'} />
 
                 <script>
                         document.addEventListener('DOMContentLoaded', () => {
@@ -347,24 +351,56 @@ const orgJsonLd = JSON.stringify({
                                 });
 
                                 // Close menu when a link is clicked; collapse dropdowns
+                                const closeMobileNav = () => {
+                                        navLinks.querySelectorAll('details.nav-drop').forEach(d => d.removeAttribute('open'));
+                                        navbar.classList.remove('is-open');
+                                        burgerMenu.classList.remove('is-open');
+                                        burgerMenu.setAttribute('aria-expanded', 'false');
+                                };
+
                                 navItems.forEach(item => {
-                                        item.addEventListener('click', () => {
-                                                navLinks.querySelectorAll('details.nav-drop').forEach(d => d.removeAttribute('open'));
-                                                navbar.classList.remove('is-open');
-                                                burgerMenu.classList.remove('is-open');
-                                                burgerMenu.setAttribute('aria-expanded', 'false');
-                                        });
+                                        item.addEventListener('click', closeMobileNav);
                                 });
 
-                                // Close menu when clicking outside
-                                document.addEventListener('click', (event) => {
-                                        const target = event.target;
-                                        if (target instanceof Node && !navbar.contains(target) && navbar.classList.contains('is-open')) {
-                                                navbar.classList.remove('is-open');
-                                                burgerMenu.classList.remove('is-open');
-                                                burgerMenu.setAttribute('aria-expanded', 'false');
-                                        }
-                                });
+				const closeDropdowns = () => {
+					navLinks.querySelectorAll('details.nav-drop[open]').forEach(d => d.removeAttribute('open'));
+				};
+
+				// Close menu/dropdowns when clicking outside
+				document.addEventListener('click', (event) => {
+					const target = event.target;
+					if (!(target instanceof Node)) return;
+					if (!navbar.contains(target)) {
+						closeDropdowns();
+						if (navbar.classList.contains('is-open')) {
+							navbar.classList.remove('is-open');
+							burgerMenu.classList.remove('is-open');
+							burgerMenu.setAttribute('aria-expanded', 'false');
+						}
+					}
+				});
+
+				// Only one desktop dropdown open at a time
+				navLinks.querySelectorAll('details.nav-drop').forEach(details => {
+					details.addEventListener('toggle', () => {
+						if (!details.open) return;
+						navLinks.querySelectorAll('details.nav-drop[open]').forEach(other => {
+							if (other !== details) other.removeAttribute('open');
+						});
+					});
+				});
+
+				// Escape closes dropdowns and mobile menu
+				document.addEventListener('keydown', (event) => {
+					if (event.key !== 'Escape') return;
+					closeDropdowns();
+					if (navbar.classList.contains('is-open')) {
+						navbar.classList.remove('is-open');
+						burgerMenu.classList.remove('is-open');
+						burgerMenu.setAttribute('aria-expanded', 'false');
+						burgerMenu.focus();
+					}
+				});
 
                                 const footerCookieSettings = document.getElementById('footer-cookie-settings');
                                 footerCookieSettings?.addEventListener('click', () => {
@@ -380,18 +416,35 @@ const orgJsonLd = JSON.stringify({
                 box-sizing: border-box;
         }
 
-        :root {
-                --bg: #f4f7fb;
-                --surface: #ffffff;
-                --surface-soft: #f8fbff;
-                --text: #0f172a;
-                --muted: #4b5563;
-                --line: #dbe5f1;
-                --primary: #163b63;
-                --primary-strong: #0f2e50;
-                --shadow: 0 14px 34px rgba(16, 34, 62, 0.08);
-                --radius: 18px;
-        }
+	:root {
+		--bg: #f4f7fb;
+		--surface: #ffffff;
+		--surface-soft: #f8fbff;
+		--text: #0f172a;
+		--muted: #4b5563;
+		--line: #dbe5f1;
+
+		/* Brand: navy = primary, royal blue = interactive accent */
+		--primary: #163b63;
+		--primary-strong: #0f2e50;
+		--accent: #1d4ed8;
+		--accent-strong: #1e40af;
+		--accent-tint: rgba(29, 78, 216, 0.12);
+
+		/* Filled CTA */
+		--cta-grad: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
+		--cta-grad-hover: linear-gradient(135deg, #1e40af 0%, #0f2e50 100%);
+		--cta-shadow: 0 10px 24px rgba(29, 78, 216, 0.3);
+		--cta-shadow-hover: 0 14px 30px rgba(29, 78, 216, 0.34);
+
+		--shadow: 0 14px 34px rgba(16, 34, 62, 0.08);
+		--shadow-card-hover: 0 18px 45px rgba(15, 42, 69, 0.13);
+
+		--radius-sm: 10px;
+		--radius-md: 14px;
+		--radius-lg: 18px;
+		--radius: 18px;
+	}
 
         html, body {
                 margin: 0;
@@ -452,8 +505,8 @@ const orgJsonLd = JSON.stringify({
 
         .nav-wrapper {
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
+                gap: 0.75rem 1rem;
                 padding: 1rem 0;
         }
 
@@ -497,7 +550,10 @@ const orgJsonLd = JSON.stringify({
                 display: flex;
                 align-items: center;
                 flex-wrap: wrap;
+                justify-content: flex-end;
                 gap: 0.35rem 1.15rem;
+                flex: 1;
+                min-width: 0;
         }
 
         .nav-links .nav-top-link,
@@ -720,6 +776,22 @@ const orgJsonLd = JSON.stringify({
                 margin: 0;
                 font-size: 0.85rem;
                 line-height: 1.55;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.35rem 0.5rem;
+        }
+
+        .footer-legal-label {
+                flex-shrink: 0;
+                font-weight: 700;
+                font-size: 0.8rem;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: #7dd3fc;
+        }
+
+        .footer-legal-text {
+                flex: 1 1 16rem;
                 color: #94a3b8;
         }
 
@@ -806,17 +878,17 @@ const orgJsonLd = JSON.stringify({
                 margin: 0;
         }
 
-        @media (max-width: 768px) {
-                .nav-wrapper {
-                        flex-direction: row;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 1rem 0;
-                }
+	@media (max-width: 1024px) {
+		.nav-wrapper {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1rem 0;
+		}
 
-                .burger-menu {
-                        display: flex;
-                }
+		.burger-menu {
+			display: flex;
+		}
 
                 .nav-links {
                         position: absolute;
@@ -889,6 +961,11 @@ const orgJsonLd = JSON.stringify({
                         display: inline-flex;
                 }
 
+                .nav-links {
+                        flex: none;
+                        justify-content: flex-start;
+                }
+
                 .nav-links .nav-top-link:hover,
                 .nav-drop-panel a:hover {
                         background-color: #f9fafb;
@@ -908,25 +985,26 @@ const orgJsonLd = JSON.stringify({
                         grid-column: 1 / -1;
                 }
 
-                .footer-nav {
-                        display: none;
-                }
+		.footer-nav {
+			display: none;
+		}
 
-                .footer-community {
-                        grid-column: 1;
-                        grid-row: 2;
-                }
+		.footer-community {
+			grid-column: 1;
+			grid-row: 2;
+		}
 
-                .footer-contact {
-                        display: none;
-                }
+		.footer-legal {
+			grid-column: 2;
+			grid-row: 2;
+			margin-top: 0;
+		}
 
-                .footer-legal {
-                        grid-column: 2;
-                        grid-row: 2;
-                        margin-top: 0;
-                }
-        }
+		.footer-contact {
+			grid-column: 1 / -1;
+			grid-row: 3;
+		}
+	}
 
         @media (max-width: 640px) {
                 .logo img.logo-main {
@@ -971,11 +1049,11 @@ const orgJsonLd = JSON.stringify({
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .card:hover,
-        .feature-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 18px 45px rgba(15, 42, 69, 0.13);
-        }
+	.card:hover,
+	.feature-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-card-hover);
+	}
 
         .card-icon {
                 width: 56px;
@@ -1029,74 +1107,82 @@ const orgJsonLd = JSON.stringify({
                 text-decoration: underline;
         }
 
-        .btn-outline {
-                display: inline-flex;
-                align-items: center;
-                margin-top: 1.25rem;
-                padding: 0.6rem 1.2rem;
-                border: 2px solid #163b63;
-                border-radius: 0.65rem;
-                color: #163b63;
-                font-weight: 600;
-                font-size: 0.95rem;
-                text-decoration: none;
-                background: transparent;
-                transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-        }
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		margin-top: 1.25rem;
+		padding: 0.6rem 1.2rem;
+		border: 2px solid var(--primary);
+		border-radius: var(--radius-sm);
+		color: var(--primary);
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		background: transparent;
+		transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
 
-        .btn-outline:hover {
-                background: #163b63;
-                color: #ffffff;
-                border-color: #163b63;
-        }
+	.btn-outline:hover {
+		background: var(--primary);
+		color: #ffffff;
+		border-color: var(--primary);
+	}
 
-        @media (max-width: 768px) {
-                html,
-                body {
-                        background-color: #ffffff;
-                }
+	@media (max-width: 768px) {
+		html,
+		body {
+			background-color: var(--bg);
+		}
 
-                .main-content {
-                        padding: 1.5rem 0 2.25rem;
-                }
+		.main-content {
+			padding: 1.5rem 0 2.25rem;
+		}
 
-                .card,
-                .feature-card,
-                .project-card,
-                .contact-form-card,
-                .contact-info,
-                .project-logic li,
-                .steps .card {
-                        background: transparent !important;
-                        border: none !important;
-                        box-shadow: none !important;
-                        border-radius: 0 !important;
-                        padding: 0 !important;
-                }
+		.card,
+		.feature-card,
+		.project-card,
+		.contact-form-card,
+		.contact-info,
+		.steps .card {
+			background: var(--surface);
+			border: 1px solid var(--line);
+			box-shadow: none;
+			border-radius: var(--radius-md);
+			padding: 1.1rem 1.15rem;
+		}
 
-                .card-grid,
-                .grid {
-                        gap: 1rem;
-                }
+		.card:hover,
+		.feature-card:hover,
+		.project-card:hover {
+			transform: none;
+			box-shadow: none;
+		}
 
-                .card-icon {
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 0;
-                        background: transparent;
-                        border: none;
-                        margin-bottom: 0.65rem;
-                }
+		.project-logic li {
+			background: transparent;
+			border: none;
+			box-shadow: none;
+			border-radius: 0;
+			padding: 0;
+		}
 
-                .card-icon svg {
-                        width: 20px;
-                        height: 20px;
-                }
+		.card-grid,
+		.grid {
+			gap: 0.85rem;
+		}
 
-                .card-icon {
-                        display: none;
-                }
-        }
+		.card-icon {
+			width: 40px;
+			height: 40px;
+			border-radius: 12px;
+			margin-bottom: 0.65rem;
+		}
+
+		.card-icon svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
 
         @media (max-width: 600px) {
                 .card h3,

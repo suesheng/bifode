@@ -1,0 +1,308 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const pageDescription =
+  'Pilotprojekt NRW von BiFoDe e.V.: Workshops und Formate zu Antisemitismusprävention, Medienkompetenz und demokratischem Zusammenhalt für Schulen.';
+
+const highlights = [
+  {
+    title: 'Workshops & Projekttage',
+    text: 'Praxisnahe Formate in Schulen — modular und auf den Schulalltag abgestimmt.',
+  },
+  {
+    title: 'Materialien & Einordnung',
+    text: 'Unterstützung für Lehrkräfte mit Materialien und verlässlicher fachlicher Orientierung.',
+  },
+  {
+    title: 'Evaluation & Roll-out',
+    text: 'Formate werden evaluiert und für eine NRW-weite Weiterentwicklung vorbereitet.',
+  },
+];
+
+const webPageJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Pilotprojekt NRW – BiFoDe e.V.',
+  url: 'https://www.bifode.org/projekte/pilotprojekt-nrw',
+  description: pageDescription,
+  inLanguage: 'de-DE',
+  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
+});
+---
+
+<MainLayout
+  title="Pilotprojekt NRW"
+  description={pageDescription}
+  titleSuffix={false}
+  mainClass="pj-main"
+  breadcrumbs={[
+    { label: 'Startseite', href: '/' },
+    { label: 'Projekte', href: '/projekte' },
+    { label: 'Pilotprojekt NRW' },
+  ]}
+>
+  <script type="application/ld+json" set:html={webPageJsonLd} />
+
+  <div class="pj-page" data-landing="pilotprojekt-nrw">
+    <section class="pj-hero" aria-labelledby="pj-hero-title">
+      <div class="pj-hero-visual" aria-hidden="true"></div>
+      <div class="container pj-hero-inner">
+        <p class="pj-back">
+          <a href="/projekte">← Alle Projekte</a>
+        </p>
+        <p class="pj-eyebrow">Hauptprojekt · BiFoDe e.V.</p>
+        <h1 id="pj-hero-title">Pilotprojekt NRW</h1>
+        <p class="pj-hero-sub">
+          Antisemitismusprävention, Medienkompetenz und demokratischer Zusammenhalt — gemeinsam mit Schulen
+          in Nordrhein-Westfalen.
+        </p>
+        <p class="pj-lead">
+          In enger Zusammenarbeit mit Schulen und Bildungspartnern testen und verfeinern wir modulare Formate.
+          Das Pilotprojekt ist der Kern unserer Bildungsarbeit in NRW.
+        </p>
+        <div class="pj-actions">
+          <a href="/fuer-schulen" class="pj-btn pj-btn-primary">Workshop anfragen</a>
+          <a href="/kontakt" class="pj-btn pj-btn-secondary">Kontakt</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pj-section" aria-labelledby="pj-highlights-title">
+      <div class="container">
+        <h2 id="pj-highlights-title">Schwerpunkte</h2>
+        <div class="card-grid pj-grid">
+          {highlights.map((item) => (
+            <article class="card feature-card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pj-section pj-section-alt" aria-labelledby="pj-details-title">
+      <div class="container pj-narrow">
+        <h2 id="pj-details-title">Projektdetails</h2>
+
+        <h3 class="pj-subhead">Projektziele</h3>
+        <ul class="pj-list">
+          <li>Praxisnahe Workshops und Projekttage in Schulen etablieren</li>
+          <li>Lehrkräfte mit Materialien und fachlicher Einordnung unterstützen</li>
+          <li>Formate evaluieren und für NRW-weiten Roll-out vorbereiten</li>
+        </ul>
+
+        <h3 class="pj-subhead">Zielgruppen</h3>
+        <ul class="pj-list">
+          <li>Schulen (Sekundarstufe I und II)</li>
+          <li>Lehrkräfte und pädagogische Fachkräfte</li>
+          <li>Kommunen und zivilgesellschaftliche Partner</li>
+        </ul>
+
+        <h3 class="pj-subhead">Zeitplan (Pilotphase)</h3>
+        <ul class="pj-list">
+          <li><strong>Q1–Q2 2026:</strong> Vorgespräche und erste Workshops</li>
+          <li><strong>Q3 2026:</strong> Ausweitung auf weitere Standorte</li>
+          <li><strong>Q4 2026:</strong> Auswertung und Weiterentwicklung der Module</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pj-section pj-final" aria-labelledby="pj-cta-title">
+      <div class="container pj-narrow pj-final-inner">
+        <h2 id="pj-cta-title">Mit Ihrer Schule einsteigen</h2>
+        <p class="pj-lead">
+          Sie möchten das Pilotprojekt mit Ihrer Schule oder Institution begleiten? Wir freuen uns auf Ihre
+          Anfrage.
+        </p>
+        <p class="pj-cta-row">
+          <a href="/fuer-schulen" class="pj-btn pj-btn-primary">Angebote für Schulen</a>
+          <a href="/kontakt" class="pj-btn pj-btn-secondary">Kontakt aufnehmen</a>
+        </p>
+        <p>
+          <a href="/projekte" class="pj-link">Weitere Projekte</a>
+          {' · '}
+          <a href="/ueber-uns" class="pj-link">Über BiFoDe e.V.</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  :global(.pj-main) {
+    padding: 0 !important;
+  }
+
+  .pj-page {
+    --pj-navy: #0c1e34;
+    --pj-blue: #163b63;
+    --pj-bg: #f4f7fb;
+    background: var(--pj-bg);
+  }
+
+  .pj-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 3.25rem 0 3rem;
+    background: linear-gradient(155deg, #e8f2ff 0%, #f0f6ff 40%, #ffffff 100%);
+  }
+
+  .pj-hero-visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 30%, rgba(22, 59, 99, 0.14), transparent),
+      radial-gradient(ellipse 55% 45% at 85% 25%, rgba(214, 225, 252, 0.95), transparent);
+  }
+
+  .pj-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  .pj-back {
+    margin: 0 0 1rem;
+  }
+
+  .pj-back a {
+    font-weight: 600;
+    color: var(--pj-blue);
+    text-decoration: none;
+  }
+
+  .pj-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .pj-hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--pj-navy);
+    line-height: 1.1;
+  }
+
+  .pj-hero-sub {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--pj-blue);
+    line-height: 1.45;
+  }
+
+  .pj-section {
+    padding: 2.75rem 0;
+  }
+
+  .pj-section-alt {
+    background: #fff;
+  }
+
+  .pj-final {
+    background: linear-gradient(180deg, #fff 0%, #eef4ff 100%);
+  }
+
+  .pj-section h2 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--pj-navy);
+  }
+
+  .pj-subhead {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1.1rem;
+    color: var(--pj-blue);
+  }
+
+  .pj-subhead:first-of-type {
+    margin-top: 0;
+  }
+
+  .pj-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    line-height: 1.8;
+    color: #334155;
+  }
+
+  .pj-lead {
+    margin: 0 0 1rem;
+    color: #334155;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  .pj-narrow {
+    max-width: 720px;
+  }
+
+  .pj-grid {
+    margin-top: 0.5rem;
+  }
+
+  .pj-actions,
+  .pj-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .pj-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .pj-btn-primary {
+    background: var(--cta-grad);
+    color: #fff;
+    box-shadow: var(--cta-shadow);
+  }
+
+  .pj-btn-primary:hover {
+    background: var(--cta-grad-hover);
+    box-shadow: var(--cta-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .pj-btn-secondary {
+    background: #fff;
+    color: var(--pj-blue);
+    border-color: rgba(22, 59, 99, 0.35);
+  }
+
+  .pj-btn-secondary:hover {
+    border-color: var(--pj-blue);
+  }
+
+  .pj-link {
+    font-weight: 600;
+    color: var(--pj-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
+  }
+
+  .pj-link:hover {
+    color: var(--pj-navy);
+    border-bottom-color: var(--pj-navy);
+  }
+</style>

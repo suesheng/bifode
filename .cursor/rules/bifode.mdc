@@ -23,7 +23,7 @@ NGO site for **BiFoDe e.V.** — production **https://www.bifode.org** (Vercel).
 
 ## i18n
 
-- DE at root (`/kontakt`, `/aktuelles`, …); EN under `/en/`
+- DE at root (`/kontakt`, `/israel-community`, …); EN under `/en/`
 - Update **both** locales when a page has a pair; formal nonprofit tone
 - One language per page; `MainLayout` `lang`: `de` | `en`
 

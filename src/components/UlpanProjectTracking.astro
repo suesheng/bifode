@@ -1,0 +1,97 @@
+---
+/** Meta Pixel events for /projekte/ulpan-next — no PII in payloads. */
+import MetaPixel from './MetaPixel.astro';
+---
+
+<MetaPixel />
+
+<script>
+  import {
+    ensureMetaPixelReady,
+    trackMetaStandard,
+    trackMetaCustom,
+    readMarketingConsent,
+  } from '../lib/metaPixel.ts';
+
+  const VIEW_CONTENT = { content_name: 'Ulpan Next Project Page' };
+  let viewContentSent = false;
+
+  function sendViewContentOnce() {
+    if (viewContentSent || !readMarketingConsent()) return;
+    if (!ensureMetaPixelReady()) return;
+    viewContentSent = true;
+    trackMetaStandard('ViewContent', VIEW_CONTENT);
+  }
+
+  function initScrollViewContent() {
+    let halfScroll = false;
+    const onScroll = () => {
+      if (halfScroll) return;
+      const doc = document.documentElement;
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = doc.scrollHeight;
+      if (total > 0 && scrolled / total >= 0.5) {
+        halfScroll = true;
+        sendViewContentOnce();
+        window.removeEventListener('scroll', onScroll, { passive: true } as EventListenerOptions);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.setTimeout(() => sendViewContentOnce(), 30000);
+  }
+
+  function trackFacebookGroupClick() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaCustom('SocialClick', { channel: 'ulpan_facebook_group' });
+  }
+
+  function trackJotformEngage() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaCustom('FormStart', { form_name: 'ulpan_jotform' });
+  }
+
+  function trackLead() {
+    if (!ensureMetaPixelReady()) return;
+    trackMetaStandard('Lead', { form_name: 'ulpan_jotform' });
+  }
+
+  function bindTracking() {
+    document.querySelectorAll('[data-track="ulpan_facebook_group"]').forEach((el) => {
+      el.addEventListener('click', trackFacebookGroupClick);
+    });
+
+    const jotformRoot = document.querySelector('.jotform-embed-root');
+    if (jotformRoot) {
+      let jotformStartSent = false;
+      const onEngage = () => {
+        if (jotformStartSent) return;
+        jotformStartSent = true;
+        trackJotformEngage();
+      };
+      jotformRoot.addEventListener('pointerdown', onEngage, { once: true, passive: true });
+      jotformRoot.addEventListener('focusin', onEngage, { once: true });
+    }
+
+    window.addEventListener('message', (event) => {
+      if (!event.origin.includes('jotform')) return;
+      const data = event.data;
+      if (typeof data === 'string' && /submit|thank/i.test(data)) trackLead();
+      if (data && typeof data === 'object' && (data.action === 'submission' || data.type === 'submit'))
+        trackLead();
+    });
+  }
+
+  function initUlpanProjectTracking() {
+    initScrollViewContent();
+    bindTracking();
+    window.addEventListener('cookie-consent-changed', (event) => {
+      if (event.detail?.marketing) initScrollViewContent();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUlpanProjectTracking, { once: true });
+  } else {
+    initUlpanProjectTracking();
+  }
+</script>

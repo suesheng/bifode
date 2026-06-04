@@ -21,7 +21,15 @@ const isEn = lang === 'en';
 
         {tertiary && (
           <p class="hero-tertiary">
-            <a href={tertiary.href} class="hero-tertiary-link">{tertiary.label}</a>
+            <a
+              href={tertiary.href}
+              class="hero-tertiary-link"
+              {...(tertiary.external
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              {tertiary.label}
+            </a>
           </p>
         )}
 
@@ -37,33 +45,7 @@ const isEn = lang === 'en';
   .hero {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 42%, #ffffff 100%);
-  }
-
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      repeating-linear-gradient(115deg, rgba(15, 46, 80, 0.05) 0 1px, transparent 1px 18px),
-      radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.32) 0 1px, transparent 1px),
-      radial-gradient(circle at 75% 65%, rgba(15, 46, 80, 0.08) 0 1px, transparent 1px);
-    background-size: auto, 7px 7px, 11px 11px;
-    opacity: 0.42;
-    mix-blend-mode: multiply;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 1;
-    height: 56px;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(249, 250, 251, 0.96) 0%, rgba(249, 250, 251, 0.58) 42%, rgba(249, 250, 251, 0) 100%);
-    backdrop-filter: blur(2px);
+    background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 45%, #ffffff 100%);
   }
 
   .hero-centered {
@@ -80,22 +62,11 @@ const isEn = lang === 'en';
     position: absolute;
     inset: 0;
     z-index: 0;
+    pointer-events: none;
     background:
-      radial-gradient(circle at 15% 20%, rgba(37,99,235,0.34), transparent 44%),
-      radial-gradient(circle at 85% 15%, rgba(14,116,144,0.26), transparent 42%),
-      radial-gradient(circle at 60% 85%, rgba(79,70,229,0.2), transparent 48%);
-    filter: blur(36px);
-  }
-
-  .hero-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.62) 100%),
-      linear-gradient(rgba(22,59,99,0.06) 1px, transparent 1px);
-    background-size: auto, 40px 40px;
-    opacity: 0.85;
+      radial-gradient(circle at 18% 22%, rgba(37, 99, 235, 0.22), transparent 46%),
+      radial-gradient(circle at 82% 18%, rgba(22, 59, 99, 0.16), transparent 44%);
+    filter: blur(40px);
   }
 
   .container {
@@ -119,13 +90,12 @@ const isEn = lang === 'en';
   }
 
   .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
     font-weight: 800;
     color: #0b1e35;
     margin-bottom: 1.5rem;
-    line-height: 1.1;
+    line-height: 1.12;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 14px rgba(37, 99, 235, 0.15);
   }
 
   .hero-subtitle {
@@ -148,19 +118,19 @@ const isEn = lang === 'en';
   .button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
+    background: var(--cta-grad);
     color: #ffffff;
     text-decoration: none;
     font-weight: 600;
-    border-radius: 0.7rem;
-    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.3);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--cta-shadow);
     transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .button:hover {
-    background: linear-gradient(135deg, #1e40af 0%, #0f2e50 100%);
+    background: var(--cta-grad-hover);
     transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(29, 78, 216, 0.34);
+    box-shadow: var(--cta-shadow-hover);
   }
 
   .button.secondary {
@@ -171,7 +141,7 @@ const isEn = lang === 'en';
   }
 
   .button.secondary:hover {
-    background: #163b63;
+    background: var(--primary);
     color: #ffffff;
     box-shadow: 0 14px 30px rgba(15, 46, 80, 0.25);
   }

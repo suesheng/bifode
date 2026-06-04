@@ -1,0 +1,172 @@
+---
+import {
+  FB_PAGE_BIFODE,
+  ULPAN_LANDING_PATH,
+  jotformAnmeldungUrl,
+  telegramIsraelHubUrl,
+} from '../lib/communityLinks';
+
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+const jotformUrl = jotformAnmeldungUrl();
+const telegramUrl = telegramIsraelHubUrl();
+
+const copy = isEn
+  ? {
+      title: 'News, events & registration',
+      lead: 'Updates and event dates are shared in our community channels. Workshop and event registration is handled via our online form.',
+      fbPage: 'BiFoDe on Facebook',
+      fbPageHint: 'News and updates from BiFoDe e.V.',
+      ulpan: 'Ulpan Next',
+      ulpanHint: 'Educational project — Hebrew, courses & community',
+      tg: 'Telegram',
+      register: 'Register for an event',
+      registerHint: 'Registration form (Jotform)',
+    }
+  : {
+      title: 'Aktuelles, Termine & Anmeldung',
+      lead: 'Neuigkeiten und Termine teilen wir in unseren Community-Kanälen. Die Anmeldung zu Veranstaltungen erfolgt über unser Online-Formular.',
+      fbPage: 'BiFoDe auf Facebook',
+      fbPageHint: 'Neuigkeiten und Beiträge von BiFoDe e.V.',
+      ulpan: 'Ulpan Next',
+      ulpanHint: 'Bildungsprojekt — Infos, Kurse & Community',
+      tg: 'Telegram',
+      register: 'Zur Veranstaltungsanmeldung',
+      registerHint: 'Anmeldeformular (Jotform)',
+    };
+---
+
+<section class="container community-channels">
+  <div class="section-header">
+    <h2>{copy.title}</h2>
+  </div>
+  <p class="community-channels-lead">{copy.lead}</p>
+  <div class="community-channels-grid">
+    <a
+      class="card community-channel-card"
+      href={FB_PAGE_BIFODE}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <h3>{copy.fbPage}</h3>
+      <p>{copy.fbPageHint}</p>
+      <span class="community-channel-cta">{isEn ? 'Open page →' : 'Seite öffnen →'}</span>
+    </a>
+    <a class="card community-channel-card" href={isEn ? '/en/ulpan' : ULPAN_LANDING_PATH}>
+      <h3>{copy.ulpan}</h3>
+      <p>{copy.ulpanHint}</p>
+      <span class="community-channel-cta">{isEn ? 'View project →' : 'Zum Projekt →'}</span>
+    </a>
+    {
+      telegramUrl ? (
+        <a
+          class="card community-channel-card"
+          href={telegramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h3>{copy.tg}</h3>
+          <p>{isEn ? 'Channel updates' : 'Kanal-Updates'}</p>
+          <span class="community-channel-cta">{isEn ? 'Open Telegram →' : 'Telegram öffnen →'}</span>
+        </a>
+      ) : null
+    }
+    {
+      jotformUrl ? (
+        <a
+          class="card community-channel-card"
+          href={isEn ? '/en/projects' : `${ULPAN_LANDING_PATH}#anmeldung`}
+        >
+          <h3>{copy.register}</h3>
+          <p>{copy.registerHint}</p>
+          <span class="community-channel-cta">{isEn ? 'To registration →' : 'Zur Anmeldung →'}</span>
+        </a>
+      ) : (
+        <div class="card community-channel-card community-channel-card--muted">
+          <h3>{copy.register}</h3>
+          <p>
+            {isEn ? (
+              <>
+                Registration link is not configured yet. Please use{' '}
+                <a href="/en/contact">contact</a>.
+              </>
+            ) : (
+              <>
+                Anmelde-Link ist noch nicht hinterlegt. Bitte nutzen Sie{' '}
+                <a href="/kontakt">Kontakt</a>.
+              </>
+            )}
+          </p>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .community-channels {
+    margin-block: 2.5rem 3rem;
+  }
+
+  .community-channels-lead {
+    max-width: 720px;
+    color: #475569;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .community-channels-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .community-channel-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .community-channel-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px var(--accent-tint);
+  }
+
+  .community-channel-card h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #111827;
+  }
+
+  .community-channel-card p {
+    margin: 0;
+    flex: 1;
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.5;
+  }
+
+  .community-channel-cta {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--primary);
+  }
+
+  .community-channel-card--muted {
+    pointer-events: auto;
+  }
+
+  .community-channel-card--muted a {
+    color: var(--primary);
+    font-weight: 600;
+  }
+</style>

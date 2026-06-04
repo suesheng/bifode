@@ -1,0 +1,367 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import { publicEnv } from '../lib/publicEnv';
+import { getSpendenBankDetails } from '../lib/spendenBank';
+
+const description =
+  'Spenden für BiFoDe e.V. — Bildungs- und Präventionsarbeit in NRW. Banküberweisung, Hinweise zu Zuwendungsbestätigung und steuerlicher Berücksichtigung.';
+
+const donationUrl = publicEnv('PUBLIC_DONATION_URL');
+const { iban, bic, bankName, blz, accountHolder, paymentReference, hasBankDetails } =
+  getSpendenBankDetails('de');
+
+const impactAreas = [
+  {
+    title: 'Schulen & Prävention',
+    text: 'Workshops, Projekttage und Materialien zu Demokratie, Antisemitismusprävention und Medienkompetenz in NRW.',
+  },
+  {
+    title: 'Community & Sprache',
+    text: 'Hebräisch- und Israel-bezogene Bildungsformate, Treffen und Vernetzung — u. a. Israel Community und Israel Hub DACH.',
+  },
+  {
+    title: 'Projekte & Netzwerk',
+    text: 'Pilotprojekte, Kooperationen mit Partnern und den Aufbau nachhaltiger Vereinsstrukturen.',
+  },
+];
+---
+
+<MainLayout title="Spenden" description={description}>
+  <Hero
+    centered={false}
+    title="Spenden"
+    subtitle="Mit Ihrer Unterstützung stärken Sie demokratische Bildung, Prävention und Community-Angebote von BiFoDe e.V. in Nordrhein-Westfalen."
+  />
+
+  <div class="sp-page">
+    <section class="container sp-section">
+      <div class="sp-stack">
+        <h2>Wofür Ihre Spende wirkt</h2>
+        <p class="sp-lead">
+          BiFoDe e.V. (Bildungsforum für Demokratie und Vielfalt NRW) entwickelt Bildungs- und Präventionsformate für Schulen, Partner und Communities. Spenden fließen in die Vereinsarbeit — Planung, Durchführung und Weiterentwicklung unserer Angebote.
+        </p>
+        <div class="sp-card-grid">
+          {impactAreas.map((area) => (
+            <article class="sp-card">
+              <h3>{area.title}</h3>
+              <p>{area.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="container sp-section sp-section-alt" id="spenden-weise" aria-labelledby="sp-ways-title">
+      <div class="sp-stack">
+        <h2 id="sp-ways-title">So können Sie spenden</h2>
+
+        <article class="sp-panel" id="ueberweisung" aria-labelledby="sp-bank-title">
+          <h3 id="sp-bank-title">Banküberweisung</h3>
+          {hasBankDetails ? (
+            <dl class="sp-bank-dl">
+              <div>
+                <dt>Kontoinhaber</dt>
+                <dd>{accountHolder}</dd>
+              </div>
+              {bankName && (
+                <div>
+                  <dt>Bank</dt>
+                  <dd>{bankName}</dd>
+                </div>
+              )}
+              <div>
+                <dt>IBAN</dt>
+                <dd><code class="sp-mono">{iban}</code></dd>
+              </div>
+              {blz && (
+                <div>
+                  <dt>Bankleitzahl (BLZ)</dt>
+                  <dd><code class="sp-mono">{blz}</code></dd>
+                </div>
+              )}
+              {bic && (
+                <div>
+                  <dt>BIC</dt>
+                  <dd><code class="sp-mono">{bic}</code></dd>
+                </div>
+              )}
+              <div>
+                <dt>Verwendungszweck</dt>
+                <dd><code class="sp-mono">{paymentReference}</code></dd>
+              </div>
+            </dl>
+          ) : (
+            <p>
+              Die Bankverbindung für Spenden wird in Kürze hier veröffentlicht. Bis dahin erreichen Sie uns unter{' '}
+              <a href="mailto:info@bifode.org?subject=Spende%20BiFoDe%20e.V.">info@bifode.org</a> — wir senden Ihnen die Zahlungsdaten zu.
+            </p>
+          )}
+          <p class="sp-small">
+            Bitte geben Sie den Verwendungszweck an, damit wir Ihre Zuwendung zuordnen können. Für Zuwendungsbestätigungen benötigen wir Ihre vollständige Anschrift.
+          </p>
+        </article>
+
+        {donationUrl && (
+          <article class="sp-panel" aria-labelledby="sp-online-title">
+            <h3 id="sp-online-title">Online spenden</h3>
+            <p>
+              Sie können uns auch über unseren externen Spendenlink unterstützen. Es gelten die Datenschutzhinweise des jeweiligen Anbieters.
+            </p>
+            <p class="sp-actions">
+              <a href={donationUrl} class="sp-btn sp-btn-primary" target="_blank" rel="noopener noreferrer">
+                Jetzt online spenden
+              </a>
+            </p>
+          </article>
+        )}
+
+        <article class="sp-panel sp-panel-muted" aria-labelledby="sp-contact-title">
+          <h3 id="sp-contact-title">Fragen oder größere Zuwendungen</h3>
+          <p>
+            Für Firmenspenden, Daueraufträge oder Fragen zu Projektzwecken schreiben Sie uns — wir melden uns zeitnah.
+          </p>
+          <p class="sp-actions">
+            <a href="/kontakt" class="sp-btn sp-btn-secondary">Kontakt aufnehmen</a>
+            <a href="mailto:info@bifode.org?subject=Spende%20BiFoDe%20e.V." class="sp-btn sp-btn-secondary">info@bifode.org</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container sp-section" aria-labelledby="sp-diff-title">
+      <div class="sp-stack">
+        <h2 id="sp-diff-title">Spende oder Mitgliedschaft?</h2>
+        <p class="sp-lead">
+          Eine <strong>Spende</strong> ist eine einmalige oder wiederkehrende freiwillige Zuwendung ohne Mitgliedschaftsrechte. Die{' '}
+          <a href="/mitglied-werden">Mitgliedschaft</a> ist ein laufender Vereinsbeitrag mit Zugang zu Vereinsangeboten gemäß Satzung und Beschluss.
+        </p>
+        <p class="sp-lead">
+          Beides unterstützt unsere Arbeit — wählen Sie die Form, die zu Ihnen passt.
+        </p>
+      </div>
+    </section>
+
+    <section class="container sp-section sp-section-alt" aria-labelledby="sp-tax-title">
+      <div class="sp-stack">
+        <h2 id="sp-tax-title">Steuerliche Hinweise &amp; Zuwendungsbestätigung</h2>
+        <div class="sp-note-box">
+          <p>
+            <strong>Gemeinnützigkeit:</strong> BiFoDe e.V. befindet sich derzeit <strong>in Gründung</strong>. Der Antrag auf Anerkennung der Gemeinnützigkeit und die Eintragung ins Vereinsregister sind noch nicht abgeschlossen. Bis zur entsprechenden Anerkennung können wir keine verbindlichen Zusagen zur steuerlichen Abzugsfähigkeit geben.
+          </p>
+          <p>
+            <strong>Zuwendungsbestätigungen:</strong> Sobald die gesetzlichen Voraussetzungen erfüllt sind, stellen wir für Spenden — soweit rechtlich zulässig — Zuwendungsbestätigungen nach den geltenden Vorgaben aus. Bitte teilen Sie uns bei der Überweisung Name und Anschrift mit oder kontaktieren Sie uns nach der Spende.
+          </p>
+          <p class="sp-small">
+            Diese Angaben ersetzen keine steuerliche oder rechtliche Beratung. Die steuerliche Behandlung hängt von Ihrer persönlichen Situation und den jeweils geltenden Vorschriften ab.
+          </p>
+        </div>
+        <p class="sp-links">
+          <a href="/impressum">Impressum</a>
+          ·
+          <a href="/datenschutz">Datenschutzerklärung</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  .sp-page {
+    --sp-navy: #0c1e34;
+    --sp-blue: #1e3a8a;
+    padding-bottom: 2.5rem;
+  }
+
+  .sp-section {
+    padding: 2.25rem 0;
+  }
+
+  .sp-section-alt {
+    background: #fff;
+  }
+
+  .sp-stack {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .sp-stack h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
+    color: var(--sp-navy);
+  }
+
+  .sp-lead {
+    margin: 0 0 1.25rem;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .sp-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .sp-card {
+    padding: 1.15rem 1.25rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+
+  .sp-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    color: var(--sp-navy);
+  }
+
+  .sp-card p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .sp-panel {
+    margin-top: 1.25rem;
+    padding: 1.35rem 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #dbe5f1;
+    border-radius: 14px;
+  }
+
+  .sp-panel-muted {
+    background: #fff;
+  }
+
+  .sp-panel h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    color: var(--sp-navy);
+  }
+
+  .sp-panel p {
+    margin: 0 0 0.75rem;
+    color: #334155;
+    line-height: 1.65;
+  }
+
+  .sp-panel p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sp-bank-dl {
+    margin: 0 0 1rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .sp-bank-dl div {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .sp-bank-dl dt {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #64748b;
+  }
+
+  .sp-bank-dl dd {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1rem;
+  }
+
+  .sp-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.95rem;
+    word-break: break-all;
+  }
+
+  .sp-small {
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  .sp-note-box {
+    padding: 1.25rem 1.35rem;
+    background: #eef3fc;
+    border-left: 4px solid var(--sp-blue);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .sp-note-box p {
+    margin: 0 0 0.85rem;
+    color: #1e293b;
+    line-height: 1.65;
+  }
+
+  .sp-note-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sp-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.5rem;
+  }
+
+  .sp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.15rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .sp-btn-primary {
+    background: var(--sp-blue);
+    color: #fff;
+    border-color: var(--sp-blue);
+  }
+
+  .sp-btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .sp-btn-secondary {
+    background: #fff;
+    color: var(--sp-blue);
+    border-color: #89a6cc;
+  }
+
+  .sp-btn-secondary:hover {
+    background: #e8f1ff;
+  }
+
+  .sp-links {
+    margin: 1.25rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .sp-links a {
+    color: var(--sp-blue);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .sp-actions .sp-btn {
+      width: 100%;
+    }
+  }
+</style>

@@ -6,6 +6,8 @@ const projekteCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    /** Hidden from /projekte/[slug] static paths when true */
+    draft: z.boolean().optional().default(false),
   }),
 });
 

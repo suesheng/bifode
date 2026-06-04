@@ -1,0 +1,324 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import JotformEmbed from '../../components/JotformEmbed.astro';
+import UlpanProjectTracking from '../../components/UlpanProjectTracking.astro';
+import { FB_GROUP_ULPAN_NEXT, jotformUlpanUrl } from '../../lib/communityLinks';
+
+const pageDescription =
+  'Ulpan Next ist das Bildungsprojekt von BiFoDe e.V. für modernes Hebräisch — Anmeldung, Kurse und Community.';
+
+const jotformUrl = jotformUlpanUrl();
+
+const features = [
+  {
+    title: 'Modernes Hebräisch',
+    text: 'Ivrit für Alltag, Beruf und Begegnungen — mit klaren Lernzielen und praxisnahen Formaten.',
+  },
+  {
+    title: 'Online & vor Ort',
+    text: 'Kurse und Treffen je nach Projektphase — Termine und Updates in der Facebook-Gruppe.',
+  },
+  {
+    title: 'Lernmaterialien',
+    text: 'Strukturierte Inhalte und Begleitung für Teilnehmende innerhalb des Vereinsangebots.',
+  },
+  {
+    title: 'Community',
+    text: 'Austausch, Fragen und Ankündigungen in der offenen Facebook-Gruppe Ulpan Next.',
+  },
+];
+
+const webPageJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Ulpan Next – BiFoDe e.V.',
+  url: 'https://www.bifode.org/projekte/ulpan-next',
+  description: pageDescription,
+  inLanguage: 'de-DE',
+  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
+});
+---
+
+<MainLayout
+  title="Ulpan Next"
+  description={pageDescription}
+  titleSuffix={false}
+  mainClass="un-main"
+  breadcrumbs={[
+    { label: 'Startseite', href: '/' },
+    { label: 'Projekte', href: '/projekte' },
+    { label: 'Ulpan Next' },
+  ]}
+>
+  <UlpanProjectTracking />
+  <script type="application/ld+json" set:html={webPageJsonLd} />
+
+  <div class="un-page" data-landing="ulpan-next">
+    <section class="un-hero" aria-labelledby="un-hero-title">
+      <div class="un-hero-visual" aria-hidden="true"></div>
+      <div class="container un-hero-inner">
+        <p class="un-back">
+          <a href="/projekte">← Alle Projekte</a>
+        </p>
+        <p class="un-eyebrow">Bildungsprojekt · BiFoDe e.V.</p>
+        <h1 id="un-hero-title">Ulpan Next</h1>
+        <p class="un-hero-sub">Hebräisch lernen mit Community — Kurse, Materialien und Vernetzung.</p>
+        <p class="un-lead">
+          Ulpan Next bündelt Hebräisch-Angebote von BiFoDe e.V. Melden Sie sich über das Formular an,
+          folgen Sie der Facebook-Gruppe für Termine und Austausch.
+        </p>
+        <div class="un-actions">
+          <a href="#anmeldung" class="un-btn un-btn-primary">Zur Anmeldung</a>
+          <a
+            href={FB_GROUP_ULPAN_NEXT}
+            class="un-btn un-btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="ulpan_facebook_group"
+          >
+            Facebook-Gruppe
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="un-section" aria-labelledby="un-offers-title">
+      <div class="container">
+        <h2 id="un-offers-title">Was Sie erwartet</h2>
+        <div class="card-grid un-grid">
+          {features.map((item) => (
+            <article class="card feature-card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="un-section un-section-alt" id="anmeldung" aria-labelledby="un-form-title">
+      <div class="container un-narrow">
+        <h2 id="un-form-title">Anmeldung & Interesse</h2>
+        <p class="un-lead">
+          Nutzen Sie das Formular für Kursinteresse, Veranstaltungen oder Rückfragen zu Ulpan Next. Die
+          Daten werden über <strong>Jotform</strong> verarbeitet (siehe{' '}
+          <a href="/datenschutz">Datenschutz</a>).
+        </p>
+        {
+          jotformUrl ? (
+            <JotformEmbed formUrl={jotformUrl} title="Anmeldung Ulpan Next" iframeLang="de" />
+          ) : (
+            <p class="un-form-fallback">
+              Das Anmeldeformular ist noch nicht hinterlegt. Bitte schreiben Sie uns über{' '}
+              <a href="/kontakt">Kontakt</a> oder treten Sie der Facebook-Gruppe bei.
+            </p>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="un-section" aria-labelledby="un-join-title">
+      <div class="container un-narrow">
+        <h2 id="un-join-title">Community auf Facebook</h2>
+        <p class="un-lead">
+          In der Gruppe <strong>Ulpan Next</strong> finden Sie Kursankündigungen, Termine und Austausch mit
+          anderen Lernenden.
+        </p>
+        <p class="un-cta-row">
+          <a
+            href={FB_GROUP_ULPAN_NEXT}
+            class="un-btn un-btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="ulpan_facebook_group"
+          >
+            Facebook-Gruppe beitreten
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="un-section un-section-alt" aria-labelledby="un-bifode-title">
+      <div class="container un-narrow">
+        <h2 id="un-bifode-title">Teil von BiFoDe e.V.</h2>
+        <p class="un-lead">
+          Ulpan Next gehört zur Bildungsarbeit von BiFoDe e.V. Mitglieder erhalten je nach Programm Zugang
+          zu Kursen, Materialien und Vereinsformaten.
+        </p>
+        <p>
+          <a href="/mitglied-werden" class="un-link">Mitglied werden</a>
+          {' · '}
+          <a href="/projekte" class="un-link">Weitere Projekte</a>
+          {' · '}
+          <a href="/kontakt" class="un-link">Kontakt</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  :global(.un-main) {
+    padding: 0 !important;
+  }
+
+  .un-page {
+    --un-navy: #0c1e34;
+    --un-blue: #163b63;
+    --un-bg: #f4f7fb;
+    background: var(--un-bg);
+  }
+
+  .un-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 3.25rem 0 3rem;
+    background: linear-gradient(155deg, #e8f2ff 0%, #f0f6ff 40%, #ffffff 100%);
+  }
+
+  .un-hero-visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 30%, rgba(22, 59, 99, 0.14), transparent),
+      radial-gradient(ellipse 55% 45% at 85% 25%, rgba(214, 225, 252, 0.95), transparent);
+  }
+
+  .un-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  .un-back {
+    margin: 0 0 1rem;
+  }
+
+  .un-back a {
+    font-weight: 600;
+    color: var(--un-blue);
+    text-decoration: none;
+  }
+
+  .un-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .un-hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--un-navy);
+    line-height: 1.1;
+  }
+
+  .un-hero-sub {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--un-blue);
+    line-height: 1.45;
+  }
+
+  .un-section {
+    padding: 2.75rem 0;
+  }
+
+  .un-section-alt {
+    background: #fff;
+  }
+
+  .un-section h2 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--un-navy);
+  }
+
+  .un-lead {
+    margin: 0 0 1rem;
+    color: #334155;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  .un-narrow {
+    max-width: 720px;
+  }
+
+  .un-form-fallback {
+    padding: 1rem 1.25rem;
+    border-radius: 0.65rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .un-grid {
+    margin-top: 0.5rem;
+  }
+
+  .un-actions,
+  .un-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .un-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .un-btn-primary {
+    background: var(--cta-grad);
+    color: #fff;
+    box-shadow: var(--cta-shadow);
+  }
+
+  .un-btn-primary:hover {
+    background: var(--cta-grad-hover);
+    box-shadow: var(--cta-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .un-btn-secondary {
+    background: #fff;
+    color: var(--un-blue);
+    border-color: rgba(22, 59, 99, 0.35);
+  }
+
+  .un-btn-secondary:hover {
+    border-color: var(--un-blue);
+  }
+
+  .un-link {
+    font-weight: 600;
+    color: var(--un-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
+  }
+
+  .un-link:hover {
+    color: var(--un-navy);
+    border-bottom-color: var(--un-navy);
+  }
+</style>
