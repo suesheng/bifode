@@ -39,6 +39,8 @@ const ROUTES: Record<string, RouteDef> = {
     labelDe: 'Beitrittserklärung',
     labelEn: 'Membership declaration',
   },
+  '/satzung': { labelDe: 'Satzung', labelEn: 'Statutes' },
+  '/en/statutes': { labelDe: 'Satzung', labelEn: 'Statutes' },
   '/impressum': { labelDe: 'Impressum', labelEn: 'Legal notice' },
   '/en/legal-notice': { labelDe: 'Impressum', labelEn: 'Legal notice' },
   '/datenschutz': { labelDe: 'Datenschutz', labelEn: 'Privacy' },

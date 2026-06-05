@@ -9,10 +9,13 @@ import {
   getMembershipFeeAmounts,
 } from '../lib/membershipFees';
 import { ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { SATZUNG_PAGE_DE } from '../lib/vereinDocs';
 
 const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
-  'Mitgliedschaft bei BiFoDe e.V. ab 15 €/Monat (Studierende 10,50 €, Jahresbeitrag ab 162 €) — Ulpan, Lernmaterialien, Community-Treffen, Merch und weitere Vereinsangebote.';
+  'Mitgliedschaft bei BiFoDe e.V. ab 15 €/Monat (Studierende 10,50 €, Jahresbeitrag ab 162 €) — Unterstützung der Vereinsarbeit mit Zugang zu Bildungsangeboten nach Aufnahme.';
+
+const ctaApply = 'Mitgliedschaft beantragen';
 
 const eur = formatEur;
 const { monthlyStudent, annualStandard, annualStudent, annualStandardFull, annualStudentFull } =
@@ -32,11 +35,11 @@ const vereinServices = [
     text: 'Community-Runden und Begegnungen — inklusive Bewirtung bei ausgewählten Formaten.'
   },
   {
-    title: 'Merch & Vereinsmaterialien',
-    text: 'Community-Merch und Vereinsmaterialien, sofern verfügbar und passend zum jeweiligen Angebot.'
+    title: 'Vereinsmaterialien',
+    text: 'Ausgewählte Vereinsmaterialien, sofern verfügbar und passend zum jeweiligen Angebot.'
   },
   {
-    title: 'Weitere Vereinsangebote',
+    title: 'Weitere Bildungsformate',
     text: 'Workshops, Webinare, Israel-Community-Formate und weitere Projekte von BiFoDe e.V.'
   },
   {
@@ -52,7 +55,7 @@ const pricingRows = [
     monthlyNote: 'Regelbeitrag',
     annual: eur(annualStandard),
     annualRef: eur(annualStandardFull),
-    annualNote: 'mit Rabatt bei Jahreszahlung',
+    annualNote: 'bei jährlicher Zahlung',
     highlight: false
   },
   {
@@ -62,7 +65,7 @@ const pricingRows = [
     monthlyNote: 'mit Ermäßigung',
     annual: eur(annualStudent),
     annualRef: eur(annualStudentFull),
-    annualNote: 'mit Ermäßigung und Rabatt bei Jahreszahlung',
+    annualNote: 'Ermäßigung · jährliche Zahlung',
     highlight: true,
     badge: 'Ermäßigung'
   }
@@ -70,30 +73,40 @@ const pricingRows = [
 
 const steps = [
   {
-    title: 'Mitgliedschaft abschließen',
-    text: 'Online-Formular oder Beitrittserklärung ausfüllen — monatlich oder jährlich.'
+    title: 'Aufnahme beantragen',
+    text: 'Online-Formular oder Beitrittserklärung ausfüllen — monatlicher oder jährlicher Mitgliedsbeitrag.'
   },
   {
     title: 'Aufnahme & Zugang',
-    text: 'Nach Vereinsbeschluss und Beitrittserklärung erhältst du Zugang zu allen Vereinsangeboten.'
+    text: 'Nach Vereinsbeschluss und Beitrittserklärung erhalten Sie Zugang zu den Vereinsangeboten gemäß Satzung und Verfügbarkeit.'
   },
   {
     title: 'Angebote nutzen',
-    text: 'Ulpan, Materialien, Treffen, Merch und weitere Formate — gemäß Programm und Verfügbarkeit.'
+    text: 'Ulpan, Materialien, Treffen und weitere Formate — je nach Programm und Kapazität.'
   }
 ];
 
-const membershipTypes = [
-  `Standard — ${eur(MONTHLY_EUR)} € / Monat`,
-  `Studierende — ${eur(monthlyStudent)} € / Monat (mit Ermäßigung)`,
-  `Jahresbeitrag Standard — ${eur(annualStandard)} € / Jahr (mit Rabatt)`
-];
-
-const billingOptions = [
-  `Monatlich (Standard) — ${eur(MONTHLY_EUR)} €`,
-  `Monatlich (Studierende) — ${eur(monthlyStudent)} € (mit Ermäßigung)`,
-  `Jährlich (Standard) — ${eur(annualStandard)} € (mit Rabatt)`,
-  `Jährlich (Studierende) — ${eur(annualStudent)} € (mit Ermäßigung und Rabatt)`
+const tariffOptions = [
+  {
+    value: 'standard_monthly',
+    label: `Standard — monatlich — ${eur(MONTHLY_EUR)} €`,
+    isStudent: false
+  },
+  {
+    value: 'student_monthly',
+    label: `Studierende — monatlich — ${eur(monthlyStudent)} € (Ermäßigung, Nachweis erforderlich)`,
+    isStudent: true
+  },
+  {
+    value: 'standard_yearly',
+    label: `Standard — jährlich — ${eur(annualStandard)} €`,
+    isStudent: false
+  },
+  {
+    value: 'student_yearly',
+    label: `Studierende — jährlich — ${eur(annualStudent)} € (Ermäßigung, Nachweis erforderlich)`,
+    isStudent: true
+  }
 ];
 
 const interestOptions = [
@@ -127,17 +140,17 @@ const webPageJsonLd = JSON.stringify({
         <h1 id="mw-hero-title">Mitglied werden</h1>
         <p class="mw-hero-sub">Gemeinsam Bildung stärken — demokratisch, vielfältig und mit klarem gesellschaftlichem Auftrag.</p>
         <p class="mw-lead">
-          <strong>Alle Vereinsangebote</strong> — Ulpan vor Ort und online, Lernmaterialien, gemeinsame Treffen mit Bewirtung, Merch und weitere Formate — sind <strong>nach abgeschlossener Mitgliedschaft</strong> und laufendem Mitgliedsbeitrag verfügbar.
+          Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Arbeit von BiFoDe e.V. Nach Aufnahme und laufendem Mitgliedsbeitrag erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan, Lernmaterialien und gemeinsame Treffen — <strong>je nach Verfügbarkeit und Programm</strong>.
         </p>
         <p class="mw-price-hero">
           <span class="mw-price-big">15 €</span>
           <span class="mw-price-unit">pro Monat</span>
           <span class="mw-price-meta">
-            Studierende {eur(monthlyStudent)} € / Monat (mit Ermäßigung) · Jahresbeitrag ab {eur(annualStandard)} € (mit Rabatt)
+            Studierende {eur(monthlyStudent)} € / Monat (Ermäßigung) · Jahresbeitrag ab {eur(annualStandard)} €
           </span>
         </p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">Mitgliedschaft abschließen</a>
+          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
           <a href="#preise" class="mw-btn mw-btn-secondary">Preistabelle</a>
         </div>
       </div>
@@ -145,9 +158,9 @@ const webPageJsonLd = JSON.stringify({
 
     <section class="mw-section" id="leistungen" aria-labelledby="mw-services-title">
       <div class="container">
-        <h2 id="mw-services-title">Das ist mit der Mitgliedschaft drin</h2>
+        <h2 id="mw-services-title">Was die Mitgliedschaft ermöglicht</h2>
         <p class="mw-lead">
-          Nach Aufnahme als Mitglied und mit laufendem Mitgliedsbeitrag nutzt du die Angebote von BiFoDe e.V. — ein Zugang für alle genannten Vereinsleistungen, nicht pro Einzelleistung.
+          Nach Aufnahme als Mitglied und mit laufendem Mitgliedsbeitrag können Sie die Angebote von BiFoDe e.V. nutzen — ein gemeinsamer Zugang zur Vereinsarbeit, nicht pro Einzelleistung.
         </p>
         <div class="card-grid">
           {vereinServices.map((item) => (
@@ -167,7 +180,7 @@ const webPageJsonLd = JSON.stringify({
       <span id="preise" class="mw-anchor" aria-hidden="true"></span>
       <div class="container">
         <h2 id="mw-fee-title">Mitgliedsbeitrag</h2>
-        <p class="mw-lead">Alle Beträge in Euro. Ermäßigungen und Rabatte sind als Hinweis genannt — die Spalten zeigen die Beiträge, die du zahlst.</p>
+        <p class="mw-lead">Alle Beträge in Euro. Die Tabelle zeigt die Mitgliedsbeiträge bei monatlicher bzw. jährlicher Zahlung.</p>
 
         <div class="mw-table-wrap">
           <table class="mw-price-table" aria-describedby="mw-fee-caption">
@@ -211,11 +224,11 @@ const webPageJsonLd = JSON.stringify({
         </div>
 
         <p class="mw-table-foot">
-          Studierenden-Ermäßigung nach Vorlage eines Nachweises. Bei Jahreszahlung gilt der ausgewiesene Jahresbeitrag mit Vereins-Rabatt.
+          Studierenden-Ermäßigung nach Vorlage eines Nachweises. Bei jährlicher Zahlung gilt der ausgewiesene Jahresbeitrag.
         </p>
 
         <p class="mw-cta-row">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">Mitgliedschaft abschließen</a>
+          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
         </p>
       </div>
     </section>
@@ -256,9 +269,9 @@ const webPageJsonLd = JSON.stringify({
     <section class="mw-section" id="anmeldung" aria-labelledby="mw-form-title">
       <div class="container">
         <div class="mw-form-stack">
-        <h2 id="mw-form-title">Mitgliedschaft abschließen</h2>
+        <h2 id="mw-form-title">{ctaApply}</h2>
         <p class="mw-lead">
-          Starte deine Aufnahme als Mitglied bei BiFoDe e.V. Wir melden uns mit Zahlungsinformationen. Pflichtfelder sind mit * markiert.
+          Stellen Sie hier Ihre Anfrage auf Aufnahme als Mitglied bei BiFoDe e.V. Wir melden uns mit den nächsten Schritten. Pflichtfelder sind mit * markiert.
         </p>
         <p class="mw-doc-link no-print">
           <a href="/beitrittserklaerung" class="mw-doc-btn">Beitrittserklärung öffnen (HTML, als PDF speichern)</a>
@@ -288,48 +301,34 @@ const webPageJsonLd = JSON.stringify({
               <input type="tel" id="mw-phone" name="phone" autocomplete="tel" />
             </div>
 
+            <fieldset class="mw-fieldset mw-address-fieldset">
+              <legend>Anschrift *</legend>
+              <div class="form-group">
+                <label for="mw-street">Straße und Hausnummer *</label>
+                <input type="text" id="mw-street" name="street" required autocomplete="street-address" />
+              </div>
+              <div class="mw-form-row">
+                <div class="form-group">
+                  <label for="mw-postalCode">PLZ *</label>
+                  <input type="text" id="mw-postalCode" name="postalCode" required autocomplete="postal-code" inputmode="numeric" />
+                </div>
+                <div class="form-group">
+                  <label for="mw-city">Ort *</label>
+                  <input type="text" id="mw-city" name="city" required autocomplete="address-level2" />
+                </div>
+              </div>
+            </fieldset>
+
             <div class="form-group">
-              <label for="mw-street">Straße und Hausnummer</label>
-              <input type="text" id="mw-street" name="street" autocomplete="street-address" />
-            </div>
-
-            <div class="mw-form-row">
-              <div class="form-group">
-                <label for="mw-postalCode">PLZ *</label>
-                <input type="text" id="mw-postalCode" name="postalCode" required autocomplete="postal-code" inputmode="numeric" />
-              </div>
-              <div class="form-group">
-                <label for="mw-city">Ort *</label>
-                <input type="text" id="mw-city" name="city" required autocomplete="address-level2" />
-              </div>
-            </div>
-
-            <div class="mw-form-row">
-              <div class="form-group">
-                <label for="mw-membershipType">Mitgliedschaftsart *</label>
-                <select id="mw-membershipType" name="membershipType" required>
-                  <option value="">Bitte wählen</option>
-                  {membershipTypes.map((type) => (
-                    <option value={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="mw-billing">Zahlungsweise *</label>
-                <select id="mw-billing" name="billing" required>
-                  <option value="">Bitte wählen</option>
-                  {billingOptions.map((opt) => (
-                    <option value={opt}>{opt}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="mw-student" name="isStudent" />
-              <label for="mw-student">
-                Ich bin studierend und möchte die Ermäßigung beantragen ({eur(monthlyStudent)} € / Monat statt {eur(MONTHLY_EUR)} € — Nachweis wird angefordert).
-              </label>
+              <label for="mw-membershipTariff">Mitgliedsbeitrag *</label>
+              <select id="mw-membershipTariff" name="membershipTariff" required>
+                <option value="">Bitte wählen</option>
+                {tariffOptions.map((opt) => (
+                  <option value={opt.value} data-label={opt.label} data-student={opt.isStudent ? '1' : '0'}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <fieldset class="mw-fieldset">
@@ -350,6 +349,15 @@ const webPageJsonLd = JSON.stringify({
             </div>
 
             <div class="form-group checkbox-group">
+              <input type="checkbox" id="mw-admission" name="admission" required />
+              <label for="mw-admission">
+                Ich beantrage die Aufnahme als Mitglied in BiFoDe e.V. und habe die{' '}
+                <a href={SATZUNG_PAGE_DE}>Satzung</a> zur Kenntnis genommen.
+                Die Mitgliedschaft erfolgt gemäß Satzung (einschließlich der Beitragsregelungen).
+              </label>
+            </div>
+
+            <div class="form-group checkbox-group">
               <input type="checkbox" id="mw-privacy" name="privacy" required />
               <label for="mw-privacy">
                 Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Mitgliedschaftsanfrage gespeichert und verarbeitet werden. Weitere Informationen in der <a href="/datenschutz">Datenschutzerklärung</a>.
@@ -358,7 +366,7 @@ const webPageJsonLd = JSON.stringify({
 
             <div class="form-group checkbox-group">
               <input type="checkbox" id="mw-newsletter" name="newsletter" />
-              <label for="mw-newsletter">Ich möchte Informationen zu Vereinsangeboten und Veranstaltungen per E-Mail erhalten.</label>
+              <label for="mw-newsletter">Ich möchte Informationen zu Vereinsveranstaltungen per E-Mail erhalten (optional).</label>
             </div>
 
             <div class="hp-field" aria-hidden="true">
@@ -366,9 +374,9 @@ const webPageJsonLd = JSON.stringify({
               <input type="text" id="mw-website" name="website" tabindex="-1" autocomplete="off" />
             </div>
 
-            <button type="submit" class="mw-btn mw-btn-primary">Mitgliedschaft abschließen</button>
+            <button type="submit" class="mw-btn mw-btn-primary">{ctaApply}</button>
           </form>
-          <p class="form-note" id="mw-form-note">
+          <p class="form-note" id="mw-form-note" role="status" aria-live="polite">
             Alternativ: <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>
           </p>
         </div>
@@ -386,10 +394,10 @@ const webPageJsonLd = JSON.stringify({
 
     <section class="mw-section mw-final" aria-labelledby="mw-final-title">
       <div class="container mw-narrow mw-final-inner">
-        <h2 id="mw-final-title">Fragen vor der Anmeldung?</h2>
-        <p class="mw-lead">Noch unsicher? Schreib uns — oder starte direkt die Aufnahme.</p>
+        <h2 id="mw-final-title">Fragen vor der Aufnahme?</h2>
+        <p class="mw-lead">Noch unsicher? Schreiben Sie uns — oder stellen Sie direkt Ihre Anfrage.</p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">Mitgliedschaft abschließen</a>
+          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
           <a href="/kontakt" class="mw-btn mw-btn-secondary">Kontakt</a>
           <a href={ULPAN_LANDING_PATH} class="mw-btn mw-btn-outline">Ulpan Next</a>
         </div>
@@ -974,6 +982,15 @@ const webPageJsonLd = JSON.stringify({
     padding: 0 0.25rem;
   }
 
+  .mw-address-fieldset {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .form-note.form-note--error {
+    color: #b91c1c;
+  }
+
   .mw-checkbox-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
@@ -1078,6 +1095,12 @@ const webPageJsonLd = JSON.stringify({
 
       const data = new FormData(form);
       const interests = data.getAll('interests').map((v) => String(v));
+      const tariffSelect = form.querySelector('#mw-membershipTariff');
+      const selectedOption =
+        tariffSelect instanceof HTMLSelectElement ? tariffSelect.selectedOptions[0] : null;
+      const membershipTariff = String(data.get('membershipTariff') || '');
+      const membershipLabel = selectedOption?.textContent?.trim() || membershipTariff;
+      const isStudent = selectedOption?.dataset.student === '1';
 
       const payload = {
         formSource: 'mitgliedschaft',
@@ -1089,9 +1112,11 @@ const webPageJsonLd = JSON.stringify({
         street: String(data.get('street') || ''),
         postalCode: String(data.get('postalCode') || ''),
         city: String(data.get('city') || ''),
-        membershipType: String(data.get('membershipType') || ''),
-        billing: String(data.get('billing') || ''),
-        isStudent: data.get('isStudent') === 'on',
+        membershipTariff,
+        membershipType: membershipLabel,
+        billing: membershipLabel,
+        isStudent,
+        admissionAccepted: data.get('admission') === 'on',
         interests,
         message: String(data.get('message') || ''),
         privacyAccepted: data.get('privacy') === 'on',
@@ -1101,9 +1126,10 @@ const webPageJsonLd = JSON.stringify({
       };
 
       submitButton.disabled = true;
-      const originalText = submitButton.textContent || 'Anfrage absenden';
+      const originalText = submitButton.textContent || 'Mitgliedschaft beantragen';
       submitButton.textContent = 'Wird gesendet…';
-      note.textContent = 'Bitte kurz warten…';
+      note.classList.remove('form-note--error');
+      note.textContent = 'Bitte kurz warten …';
 
       try {
         const response = await fetch('/api/contact', {
@@ -1120,10 +1146,11 @@ const webPageJsonLd = JSON.stringify({
         form.reset();
         note.textContent =
           result.message ||
-          'Vielen Dank — wir haben Ihre Mitgliedschaftsanfrage erhalten und melden uns in Kürze.';
+          'Vielen Dank — wir haben Ihre Anfrage auf Mitgliedschaft erhalten. Wir melden uns in Kürze mit den nächsten Schritten zur Aufnahme.';
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Versand fehlgeschlagen.';
-        note.textContent = `${message} Alternativ: info@bifode.org`;
+        note.classList.add('form-note--error');
+        note.textContent = `${message} Alternativ schreiben Sie an info@bifode.org.`;
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = originalText;

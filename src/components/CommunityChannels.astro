@@ -17,26 +17,26 @@ const telegramUrl = telegramIsraelHubUrl();
 
 const copy = isEn
   ? {
-      title: 'News, events & registration',
-      lead: 'Updates and event dates are shared in our community channels. Workshop and event registration is handled via our online form.',
+      title: 'News & dates',
+      lead: 'News and event dates are published on our Facebook page. Course sign-up for Ulpan Next is on the project page under Projects.',
       fbPage: 'BiFoDe on Facebook',
-      fbPageHint: 'News and updates from BiFoDe e.V.',
+      fbPageHint: 'News, dates, and updates from BiFoDe e.V.',
       ulpan: 'Ulpan Next',
-      ulpanHint: 'Educational project — Hebrew, courses & community',
+      ulpanHint: 'Hebrew education project — see Projects',
       tg: 'Telegram',
-      register: 'Register for an event',
-      registerHint: 'Registration form (Jotform)',
+      register: 'Ulpan sign-up',
+      registerHint: 'Registration on the Ulpan Next project page',
     }
   : {
-      title: 'Aktuelles, Termine & Anmeldung',
-      lead: 'Neuigkeiten und Termine teilen wir in unseren Community-Kanälen. Die Anmeldung zu Veranstaltungen erfolgt über unser Online-Formular.',
+      title: 'Aktuelles & Termine',
+      lead: 'Neuigkeiten und Termine veröffentlichen wir auf unserer Facebook-Seite. Die Anmeldung zu Ulpan Next erfolgt über die Projektseite unter Projekte.',
       fbPage: 'BiFoDe auf Facebook',
-      fbPageHint: 'Neuigkeiten und Beiträge von BiFoDe e.V.',
+      fbPageHint: 'Aktuelles, Termine und Beiträge von BiFoDe e.V.',
       ulpan: 'Ulpan Next',
-      ulpanHint: 'Bildungsprojekt — Infos, Kurse & Community',
+      ulpanHint: 'Bildungsprojekt Hebräisch — unter Projekte',
       tg: 'Telegram',
-      register: 'Zur Veranstaltungsanmeldung',
-      registerHint: 'Anmeldeformular (Jotform)',
+      register: 'Ulpan-Anmeldung',
+      registerHint: 'Anmeldung auf der Projektseite Ulpan Next',
     };
 ---
 
@@ -56,10 +56,10 @@ const copy = isEn
       <p>{copy.fbPageHint}</p>
       <span class="community-channel-cta">{isEn ? 'Open page →' : 'Seite öffnen →'}</span>
     </a>
-    <a class="card community-channel-card" href={isEn ? '/en/ulpan' : ULPAN_LANDING_PATH}>
+    <a class="card community-channel-card" href={isEn ? '/en/projects' : '/projekte'}>
       <h3>{copy.ulpan}</h3>
       <p>{copy.ulpanHint}</p>
-      <span class="community-channel-cta">{isEn ? 'View project →' : 'Zum Projekt →'}</span>
+      <span class="community-channel-cta">{isEn ? 'View projects →' : 'Zu den Projekten →'}</span>
     </a>
     {
       telegramUrl ? (
@@ -79,7 +79,7 @@ const copy = isEn
       jotformUrl ? (
         <a
           class="card community-channel-card"
-          href={isEn ? '/en/projects' : `${ULPAN_LANDING_PATH}#anmeldung`}
+          href={isEn ? '/en/ulpan' : `${ULPAN_LANDING_PATH}#anmeldung`}
         >
           <h3>{copy.register}</h3>
           <p>{copy.registerHint}</p>

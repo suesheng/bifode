@@ -1,12 +1,26 @@
 ---
 // src/components/Hero.astro
+import { getImage } from 'astro:assets';
+import heroBgSource from '../assets/hero-bg.webp';
+
 const { title, subtitle, centered = true, tertiary } = Astro.props;
 const lang = Astro.props.lang === 'en' ? 'en' : 'de';
 const isEn = lang === 'en';
+
+const heroBg = await getImage({
+  src: heroBgSource,
+  width: 1536,
+  format: 'webp',
+  quality: 80,
+});
 ---
 
 <section class={`hero ${centered ? 'hero-centered' : 'hero-page'}`}>
-  <div class="hero-bg"></div>
+  <div
+    class="hero-bg"
+    aria-hidden="true"
+    style={`background-image: url(${heroBg.src})`}
+  ></div>
 
   <div class="container hero-content">
     <h1>{title}</h1>
@@ -45,7 +59,7 @@ const isEn = lang === 'en';
   .hero {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(165deg, #e8f1ff 0%, #f3f8ff 45%, #ffffff 100%);
+    background: #f3f8ff;
   }
 
   .hero-centered {
@@ -63,10 +77,9 @@ const isEn = lang === 'en';
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background:
-      radial-gradient(circle at 18% 22%, rgba(37, 99, 235, 0.22), transparent 46%),
-      radial-gradient(circle at 82% 18%, rgba(22, 59, 99, 0.16), transparent 44%);
-    filter: blur(40px);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   .container {

@@ -7,7 +7,9 @@ import CookieBanner from '../components/CookieBanner.astro';
 import FloatingCta from '../components/FloatingCta.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { buildBreadcrumbs, type BreadcrumbCrumb } from '../lib/breadcrumbs';
-import { FB_PAGE_BIFODE, ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { FB_PAGE_BIFODE } from '../lib/communityLinks';
+
+type FooterLink = { href: string; label: string; external?: boolean; cta?: boolean };
 const {
   title = 'Startseite',
   description = 'BiFoDe e.V. entwickelt Bildungs- und Präventionsformate für Schulen und Partner in NRW',
@@ -23,7 +25,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const breadcrumbItems =
   breadcrumbsOverride ?? buildBreadcrumbs(currentPath, locale, title);
 
-type NavHref = { href: string; label: string };
+type NavHref = { href: string; label: string; external?: boolean };
 type NavGroup = { kind: 'group'; label: string; items: NavHref[] };
 type NavLink = { kind: 'link'; href: string; label: string; external?: boolean };
 type NavEntry = NavLink | NavGroup;
@@ -33,55 +35,132 @@ const navStructure: NavEntry[] = isEn
       { kind: 'link', href: '/en', label: 'Home' },
       {
         kind: 'group',
-        label: 'Who we are',
+        label: 'About',
         items: [
-          { href: '/en/about', label: 'About' },
-          { href: '/en/our-work', label: 'Our Work' },
+          { href: '/en/about', label: 'About us' },
+          { href: '/en/our-work', label: 'Our work' },
           { href: '/en/cooperation', label: 'Cooperation' }
         ]
       },
       {
         kind: 'group',
-        label: 'What we offer',
+        label: 'Programs',
+        items: [{ href: '/en/schools', label: 'Schools' }]
+      },
+      { kind: 'link', href: '/en/projects', label: 'Projects' },
+      {
+        kind: 'link',
+        href: FB_PAGE_BIFODE,
+        label: 'Dates',
+        external: true
+      },
+      {
+        kind: 'group',
+        label: 'Join',
         items: [
-          { href: '/en/schools', label: 'Schools' },
-          { href: '/en/projects', label: 'Projects' }
+          { href: '/mitglied-werden', label: 'Membership' },
+          { href: '/en/donate', label: 'Donate' }
         ]
       },
       { kind: 'link', href: '/en/contact', label: 'Contact' }
     ]
   : [
-      { kind: 'link', href: '/', label: 'Startseite' },
+      { kind: 'link', href: '/', label: 'Start' },
       {
         kind: 'group',
-        label: 'Wer wir sind',
+        label: 'Verein',
         items: [
           { href: '/ueber-uns', label: 'Über uns' },
-          { href: '/unsere-arbeit', label: 'Unsere Arbeit' },
+          { href: '/unsere-arbeit', label: 'Arbeit' },
           { href: '/kooperation', label: 'Kooperation' }
         ]
       },
       {
         kind: 'group',
-        label: 'Was wir anbieten',
+        label: 'Angebote',
+        items: [{ href: '/fuer-schulen', label: 'Schulen' }]
+      },
+      { kind: 'link', href: '/projekte', label: 'Projekte' },
+      {
+        kind: 'link',
+        href: FB_PAGE_BIFODE,
+        label: 'Termine',
+        external: true
+      },
+      {
+        kind: 'group',
+        label: 'Mitmachen',
         items: [
-          { href: '/fuer-schulen', label: 'Schulen' },
-          { href: '/projekte', label: 'Projekte' }
+          { href: '/mitglied-werden', label: 'Mitgliedschaft' },
+          { href: '/spenden', label: 'Spenden' }
         ]
       },
       { kind: 'link', href: '/kontakt', label: 'Kontakt' }
     ];
 
-function flattenNav(entries: NavEntry[]): NavHref[] {
-  const out: NavHref[] = [];
-  for (const e of entries) {
-    if (e.kind === 'link') out.push({ href: e.href, label: e.label });
-    else for (const i of e.items) out.push(i);
-  }
-  return out;
-}
+const footerBrandText = isEn
+  ? 'Forum for democracy and diversity education in NRW. Education, prevention and exchange for a democratic society.'
+  : 'Bildungsforum für Demokratie und Vielfalt NRW. Bildung, Prävention und Austausch für eine demokratische Gesellschaft.';
 
-const footerNavLinks = flattenNav(navStructure);
+const footerOrganisation: FooterLink[] = isEn
+  ? [
+      { href: '/en/about', label: 'About' },
+      { href: '/en/our-work', label: 'Our Work' },
+      { href: '/en/cooperation', label: 'Cooperation' }
+    ]
+  : [
+      { href: '/ueber-uns', label: 'Über uns' },
+      { href: '/unsere-arbeit', label: 'Unsere Arbeit' },
+      { href: '/kooperation', label: 'Kooperation' }
+    ];
+
+const footerOffers: FooterLink[] = isEn
+  ? [
+      { href: '/en/schools', label: 'Schools' },
+      { href: '/en/projects', label: 'Projects' }
+    ]
+  : [
+      { href: '/fuer-schulen', label: 'Schulen' },
+      { href: '/projekte', label: 'Projekte' }
+    ];
+
+const footerCurrent: FooterLink[] = isEn
+  ? [
+      { href: '/en/news', label: 'News' },
+      { href: FB_PAGE_BIFODE, label: 'Events', external: true },
+      { href: '/en/registration', label: 'Registration' }
+    ]
+  : [
+      { href: '/aktuelles', label: 'Aktuelles' },
+      { href: FB_PAGE_BIFODE, label: 'Termine', external: true },
+      { href: '/anmeldung', label: 'Anmeldung' }
+    ];
+
+const footerJoin: FooterLink[] = isEn
+  ? [
+      { href: '/mitglied-werden', label: 'Become a member', cta: true },
+      { href: '/en/donate', label: 'Donate', cta: true }
+    ]
+  : [
+      { href: '/mitglied-werden', label: 'Mitglied werden', cta: true },
+      { href: '/spenden', label: 'Spenden', cta: true }
+    ];
+
+const footerLegalLinks: FooterLink[] = isEn
+  ? [
+      { href: '/en/legal-notice', label: 'Legal Notice' },
+      { href: '/en/statutes', label: 'Statutes' },
+      { href: '/en/privacy', label: 'Privacy Policy' }
+    ]
+  : [
+      { href: '/impressum', label: 'Impressum' },
+      { href: '/satzung', label: 'Satzung' },
+      { href: '/datenschutz', label: 'Datenschutz' }
+    ];
+
+const footerDisclaimer = isEn
+  ? 'Our programmes provide education, orientation and general information. They do not replace individual legal, tax or immigration advice. Where appropriate, we refer you to competent authorities or qualified professionals.'
+  : 'Unsere Angebote dienen der Bildung, Orientierung und allgemeinen Information. Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung. Bei Bedarf verweisen wir auf zuständige Stellen oder qualifizierte Fachpersonen.';
 
 const pathMap: Record<string, string> = {
   '/': '/en',
@@ -90,10 +169,16 @@ const pathMap: Record<string, string> = {
   '/fuer-schulen': '/en/schools',
   '/schulen': '/en/schools',
   '/projekte': '/en/projects',
+  '/projekte/ulpan-next': '/en/ulpan',
   '/kooperation': '/en/cooperation',
+  '/aktuelles': '/en/news',
+  '/termine': '/en/events',
+  '/anmeldung': '/en/registration',
+  '/mitglied-werden': '/mitglied-werden',
   '/kontakt': '/en/contact',
   '/spenden': '/en/donate',
   '/beitrittserklaerung': '/en/membership-declaration',
+  '/satzung': '/en/statutes',
   '/impressum': '/en/legal-notice',
   '/datenschutz': '/en/privacy',
   '/cookie-richtlinien': '/en/cookie-policy',
@@ -102,10 +187,15 @@ const pathMap: Record<string, string> = {
   '/en/our-work': '/unsere-arbeit',
   '/en/schools': '/fuer-schulen',
   '/en/projects': '/projekte',
+  '/en/ulpan': '/projekte/ulpan-next',
   '/en/cooperation': '/kooperation',
+  '/en/news': '/aktuelles',
+  '/en/events': '/termine',
+  '/en/registration': '/anmeldung',
   '/en/contact': '/kontakt',
   '/en/donate': '/spenden',
   '/en/membership-declaration': '/beitrittserklaerung',
+  '/en/statutes': '/satzung',
   '/en/legal-notice': '/impressum',
   '/en/privacy': '/datenschutz',
   '/en/cookie-policy': '/cookie-richtlinien'
@@ -162,7 +252,7 @@ const orgJsonLd = JSON.stringify({
                         @media (max-width: 768px) {
                                 .burger-menu { display: flex; }
                                 .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; gap: 0; border-bottom: 1px solid #e5e7eb; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-                                .navbar.is-open .nav-links { max-height: 920px; }
+                                .navbar.is-open .nav-links { max-height: calc(100vh - 72px); overflow-y: auto; }
                                 .nav-links a { padding: 0.75rem 1rem; border-bottom: 1px solid #f3f4f6; }
                         }
                 </style>
@@ -180,10 +270,14 @@ const orgJsonLd = JSON.stringify({
                                                   entry.kind === 'link' ? (
                                                     <a
                                                       href={entry.href}
-                                                      class="nav-top-link"
+                                                      class:list={['nav-top-link', entry.external && 'nav-top-link--external']}
                                                       data-nav-link
                                                       {...(entry.external
-                                                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                                                        ? {
+                                                            target: '_blank',
+                                                            rel: 'noopener noreferrer',
+                                                            'aria-label': `${entry.label} (Facebook)`
+                                                          }
                                                         : {})}
                                                     >
                                                       {entry.label}
@@ -196,7 +290,13 @@ const orgJsonLd = JSON.stringify({
                                                       </summary>
                                                       <div class="nav-drop-panel">
                                                         {entry.items.map((item) => (
-                                                          <a href={item.href} data-nav-link>
+                                                          <a
+                                                            href={item.href}
+                                                            data-nav-link
+                                                            {...(item.external
+                                                              ? { target: '_blank', rel: 'noopener noreferrer' }
+                                                              : {})}
+                                                          >
                                                             {item.label}
                                                           </a>
                                                         ))}
@@ -231,67 +331,109 @@ const orgJsonLd = JSON.stringify({
                         </main>
 
                         <footer class="footer">
-                                <div class="container footer-grid">
-                                        <div class="footer-section footer-about">
-                                                <div class="footer-logo">
+                                <div class="container footer-shell">
+                                        <div class="footer-brand">
+                                                <a href={isEn ? '/en' : '/'} class="footer-logo">
                                                         <img src="/logos/logo-dark.svg" alt="BiFoDe Logo" width="1866" height="666" loading="lazy" />
+                                                </a>
+                                                <p class="footer-brand-text">{footerBrandText}</p>
+                                        </div>
+
+                                        <div class="footer-columns">
+                                                <div class="footer-col">
+                                                        <h4>{isEn ? 'Organisation' : 'Organisation'}</h4>
+                                                        <ul>
+                                                                {footerOrganisation.map((item) => (
+                                                                        <li>
+                                                                                <a href={item.href}>{item.label}</a>
+                                                                        </li>
+                                                                ))}
+                                                        </ul>
                                                 </div>
-                                                <p>{isEn ? 'BiFoDe NRW. We strengthen democratic education and are clearly committed to combating antisemitism.' : 'Bildungsforum für Demokratie und Vielfalt NRW. Wir stärken demokratische Bildung und engagieren uns klar gegen Antisemitismus.'}</p>
-                                        </div>
 
-                                        <div class="footer-section footer-nav">
-                                                <h4>{isEn ? 'Navigation' : 'Navigation'}</h4>
-                                                <ul>
-                                                        {footerNavLinks.map((item) => (
-                                                                <li><a href={item.href}>{item.label}</a></li>
-                                                        ))}
-                                                </ul>
-                                        </div>
+                                                <div class="footer-col">
+                                                        <h4>{isEn ? 'Programmes' : 'Angebote'}</h4>
+                                                        <ul>
+                                                                {footerOffers.map((item) => (
+                                                                        <li>
+                                                                                <a href={item.href}>{item.label}</a>
+                                                                        </li>
+                                                                ))}
+                                                        </ul>
+                                                </div>
 
-                                        <div class="footer-section footer-contact">
-                                                <h4>{isEn ? 'Contact' : 'Kontakt'}</h4>
-                                                <p>E-Mail: info@bifode.org</p>
-                                                <p>{isEn ? 'Location: North Rhine-Westphalia' : 'Standort: Nordrhein-Westfalen'}</p>
-                                        </div>
+                                                <div class="footer-col">
+                                                        <h4>{isEn ? 'Updates' : 'Aktuell'}</h4>
+                                                        <ul>
+                                                                {footerCurrent.map((item) => (
+                                                                        <li>
+                                                                                <a
+                                                                                        href={item.href}
+                                                                                        {...(item.external
+                                                                                                ? { target: '_blank', rel: 'noopener noreferrer' }
+                                                                                                : {})}
+                                                                                >
+                                                                                        {item.label}{item.external ? ' ↗' : ''}
+                                                                                </a>
+                                                                        </li>
+                                                                ))}
+                                                        </ul>
+                                                </div>
 
-                                        <div class="footer-section footer-community">
-                                                <h4>{isEn ? 'Follow us' : 'Community'}</h4>
-                                                <ul>
-                                                        <li>
-                                                                <a href={FB_PAGE_BIFODE} target="_blank" rel="noopener noreferrer">
-                                                                        {isEn ? 'Facebook page' : 'Facebook-Seite BiFoDe'}
-                                                                </a>
-                                                        </li>
-                                                        <li>
-                                                                <a href={isEn ? '/en/ulpan' : ULPAN_LANDING_PATH}>
-                                                                        Ulpan Next
-                                                                </a>
-                                                        </li>
-                                                        {!isEn && <li><span class="footer-todo">Telegram-Kanal (Link folgt)</span></li>}
-                                                </ul>
-                                        </div>
+                                                <div class="footer-col footer-col-join">
+                                                        <h4>{isEn ? 'Get involved' : 'Mitmachen'}</h4>
+                                                        <ul class="footer-cta-list">
+                                                                {footerJoin.map((item) => (
+                                                                        <li>
+                                                                                <a href={item.href} class:list={[item.cta && 'footer-cta']}>
+                                                                                        {item.label}
+                                                                                </a>
+                                                                        </li>
+                                                                ))}
+                                                        </ul>
+                                                </div>
 
-                                        <div class="footer-section footer-legal">
-                                                <h4>{isEn ? 'Legal' : 'Rechtliches'}</h4>
-                                                <ul>
-                                                        <li><a href={isEn ? '/en/legal-notice' : '/impressum'}>{isEn ? 'Legal Notice' : 'Impressum'}</a></li>
-                                                        <li><a href={isEn ? '/en/privacy' : '/datenschutz'}>{isEn ? 'Privacy Policy' : 'Datenschutz'}</a></li>
-                                                        <li><button type="button" class="footer-cookie-button" id="footer-cookie-settings">{isEn ? 'Cookie Settings' : 'Cookie-Einstellungen'}</button></li>
-                                                </ul>
+                                                <div class="footer-col footer-col-contact">
+                                                        <h4>{isEn ? 'Contact & legal' : 'Kontakt & Rechtliches'}</h4>
+                                                        <ul class="footer-contact-stack">
+                                                                <li>
+                                                                        <a href="mailto:info@bifode.org">info@bifode.org</a>
+                                                                </li>
+                                                                <li>
+                                                                        <a href={isEn ? '/en/contact' : '/kontakt'}>
+                                                                                {isEn ? 'Contact page' : 'Kontaktseite'}
+                                                                        </a>
+                                                                </li>
+                                                                <li class="footer-stack-gap" aria-hidden="true"></li>
+                                                                {footerLegalLinks.map((item) => (
+                                                                        <li>
+                                                                                <a href={item.href}>{item.label}</a>
+                                                                        </li>
+                                                                ))}
+                                                                <li>
+                                                                        <button type="button" class="footer-cookie-button" id="footer-cookie-settings">
+                                                                                {isEn ? 'Cookie Settings' : 'Cookie-Einstellungen'}
+                                                                        </button>
+                                                                </li>
+                                                                <li class="footer-stack-gap" aria-hidden="true"></li>
+                                                                <li>
+                                                                        <a
+                                                                                href={FB_PAGE_BIFODE}
+                                                                                target="_blank"
+                                                                                rel="noopener noreferrer"
+                                                                                class="footer-social-link"
+                                                                        >
+                                                                                Facebook ↗
+                                                                        </a>
+                                                                </li>
+                                                        </ul>
+                                                </div>
                                         </div>
                                 </div>
 
-                                {!isEn && (
-                                        <div class="container footer-legal-note">
-                                                <p>
-                                                        <span class="footer-legal-label">Hinweis</span>
-                                                        <span class="footer-legal-text">
-                                                          Unsere Angebote dienen der Bildung, Orientierung und allgemeinen Information.
-                                                          Sie ersetzen keine individuelle Rechts-, Steuer- oder Einwanderungsberatung. Bei Bedarf verweisen wir auf zuständige Stellen oder qualifizierte Fachpersonen.
-                                                        </span>
-                                                </p>
-                                        </div>
-                                )}
+                                <div class="container footer-legal-note">
+                                        <p>{footerDisclaimer}</p>
+                                </div>
 
                                 <div class="footer-bottom">
                                         <div class="container">
@@ -551,9 +693,20 @@ const orgJsonLd = JSON.stringify({
                 align-items: center;
                 flex-wrap: wrap;
                 justify-content: flex-end;
-                gap: 0.35rem 1.15rem;
+                gap: 0.3rem 0.9rem;
                 flex: 1;
                 min-width: 0;
+        }
+
+        @media (min-width: 1025px) and (max-width: 1200px) {
+                .nav-links {
+                        gap: 0.25rem 0.65rem;
+                }
+
+                .nav-links .nav-top-link,
+                .nav-drop-summary {
+                        font-size: 0.9rem;
+                }
         }
 
         .nav-links .nav-top-link,
@@ -576,6 +729,13 @@ const orgJsonLd = JSON.stringify({
         .nav-links .nav-drop-panel a[aria-current='page'] {
                 color: var(--primary);
                 border-bottom-color: var(--primary);
+        }
+
+        .nav-top-link--external::after {
+                content: '↗';
+                font-size: 0.72em;
+                margin-left: 0.15em;
+                opacity: 0.75;
         }
 
         .nav-drop {
@@ -750,85 +910,63 @@ const orgJsonLd = JSON.stringify({
         }
 
         .footer {
-                background: linear-gradient(180deg, #0f2741 0%, #0b1e35 100%);
-                color: #d4dfeb;
-                padding: 3rem 0 2rem;
+                background: linear-gradient(180deg, #122a45 0%, #0f2439 100%);
+                color: #b8c5d6;
+                padding: 3.25rem 0 1.75rem;
         }
 
-        .footer-grid {
+        .footer-shell {
                 display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 2rem;
+                grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+                gap: 2.5rem 3rem;
+                align-items: start;
         }
 
-        .footer-todo {
-                color: #94a3b8;
+        .footer-columns {
+                display: grid;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 1.75rem 2rem;
+        }
+
+        .footer-brand-text {
+                margin: 0;
                 font-size: 0.9rem;
+                line-height: 1.65;
+                color: #94a3b8;
+                max-width: 28rem;
         }
 
         .footer-legal-note {
-                margin-top: 1.5rem;
+                margin-top: 2rem;
                 padding-top: 1.25rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .footer-legal-note p {
                 margin: 0;
-                font-size: 0.85rem;
+                font-size: 0.78rem;
                 line-height: 1.55;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.35rem 0.5rem;
-        }
-
-        .footer-legal-label {
-                flex-shrink: 0;
-                font-weight: 700;
-                font-size: 0.8rem;
-                letter-spacing: 0.04em;
-                text-transform: uppercase;
-                color: #7dd3fc;
-        }
-
-        .footer-legal-text {
-                flex: 1 1 16rem;
-                color: #94a3b8;
+                color: #64748b;
+                max-width: 72rem;
         }
 
         .footer-logo {
-                display: block;
-                margin-bottom: 1rem;
+                display: inline-block;
+                margin-bottom: 1.15rem;
         }
 
         .footer-logo img {
-                height: 40px;
+                height: 36px;
                 width: auto;
-                opacity: 0.95;
-        }
-
-        .footer-logo span {
-                font-weight: 600;
-                color: #ffffff;
-        }
-
-        .footer h3 {
-                color: #ffffff;
-                font-size: 1.25rem;
-                font-weight: 600;
-                margin-bottom: 0.5rem;
+                opacity: 0.92;
         }
 
         .footer h4 {
-                color: #ffffff;
-                font-size: 1rem;
+                color: #f1f5f9;
+                font-size: 0.82rem;
                 font-weight: 600;
-                margin-bottom: 1rem;
-        }
-
-        .footer p {
-                color: #cbd5e1;
-                line-height: 1.6;
-                margin-bottom: 1rem;
+                letter-spacing: 0.02em;
+                margin: 0 0 0.85rem;
         }
 
         .footer ul {
@@ -837,13 +975,19 @@ const orgJsonLd = JSON.stringify({
                 margin: 0;
         }
 
-        .footer li {
-                margin-bottom: 0.5rem;
+        .footer-col li {
+                margin-bottom: 0.55rem;
+        }
+
+        .footer-col li:last-child {
+                margin-bottom: 0;
         }
 
         .footer a {
-                color: #cbd5e1;
+                color: #94a3b8;
                 text-decoration: none;
+                font-size: 0.9rem;
+                line-height: 1.45;
                 transition: color 0.2s ease;
         }
 
@@ -851,30 +995,73 @@ const orgJsonLd = JSON.stringify({
                 background: transparent;
                 border: none;
                 padding: 0;
-                color: #cbd5e1;
+                color: #94a3b8;
                 font: inherit;
+                font-size: 0.9rem;
                 cursor: pointer;
                 text-align: left;
         }
 
-        .footer a:hover {
-                color: #ffffff;
-        }
-
+        .footer a:hover,
         .footer-cookie-button:hover {
                 color: #ffffff;
         }
 
+        .footer-cta-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.65rem;
+        }
+
+        .footer-cta-list li {
+                margin-bottom: 0;
+        }
+
+        .footer-cta {
+                display: inline-flex;
+                align-items: center;
+                padding: 0.42rem 0.7rem;
+                border: 1px solid rgba(255, 255, 255, 0.28);
+                border-radius: 6px;
+                color: #e2e8f0 !important;
+                font-weight: 600;
+                font-size: 0.84rem !important;
+                transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .footer-cta:hover {
+                background: rgba(255, 255, 255, 0.07);
+                border-color: rgba(255, 255, 255, 0.45);
+                color: #ffffff !important;
+        }
+
+        .footer-contact-stack .footer-stack-gap {
+                height: 0;
+                margin: 0.35rem 0 0.5rem;
+                padding: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                pointer-events: none;
+        }
+
+        .footer-social-link {
+                font-size: 0.86rem !important;
+                color: #64748b !important;
+        }
+
+        .footer-social-link:hover {
+                color: #ffffff !important;
+        }
+
         .footer-bottom {
-                margin-top: 2rem;
+                margin-top: 1.5rem;
                 padding-top: 1rem;
-                border-top: 1px solid rgba(255,255,255,0.1);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
                 text-align: center;
-                font-size: 0.9rem;
+                font-size: 0.82rem;
         }
 
         .footer-bottom p {
-                color: #cbd5e1;
+                color: #64748b;
                 margin: 0;
         }
 
@@ -906,7 +1093,8 @@ const orgJsonLd = JSON.stringify({
                 }
 
                 .navbar.is-open .nav-links {
-                        max-height: 920px;
+                        max-height: calc(100vh - 72px);
+                        overflow-y: auto;
                 }
 
                 .nav-links .nav-top-link {
@@ -975,36 +1163,31 @@ const orgJsonLd = JSON.stringify({
                         position: relative;
                 }
 
-                .footer-grid {
-                        grid-template-columns: 1fr 1fr;
-                        column-gap: 1.25rem;
-                        row-gap: 1.75rem;
+                .footer-shell {
+                        grid-template-columns: 1fr;
+                        gap: 2rem;
                 }
 
-                .footer-about {
+                .footer-columns {
+                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                        gap: 1.5rem 1.75rem;
+                }
+
+                .footer-col-contact {
+                        grid-column: span 3;
+                }
+	}
+
+        @media (max-width: 768px) {
+                .footer-columns {
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 1.35rem 1.25rem;
+                }
+
+                .footer-col-contact {
                         grid-column: 1 / -1;
                 }
-
-		.footer-nav {
-			display: none;
-		}
-
-		.footer-community {
-			grid-column: 1;
-			grid-row: 2;
-		}
-
-		.footer-legal {
-			grid-column: 2;
-			grid-row: 2;
-			margin-top: 0;
-		}
-
-		.footer-contact {
-			grid-column: 1 / -1;
-			grid-row: 3;
-		}
-	}
+        }
 
         @media (max-width: 640px) {
                 .logo img.logo-main {
@@ -1021,9 +1204,13 @@ const orgJsonLd = JSON.stringify({
                         padding: 2.5rem 0 1.5rem;
                 }
 
-                .footer-grid {
-                        column-gap: 1rem;
-                        row-gap: 1.35rem;
+                .footer-columns {
+                        grid-template-columns: 1fr;
+                        gap: 1.5rem;
+                }
+
+                .footer-col-contact {
+                        grid-column: auto;
                 }
 
                 .card h3,

@@ -1,41 +1,247 @@
 ---
-const partners = [
-  { name: 'Bildungsnetzwerk NRW', initial: 'BN' },
-  { name: 'Zivilgesellschaftliche Initiative', initial: 'ZI' },
-  { name: 'Kommunale Bildungsstelle', initial: 'KB' },
-  { name: 'Schulträger Kooperation', initial: 'SK' },
-  { name: 'Fachstelle Demokratie', initial: 'FD' },
-];
+import { Image } from 'astro:assets';
+import { partners } from '../lib/partners';
+
+const { lang = 'de' } = Astro.props as { lang?: 'de' | 'en' };
+const isEn = lang === 'en';
+
+const logoModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/partners/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+function resolveLogo(file: string): ImageMetadata | undefined {
+  const key = `../assets/partners/${file}`;
+  return logoModules[key]?.default;
+}
+
+const prevLabel = isEn ? 'Previous partner' : 'Vorheriger Partner';
+const nextLabel = isEn ? 'Next partner' : 'Nächster Partner';
 ---
 
-<div class="partner-grid">
-  {partners.map((partner) => (
-    <div class="partner-card">
-      <span class="partner-logo" aria-hidden="true">{partner.initial}</span>
-      <span class="partner-name">{partner.name}</span>
+<div class="partner-carousel" data-partner-carousel>
+  <button
+    type="button"
+    class="partner-carousel-btn partner-carousel-btn-prev"
+    data-partner-prev
+    aria-label={prevLabel}
+    hidden
+  >
+    ‹
+  </button>
+
+  <div class="partner-carousel-viewport">
+    <div class="partner-carousel-track" data-partner-track tabindex="0">
+      {
+        partners.map((partner) => {
+          const logo = resolveLogo(partner.logoFile);
+          const label = isEn || !partner.nameDe ? partner.name : partner.nameDe;
+
+          return partner.href ? (
+            <a
+              class="partner-card"
+              href={partner.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-partner-card
+            >
+              <div class="partner-logo-wrap">
+                {logo ? (
+                  <Image
+                    src={logo}
+                    alt={partner.logoAlt ?? label}
+                    width={logo.width}
+                    height={logo.height}
+                    class="partner-logo-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="partner-logo-missing" title="Logo file missing">
+                    {partner.logoFile}
+                  </span>
+                )}
+              </div>
+              <span class="partner-name">{label}</span>
+            </a>
+          ) : (
+            <div class="partner-card" data-partner-card>
+              <div class="partner-logo-wrap">
+                {logo ? (
+                  <Image
+                    src={logo}
+                    alt={partner.logoAlt ?? label}
+                    width={logo.width}
+                    height={logo.height}
+                    class="partner-logo-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="partner-logo-missing" title="Logo file missing">
+                    {partner.logoFile}
+                  </span>
+                )}
+              </div>
+              <span class="partner-name">{label}</span>
+            </div>
+          );
+        })
+      }
     </div>
-  ))}
+  </div>
+
+  <button
+    type="button"
+    class="partner-carousel-btn partner-carousel-btn-next"
+    data-partner-next
+    aria-label={nextLabel}
+    hidden
+  >
+    ›
+  </button>
 </div>
 
+<script>
+  function initPartnerCarousel() {
+    const root = document.querySelector('[data-partner-carousel]');
+    const track = document.querySelector('[data-partner-track]');
+    const prev = document.querySelector('[data-partner-prev]');
+    const next = document.querySelector('[data-partner-next]');
+    if (!(root instanceof HTMLElement) || !(track instanceof HTMLElement)) return;
+    if (!(prev instanceof HTMLButtonElement) || !(next instanceof HTMLButtonElement)) return;
+
+    const scrollByCard = (direction: -1 | 1) => {
+      const card = track.querySelector('[data-partner-card]');
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 16;
+      const step = card instanceof HTMLElement ? card.offsetWidth + gap : track.clientWidth * 0.85;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      track.scrollBy({ left: direction * step, behavior: prefersReduced ? 'auto' : 'smooth' });
+    };
+
+    const updateButtons = () => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const overflow = maxScroll > 4;
+      prev.hidden = !overflow || track.scrollLeft <= 4;
+      next.hidden = !overflow || track.scrollLeft >= maxScroll - 4;
+      root.dataset.overflow = overflow ? 'true' : 'false';
+    };
+
+    prev.addEventListener('click', () => scrollByCard(-1));
+    next.addEventListener('click', () => scrollByCard(1));
+    track.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons, { passive: true });
+    updateButtons();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPartnerCarousel, { once: true });
+  } else {
+    initPartnerCarousel();
+  }
+</script>
+
 <style>
-  .partner-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+  .partner-carousel {
+    position: relative;
+    width: 100%;
     margin-top: 1.5rem;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+  }
+
+  .partner-carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .partner-carousel[data-overflow='false'] .partner-carousel-track {
+    justify-content: center;
+  }
+
+  .partner-carousel-track {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 1rem;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.15rem 0.25rem 0.35rem;
+  }
+
+  .partner-carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .partner-carousel-track:focus-visible {
+    outline: 2px solid #163b63;
+    outline-offset: 4px;
+    border-radius: 0.5rem;
+  }
+
+  .partner-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #163b63;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(15, 42, 69, 0.1);
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .partner-carousel-btn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f2e50;
+  }
+
+  .partner-carousel-btn:focus-visible {
+    outline: 2px solid #163b63;
+    outline-offset: 2px;
+  }
+
+  .partner-carousel-btn-prev {
+    left: 0;
+  }
+
+  .partner-carousel-btn-next {
+    right: 0;
   }
 
   .partner-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 1rem;
+    gap: 0.65rem;
+    padding: 1.1rem 1.25rem 1.2rem;
     border: 1px solid #e2e8f0;
     border-radius: 0.75rem;
     background: #fff;
+    color: inherit;
     text-decoration: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    flex: 0 0 280px;
+    width: 280px;
+    min-width: 280px;
+    max-width: none;
+    scroll-snap-align: start;
   }
 
   .partner-card:hover {
@@ -44,19 +250,34 @@ const partners = [
     transform: translateY(-2px);
   }
 
-  .partner-logo {
+  .partner-logo-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 140px;
-    height: 64px;
+    padding: 0.55rem 0.85rem;
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
     border-radius: 0.5rem;
-    background: #e2e8f0;
-    color: #64748b;
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: 0.04em;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .partner-logo-img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 92px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .partner-logo-missing {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-align: center;
+    word-break: break-all;
   }
 
   .partner-name {
@@ -67,20 +288,33 @@ const partners = [
     line-height: 1.35;
   }
 
-  @media (max-width: 900px) {
-    .partner-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 640px) {
+    .partner-carousel {
+      padding: 0 1.75rem;
+    }
+
+    .partner-card {
+      flex: 0 0 260px;
+      width: 260px;
+      min-width: 260px;
+    }
+
+    .partner-logo-wrap {
+      padding: 0.45rem 0.65rem;
+    }
+
+    .partner-logo-img {
+      max-height: 80px;
     }
   }
 
-  @media (max-width: 480px) {
-    .partner-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
+  @media (prefers-reduced-motion: reduce) {
+    .partner-carousel-track {
+      scroll-behavior: auto;
     }
 
-    .partner-logo {
-      height: 56px;
+    .partner-card:hover {
+      transform: none;
     }
   }
 </style>

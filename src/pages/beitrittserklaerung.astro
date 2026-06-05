@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import { getSpendenBankDetails } from '../lib/spendenBank';
+import { SATZUNG_PAGE_DE } from '../lib/vereinDocs';
 import { MONTHLY_EUR, formatEur, getMembershipFeeAmounts } from '../lib/membershipFees';
 
 const { monthlyStudent, annualStandard, annualStudent } = getMembershipFeeAmounts();
@@ -122,8 +123,8 @@ const pageDescription =
       <h2>3. Erklärungen</h2>
       <ol class="beitritt-list">
         <li>
-          Ich habe die Satzung von BiFoDe e.V. zur Kenntnis genommen und erkenne sie an, sobald sie mir vom Verein
-          übermittelt wurde bzw. veröffentlicht ist.
+          Ich habe die <a href={SATZUNG_PAGE_DE}>Satzung</a> von BiFoDe e.V.
+          zur Kenntnis genommen und erkenne sie an.
         </li>
         <li>
           Ich verpflichte mich, den vom Verein festgelegten Mitgliedsbeitrag fristgerecht zu entrichten.

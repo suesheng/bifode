@@ -7,12 +7,14 @@ const {
   cooperationHref,
   cooperationLabel,
   mobileHidden = false,
+  lang = 'de',
 } = Astro.props as {
   label: string;
   partnerTitle?: string;
   cooperationHref?: string;
   cooperationLabel?: string;
   mobileHidden?: boolean;
+  lang?: 'de' | 'en';
 };
 ---
 
@@ -20,7 +22,7 @@ const {
   <div class="container trust-content">
     {partnerTitle && <h2 class="trust-partner-title">{partnerTitle}</h2>}
     <p class="trust-label">{label}</p>
-    <PartnerGrid />
+    <PartnerGrid lang={lang} />
     {cooperationHref && cooperationLabel && (
       <p class="trust-cooperation">
         <a href={cooperationHref}>{cooperationLabel}</a>

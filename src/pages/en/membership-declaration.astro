@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getSpendenBankDetails } from '../../lib/spendenBank';
+import { SATZUNG_PAGE_EN } from '../../lib/vereinDocs';
 import { MONTHLY_EUR, formatEur, getMembershipFeeAmounts } from '../../lib/membershipFees';
 
 const { monthlyStudent, annualStandard, annualStudent } = getMembershipFeeAmounts();
@@ -123,8 +124,8 @@ const pageDescription =
       <h2>3. Declarations</h2>
       <ol class="beitritt-list">
         <li>
-          I have taken note of the statutes of BiFoDe e.V. and accept them once provided or published by the
-          association.
+          I have read the <a href={SATZUNG_PAGE_EN}>statutes</a> of BiFoDe
+          e.V. (German) and accept them.
         </li>
         <li>I undertake to pay the membership fee determined by the association on time.</li>
         <li>

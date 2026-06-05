@@ -1,0 +1,346 @@
+---
+interface Props {
+  showTitle?: boolean;
+}
+
+const { showTitle = true } = Astro.props;
+---
+
+<article class="satzung-doc" lang="de">
+  {showTitle && (
+    <header class="satzung-doc-header">
+      <h1>Satzung</h1>
+      <p class="satzung-doc-meta">
+        Verein „Bildungsforum für Demokratie und Vielfalt NRW“ (e.V.) · beschlossen am 22.12.2025
+      </p>
+    </header>
+  )}
+
+  <section>
+    <h2>§ 1 Name, Sitz, Geschäftsjahr</h2>
+    <ol>
+      <li>Der Verein führt den Namen „Bildungsforum für Demokratie und Vielfalt NRW“.</li>
+      <li>Er soll in das Vereinsregister eingetragen werden und führt danach den Zusatz „e.V.“.</li>
+      <li>Sitz des Vereins ist Solingen.</li>
+      <li>Geschäftsjahr ist das Kalenderjahr.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 2 Charakter als Migrantenselbstorganisation (MSO)</h2>
+    <ol>
+      <li>Der Verein ist eine Migrantenselbstorganisation (MSO) im Land Nordrhein-Westfalen.</li>
+      <li>
+        Im Verein engagieren sich Menschen mit und ohne internationale Familiengeschichte; maßgeblich an der
+        inhaltlichen Ausrichtung beteiligt sind Personen mit (post-)migrantischer Biografie.
+      </li>
+      <li>
+        Der Verein arbeitet in enger Kooperation mit anderen MSOs sowie Bildungs- und zivilgesellschaftlichen
+        Einrichtungen.
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 3 Zweck und Gemeinnützigkeit</h2>
+    <ol>
+      <li>
+        Der Verein verfolgt ausschließlich und unmittelbar gemeinnützige Zwecke im Sinne des Abschnitts
+        „Steuerbegünstigte Zwecke“ der Abgabenordnung (AO).
+      </li>
+      <li>
+        Zweck des Vereins ist:
+        <ul>
+          <li>die Förderung der Erziehung,</li>
+          <li>die Förderung der Volks- und Berufsbildung einschließlich der Studentenhilfe,</li>
+          <li>die Förderung der Jugendhilfe,</li>
+          <li>
+            die Förderung der internationalen Gesinnung, der Toleranz auf allen Gebieten der Kultur und des
+            Völkerverständigungsgedankens,
+          </li>
+          <li>sowie die Förderung des demokratischen Staatswesens.</li>
+        </ul>
+      </li>
+      <li>
+        Der Verein entwickelt und realisiert niedrigschwellige, lebensweltnahe und mehrsprachige
+        Bildungsangebote für Kinder, Jugendliche, Familien und Erwachsene, die Bildungswege unterstützen,
+        Teilhabechancen verbessern und demokratische Kompetenzen stärken.
+      </li>
+      <li>
+        Der Satzungszweck wird insbesondere verwirklicht durch:
+        <ul class="satzung-sublist">
+          <li>a) Bildungsarbeit mit Kindern,</li>
+          <li>b) Bildungsarbeit mit Jugendlichen,</li>
+          <li>c) Bildungsarbeit mit Familien,</li>
+          <li>d) Bildungsarbeit mit Erwachsenen,</li>
+          <li>
+            e) Kooperationen mit Schulen, Kitas, Jugendhilfe, Hochschulen und weiteren zivilgesellschaftlichen
+            Akteuren,
+          </li>
+          <li>f) Erstellung und Verbreitung analoger und digitaler Materialien.</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 4 Selbstlosigkeit und Mittelverwendung</h2>
+    <ol>
+      <li>Der Verein ist selbstlos tätig; er verfolgt nicht in erster Linie eigenwirtschaftliche Zwecke.</li>
+      <li>Mittel des Vereins dürfen nur für die satzungsgemäßen Zwecke verwendet werden.</li>
+      <li>Die Mitglieder erhalten keine Zuwendungen aus Mitteln des Vereins.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 5 Verbot der Begünstigung</h2>
+    <ol>
+      <li>
+        Es darf keine Person durch Ausgaben, die dem Zweck des Vereins fremd sind, oder durch
+        unverhältnismäßig hohe Vergütungen begünstigt werden.
+      </li>
+      <li>
+        Ehrenamtlich Tätige haben Anspruch auf Ersatz nachgewiesener Auslagen. Der Vorstand kann im Rahmen der
+        gesetzlichen Möglichkeiten Aufwandsentschädigungen beschließen.
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 6 Überparteilichkeit und Unabhängigkeit</h2>
+    <ol>
+      <li>Der Verein ist überparteilich und konfessionell ungebunden.</li>
+      <li>Er verfolgt keine parteipolitischen Zwecke.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 7 Mitgliedschaft</h2>
+    <ol>
+      <li>Mitglied des Vereins kann jede natürliche Person werden, die die Ziele des Vereins unterstützt.</li>
+      <li>Juristische Personen können als fördernde Mitglieder aufgenommen werden.</li>
+      <li>
+        Der Antrag auf Aufnahme ist schriftlich oder in Textform an den Vorstand zu richten. Über die Aufnahme
+        entscheidet der Vorstand.
+      </li>
+      <li>Mit der Aufnahme erkennt das Mitglied die Satzung und die Beitragsordnung an.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 8 Beendigung der Mitgliedschaft</h2>
+    <ol>
+      <li>Die Mitgliedschaft endet durch Austritt, Ausschluss, Tod oder Auflösung der juristischen Person.</li>
+      <li>
+        Der Austritt ist gegenüber dem Vorstand schriftlich oder in Textform zu erklären; er ist mit einer Frist
+        von drei Monaten zum Ende des Geschäftsjahres möglich.
+      </li>
+      <li>
+        Ein Ausschluss ist möglich, wenn ein Mitglied in grober Weise gegen die Satzung, die Ziele oder die
+        Interessen des Vereins verstößt oder mit Beiträgen trotz Mahnung im Rückstand ist.
+      </li>
+      <li>
+        Über den Ausschluss entscheidet der Vorstand; dem Mitglied ist Gelegenheit zur Stellungnahme zu geben.
+        Gegen den Beschluss kann die Mitgliederversammlung angerufen werden.
+      </li>
+      <li>
+        Mit Beendigung der Mitgliedschaft erlöschen alle Mitgliedsrechte; Beitragspflichten für die Vergangenheit
+        bleiben unberührt.
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 9 Mitgliedsbeiträge</h2>
+    <ol>
+      <li>Von den Mitgliedern werden Beiträge erhoben.</li>
+      <li>Höhe und Fälligkeit regelt eine von der Mitgliederversammlung beschlossene Beitragsordnung.</li>
+      <li>In begründeten Fällen kann der Vorstand Beiträge stunden, ermäßigen oder erlassen.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 10 Organe des Vereins</h2>
+    <p>Organe des Vereins sind:</p>
+    <ul>
+      <li>die Mitgliederversammlung,</li>
+      <li>der Vorstand,</li>
+      <li>ggf. ein Beirat.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>§ 11 Mitgliederversammlung</h2>
+    <ol>
+      <li>Die Mitgliederversammlung ist das oberste Organ des Vereins.</li>
+      <li>Sie findet mindestens einmal jährlich als ordentliche Mitgliederversammlung statt.</li>
+      <li>
+        Sie wird vom Vorstand mit einer Frist von mindestens zwei Wochen unter Angabe der Tagesordnung
+        schriftlich oder in Textform einberufen.
+      </li>
+      <li>
+        Eine außerordentliche Mitgliederversammlung ist einzuberufen, wenn es das Interesse des Vereins
+        erfordert oder wenn mindestens ein Zehntel der stimmberechtigten Mitglieder dies schriftlich verlangt.
+      </li>
+      <li>
+        Die Mitgliederversammlung ist ohne Rücksicht auf die Zahl der erschienenen Mitglieder beschlussfähig,
+        sofern ordnungsgemäß eingeladen wurde.
+      </li>
+      <li>Jedes Mitglied hat eine Stimme; eine Übertragung ist ausgeschlossen.</li>
+      <li>
+        Beschlüsse werden mit einfacher Mehrheit gefasst, soweit die Satzung nichts anderes bestimmt.
+        Stimmenthaltungen gelten als nicht abgegebene Stimmen.
+      </li>
+      <li>
+        Über die Mitgliederversammlung ist ein Protokoll zu führen, das von der Versammlungsleitung und der
+        Protokollführung zu unterzeichnen ist.
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 12 Vorstand</h2>
+    <ol>
+      <li>
+        Vorstand im Sinne des § 26 BGB. Der Vorstand im Sinne des § 26 BGB besteht aus:
+        <ul class="satzung-sublist">
+          <li>a) der/dem 1. Vorsitzenden,</li>
+          <li>b) der/dem stellvertretenden Vorsitzenden,</li>
+          <li>c) der/dem Schatzmeister/in.</li>
+        </ul>
+      </li>
+      <li>
+        Vertretung: Der Verein wird gerichtlich und außergerichtlich durch die/den 1. Vorsitzende/n allein
+        vertreten.
+      </li>
+      <li>
+        Wahl und Amtszeit: Die Mitglieder des Vorstands werden von der Mitgliederversammlung für die Dauer von
+        zwei Jahren gewählt. Sie bleiben bis zur Neuwahl im Amt. Wiederwahl ist zulässig.
+      </li>
+      <li>
+        Vorzeitiges Ausscheiden: Scheidet ein Vorstandsmitglied vorzeitig aus, kann der Vorstand ein
+        kommissarisches Mitglied bis zur nächsten Mitgliederversammlung berufen.
+      </li>
+      <li>
+        Aufgaben des Vorstandes:
+        <ul>
+          <li>Vorbereitung und Einberufung der Mitgliederversammlung,</li>
+          <li>Ausführung der Beschlüsse,</li>
+          <li>Verwaltung des Vereinsvermögens,</li>
+          <li>Aufnahme und Ausschluss von Mitgliedern,</li>
+          <li>Erstellung einer Geschäftsordnung,</li>
+          <li>Bestellung eines Geschäftsführers und Einstellung von Mitarbeitern.</li>
+        </ul>
+      </li>
+      <li>
+        Geschäftsordnung und Beschlussfassung: Der Vorstand fasst seine Beschlüsse mit einfacher Mehrheit. Bei
+        Stimmengleichheit entscheidet die Stimme der/des 1. Vorsitzenden.
+      </li>
+      <li>
+        Vergütung: Die Vorstandsmitglieder sind grundsätzlich ehrenamtlich tätig und erhalten nur Ersatz
+        nachgewiesener Auslagen.
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 13 Satzungsänderungen</h2>
+    <ol>
+      <li>
+        Satzungsänderungen bedürfen einer Mehrheit von zwei Dritteln der abgegebenen gültigen Stimmen der
+        Mitgliederversammlung.
+      </li>
+      <li>Anträge auf Satzungsänderungen sind mit der Einladung bekannt zu geben.</li>
+      <li>Formale Änderungen durch Registergericht oder Finanzamt kann der Vorstand vornehmen.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 14 Auflösung und Vermögensbindung</h2>
+    <ol>
+      <li>
+        Die Auflösung des Vereins kann nur von einer zu diesem Zweck einberufenen Mitgliederversammlung
+        beschlossen werden. Der Beschluss bedarf einer Mehrheit von drei Vierteln der abgegebenen gültigen
+        Stimmen.
+      </li>
+      <li>
+        Bei Auflösung des Vereins oder Wegfall steuerbegünstigter Zwecke fällt das Vermögen des Vereins an eine
+        steuerbegünstigte Körperschaft zur Förderung von Bildung und Demokratie.
+      </li>
+      <li>Beschlüsse über die Verwendung dürfen erst nach Einwilligung des Finanzamts ausgeführt werden.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>§ 15 Inkrafttreten</h2>
+    <ol>
+      <li>
+        Diese Satzung wurde am 22.12.2025 beschlossen und tritt mit Eintragung in das Vereinsregister in Kraft.
+      </li>
+    </ol>
+    <p class="satzung-place-date">Solingen, den 22.12.2025</p>
+  </section>
+</article>
+
+<style>
+  .satzung-doc {
+    color: #1e293b;
+    line-height: 1.7;
+  }
+
+  .satzung-doc-header h1 {
+    margin: 0 0 0.35rem;
+    font-size: 2rem;
+    color: #0f172a;
+  }
+
+  .satzung-doc-meta {
+    margin: 0 0 1.75rem;
+    color: #64748b;
+    font-size: 0.95rem;
+  }
+
+  .satzung-doc section {
+    margin-bottom: 1.75rem;
+  }
+
+  .satzung-doc h2 {
+    margin: 0 0 0.65rem;
+    font-size: 1.15rem;
+    color: #0f172a;
+  }
+
+  .satzung-doc ol {
+    margin: 0;
+    padding-left: 1.35rem;
+  }
+
+  .satzung-doc ol > li + li {
+    margin-top: 0.65rem;
+  }
+
+  .satzung-doc ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .satzung-doc ul li + li {
+    margin-top: 0.35rem;
+  }
+
+  .satzung-sublist {
+    list-style-type: lower-alpha;
+  }
+
+  .satzung-place-date {
+    margin: 1rem 0 0;
+    font-style: italic;
+    color: #475569;
+  }
+
+  @media print {
+    .satzung-doc section {
+      break-inside: avoid-page;
+    }
+  }
+</style>

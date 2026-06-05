@@ -1,0 +1,47 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import SatzungDocument from '../components/SatzungDocument.astro';
+---
+
+<MainLayout
+  title="Satzung"
+  description="Satzung von BiFoDe e.V. (Bildungsforum für Demokratie und Vielfalt NRW e.V.)."
+>
+  <div class="container satzung-page">
+    <p class="satzung-intro">
+      Die Satzung regelt Zweck, Mitgliedschaft, Organe und Beiträge des Vereins. Für die Aufnahme als Mitglied
+      ist die Kenntnisnahme erforderlich.
+    </p>
+    <SatzungDocument />
+    <p class="satzung-footer-note">
+      Fragen: <a href="mailto:info@bifode.org">info@bifode.org</a> ·{' '}
+      <a href="/mitglied-werden">Mitgliedschaft beantragen</a>
+    </p>
+  </div>
+</MainLayout>
+
+<style>
+  .satzung-page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+  }
+
+  .satzung-intro {
+    margin: 0 0 1.5rem;
+    color: #334155;
+    line-height: 1.65;
+  }
+
+  .satzung-footer-note {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .satzung-page a {
+    color: #163b63;
+  }
+</style>

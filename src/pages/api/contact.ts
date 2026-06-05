@@ -31,6 +31,8 @@ function createMessages(locale: Locale) {
       message: 'Message',
       subject: 'Subject',
       success: 'Thank you, we have received your request.',
+      membershipSuccess:
+        'Thank you — we have received your membership application. We will contact you shortly with the next steps.',
       failure: 'Sending failed. Please try again later.',
       rateLimited: 'Too many requests. Please try again in a few minutes.',
       autoReplySubject: 'We have received your request',
@@ -53,6 +55,8 @@ function createMessages(locale: Locale) {
     message: 'Nachricht',
     subject: 'Betreff',
     success: 'Vielen Dank, wir haben Ihre Anfrage erhalten.',
+    membershipSuccess:
+      'Vielen Dank — wir haben Ihre Anfrage auf Mitgliedschaft erhalten. Wir melden uns in Kürze mit den nächsten Schritten zur Aufnahme.',
     failure: 'Versand fehlgeschlagen. Bitte später erneut versuchen.',
     rateLimited: 'Zu viele Anfragen. Bitte in einigen Minuten erneut versuchen.',
     autoReplySubject: 'Wir haben Ihre Anfrage erhalten',
@@ -143,9 +147,16 @@ export const POST: APIRoute = async ({ request }) => {
     const street = String(body?.street || '').trim();
     const postalCode = String(body?.postalCode || '').trim();
     const city = String(body?.city || '').trim();
-    const membershipType = String(body?.membershipType || '').trim();
-    const billing = String(body?.billing || '').trim();
-    const isStudent = Boolean(body?.isStudent);
+    const membershipTariff = String(body?.membershipTariff || '').trim();
+    let membershipType = String(body?.membershipType || '').trim();
+    const billing = String(body?.billing || '').trim() || membershipType;
+    let isStudent = Boolean(body?.isStudent);
+    if (membershipTariff.includes('student')) {
+      isStudent = true;
+    } else if (membershipTariff) {
+      isStudent = false;
+    }
+    const admissionAccepted = Boolean(body?.admissionAccepted);
     const interests = Array.isArray(body?.interests)
       ? body.interests.map((o) => String(o).trim()).filter(Boolean)
       : [];
@@ -177,20 +188,24 @@ export const POST: APIRoute = async ({ request }) => {
         subject = `[Israel Community] ${interest}`;
       }
     } else if (isMembership) {
+      if (!membershipType && membershipTariff) {
+        membershipType = membershipTariff;
+      }
       if (
         !firstName ||
         !lastName ||
         !email ||
         !privacyAccepted ||
+        !admissionAccepted ||
         !membershipType ||
-        !billing ||
+        !street ||
         !postalCode ||
         !city
       ) {
         return json({ ok: false, message: t.required }, 400);
       }
       if (!subject) {
-        subject = `[Mitgliedschaft] ${membershipType} · ${billing}${isStudent ? ' · mit Studierenden-Ermäßigung' : ''}`;
+        subject = `[Mitgliedschaft] ${membershipType}${isStudent ? ' · Studierende' : ''}`;
       }
     } else if (!name || !email || !subject || !message || !privacyAccepted) {
       return json({ ok: false, message: t.required }, 400);
@@ -238,9 +253,9 @@ export const POST: APIRoute = async ({ request }) => {
           `Straße: ${street || '-'}`,
           `PLZ: ${postalCode}`,
           `Ort: ${city}`,
-          `Mitgliedschaftsart: ${membershipType}`,
-          `Zahlungsweise: ${billing}`,
+          `Mitgliedsbeitrag: ${membershipType}`,
           `Studierenden-Ermäßigung: ${isStudent ? 'ja (Nachweis folgt)' : 'nein'}`,
+          `Aufnahme beantragt: ja`,
           `Interessen: ${interests.length ? interests.join(', ') : '-'}`,
           `Newsletter: ${newsletter ? 'ja' : 'nein'}`,
           `Quelle: ${pageSource || '-'}`
@@ -301,9 +316,9 @@ export const POST: APIRoute = async ({ request }) => {
         <p><strong>Nachname:</strong> ${safe(lastName)}</p>
         <p><strong>Telefon:</strong> ${safe(phone || '-')}</p>
         <p><strong>Adresse:</strong> ${safe(street || '-')}, ${safe(postalCode)} ${safe(city)}</p>
-        <p><strong>Mitgliedschaftsart:</strong> ${safe(membershipType)}</p>
-        <p><strong>Zahlungsweise:</strong> ${safe(billing)}</p>
-        <p><strong>Studierende (30 %):</strong> ${safe(isStudent ? 'ja (Nachweis folgt)' : 'nein')}</p>
+        <p><strong>Mitgliedsbeitrag:</strong> ${safe(membershipType)}</p>
+        <p><strong>Studierenden-Ermäßigung:</strong> ${safe(isStudent ? 'ja (Nachweis folgt)' : 'nein')}</p>
+        <p><strong>Aufnahme beantragt:</strong> ja</p>
         <p><strong>Interessen:</strong> ${safe(interests.length ? interests.join(', ') : '-')}</p>
         <p><strong>Newsletter:</strong> ${newsletter ? 'ja' : 'nein'}</p>
       `
@@ -344,7 +359,10 @@ export const POST: APIRoute = async ({ request }) => {
       console.warn('Auto-reply failed:', autoReplyError);
     }
 
-    return json({ ok: true, message: t.success });
+    return json({
+      ok: true,
+      message: isMembership ? t.membershipSuccess : t.success
+    });
   } catch (error) {
     console.error('Contact API error:', error);
     return json({ ok: false, message: mapSmtpError(error, locale) }, 500);
