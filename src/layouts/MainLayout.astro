@@ -44,10 +44,10 @@ const navStructure: NavEntry[] = isEn
       },
       {
         kind: 'group',
-        label: 'Programs',
+        label: 'Programmes',
         items: [
           { href: '/en/schools', label: 'Schools' },
-          { href: '/en/ulpan', label: 'Ulpan Next' },
+          { href: '/en/projects/ulpan-next', label: 'Ulpan Next' },
           { href: '/en/moodle', label: 'Moodle' }
         ]
       },
@@ -56,7 +56,7 @@ const navStructure: NavEntry[] = isEn
         label: 'Projects',
         items: [
           { href: '/en/projects', label: 'Overview' },
-          { href: '/en/ulpan', label: 'Ulpan Next' },
+          { href: '/en/projects/ulpan-next', label: 'Ulpan Next' },
           { href: '/en/moodle', label: 'Moodle' }
         ]
       },
@@ -70,7 +70,7 @@ const navStructure: NavEntry[] = isEn
         kind: 'group',
         label: 'Join',
         items: [
-          { href: '/mitglied-werden', label: 'Membership' },
+          { href: '/en/membership', label: 'Membership' },
           { href: '/en/donate', label: 'Donate' }
         ]
       },
@@ -123,7 +123,7 @@ const navStructure: NavEntry[] = isEn
     ];
 
 const footerBrandText = isEn
-  ? 'Forum for democracy and diversity education in NRW. Education, prevention and exchange for a democratic society.'
+  ? 'Education forum for democracy and diversity in NRW. Education, prevention, and exchange for a democratic society.'
   : 'Bildungsforum für Demokratie und Vielfalt NRW. Bildung, Prävention und Austausch für eine demokratische Gesellschaft.';
 
 const footerOrganisation: FooterLink[] = isEn
@@ -142,7 +142,7 @@ const footerOffers: FooterLink[] = isEn
   ? [
       { href: '/en/schools', label: 'Schools' },
       { href: '/en/projects', label: 'Projects' },
-      { href: '/en/ulpan', label: 'Ulpan Next' },
+      { href: '/en/projects/ulpan-next', label: 'Ulpan Next' },
       { href: '/en/moodle', label: 'Moodle' }
     ]
   : [
@@ -166,7 +166,7 @@ const footerCurrent: FooterLink[] = isEn
 
 const footerJoin: FooterLink[] = isEn
   ? [
-      { href: '/mitglied-werden', label: 'Become a member', cta: true },
+      { href: '/en/membership', label: 'Become a member', cta: true },
       { href: '/en/donate', label: 'Donate', cta: true }
     ]
   : [
@@ -197,13 +197,13 @@ const pathMap: Record<string, string> = {
   '/fuer-schulen': '/en/schools',
   '/schulen': '/en/schools',
   '/projekte': '/en/projects',
-  '/projekte/ulpan-next': '/en/ulpan',
+  '/projekte/ulpan-next': '/en/projects/ulpan-next',
   '/moodle': '/en/moodle',
   '/kooperation': '/en/cooperation',
   '/aktuelles': '/en/news',
   '/termine': '/en/events',
   '/anmeldung': '/en/registration',
-  '/mitglied-werden': '/mitglied-werden',
+  '/mitglied-werden': '/en/membership',
   '/kontakt': '/en/contact',
   '/spenden': '/en/donate',
   '/beitrittserklaerung': '/en/membership-declaration',
@@ -216,12 +216,14 @@ const pathMap: Record<string, string> = {
   '/en/our-work': '/unsere-arbeit',
   '/en/schools': '/fuer-schulen',
   '/en/projects': '/projekte',
+  '/en/projects/ulpan-next': '/projekte/ulpan-next',
   '/en/ulpan': '/projekte/ulpan-next',
   '/en/moodle': '/moodle',
   '/en/cooperation': '/kooperation',
   '/en/news': '/aktuelles',
   '/en/events': '/termine',
   '/en/registration': '/anmeldung',
+  '/en/membership': '/mitglied-werden',
   '/en/contact': '/kontakt',
   '/en/donate': '/spenden',
   '/en/membership-declaration': '/beitrittserklaerung',
@@ -474,7 +476,7 @@ const orgJsonLd = JSON.stringify({
                 </div>
 
                 <!-- Cookie Banner -->
-                <CookieBanner />
+                <CookieBanner lang={locale} />
 
                 <FloatingCta lang={isEn ? 'en' : 'de'} />
 

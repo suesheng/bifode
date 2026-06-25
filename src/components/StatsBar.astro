@@ -1,12 +1,26 @@
 ---
-const stats = [
-  { value: 15, suffix: '+', label: 'Schulen erreicht' },
-  { value: 8, suffix: '', label: 'Workshops durchgeführt' },
-  { value: 3, suffix: '', label: 'Kommunen in NRW' },
-];
+// src/components/StatsBar.astro
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+
+const stats = isEn
+  ? [
+      { value: 15, suffix: '+', label: 'Schools reached' },
+      { value: 8, suffix: '', label: 'Workshops delivered' },
+      { value: 3, suffix: '', label: 'Municipalities in NRW' },
+    ]
+  : [
+      { value: 15, suffix: '+', label: 'Schulen erreicht' },
+      { value: 8, suffix: '', label: 'Workshops durchgeführt' },
+      { value: 3, suffix: '', label: 'Kommunen in NRW' },
+    ];
 ---
 
-<section class="stats-bar" aria-label="Kennzahlen">
+<section class="stats-bar" aria-label={isEn ? 'Key figures' : 'Kennzahlen'}>
   <div class="container stats-grid">
     {stats.map((stat) => (
       <div class="stat-item">

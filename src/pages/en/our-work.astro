@@ -3,26 +3,164 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
 ---
 
-<MainLayout lang="en" title="Our Work" description="Education, guidance, and analysis connected through practical prevention work.">
-  <Hero lang="en" centered={false} title="Our Work" subtitle="Education, guidance, and analysis connected through practical prevention work." />
+<MainLayout lang="en" title="Our Work" description="Education, guidance, and analysis — our work connects prevention with practical support in everyday settings.">
+  <Hero lang="en" centered={false} title="Our Work" subtitle="Education, guidance, and analysis — our work connects prevention with practical support in everyday settings." />
 
   <section class="container">
-    <div class="section-header"><h2>Education & Prevention</h2></div>
-    <p class="lead">We design programmes for schools and education providers to address antisemitism, prejudice, and disinformation.</p>
+    <div class="section-header">
+      <h2>Education &amp; prevention</h2>
+    </div>
+    <p class="lead">We develop and deliver education programmes for schools and learning institutions. Our aim is to contextualise antisemitism, make prejudice visible, and strengthen media literacy.</p>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 5h10v4H7z" /><path d="M7 14h10v5H7z" /><path d="M12 9v5" /></svg>
+        </div>
+        <h3>Workshops for schools</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2" /><path d="M8 4v4M16 4v4M4 10h16" /></svg>
+        </div>
+        <h3>Project days and modules</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="11" rx="2" /><path d="M10 20h4M9 17h6" /><path d="m10 10 2 1.4L14 10" /></svg>
+        </div>
+        <h3>Media literacy</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="2.5" /><path d="M4.5 17a4 4 0 0 1 8 0" /><rect x="13" y="6" width="7" height="6" rx="1" /><path d="M14 16h6" /></svg>
+        </div>
+        <h3>Teacher training</h3>
+      </div>
+    </div>
   </section>
 
   <section class="container">
-    <div class="section-header"><h2>Guidance & Support</h2></div>
-    <p class="lead">We provide accessible support for initial assessments of incidents and practical next steps.</p>
+    <div class="section-header">
+      <h2>Guidance &amp; support</h2>
+    </div>
+    <p class="lead">We offer a low-threshold point of contact for assessing incidents and support with first steps in addressing conflict and discrimination.</p>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m20 20-4.2-4.2" /><path d="M11 8v6M8 11h6" /></svg>
+        </div>
+        <h3>Initial assessment of incidents</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 4h7l4 4v12H7z" /><path d="M14 4v4h4" /><path d="M9 13h6M9 16h6" /></svg>
+        </div>
+        <h3>Support with documentation</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16v9H8l-4 4z" /><path d="M9 11h6" /></svg>
+        </div>
+        <h3>Guidance on handling conflict</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 14a3 3 0 1 1 0-6c1.2 0 2.2.7 2.7 1.7A3 3 0 1 1 13 14c-.9 0-1.6-.3-2.2-.8A3 3 0 0 1 8 14Z" /><path d="M4.5 19a3.5 3.5 0 0 1 6.5-1.8A3.5 3.5 0 0 1 17.5 19" /></svg>
+        </div>
+        <h3>Referral to specialist services</h3>
+      </div>
+    </div>
   </section>
 
   <section class="container">
-    <div class="section-header"><h2>Analysis & Context</h2></div>
-    <p class="lead">We monitor social developments and public discourse to strengthen educational responses.</p>
+    <div class="section-header">
+      <h2>Analysis &amp; context</h2>
+    </div>
+    <p class="lead">We monitor social developments and public discourse using open sources. The findings inform our educational work.</p>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7" /><path d="M4 19h16" /></svg>
+        </div>
+        <h3>Analysis of social trends</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 6h14v12H5z" /><path d="M8 10h3M8 13h8M8 16h8" /><rect x="12.5" y="9" width="5.5" height="2.5" /></svg>
+        </div>
+        <h3>Contextualising media content</h3>
+      </div>
+      <div class="card feature-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 6h8a3 3 0 0 1 3 3v9H8a3 3 0 0 0-3 3z" /><path d="M19 6h-6a3 3 0 0 0-3 3v12a3 3 0 0 1 3-3h6z" /></svg>
+        </div>
+        <h3>Background knowledge for education work</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>Collaboration</h2>
+    </div>
+    <p class="lead">Our work is carried out in close cooperation with schools, civil society organisations, and public institutions.</p>
+  </section>
+
+  <section class="container cta-section">
+    <a class="button" href="/en/cooperation">More on cooperation</a>
   </section>
 </MainLayout>
 
 <style>
-  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
-  .lead { color: #475569; line-height: 1.8; max-width: 720px; }
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-section {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.6rem;
+    border-radius: 0.9rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
 </style>

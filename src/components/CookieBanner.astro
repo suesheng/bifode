@@ -1,73 +1,122 @@
 ---
-// src/components/CookieBanner.astro
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+
+const copy = isEn
+  ? {
+      ariaLabel: 'Cookie settings',
+      title: 'Cookies & privacy',
+      intro:
+        'We use essential cookies to operate this website. Marketing cookies are activated only with your consent and help us measure visits and show relevant information about our education and community programmes via Meta/Facebook. You can change your consent at any time.',
+      settings: 'Settings',
+      essentialOnly: 'Essential only',
+      acceptAll: 'Accept all',
+      detailsIntro: 'Choose which optional categories you wish to allow.',
+      essentialTitle: 'Essential cookies',
+      alwaysActive: 'Always active',
+      essentialText: 'These cookies are technically required and cannot be disabled.',
+      functionalTitle: 'Functional cookies',
+      optional: 'Optional',
+      functionalText: 'Store convenience settings such as language and display.',
+      analyticsTitle: 'Analytics cookies',
+      analyticsText:
+        'Help us understand which content is used so we can improve the site. Information is used in aggregated form where possible.',
+      marketingTitle: 'Marketing cookies',
+      marketingText:
+        'Enable reach measurement via Meta/Facebook (e.g. for education and community programmes such as Israel Community Deutschland). Loaded only after consent.',
+      save: 'Save selection',
+      acceptAllDetailed: 'Accept all',
+      rejectAll: 'Reject all',
+    }
+  : {
+      ariaLabel: 'Cookie-Einstellungen',
+      title: 'Cookies & Datenschutz',
+      intro:
+        'Wir nutzen notwendige Cookies für den Betrieb der Website. Marketing-Cookies werden nur nach Ihrer Einwilligung aktiviert und helfen uns, Besuche zu messen sowie relevante Informationen zu unseren Bildungs- und Community-Angeboten über Meta/Facebook anzeigen zu können. Sie können Ihre Einwilligung jederzeit anpassen.',
+      settings: 'Einstellungen',
+      essentialOnly: 'Nur notwendige',
+      acceptAll: 'Alle akzeptieren',
+      detailsIntro: 'Wählen Sie aus, welche optionalen Kategorien Sie zulassen möchten.',
+      essentialTitle: 'Notwendige Cookies',
+      alwaysActive: 'Immer aktiv',
+      essentialText: 'Diese Cookies sind technisch erforderlich und können nicht deaktiviert werden.',
+      functionalTitle: 'Funktionale Cookies',
+      optional: 'Optional',
+      functionalText: 'Speichern Komforteinstellungen wie z. B. Sprache und Darstellung.',
+      analyticsTitle: 'Analyse-Cookies',
+      analyticsText:
+        'Helfen uns zu verstehen, welche Inhalte genutzt werden, damit wir das Angebot verbessern können.',
+      marketingTitle: 'Marketing-Cookies',
+      marketingText:
+        'Ermöglichen Reichweitenmessung über Meta/Facebook (z. B. für Bildungs- und Community-Angebote wie Israel Community Deutschland). Werden nur nach Einwilligung geladen.',
+      save: 'Auswahl speichern',
+      acceptAllDetailed: 'Alle akzeptieren',
+      rejectAll: 'Alle ablehnen',
+    };
 ---
 
-<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie-Einstellungen">
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label={copy.ariaLabel}>
   <div class="cookie-banner-content">
     <div class="cookie-banner-text">
-      <h3>Cookies & Datenschutz</h3>
-      <p>
-        Wir nutzen notwendige Cookies für den Betrieb der Website. Marketing-Cookies werden nur nach deiner
-        Einwilligung aktiviert und helfen uns, Besuche zu messen sowie relevante Informationen zu unseren
-        Bildungs- und Community-Angeboten über Meta/Facebook anzeigen zu können. Sie können Ihre Einwilligung
-        jederzeit anpassen.
-      </p>
+      <h3>{copy.title}</h3>
+      <p>{copy.intro}</p>
     </div>
 
     <div class="cookie-banner-actions">
-      <button id="cookie-settings" class="btn btn-secondary" type="button">Einstellungen</button>
-      <button id="cookie-essential" class="btn btn-outline" type="button">Nur notwendige</button>
-      <button id="cookie-accept-all" class="btn btn-primary" type="button">Alle akzeptieren</button>
+      <button id="cookie-settings" class="btn btn-secondary" type="button">{copy.settings}</button>
+      <button id="cookie-essential" class="btn btn-outline" type="button">{copy.essentialOnly}</button>
+      <button id="cookie-accept-all" class="btn btn-primary" type="button">{copy.acceptAll}</button>
     </div>
 
     <div id="cookie-details" class="cookie-details" hidden>
       <div class="cookie-intro">
-        <p>Wählen Sie aus, welche optionalen Kategorien Sie zulassen möchten.</p>
+        <p>{copy.detailsIntro}</p>
       </div>
 
       <div class="cookie-category">
         <div class="cookie-category-header">
-          <h4>Notwendige Cookies</h4>
+          <h4>{copy.essentialTitle}</h4>
           <input type="checkbox" checked disabled />
-          <span class="cookie-status required">Immer aktiv</span>
+          <span class="cookie-status required">{copy.alwaysActive}</span>
         </div>
-        <p>Diese Cookies sind technisch erforderlich und können nicht deaktiviert werden.</p>
+        <p>{copy.essentialText}</p>
       </div>
 
       <div class="cookie-category">
         <div class="cookie-category-header">
-          <h4>Funktionale Cookies</h4>
+          <h4>{copy.functionalTitle}</h4>
           <input type="checkbox" id="functional-cookies" />
-          <span class="cookie-status optional">Optional</span>
+          <span class="cookie-status optional">{copy.optional}</span>
         </div>
-        <p>Speichern Komforteinstellungen wie z. B. Sprache und Darstellung.</p>
+        <p>{copy.functionalText}</p>
       </div>
 
       <div class="cookie-category">
         <div class="cookie-category-header">
-          <h4>Analyse-Cookies</h4>
+          <h4>{copy.analyticsTitle}</h4>
           <input type="checkbox" id="analytics-cookies" />
-          <span class="cookie-status optional">Optional</span>
+          <span class="cookie-status optional">{copy.optional}</span>
         </div>
-        <p>Helfen uns zu verstehen, welche Inhalte genutzt werden, damit wir das Angebot verbessern können.</p>
+        <p>{copy.analyticsText}</p>
       </div>
 
       <div class="cookie-category">
         <div class="cookie-category-header">
-          <h4>Marketing-Cookies</h4>
+          <h4>{copy.marketingTitle}</h4>
           <input type="checkbox" id="marketing-cookies" />
-          <span class="cookie-status optional">Optional</span>
+          <span class="cookie-status optional">{copy.optional}</span>
         </div>
-        <p>
-          Ermöglichen Reichweitenmessung über Meta/Facebook (z.&nbsp;B. für Bildungs- und Community-Angebote wie
-          Israel Community Deutschland). Werden nur nach Einwilligung geladen.
-        </p>
+        <p>{copy.marketingText}</p>
       </div>
 
       <div class="cookie-details-actions">
-        <button id="cookie-save-settings" class="btn btn-primary" type="button">Auswahl speichern</button>
-        <button id="cookie-accept-all-detailed" class="btn btn-secondary" type="button">Alle akzeptieren</button>
-        <button id="cookie-reject-all" class="btn btn-outline" type="button">Alle ablehnen</button>
+        <button id="cookie-save-settings" class="btn btn-primary" type="button">{copy.save}</button>
+        <button id="cookie-accept-all-detailed" class="btn btn-secondary" type="button">{copy.acceptAllDetailed}</button>
+        <button id="cookie-reject-all" class="btn btn-outline" type="button">{copy.rejectAll}</button>
       </div>
     </div>
   </div>

@@ -6,6 +6,12 @@ export const FB_PAGE_BIFODE = 'https://www.facebook.com/bifode';
 /** Ulpan Next project page (Jotform + Meta Pixel). */
 export const ULPAN_LANDING_PATH = '/projekte/ulpan-next';
 
+export const ULPAN_LANDING_PATH_EN = '/en/projects/ulpan-next';
+
+export function ulpanLandingPath(lang: 'de' | 'en' = 'de'): string {
+  return lang === 'en' ? ULPAN_LANDING_PATH_EN : ULPAN_LANDING_PATH;
+}
+
 /** Ulpan Next — Bildungsprojekt (Facebook-Gruppe, linked from landing). */
 export const FB_GROUP_ULPAN_NEXT = 'https://www.facebook.com/groups/ulpan.next';
 

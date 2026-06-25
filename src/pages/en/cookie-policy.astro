@@ -3,14 +3,123 @@ import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
 <MainLayout lang="en" title="Cookie Policy" description="Information about the use of cookies on this website.">
-  <section class="container">
-    <div class="section-header"><h2>Cookie Policy</h2></div>
-    <p class="lead">This website uses technically necessary cookies and optional cookies for functionality, analytics, and marketing.</p>
-    <p class="lead">You can change your cookie preferences at any time via the cookie settings link in the footer.</p>
-  </section>
+  <div class="container">
+    <h1>Cookie policy</h1>
+
+    <div class="content-section">
+      <h2>What are cookies?</h2>
+      <p>
+        Cookies are small text files stored on your device when you visit our website.
+        They help us provide a better user experience and improve the site.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>Types of cookies we use</h2>
+
+      <div class="cookie-type">
+        <h3>Essential cookies</h3>
+        <p>
+          These cookies are required for the website to function. They enable basic features
+          such as security, network management, and accessibility. They are activated automatically
+          and cannot be disabled.
+        </p>
+        <p><strong>Retention:</strong> Session or up to 1 year</p>
+      </div>
+
+      <div class="cookie-type">
+        <h3>Functional cookies</h3>
+        <p>
+          These cookies allow the website to offer enhanced functionality and personalisation,
+          such as language or display preferences.
+        </p>
+        <p><strong>Retention:</strong> Up to 1 year</p>
+      </div>
+
+      <div class="cookie-type">
+        <h3>Analytics cookies</h3>
+        <p>
+          These cookies help us understand how visitors use the website. Information is aggregated
+          and used in anonymised form where possible.
+        </p>
+        <p><strong>Retention:</strong> Up to 2 years</p>
+        <p><strong>Services:</strong> Google Analytics, Matomo (if enabled)</p>
+      </div>
+
+      <div class="cookie-type">
+        <h3>Marketing cookies</h3>
+        <p>
+          These cookies are used to measure reach and relevance of communications, including via
+          Meta/Facebook (e.g. for education and community programmes). They are loaded only after consent.
+        </p>
+        <p><strong>Retention:</strong> Up to 2 years</p>
+        <p><strong>Services:</strong> Meta Pixel (if enabled)</p>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Managing your cookie settings</h2>
+      <p>
+        You can change your cookie preferences at any time via the cookie settings link in the footer
+        or the settings button in the cookie banner.
+      </p>
+    </div>
+  </div>
 </MainLayout>
 
 <style>
-  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
-  .lead { color: #475569; line-height: 1.8; max-width: 760px; }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    color: #111827;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .content-section {
+    margin-bottom: 2rem;
+  }
+
+  .content-section h2 {
+    color: #111827;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .content-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #374151;
+  }
+
+  .cookie-type {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .cookie-type h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+    color: #111827;
+  }
+
+  .cookie-type p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #4b5563;
+  }
+
+  .cookie-type p:last-child {
+    margin-bottom: 0;
+  }
 </style>

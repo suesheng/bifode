@@ -3,7 +3,7 @@ import MainLayout from '../../../layouts/MainLayout.astro';
 import Hero from '../../../components/Hero.astro';
 import { PROJECT_CARDS } from '../../../lib/projectCards';
 import { PILOT_LANDING_PATH } from '../../../lib/projectCards';
-import { ULPAN_LANDING_PATH } from '../../../lib/communityLinks';
+import { ULPAN_LANDING_PATH_EN } from '../../../lib/communityLinks';
 ---
 
 <MainLayout
@@ -28,7 +28,7 @@ import { ULPAN_LANDING_PATH } from '../../../lib/communityLinks';
         PROJECT_CARDS.map((project) => {
           const href =
             project.id === 'ulpan-next'
-              ? ULPAN_LANDING_PATH
+              ? ULPAN_LANDING_PATH_EN
               : project.id === 'pilotprojekt-nrw'
                 ? PILOT_LANDING_PATH
                 : project.href;
@@ -58,7 +58,7 @@ import { ULPAN_LANDING_PATH } from '../../../lib/communityLinks';
       </p>
       <div class="moodle-callout-actions">
         <a class="project-card-cta" href="/en/moodle">About Moodle →</a>
-        <a class="moodle-callout-secondary" href={ULPAN_LANDING_PATH}>Ulpan Next →</a>
+        <a class="moodle-callout-secondary" href={ULPAN_LANDING_PATH_EN}>Ulpan Next →</a>
       </div>
     </aside>
   </section>

@@ -1,36 +1,37 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
-import UlpanNextLanding from '../../components/UlpanNextLanding.astro';
-import UlpanProjectTracking from '../../components/UlpanProjectTracking.astro';
+import MainLayout from '../../../layouts/MainLayout.astro';
+import UlpanNextLanding from '../../../components/UlpanNextLanding.astro';
+import UlpanProjectTracking from '../../../components/UlpanProjectTracking.astro';
 
 const pageDescription =
-  'Ulpan Next ist das Bildungsprojekt von BiFoDe e.V. für modernes Hebräisch — Kurse, Moodle und Community für Mitglieder.';
+  'Ulpan Next is BiFoDe e.V.’s education project for modern Hebrew — courses, Moodle, and community for members.';
 
 const webPageJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Ulpan Next – BiFoDe e.V.',
-  url: 'https://www.bifode.org/projekte/ulpan-next',
+  url: 'https://www.bifode.org/en/projects/ulpan-next',
   description: pageDescription,
-  inLanguage: 'de-DE',
+  inLanguage: 'en-GB',
   isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
 });
 ---
 
 <MainLayout
+  lang="en"
   title="Ulpan Next"
   description={pageDescription}
   titleSuffix={false}
   mainClass="un-main"
   breadcrumbs={[
-    { label: 'Startseite', href: '/' },
-    { label: 'Projekte', href: '/projekte' },
+    { label: 'Home', href: '/en' },
+    { label: 'Projects', href: '/en/projects' },
     { label: 'Ulpan Next' },
   ]}
 >
   <UlpanProjectTracking />
   <script type="application/ld+json" set:html={webPageJsonLd} />
-  <UlpanNextLanding lang="de" />
+  <UlpanNextLanding lang="en" />
 </MainLayout>
 
 <style>

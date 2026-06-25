@@ -17,7 +17,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
   {
     id: 'pilotprojekt-nrw',
     titleDe: 'Pilotprojekt NRW',
-    titleEn: 'NRW pilot project',
+    titleEn: 'NRW Pilot Project',
     descriptionDe:
       'Modulare Formate zu Antisemitismusprävention, Medienkompetenz und demokratischem Zusammenhalt — in Zusammenarbeit mit Schulen.',
     descriptionEn:

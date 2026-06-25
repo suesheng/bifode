@@ -1,0 +1,356 @@
+---
+import { FB_GROUP_ULPAN_NEXT, moodleUlpanUrl } from '../lib/communityLinks';
+
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+const moodleUrl = moodleUlpanUrl();
+
+const projectsPath = isEn ? '/en/projects' : '/projekte';
+const membershipPath = isEn ? '/en/membership' : '/mitglied-werden';
+const moodlePath = isEn ? '/en/moodle' : '/moodle';
+const contactPath = isEn ? '/en/contact' : '/kontakt';
+
+const copy = isEn
+  ? {
+      back: '← All projects',
+      eyebrow: 'Education project · BiFoDe e.V.',
+      heroSub: 'Learn Hebrew with community — courses, materials, and networking.',
+      lead:
+        'Ulpan Next brings together Hebrew programmes from BiFoDe e.V. Courses, Moodle, and community formats are available to admitted members — dates and exchange also in the Facebook group.',
+      ctaMember: 'Become a member',
+      ctaMoodle: 'Moodle',
+      ctaFacebook: 'Facebook group',
+      offersTitle: 'What to expect',
+      features: [
+        {
+          title: 'Modern Hebrew',
+          text: 'Ivrit for everyday life, work, and encounters — with clear learning goals and practical formats.',
+        },
+        {
+          title: 'Online & in person',
+          text: 'Courses and meetings depending on project phase — dates and updates in the Facebook group.',
+        },
+        {
+          title: 'Learning materials',
+          text: 'Structured content on Moodle and support for participants within the association’s programmes.',
+        },
+        {
+          title: 'Moodle platform',
+          text: 'Course modules and exercises online — access for admitted members at ulpan.bifode.org.',
+        },
+        {
+          title: 'Community',
+          text: 'Exchange, questions, and announcements in the open Facebook group Ulpan Next.',
+        },
+      ],
+      facebookTitle: 'Community on Facebook',
+      facebookLead:
+        'In the Ulpan Next group you will find course announcements, dates, and exchange with other learners.',
+      facebookCta: 'Join Facebook group',
+      bifodeTitle: 'Part of BiFoDe e.V.',
+      bifodeLead:
+        'Ulpan Next is part of BiFoDe e.V.’s education work. Members receive access to courses, materials, and association formats depending on the programme.',
+      linkMember: 'Become a member',
+      linkMoodle: 'Moodle',
+      linkProjects: 'More projects',
+      linkContact: 'Contact',
+      moodleNoteBefore: 'Moodle access:',
+      moodleNoteAfter: '— after admission as a member.',
+    }
+  : {
+      back: '← Alle Projekte',
+      eyebrow: 'Bildungsprojekt · BiFoDe e.V.',
+      heroSub: 'Hebräisch lernen mit Community — Kurse, Materialien und Vernetzung.',
+      lead:
+        'Ulpan Next bündelt Hebräisch-Angebote von BiFoDe e.V. Kurse, Moodle und Community-Formate stehen aufgenommenen Mitgliedern zur Verfügung — Termine und Austausch auch in der Facebook-Gruppe.',
+      ctaMember: 'Mitglied werden',
+      ctaMoodle: 'Moodle',
+      ctaFacebook: 'Facebook-Gruppe',
+      offersTitle: 'Was Sie erwartet',
+      features: [
+        {
+          title: 'Modernes Hebräisch',
+          text: 'Ivrit für Alltag, Beruf und Begegnungen — mit klaren Lernzielen und praxisnahen Formaten.',
+        },
+        {
+          title: 'Online & vor Ort',
+          text: 'Kurse und Treffen je nach Projektphase — Termine und Updates in der Facebook-Gruppe.',
+        },
+        {
+          title: 'Lernmaterialien',
+          text: 'Strukturierte Inhalte auf Moodle und Begleitung für Teilnehmende innerhalb des Vereinsangebots.',
+        },
+        {
+          title: 'Moodle-Plattform',
+          text: 'Kursmodule und Übungen online — Zugang für aufgenommene Mitglieder unter ulpan.bifode.org.',
+        },
+        {
+          title: 'Community',
+          text: 'Austausch, Fragen und Ankündigungen in der offenen Facebook-Gruppe Ulpan Next.',
+        },
+      ],
+      facebookTitle: 'Community auf Facebook',
+      facebookLead:
+        'In der Gruppe Ulpan Next finden Sie Kursankündigungen, Termine und Austausch mit anderen Lernenden.',
+      facebookCta: 'Facebook-Gruppe beitreten',
+      bifodeTitle: 'Teil von BiFoDe e.V.',
+      bifodeLead:
+        'Ulpan Next gehört zur Bildungsarbeit von BiFoDe e.V. Mitglieder erhalten je nach Programm Zugang zu Kursen, Materialien und Vereinsformaten.',
+      linkMember: 'Mitglied werden',
+      linkMoodle: 'Moodle',
+      linkProjects: 'Weitere Projekte',
+      linkContact: 'Kontakt',
+      moodleNoteBefore: 'Moodle-Zugang:',
+      moodleNoteAfter: '— nach Aufnahme als Mitglied.',
+    };
+---
+
+<div class="un-page" data-landing="ulpan-next">
+  <section class="un-hero" aria-labelledby="un-hero-title">
+    <div class="un-hero-visual" aria-hidden="true"></div>
+    <div class="container un-hero-inner">
+      <p class="un-back">
+        <a href={projectsPath}>{copy.back}</a>
+      </p>
+      <p class="un-eyebrow">{copy.eyebrow}</p>
+      <h1 id="un-hero-title">Ulpan Next</h1>
+      <p class="un-hero-sub">{copy.heroSub}</p>
+      <p class="un-lead">{copy.lead}</p>
+      <div class="un-actions">
+        <a href={membershipPath} class="un-btn un-btn-primary" data-track="membership_intent">{copy.ctaMember}</a>
+        <a href={moodlePath} class="un-btn un-btn-secondary">{copy.ctaMoodle}</a>
+        <a
+          href={FB_GROUP_ULPAN_NEXT}
+          class="un-btn un-btn-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track="ulpan_facebook_group"
+        >
+          {copy.ctaFacebook}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="un-section" aria-labelledby="un-offers-title">
+    <div class="container">
+      <h2 id="un-offers-title">{copy.offersTitle}</h2>
+      <div class="card-grid un-grid">
+        {copy.features.map((item) => (
+          <article class="card feature-card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="un-section" aria-labelledby="un-join-title">
+    <div class="container un-narrow">
+      <h2 id="un-join-title">{copy.facebookTitle}</h2>
+      <p class="un-lead">{copy.facebookLead}</p>
+      <p class="un-cta-row">
+        <a
+          href={FB_GROUP_ULPAN_NEXT}
+          class="un-btn un-btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track="ulpan_facebook_group"
+        >
+          {copy.facebookCta}
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="un-section un-section-alt" aria-labelledby="un-bifode-title">
+    <div class="container un-narrow">
+      <h2 id="un-bifode-title">{copy.bifodeTitle}</h2>
+      <p class="un-lead">{copy.bifodeLead}</p>
+      <p>
+        <a href={membershipPath} class="un-link">{copy.linkMember}</a>
+        {' · '}
+        <a href={moodlePath} class="un-link">{copy.linkMoodle}</a>
+        {' · '}
+        <a href={projectsPath} class="un-link">{copy.linkProjects}</a>
+        {' · '}
+        <a href={contactPath} class="un-link">{copy.linkContact}</a>
+      </p>
+      <p class="un-moodle-note">
+        {copy.moodleNoteBefore}{' '}
+        <a href={moodleUrl} target="_blank" rel="noopener noreferrer">ulpan.bifode.org</a>
+        {' '}{copy.moodleNoteAfter}
+      </p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .un-page {
+    --un-navy: #0c1e34;
+    --un-blue: #163b63;
+    --un-bg: #f4f7fb;
+    background: var(--un-bg);
+  }
+
+  .un-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 3.25rem 0 3rem;
+    background: linear-gradient(155deg, #e8f2ff 0%, #f0f6ff 40%, #ffffff 100%);
+  }
+
+  .un-hero-visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 30%, rgba(22, 59, 99, 0.14), transparent),
+      radial-gradient(ellipse 55% 45% at 85% 25%, rgba(214, 225, 252, 0.95), transparent);
+  }
+
+  .un-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  .un-back {
+    margin: 0 0 1rem;
+  }
+
+  .un-back a {
+    font-weight: 600;
+    color: var(--un-blue);
+    text-decoration: none;
+  }
+
+  .un-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .un-hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--un-navy);
+    line-height: 1.1;
+  }
+
+  .un-hero-sub {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--un-blue);
+    line-height: 1.45;
+  }
+
+  .un-section {
+    padding: 2.75rem 0;
+  }
+
+  .un-section-alt {
+    background: #fff;
+  }
+
+  .un-section h2 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--un-navy);
+  }
+
+  .un-lead {
+    margin: 0 0 1rem;
+    color: #334155;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  .un-narrow {
+    max-width: 720px;
+  }
+
+  .un-grid {
+    margin-top: 0.5rem;
+  }
+
+  .un-actions,
+  .un-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .un-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .un-btn-primary {
+    background: var(--cta-grad);
+    color: #fff;
+    box-shadow: var(--cta-shadow);
+  }
+
+  .un-btn-primary:hover {
+    background: var(--cta-grad-hover);
+    box-shadow: var(--cta-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .un-btn-secondary {
+    background: #fff;
+    color: var(--un-blue);
+    border-color: rgba(22, 59, 99, 0.35);
+  }
+
+  .un-btn-secondary:hover {
+    border-color: var(--un-blue);
+  }
+
+  .un-link {
+    font-weight: 600;
+    color: var(--un-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(22, 59, 99, 0.35);
+  }
+
+  .un-link:hover {
+    color: var(--un-navy);
+    border-bottom-color: var(--un-navy);
+  }
+
+  .un-moodle-note {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  .un-moodle-note a {
+    color: var(--un-blue);
+    font-weight: 600;
+  }
+</style>

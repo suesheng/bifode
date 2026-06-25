@@ -45,7 +45,7 @@ const copy = isEn
       ctaMoodle: 'Open Moodle',
       ctaMoodleHint: 'Opens ulpan.bifode.org in a new tab',
       ctaMember: 'Apply for membership',
-      ctaUlpan: 'Ulpan.Next project page',
+      ctaUlpan: 'Ulpan Next project page',
       help: 'Questions about access?',
       contact: 'info@bifode.org',
       includesTitle: 'What you will find on Moodle',
@@ -96,8 +96,8 @@ const copy = isEn
       ],
     };
 
-const membershipPath = '/mitglied-werden';
-const ulpanPath = ULPAN_LANDING_PATH;
+const membershipPath = isEn ? '/en/membership' : '/mitglied-werden';
+const ulpanPath = isEn ? '/en/projects/ulpan-next' : ULPAN_LANDING_PATH;
 const infoPath = isEn ? '/en/moodle' : MOODLE_INFO_PATH;
 ---
 

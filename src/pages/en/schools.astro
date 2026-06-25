@@ -3,26 +3,139 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
 ---
 
-<MainLayout lang="en" title="Schools" description="Education programmes on antisemitism, prejudice, media literacy, and democratic cohesion.">
-  <Hero lang="en" centered={false} title="Programmes for Schools" subtitle="Education programmes on antisemitism, prejudice, media literacy, and democratic cohesion." />
+<MainLayout
+  lang="en"
+  title="Schools"
+  description="Workshops, project days, and training for schools in NRW — antisemitism prevention, media literacy, and democratic education."
+>
+  <Hero
+    lang="en"
+    centered={false}
+    title="For schools and teachers"
+    subtitle="Practical education formats on antisemitism prevention, prejudice, media literacy, and democratic cohesion."
+  />
 
   <section class="container">
-    <div class="section-header"><h2>Why This Program?</h2></div>
-    <p class="lead">Schools increasingly face polarisation and disinformation in everyday practice. We provide practical, age-appropriate programmes.</p>
+    <div class="section-header">
+      <h2>What BiFoDe offers schools</h2>
+    </div>
+    <p class="lead">
+      We support schools in NRW with modular formats — from one-hour workshops to project days and teacher training. All programmes are age-appropriate, evidence-informed, and tailored to everyday school life.
+    </p>
+    <ul class="offer-list">
+      <li>Understanding and contextualising antisemitism</li>
+      <li>Addressing prejudice and disinformation in the classroom</li>
+      <li>Strengthening democratic values and respectful coexistence</li>
+      <li>Materials and guidance for sustainable implementation</li>
+    </ul>
   </section>
 
   <section class="container">
-    <div class="section-header"><h2>Target Groups</h2></div>
-    <div class="card-grid">
-      <div class="card feature-card"><h3>Lower Secondary Students</h3></div>
-      <div class="card feature-card"><h3>Upper Secondary Students</h3></div>
-      <div class="card feature-card"><h3>Teachers</h3></div>
-      <div class="card feature-card"><h3>Educational Professionals</h3></div>
+    <div class="section-header">
+      <h2>Workshop formats</h2>
     </div>
+    <div class="card-grid">
+      <div class="card feature-card">
+        <h3>Workshops (90–180 min.)</h3>
+        <p>Interactive sessions for classes or year groups with discussion, group work, and reflection.</p>
+      </div>
+      <div class="card feature-card">
+        <h3>Project days</h3>
+        <p>Full-day formats with several modules, e.g. for project weeks or themed school days.</p>
+      </div>
+      <div class="card feature-card">
+        <h3>Teacher training</h3>
+        <p>For teachers and education staff — with handouts and follow-up materials.</p>
+      </div>
+      <div class="card feature-card">
+        <h3>Digital modules</h3>
+        <p>Supplementary online content and learning stations for self-directed or blended learning.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <h2>How to request a programme</h2>
+    </div>
+    <ol class="steps-list">
+      <li><strong>Enquiry</strong> — Brief message with school, year group, and preferred format</li>
+      <li><strong>Initial discussion</strong> — Aligning goals, framework, and dates</li>
+      <li><strong>Planning</strong> — Module selection and materials</li>
+      <li><strong>Delivery</strong> — On site or online</li>
+      <li><strong>Follow-up</strong> — Optional evaluation and materials</li>
+    </ol>
+  </section>
+
+  <section class="container cta-section">
+    <a class="button" href="/en/contact">Request a programme</a>
   </section>
 </MainLayout>
 
 <style>
-  .section-header h2 { font-size: 2rem; margin-bottom: 1rem; color: #111827; }
-  .lead { color: #475569; line-height: 1.8; max-width: 720px; }
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .offer-list {
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.85;
+  }
+
+  .steps-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.85;
+    max-width: 720px;
+  }
+
+  .steps-list li + li {
+    margin-top: 0.65rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-section {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    border-radius: 0.9rem;
+    background: linear-gradient(135deg, #1d4ed8 0%, #163b63 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.25);
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .button {
+      width: 100%;
+    }
+  }
 </style>

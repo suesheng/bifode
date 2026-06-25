@@ -1,0 +1,542 @@
+---
+/**
+ * Membership — English landing for new Verein members.
+ */
+import MainLayout from '../../layouts/MainLayout.astro';
+import JotformEmbed from '../../components/JotformEmbed.astro';
+import {
+  ANNUAL_STANDARD_EUR,
+  ANNUAL_STUDENT_EUR,
+  formatEur,
+  MONTHLY_STANDARD_EUR,
+  MONTHLY_STUDENT_EUR,
+} from '../../lib/membershipFees';
+import { jotformMitgliedschaftUrl, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
+
+const jotformUrl = jotformMitgliedschaftUrl();
+
+const pageTitle = 'Become a member | BiFoDe e.V.';
+const pageDescription =
+  `Membership in BiFoDe e.V. — ${formatEur(ANNUAL_STANDARD_EUR)} € / year (standard, ${formatEur(MONTHLY_STANDARD_EUR)} € / month) · students / reduced ${formatEur(ANNUAL_STUDENT_EUR)} € / year — support the association’s work with access to programmes after admission.`;
+
+const ctaApply = 'Apply for membership';
+
+const formSectionTitle = 'Become a member of BiFoDe e.V.';
+const formSectionIntro =
+  'Through your membership you support the non-profit education, cultural, and community work of BiFoDe e.V. After review and admission you gain access to association programmes — such as Ulpan Next, learning materials, and community formats, subject to availability. Fields marked * are required.';
+
+const vereinServices = [
+  {
+    title: 'Ulpan on site & online',
+    text: 'Learn Hebrew in in-person and online formats — for members of the association.',
+  },
+  {
+    title: 'Learning materials & Moodle',
+    text: 'Access exercises, links, recommendations, and the Moodle learning platform for members — including Ulpan Next course materials.',
+  },
+  {
+    title: 'Community meetings',
+    text: 'Community gatherings and encounters — including catering at selected formats.',
+  },
+  {
+    title: 'Association materials',
+    text: 'Selected association materials where available and appropriate to the programme.',
+  },
+  {
+    title: 'Further education formats',
+    text: 'Workshops, webinars, Israel Community formats, and other BiFoDe e.V. projects.',
+  },
+  {
+    title: 'Network & participation',
+    text: 'Exchange, early information on new courses, and opportunities to help shape projects.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Apply for admission',
+    text: `Complete the online form — annual membership fee (${formatEur(ANNUAL_STANDARD_EUR)} € or ${formatEur(ANNUAL_STUDENT_EUR)} € reduced).`,
+  },
+  {
+    title: 'Admission & access',
+    text: 'After review and a decision by the association, you receive access to programmes under the statutes and subject to availability.',
+  },
+  {
+    title: 'Use the programmes',
+    text: 'Ulpan, Moodle, materials, meetings, and other formats — depending on programme and capacity.',
+  },
+];
+
+const webPageJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageTitle,
+  url: 'https://www.bifode.org/en/membership',
+  description: pageDescription,
+  inLanguage: 'en-GB',
+  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
+});
+---
+
+<MainLayout lang="en" title={pageTitle} description={pageDescription} titleSuffix={false} mainClass="mw-main">
+  <script type="application/ld+json" set:html={webPageJsonLd} />
+
+  <div class="mw-page" data-landing="mitglied-werden">
+    <section class="mw-hero" aria-labelledby="mw-hero-title">
+      <div class="mw-hero-visual" aria-hidden="true"></div>
+      <div class="container mw-hero-inner">
+        <p class="mw-eyebrow">BiFoDe e.V. · Education Forum for Democracy and Diversity NRW</p>
+        <h1 id="mw-hero-title">Become a member</h1>
+        <p class="mw-hero-sub">Strengthening education together — democratic, diverse, and with a clear social mission.</p>
+        <p class="mw-lead">
+          Through your membership you support the non-profit work of BiFoDe e.V. After admission and payment of the ongoing membership fee you gain access to association programmes — such as Ulpan, learning materials, and community meetings — <strong>subject to availability and programme capacity</strong>.
+        </p>
+        <p class="mw-price-hero">
+          <span class="mw-price-big">{formatEur(ANNUAL_STANDARD_EUR)} €</span>
+          <span class="mw-price-unit">per year</span>
+          <span class="mw-price-meta">
+            Standard · equivalent to {formatEur(MONTHLY_STANDARD_EUR)} € / month · students / reduced{' '}
+            {formatEur(ANNUAL_STUDENT_EUR)} € / year ({formatEur(MONTHLY_STUDENT_EUR)} € / month)
+          </span>
+        </p>
+        <div class="mw-actions">
+          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mw-section" id="leistungen" aria-labelledby="mw-services-title">
+      <div class="container">
+        <h2 id="mw-services-title">What membership includes</h2>
+        <p class="mw-lead">
+          After admission and payment of the ongoing membership fee you can use BiFoDe e.V. programmes — shared access to the association’s work, not a fee per individual service.
+        </p>
+        <div class="card-grid">
+          {vereinServices.map((item) => (
+            <article class="card feature-card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+        <p class="mw-note">
+          Participation in specific events depends on availability, project phase, and capacity. Membership is an association contribution, not a distance contract with a guaranteed outcome.
+        </p>
+      </div>
+    </section>
+
+    <section class="mw-section mw-section-alt" id="ablauf" aria-labelledby="mw-steps-title">
+      <div class="container">
+        <div class="mw-split">
+          <div class="mw-split-col">
+            <h2 id="mw-steps-title">How admission works</h2>
+            <ol class="mw-steps">
+              {steps.map((step, i) => (
+                <li>
+                  <span class="mw-step-num" aria-hidden="true">{i + 1}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="mw-split-col" id="zielgruppe" aria-labelledby="mw-who-title">
+            <h2 id="mw-who-title">Who can become a member?</h2>
+            <p class="mw-lead mw-lead-tight">
+              Natural persons who wish to support our education and prevention work — in NRW, across Germany, or in the DACH region, where membership is permitted under the statutes.
+            </p>
+            <ul class="mw-list">
+              <li>People engaged in democratic education and social cohesion</li>
+              <li>Those interested in Israel Community, Hebrew, and related education formats</li>
+              <li>Partners, professionals, and volunteers who want to strengthen the association long term</li>
+              <li>Supporters who wish to back BiFoDe e.V. financially and in spirit</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mw-section mw-section-alt mw-form-section" id="anmeldung" aria-labelledby="mw-form-title">
+      <div class="container mw-form-container">
+        <div class="mw-form-stack">
+        <h2 id="mw-form-title">{formSectionTitle}</h2>
+        <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
+        <JotformEmbed
+          formUrl={jotformUrl}
+          title="Apply for membership in BiFoDe e.V."
+          iframeLang="en"
+          flush
+        />
+        <p class="form-note">
+          Questions? Email{' '}
+          <a href="mailto:info@bifode.org?subject=Membership%20BiFoDe%20e.V.">info@bifode.org</a>.
+        </p>
+
+        <div class="mw-tax-note">
+          <h3>Tax information</h3>
+          <p>
+            Membership fees paid to charitable organisations may be tax-deductible in Germany where the legal requirements are met. Once recognised accordingly, BiFoDe e.V. may issue donation receipts where legally permitted.
+          </p>
+          <p class="mw-small">This does not constitute tax advice. Charitable status and formal requirements must be met in each case.</p>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mw-section mw-final" aria-labelledby="mw-final-title">
+      <div class="container mw-narrow mw-final-inner">
+        <h2 id="mw-final-title">Questions before applying?</h2>
+        <p class="mw-lead">Still unsure? Write to us — or submit your application directly.</p>
+        <div class="mw-actions">
+          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+          <a href="/en/contact" class="mw-btn mw-btn-secondary">Contact</a>
+          <a href={ULPAN_LANDING_PATH_EN} class="mw-btn mw-btn-outline">Ulpan Next</a>
+          <a href="/en/moodle" class="mw-btn mw-btn-outline">Moodle</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  :global(.mw-main) {
+    padding: 0 !important;
+  }
+
+  .mw-page {
+    --mw-navy: #0c1e34;
+    --mw-blue: #163b63;
+    --mw-sky: #d6e1fc;
+    --mw-bg: #ffffff;
+    background: var(--mw-bg);
+  }
+
+  .mw-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 0 2.75rem;
+    background: linear-gradient(160deg, #e8f2ff 0%, #f5f9ff 50%, #fff 100%);
+  }
+
+  .mw-hero-visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(22, 59, 99, 0.1), transparent),
+      radial-gradient(ellipse 50% 40% at 90% 20%, rgba(214, 225, 252, 0.9), transparent);
+  }
+
+  .mw-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  .mw-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: #475569;
+  }
+
+  .mw-hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 5vw, 2.85rem);
+    font-weight: 800;
+    color: var(--mw-navy);
+    line-height: 1.1;
+  }
+
+  .mw-hero-sub {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--mw-blue);
+    line-height: 1.45;
+  }
+
+  .mw-price-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .mw-price-big {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--mw-navy);
+    line-height: 1;
+  }
+
+  .mw-price-unit {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--mw-blue);
+  }
+
+  .mw-price-meta {
+    width: 100%;
+    font-size: 0.95rem;
+    color: #64748b;
+  }
+
+  .mw-page .container {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .mw-section {
+    padding: 2.75rem 0;
+  }
+
+  .mw-section-alt {
+    background: #fff;
+  }
+
+  .mw-section h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--mw-navy);
+  }
+
+  .mw-lead {
+    margin: 0 0 1rem;
+    color: #334155;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  .mw-narrow {
+    max-width: 720px;
+  }
+
+  .mw-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 3rem;
+    align-items: start;
+  }
+
+  .mw-split-col h2 {
+    margin-top: 0;
+  }
+
+  .mw-lead-tight {
+    max-width: none;
+  }
+
+  @media (max-width: 768px) {
+    .mw-split {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+  }
+
+  .mw-note {
+    margin-top: 1.25rem;
+    padding: 0.85rem 1rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--mw-blue);
+    border-radius: 0 8px 8px 0;
+    color: #1e293b;
+    line-height: 1.55;
+    font-size: 0.95rem;
+  }
+
+  .mw-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .mw-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .mw-btn-primary {
+    background: var(--mw-blue);
+    color: #fff;
+    border-color: var(--mw-blue);
+  }
+
+  .mw-btn-primary:hover {
+    background: #0f2e50;
+    transform: translateY(-1px);
+  }
+
+  .mw-btn-secondary {
+    background: #fff;
+    color: var(--mw-blue);
+    border-color: #89a6cc;
+  }
+
+  .mw-btn-secondary:hover {
+    background: var(--mw-sky);
+  }
+
+  .mw-btn-outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  .mw-btn-outline:hover {
+    background: #fff;
+    color: var(--mw-navy);
+  }
+
+  .mw-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .mw-steps li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .mw-step-num {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--mw-blue);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+
+  .mw-steps h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+    color: var(--mw-navy);
+  }
+
+  .mw-steps p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .mw-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .mw-small {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .mw-form-container {
+    max-width: 1280px;
+  }
+
+  .mw-form-stack {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .mw-form-stack .mw-lead {
+    max-width: none;
+  }
+
+  .mw-form-stack h2 {
+    margin-top: 0;
+  }
+
+  .mw-form-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  .mw-form-section {
+    background: #fff;
+    padding-top: 2rem;
+  }
+
+  .mw-form-section :global(.jotform-embed-root) {
+    margin: 0;
+  }
+
+  .form-note {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  .mw-tax-note {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .mw-tax-note h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    color: var(--mw-navy);
+  }
+
+  .mw-tax-note p {
+    margin: 0 0 0.75rem;
+    color: #475569;
+    line-height: 1.65;
+    font-size: 0.95rem;
+  }
+
+  .mw-tax-note p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mw-final {
+    background: linear-gradient(180deg, var(--mw-navy), #0f2e50);
+    color: #e2e8f0;
+    padding: 3rem 0;
+  }
+
+  .mw-final h2 {
+    color: #fff;
+  }
+
+  .mw-final .mw-lead {
+    color: #cbd5e1;
+  }
+
+  .mw-final .mw-btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    .mw-actions .mw-btn {
+      width: 100%;
+    }
+  }
+</style>

@@ -15,7 +15,7 @@ const telegramUrl = telegramIsraelHubUrl();
 
 const copy = isEn
   ? {
-      title: 'News & dates',
+      title: 'News & events',
       lead: 'News and event dates are published on our Facebook page. Ulpan Next, Moodle, and other programmes are available after membership.',
       fbPage: 'BiFoDe on Facebook',
       fbPageHint: 'News, dates, and updates from BiFoDe e.V.',
@@ -82,7 +82,7 @@ const copy = isEn
         </a>
       ) : null
     }
-    <a class="card community-channel-card" href="/mitglied-werden">
+    <a class="card community-channel-card" href={isEn ? '/en/membership' : '/mitglied-werden'}>
       <h3>{copy.membership}</h3>
       <p>{copy.membershipHint}</p>
       <span class="community-channel-cta">{isEn ? 'Apply for membership →' : 'Mitglied werden →'}</span>
