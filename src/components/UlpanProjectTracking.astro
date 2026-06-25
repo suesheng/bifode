@@ -45,14 +45,9 @@ import MetaPixel from './MetaPixel.astro';
     trackMetaCustom('SocialClick', { channel: 'ulpan_facebook_group' });
   }
 
-  function trackJotformEngage() {
+  function trackMembershipIntent() {
     if (!ensureMetaPixelReady()) return;
-    trackMetaCustom('FormStart', { form_name: 'ulpan_jotform' });
-  }
-
-  function trackLead() {
-    if (!ensureMetaPixelReady()) return;
-    trackMetaStandard('Lead', { form_name: 'ulpan_jotform' });
+    trackMetaCustom('MembershipIntent', { source: 'ulpan_next' });
   }
 
   function bindTracking() {
@@ -60,24 +55,8 @@ import MetaPixel from './MetaPixel.astro';
       el.addEventListener('click', trackFacebookGroupClick);
     });
 
-    const jotformRoot = document.querySelector('.jotform-embed-root');
-    if (jotformRoot) {
-      let jotformStartSent = false;
-      const onEngage = () => {
-        if (jotformStartSent) return;
-        jotformStartSent = true;
-        trackJotformEngage();
-      };
-      jotformRoot.addEventListener('pointerdown', onEngage, { once: true, passive: true });
-      jotformRoot.addEventListener('focusin', onEngage, { once: true });
-    }
-
-    window.addEventListener('message', (event) => {
-      if (!event.origin.includes('jotform')) return;
-      const data = event.data;
-      if (typeof data === 'string' && /submit|thank/i.test(data)) trackLead();
-      if (data && typeof data === 'object' && (data.action === 'submission' || data.type === 'submit'))
-        trackLead();
+    document.querySelectorAll('[data-track="membership_intent"]').forEach((el) => {
+      el.addEventListener('click', trackMembershipIntent);
     });
   }
 

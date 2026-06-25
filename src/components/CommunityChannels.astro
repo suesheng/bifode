@@ -2,8 +2,6 @@
 import {
   FB_PAGE_BIFODE,
   MOODLE_INFO_PATH,
-  ULPAN_LANDING_PATH,
-  jotformAnmeldungUrl,
   telegramIsraelHubUrl,
 } from '../lib/communityLinks';
 
@@ -13,13 +11,12 @@ interface Props {
 
 const { lang = 'de' } = Astro.props;
 const isEn = lang === 'en';
-const jotformUrl = jotformAnmeldungUrl();
 const telegramUrl = telegramIsraelHubUrl();
 
 const copy = isEn
   ? {
       title: 'News & dates',
-      lead: 'News and event dates are published on our Facebook page. Course sign-up for Ulpan Next is on the project page under Projects.',
+      lead: 'News and event dates are published on our Facebook page. Ulpan Next, Moodle, and other programmes are available after membership.',
       fbPage: 'BiFoDe on Facebook',
       fbPageHint: 'News, dates, and updates from BiFoDe e.V.',
       ulpan: 'Ulpan Next',
@@ -27,12 +24,12 @@ const copy = isEn
       moodle: 'Moodle',
       moodleHint: 'Learning platform for members — membership required',
       tg: 'Telegram',
-      register: 'Ulpan sign-up',
-      registerHint: 'Registration on the Ulpan Next project page',
+      membership: 'Membership',
+      membershipHint: 'Apply for admission to BiFoDe e.V.',
     }
   : {
       title: 'Aktuelles & Termine',
-      lead: 'Neuigkeiten und Termine veröffentlichen wir auf unserer Facebook-Seite. Die Anmeldung zu Ulpan Next erfolgt über die Projektseite unter Projekte.',
+      lead: 'Neuigkeiten und Termine veröffentlichen wir auf unserer Facebook-Seite. Ulpan Next, Moodle und weitere Angebote sind nach Aufnahme als Mitglied verfügbar.',
       fbPage: 'BiFoDe auf Facebook',
       fbPageHint: 'Aktuelles, Termine und Beiträge von BiFoDe e.V.',
       ulpan: 'Ulpan Next',
@@ -40,8 +37,8 @@ const copy = isEn
       moodle: 'Moodle',
       moodleHint: 'Lernplattform für Mitglieder — Aufnahme im Verein erforderlich',
       tg: 'Telegram',
-      register: 'Ulpan-Anmeldung',
-      registerHint: 'Anmeldung auf der Projektseite Ulpan Next',
+      membership: 'Mitgliedschaft',
+      membershipHint: 'Aufnahme bei BiFoDe e.V. beantragen',
     };
 ---
 
@@ -85,35 +82,11 @@ const copy = isEn
         </a>
       ) : null
     }
-    {
-      jotformUrl ? (
-        <a
-          class="card community-channel-card"
-          href={isEn ? '/en/ulpan' : `${ULPAN_LANDING_PATH}#anmeldung`}
-        >
-          <h3>{copy.register}</h3>
-          <p>{copy.registerHint}</p>
-          <span class="community-channel-cta">{isEn ? 'To registration →' : 'Zur Anmeldung →'}</span>
-        </a>
-      ) : (
-        <div class="card community-channel-card community-channel-card--muted">
-          <h3>{copy.register}</h3>
-          <p>
-            {isEn ? (
-              <>
-                Registration link is not configured yet. Please use{' '}
-                <a href="/en/contact">contact</a>.
-              </>
-            ) : (
-              <>
-                Anmelde-Link ist noch nicht hinterlegt. Bitte nutzen Sie{' '}
-                <a href="/kontakt">Kontakt</a>.
-              </>
-            )}
-          </p>
-        </div>
-      )
-    }
+    <a class="card community-channel-card" href="/mitglied-werden">
+      <h3>{copy.membership}</h3>
+      <p>{copy.membershipHint}</p>
+      <span class="community-channel-cta">{isEn ? 'Apply for membership →' : 'Mitglied werden →'}</span>
+    </a>
   </div>
 </section>
 

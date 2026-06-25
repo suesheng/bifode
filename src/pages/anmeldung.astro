@@ -1,5 +1,3 @@
 ---
-import { ULPAN_LANDING_PATH, jotformAnmeldungUrl } from '../lib/communityLinks';
-const url = jotformAnmeldungUrl();
-return Astro.redirect(url ? `${ULPAN_LANDING_PATH}#anmeldung` : ULPAN_LANDING_PATH, 302);
+return Astro.redirect('/mitglied-werden#anmeldung', 302);
 ---

@@ -1,13 +1,11 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import JotformEmbed from '../../components/JotformEmbed.astro';
 import UlpanProjectTracking from '../../components/UlpanProjectTracking.astro';
-import { FB_GROUP_ULPAN_NEXT, jotformUlpanUrl, moodleUlpanUrl } from '../../lib/communityLinks';
+import { FB_GROUP_ULPAN_NEXT, moodleUlpanUrl } from '../../lib/communityLinks';
 
 const pageDescription =
-  'Ulpan Next ist das Bildungsprojekt von BiFoDe e.V. für modernes Hebräisch — Anmeldung, Kurse und Community.';
+  'Ulpan Next ist das Bildungsprojekt von BiFoDe e.V. für modernes Hebräisch — Kurse, Moodle und Community für Mitglieder.';
 
-const jotformUrl = jotformUlpanUrl();
 const moodleUrl = moodleUlpanUrl();
 
 const features = [
@@ -69,11 +67,11 @@ const webPageJsonLd = JSON.stringify({
         <h1 id="un-hero-title">Ulpan Next</h1>
         <p class="un-hero-sub">Hebräisch lernen mit Community — Kurse, Materialien und Vernetzung.</p>
         <p class="un-lead">
-          Ulpan Next bündelt Hebräisch-Angebote von BiFoDe e.V. Melden Sie sich über das Formular an,
-          folgen Sie der Facebook-Gruppe für Termine und Austausch.
+          Ulpan Next bündelt Hebräisch-Angebote von BiFoDe e.V. Kurse, Moodle und Community-Formate stehen
+          aufgenommenen Mitgliedern zur Verfügung — Termine und Austausch auch in der Facebook-Gruppe.
         </p>
         <div class="un-actions">
-          <a href="#anmeldung" class="un-btn un-btn-primary">Zur Anmeldung</a>
+          <a href="/mitglied-werden" class="un-btn un-btn-primary" data-track="membership_intent">Mitglied werden</a>
           <a href="/moodle" class="un-btn un-btn-secondary">Moodle</a>
           <a
             href={FB_GROUP_ULPAN_NEXT}
@@ -99,18 +97,6 @@ const webPageJsonLd = JSON.stringify({
             </article>
           ))}
         </div>
-      </div>
-    </section>
-
-    <section class="un-section un-section-alt" id="anmeldung" aria-labelledby="un-form-title">
-      <div class="container un-narrow">
-        <h2 id="un-form-title">Anmeldung & Interesse</h2>
-        <p class="un-lead">
-          Nutzen Sie das Formular für Kursinteresse, Veranstaltungen oder Rückfragen zu Ulpan Next. Die
-          Daten werden über <strong>Jotform</strong> verarbeitet (siehe{' '}
-          <a href="/datenschutz">Datenschutz</a>).
-        </p>
-        <JotformEmbed formUrl={jotformUrl} title="Anmeldung Ulpan Next" iframeLang="de" flush />
       </div>
     </section>
 
@@ -253,15 +239,6 @@ const webPageJsonLd = JSON.stringify({
 
   .un-narrow {
     max-width: 720px;
-  }
-
-  .un-form-fallback {
-    padding: 1rem 1.25rem;
-    border-radius: 0.65rem;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    color: #475569;
-    line-height: 1.6;
   }
 
   .un-grid {
