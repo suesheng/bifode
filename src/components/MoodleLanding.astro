@@ -1,0 +1,381 @@
+---
+import {
+  MOODLE_INFO_PATH,
+  MOODLE_ULPAN_URL,
+  ULPAN_LANDING_PATH,
+  moodleUlpanUrl,
+} from '../lib/communityLinks';
+
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const isEn = lang === 'en';
+const moodleUrl = moodleUlpanUrl();
+
+const copy = isEn
+  ? {
+      title: 'Moodle — Ulpan.Next learning platform',
+      subtitle: 'Course materials, exercises and modules for members of BiFoDe e.V.',
+      lead:
+        'Our Moodle site hosts structured learning content for Ulpan.Next. Access is provided to admitted members of BiFoDe e.V. after membership has been confirmed.',
+      noticeTitle: 'Membership required',
+      notice:
+        'You need to be a member of BiFoDe e.V. (admission completed) before you can register on Moodle. If you are not a member yet, please apply first.',
+      stepsTitle: 'How to get access',
+      steps: [
+        {
+          title: 'Apply for membership',
+          text: 'Submit your application via the online form on our website.',
+        },
+        {
+          title: 'Admission by the association',
+          text: 'BiFoDe e.V. reviews your application. Membership becomes effective after admission.',
+        },
+        {
+          title: 'Receive your login details',
+          text: 'You will receive further information and Moodle access by email once admission is complete.',
+        },
+        {
+          title: 'Open Moodle',
+          text: 'Sign in at ulpan.bifode.org with the credentials provided to you.',
+        },
+      ],
+      ctaMoodle: 'Open Moodle',
+      ctaMoodleHint: 'Opens ulpan.bifode.org in a new tab',
+      ctaMember: 'Apply for membership',
+      ctaUlpan: 'Ulpan.Next project page',
+      help: 'Questions about access?',
+      contact: 'info@bifode.org',
+      includesTitle: 'What you will find on Moodle',
+      includes: [
+        'Course modules and learning materials for Ulpan.Next',
+        'Exercises, assignments and supplementary resources',
+        'Organisational information for online and hybrid formats',
+      ],
+    }
+  : {
+      title: 'Moodle — Lernplattform Ulpan.Next',
+      subtitle: 'Kursmaterialien, Übungen und Module für Mitglieder von BiFoDe e.V.',
+      lead:
+        'Auf unserer Moodle-Plattform finden Sie strukturierte Lerninhalte für Ulpan.Next. Der Zugang wird aufgenommenen Mitgliedern von BiFoDe e.V. nach bestätigter Mitgliedschaft bereitgestellt.',
+      noticeTitle: 'Mitgliedschaft erforderlich',
+      notice:
+        'Für die Registrierung auf Moodle ist eine Mitgliedschaft bei BiFoDe e.V. (nach abgeschlossener Aufnahme) erforderlich. Wenn Sie noch nicht Mitglied sind, stellen Sie bitte zuerst eine Aufnahmeanfrage.',
+      stepsTitle: 'So erhalten Sie Zugang',
+      steps: [
+        {
+          title: 'Mitgliedschaft beantragen',
+          text: 'Stellen Sie Ihre Anfrage über das Online-Formular auf unserer Website.',
+        },
+        {
+          title: 'Aufnahme durch den Verein',
+          text: 'BiFoDe e.V. prüft Ihre Angaben. Die Mitgliedschaft wird nach Aufnahme wirksam.',
+        },
+        {
+          title: 'Zugangsdaten erhalten',
+          text: 'Nach der Aufnahme erhalten Sie weitere Informationen und den Moodle-Zugang per E-Mail.',
+        },
+        {
+          title: 'Moodle öffnen',
+          text: 'Melden Sie sich unter ulpan.bifode.org mit den mitgeteilten Zugangsdaten an.',
+        },
+      ],
+      ctaMoodle: 'Moodle öffnen',
+      ctaMoodleHint: 'Öffnet ulpan.bifode.org in einem neuen Tab',
+      ctaMember: 'Mitgliedschaft beantragen',
+      ctaUlpan: 'Projektseite Ulpan.Next',
+      help: 'Fragen zum Zugang?',
+      contact: 'info@bifode.org',
+      includesTitle: 'Was Sie auf Moodle finden',
+      includes: [
+        'Kursmodule und Lernmaterialien für Ulpan.Next',
+        'Übungen, Aufgaben und ergänzende Ressourcen',
+        'Organisatorische Informationen zu Online- und Hybridformaten',
+      ],
+    };
+
+const membershipPath = '/mitglied-werden';
+const ulpanPath = ULPAN_LANDING_PATH;
+const infoPath = isEn ? '/en/moodle' : MOODLE_INFO_PATH;
+---
+
+<div class="md-page">
+  <section class="md-hero" aria-labelledby="md-title">
+    <div class="container md-hero-inner">
+      <p class="md-eyebrow">Ulpan.Next · BiFoDe e.V.</p>
+      <h1 id="md-title">{copy.title}</h1>
+      <p class="md-subtitle">{copy.subtitle}</p>
+      <p class="md-lead">{copy.lead}</p>
+      <div class="md-actions">
+        <a
+          href={moodleUrl}
+          class="md-btn md-btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {copy.ctaMoodle}
+        </a>
+        <a href={membershipPath} class="md-btn md-btn-secondary">{copy.ctaMember}</a>
+      </div>
+      <p class="md-hint">{copy.ctaMoodleHint}</p>
+    </div>
+  </section>
+
+  <section class="md-section" aria-labelledby="md-notice-title">
+    <div class="container md-narrow">
+      <div class="md-notice" role="note">
+        <h2 id="md-notice-title">{copy.noticeTitle}</h2>
+        <p>{copy.notice}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="md-section md-section-alt" aria-labelledby="md-steps-title">
+    <div class="container md-narrow">
+      <h2 id="md-steps-title">{copy.stepsTitle}</h2>
+      <ol class="md-steps">
+        {copy.steps.map((step, i) => (
+          <li>
+            <span class="md-step-num" aria-hidden="true">{i + 1}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="md-section" aria-labelledby="md-includes-title">
+    <div class="container md-narrow">
+      <h2 id="md-includes-title">{copy.includesTitle}</h2>
+      <ul class="md-list">
+        {copy.includes.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <p class="md-links">
+        <a href={ulpanPath}>{copy.ctaUlpan}</a>
+        {' · '}
+        <a href={infoPath}>{isEn ? 'This page' : 'Diese Seite'}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="md-section md-section-alt md-footer-note">
+    <div class="container md-narrow">
+      <p>
+        {copy.help}{' '}
+        <a href={`mailto:${copy.contact}`}>{copy.contact}</a>
+      </p>
+    </div>
+  </section>
+</div>
+
+<style>
+  :global(.md-main) {
+    padding: 0 !important;
+  }
+
+  .md-page {
+    --md-navy: #0c1e34;
+    --md-blue: #163b63;
+    background: #fff;
+  }
+
+  .md-hero {
+    padding: 3rem 0 2.5rem;
+    background: linear-gradient(165deg, #f8fbff 0%, #fff 55%);
+    border-bottom: 1px solid #e8eef5;
+  }
+
+  .md-hero-inner {
+    max-width: 720px;
+  }
+
+  .md-eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: #475569;
+  }
+
+  .md-hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+    font-weight: 800;
+    color: var(--md-navy);
+    line-height: 1.15;
+  }
+
+  .md-subtitle {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--md-blue);
+    line-height: 1.45;
+  }
+
+  .md-lead {
+    margin: 0 0 1.5rem;
+    color: #334155;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  .md-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .md-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .md-btn-primary {
+    background: var(--md-blue);
+    color: #fff;
+    border-color: var(--md-blue);
+  }
+
+  .md-btn-primary:hover {
+    background: #0f2e50;
+  }
+
+  .md-btn-secondary {
+    background: #fff;
+    color: var(--md-blue);
+    border-color: #89a6cc;
+  }
+
+  .md-btn-secondary:hover {
+    background: #eef4ff;
+  }
+
+  .md-hint {
+    margin: 0.75rem 0 0;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  .md-section {
+    padding: 2.5rem 0;
+  }
+
+  .md-section-alt {
+    background: #fafbfd;
+  }
+
+  .md-narrow {
+    max-width: 720px;
+  }
+
+  .md-section h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    color: var(--md-navy);
+  }
+
+  .md-notice {
+    padding: 1.1rem 1.2rem;
+    border: 1px solid #dbe5f1;
+    border-left: 4px solid var(--md-blue);
+    border-radius: 0 10px 10px 0;
+    background: #fff;
+  }
+
+  .md-notice h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .md-notice p {
+    margin: 0;
+    color: #334155;
+    line-height: 1.65;
+    font-size: 0.95rem;
+  }
+
+  .md-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .md-steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .md-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--md-blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .md-steps h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    color: var(--md-navy);
+  }
+
+  .md-steps p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .md-list {
+    margin: 0 0 1.25rem;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .md-links a {
+    color: var(--md-blue);
+    font-weight: 600;
+  }
+
+  .md-footer-note p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+  }
+
+  .md-footer-note a {
+    color: var(--md-blue);
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .md-actions .md-btn {
+      width: 100%;
+    }
+  }
+</style>

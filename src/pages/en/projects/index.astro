@@ -49,6 +49,18 @@ import { ULPAN_LANDING_PATH } from '../../../lib/communityLinks';
         })
       }
     </div>
+
+    <aside class="moodle-callout card" aria-labelledby="moodle-callout-title">
+      <h3 id="moodle-callout-title">Moodle — learning platform for members</h3>
+      <p>
+        Members of BiFoDe e.V. use our Moodle instance for course materials, exercises, and supporting learning formats for Ulpan Next.
+        Access is granted after admission to the association.
+      </p>
+      <div class="moodle-callout-actions">
+        <a class="project-card-cta" href="/en/moodle">About Moodle →</a>
+        <a class="moodle-callout-secondary" href={ULPAN_LANDING_PATH}>Ulpan Next →</a>
+      </div>
+    </aside>
   </section>
 </MainLayout>
 
@@ -112,5 +124,41 @@ import { ULPAN_LANDING_PATH } from '../../../lib/communityLinks';
     font-size: 0.8rem;
     font-weight: 600;
     width: fit-content;
+  }
+
+  .moodle-callout {
+    margin-top: 2rem;
+    padding: 1.5rem 1.75rem;
+    border-left: 4px solid var(--accent);
+  }
+
+  .moodle-callout h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    color: #111827;
+  }
+
+  .moodle-callout p {
+    margin: 0 0 1rem;
+    color: #475569;
+    line-height: 1.7;
+    max-width: 720px;
+  }
+
+  .moodle-callout-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    align-items: center;
+  }
+
+  .moodle-callout-secondary {
+    color: #163b63;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .moodle-callout-secondary:hover {
+    text-decoration: underline;
   }
 </style>

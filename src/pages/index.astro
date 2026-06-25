@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 import TrustSection from '../components/TrustSection.astro';
 import StatsBar from '../components/StatsBar.astro';
 import CommunityChannels from '../components/CommunityChannels.astro';
-import { ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 import { PILOT_LANDING_PATH } from '../lib/projectCards';
 
 const orgHomeJsonLd = JSON.stringify({
@@ -39,7 +39,10 @@ const orgHomeJsonLd = JSON.stringify({
     centered={true}
     title="Bildung stärken. Vorurteilen entgegentreten. Demokratie leben."
     subtitle="BiFoDe e.V. setzt Bildungs- und Präventionsformate in Nordrhein-Westfalen um."
-    tertiary={{ href: ULPAN_LANDING_PATH, label: 'Ulpan Next →' }}
+    tertiaryLinks={[
+      { href: ULPAN_LANDING_PATH, label: 'Ulpan Next →' },
+      { href: MOODLE_INFO_PATH, label: 'Moodle →' },
+    ]}
   />
 
   <StatsBar />

@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
+import { MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../../lib/communityLinks';
 import { PROJECT_CARDS } from '../../lib/projectCards';
 ---
 
@@ -39,6 +40,18 @@ import { PROJECT_CARDS } from '../../lib/projectCards';
         )
       }
     </div>
+
+    <aside class="moodle-callout card" aria-labelledby="moodle-callout-title">
+      <h3 id="moodle-callout-title">Moodle — Lernplattform für Mitglieder</h3>
+      <p>
+        Mitglieder von BiFoDe e.V. nutzen unsere Moodle-Instanz für Kursmaterialien, Übungen und begleitende Lernformate zu Ulpan Next.
+        Zugang erhalten Sie nach Aufnahme in den Verein.
+      </p>
+      <div class="moodle-callout-actions">
+        <a class="project-card-cta" href={MOODLE_INFO_PATH}>Zur Moodle-Seite →</a>
+        <a class="moodle-callout-secondary" href={ULPAN_LANDING_PATH}>Ulpan Next →</a>
+      </div>
+    </aside>
   </section>
 </MainLayout>
 
@@ -112,5 +125,41 @@ import { PROJECT_CARDS } from '../../lib/projectCards';
     font-size: 0.8rem;
     font-weight: 600;
     width: fit-content;
+  }
+
+  .moodle-callout {
+    margin-top: 2rem;
+    padding: 1.5rem 1.75rem;
+    border-left: 4px solid var(--accent);
+  }
+
+  .moodle-callout h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    color: #111827;
+  }
+
+  .moodle-callout p {
+    margin: 0 0 1rem;
+    color: #475569;
+    line-height: 1.7;
+    max-width: 720px;
+  }
+
+  .moodle-callout-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    align-items: center;
+  }
+
+  .moodle-callout-secondary {
+    color: #163b63;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .moodle-callout-secondary:hover {
+    text-decoration: underline;
   }
 </style>

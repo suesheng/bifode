@@ -1,6 +1,7 @@
 ---
 import {
   FB_PAGE_BIFODE,
+  MOODLE_INFO_PATH,
   ULPAN_LANDING_PATH,
   jotformAnmeldungUrl,
   telegramIsraelHubUrl,
@@ -23,6 +24,8 @@ const copy = isEn
       fbPageHint: 'News, dates, and updates from BiFoDe e.V.',
       ulpan: 'Ulpan Next',
       ulpanHint: 'Hebrew education project — see Projects',
+      moodle: 'Moodle',
+      moodleHint: 'Learning platform for members — membership required',
       tg: 'Telegram',
       register: 'Ulpan sign-up',
       registerHint: 'Registration on the Ulpan Next project page',
@@ -34,6 +37,8 @@ const copy = isEn
       fbPageHint: 'Aktuelles, Termine und Beiträge von BiFoDe e.V.',
       ulpan: 'Ulpan Next',
       ulpanHint: 'Bildungsprojekt Hebräisch — unter Projekte',
+      moodle: 'Moodle',
+      moodleHint: 'Lernplattform für Mitglieder — Aufnahme im Verein erforderlich',
       tg: 'Telegram',
       register: 'Ulpan-Anmeldung',
       registerHint: 'Anmeldung auf der Projektseite Ulpan Next',
@@ -60,6 +65,11 @@ const copy = isEn
       <h3>{copy.ulpan}</h3>
       <p>{copy.ulpanHint}</p>
       <span class="community-channel-cta">{isEn ? 'View projects →' : 'Zu den Projekten →'}</span>
+    </a>
+    <a class="card community-channel-card" href={isEn ? '/en/moodle' : MOODLE_INFO_PATH}>
+      <h3>{copy.moodle}</h3>
+      <p>{copy.moodleHint}</p>
+      <span class="community-channel-cta">{isEn ? 'About Moodle →' : 'Zur Moodle-Seite →'}</span>
     </a>
     {
       telegramUrl ? (

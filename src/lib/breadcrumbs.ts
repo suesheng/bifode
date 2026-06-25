@@ -27,6 +27,8 @@ const ROUTES: Record<string, RouteDef> = {
   '/en/projects': { labelDe: 'Projekte', labelEn: 'Projects' },
   '/projekte/pilotprojekt-nrw': { labelDe: 'Pilotprojekt NRW', labelEn: 'NRW pilot project' },
   '/projekte/ulpan-next': { labelDe: 'Ulpan Next', labelEn: 'Ulpan Next' },
+  '/moodle': { labelDe: 'Moodle', labelEn: 'Moodle' },
+  '/en/moodle': { labelDe: 'Moodle', labelEn: 'Moodle' },
   '/israel-community': { labelDe: 'Community-Projekt', labelEn: 'Community project' },
   '/israel-hub': { labelDe: 'Israel Hub DACH', labelEn: 'Israel Hub DACH' },
   '/kontakt': { labelDe: 'Kontakt', labelEn: 'Contact' },

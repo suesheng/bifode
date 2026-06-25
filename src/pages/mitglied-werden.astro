@@ -11,7 +11,7 @@ import {
   MONTHLY_STANDARD_EUR,
   MONTHLY_STUDENT_EUR,
 } from '../lib/membershipFees';
-import { jotformMitgliedschaftUrl, ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { jotformMitgliedschaftUrl, MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 
 const jotformUrl = jotformMitgliedschaftUrl();
 
@@ -31,8 +31,8 @@ const vereinServices = [
     text: 'Hebräisch lernen in Präsenz- und Online-Formaten — für Mitglieder des Vereins.'
   },
   {
-    title: 'Lernmaterialien',
-    text: 'Zugang zu Übungen, Links, Empfehlungen und ausgewählten Materialien rund um Ivrit und Bildung.'
+    title: 'Lernmaterialien & Moodle',
+    text: 'Zugang zu Übungen, Links, Empfehlungen und der Moodle-Lernplattform für Mitglieder — mit Kursmaterialien zu Ulpan Next.'
   },
   {
     title: 'Gemeinsame Treffen',
@@ -63,7 +63,7 @@ const steps = [
   },
   {
     title: 'Angebote nutzen',
-    text: 'Ulpan, Materialien, Treffen und weitere Formate — je nach Programm und Kapazität.'
+    text: 'Ulpan, Moodle, Materialien, Treffen und weitere Formate — je nach Programm und Kapazität.'
   }
 ];
 
@@ -193,6 +193,7 @@ const webPageJsonLd = JSON.stringify({
           <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
           <a href="/kontakt" class="mw-btn mw-btn-secondary">Kontakt</a>
           <a href={ULPAN_LANDING_PATH} class="mw-btn mw-btn-outline">Ulpan Next</a>
+          <a href={MOODLE_INFO_PATH} class="mw-btn mw-btn-outline">Moodle</a>
         </div>
       </div>
     </section>

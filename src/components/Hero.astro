@@ -3,9 +3,14 @@
 import { getImage } from 'astro:assets';
 import heroBgSource from '../assets/hero-bg.webp';
 
-const { title, subtitle, centered = true, tertiary } = Astro.props;
+type TertiaryLink = { href: string; label: string; external?: boolean };
+
+const { title, subtitle, centered = true, tertiary, tertiaryLinks } = Astro.props;
 const lang = Astro.props.lang === 'en' ? 'en' : 'de';
 const isEn = lang === 'en';
+
+const resolvedTertiaryLinks: TertiaryLink[] =
+  tertiaryLinks ?? (tertiary ? [tertiary] : []);
 
 const heroBg = await getImage({
   src: heroBgSource,
@@ -33,17 +38,22 @@ const heroBg = await getImage({
           <a href={isEn ? '/en/cooperation' : '/kooperation'} class="button secondary">{isEn ? 'Request Cooperation' : 'Kooperation anfragen'}</a>
         </div>
 
-        {tertiary && (
+        {resolvedTertiaryLinks.length > 0 && (
           <p class="hero-tertiary">
-            <a
-              href={tertiary.href}
-              class="hero-tertiary-link"
-              {...(tertiary.external
-                ? { target: '_blank', rel: 'noopener noreferrer' }
-                : {})}
-            >
-              {tertiary.label}
-            </a>
+            {resolvedTertiaryLinks.map((link, index) => (
+              <>
+                {index > 0 && <span class="hero-tertiary-sep" aria-hidden="true"> · </span>}
+                <a
+                  href={link.href}
+                  class="hero-tertiary-link"
+                  {...(link.external
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                >
+                  {link.label}
+                </a>
+              </>
+            ))}
           </p>
         )}
 
@@ -174,6 +184,11 @@ const heroBg = await getImage({
   .hero-tertiary-link:hover {
     color: #0f2e50;
     border-bottom-color: #0f2e50;
+  }
+
+  .hero-tertiary-sep {
+    color: #64748b;
+    font-weight: 400;
   }
 
   .hero-trust {

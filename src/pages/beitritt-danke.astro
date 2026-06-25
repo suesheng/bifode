@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { FB_GROUP_ULPAN_NEXT } from '../lib/communityLinks';
+import { FB_GROUP_ULPAN_NEXT, MOODLE_INFO_PATH } from '../lib/communityLinks';
 import {
   ADMISSION_FEE_EUR,
   ANNUAL_STANDARD_EUR,
@@ -58,8 +58,8 @@ const showUlpan = Astro.url.searchParams.get('ulpan') === '1';
             <h2 id="bd-ulpan-title">Ulpan.Next</h2>
             <p>
               Wenn Sie sich für Ulpan.Next interessieren, erhalten Sie nach Bestätigung Ihrer Mitgliedschaft
-              weitere Informationen zu Kursstart, Kurszeiten, Moodle-Zugang, Zoom-Unterricht und organisatorischem
-              Ablauf.
+              weitere Informationen zu Kursstart, Kurszeiten,{' '}
+              <a href={MOODLE_INFO_PATH}>Moodle-Zugang</a>, Zoom-Unterricht und organisatorischem Ablauf.
             </p>
           </section>
         )}

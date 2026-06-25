@@ -34,10 +34,21 @@ export function jotformAnmeldungUrl(): string | undefined {
 /** Ulpan Next interest / registration on /projekte/ulpan-next (Jotform). */
 export const JOTFORM_ULPAN_URL = 'https://form.jotform.com/261742322871052';
 
+/** Moodle learning platform for Ulpan.Next members (separate subdomain). */
+export const MOODLE_ULPAN_URL = 'https://ulpan.bifode.org/';
+
+export const MOODLE_INFO_PATH = '/moodle';
+
 export function jotformUlpanUrl(): string {
   const ulpan = publicEnv('PUBLIC_JOTFORM_ULPAN_URL');
   if (ulpan?.startsWith('http')) return ulpan;
   return JOTFORM_ULPAN_URL;
+}
+
+export function moodleUlpanUrl(): string {
+  const url = publicEnv('PUBLIC_MOODLE_ULPAN_URL');
+  if (url?.startsWith('http')) return url;
+  return MOODLE_ULPAN_URL;
 }
 
 export function telegramIsraelHubUrl(): string | undefined {

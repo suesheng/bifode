@@ -1,0 +1,36 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import MoodleLanding from '../../components/MoodleLanding.astro';
+import { MOODLE_ULPAN_URL } from '../../lib/communityLinks';
+
+const pageDescription =
+  'Moodle learning platform for Ulpan.Next — course materials for members of BiFoDe e.V. Access after admission to the association.';
+---
+
+<MainLayout
+  lang="en"
+  title="Moodle — Ulpan.Next learning platform"
+  description={pageDescription}
+  titleSuffix={false}
+  mainClass="md-main"
+>
+  <MoodleLanding lang="en" />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Moodle — Ulpan.Next learning platform',
+      url: 'https://www.bifode.org/en/moodle',
+      description: pageDescription,
+      inLanguage: 'en-GB',
+      isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
+      mainEntity: {
+        '@type': 'WebApplication',
+        name: 'Moodle Ulpan.Next',
+        url: MOODLE_ULPAN_URL,
+        applicationCategory: 'EducationalApplication',
+      },
+    })}
+  />
+</MainLayout>

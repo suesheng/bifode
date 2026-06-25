@@ -45,9 +45,21 @@ const navStructure: NavEntry[] = isEn
       {
         kind: 'group',
         label: 'Programs',
-        items: [{ href: '/en/schools', label: 'Schools' }]
+        items: [
+          { href: '/en/schools', label: 'Schools' },
+          { href: '/en/ulpan', label: 'Ulpan Next' },
+          { href: '/en/moodle', label: 'Moodle' }
+        ]
       },
-      { kind: 'link', href: '/en/projects', label: 'Projects' },
+      {
+        kind: 'group',
+        label: 'Projects',
+        items: [
+          { href: '/en/projects', label: 'Overview' },
+          { href: '/en/ulpan', label: 'Ulpan Next' },
+          { href: '/en/moodle', label: 'Moodle' }
+        ]
+      },
       {
         kind: 'link',
         href: FB_PAGE_BIFODE,
@@ -78,9 +90,21 @@ const navStructure: NavEntry[] = isEn
       {
         kind: 'group',
         label: 'Angebote',
-        items: [{ href: '/fuer-schulen', label: 'Schulen' }]
+        items: [
+          { href: '/fuer-schulen', label: 'Schulen' },
+          { href: '/projekte/ulpan-next', label: 'Ulpan Next' },
+          { href: '/moodle', label: 'Moodle' }
+        ]
       },
-      { kind: 'link', href: '/projekte', label: 'Projekte' },
+      {
+        kind: 'group',
+        label: 'Projekte',
+        items: [
+          { href: '/projekte', label: 'Übersicht' },
+          { href: '/projekte/ulpan-next', label: 'Ulpan Next' },
+          { href: '/moodle', label: 'Moodle' }
+        ]
+      },
       {
         kind: 'link',
         href: FB_PAGE_BIFODE,
@@ -117,11 +141,15 @@ const footerOrganisation: FooterLink[] = isEn
 const footerOffers: FooterLink[] = isEn
   ? [
       { href: '/en/schools', label: 'Schools' },
-      { href: '/en/projects', label: 'Projects' }
+      { href: '/en/projects', label: 'Projects' },
+      { href: '/en/ulpan', label: 'Ulpan Next' },
+      { href: '/en/moodle', label: 'Moodle' }
     ]
   : [
       { href: '/fuer-schulen', label: 'Schulen' },
-      { href: '/projekte', label: 'Projekte' }
+      { href: '/projekte', label: 'Projekte' },
+      { href: '/projekte/ulpan-next', label: 'Ulpan Next' },
+      { href: '/moodle', label: 'Moodle' }
     ];
 
 const footerCurrent: FooterLink[] = isEn
@@ -170,6 +198,7 @@ const pathMap: Record<string, string> = {
   '/schulen': '/en/schools',
   '/projekte': '/en/projects',
   '/projekte/ulpan-next': '/en/ulpan',
+  '/moodle': '/en/moodle',
   '/kooperation': '/en/cooperation',
   '/aktuelles': '/en/news',
   '/termine': '/en/events',
@@ -188,6 +217,7 @@ const pathMap: Record<string, string> = {
   '/en/schools': '/fuer-schulen',
   '/en/projects': '/projekte',
   '/en/ulpan': '/projekte/ulpan-next',
+  '/en/moodle': '/moodle',
   '/en/cooperation': '/kooperation',
   '/en/news': '/aktuelles',
   '/en/events': '/termine',

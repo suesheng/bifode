@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import IsraelCommunityTracking from '../components/IsraelCommunityTracking.astro';
-import { FB_GROUP_ULPAN_NEXT, FB_PAGE_BIFODE } from '../lib/communityLinks';
+import { FB_GROUP_ULPAN_NEXT, FB_PAGE_BIFODE, MOODLE_INFO_PATH } from '../lib/communityLinks';
 
 const pageTitle = 'Community-Projekt | Sprache, Orientierung & Austausch | BiFoDe e.V.';
 const pageDescription =
@@ -241,6 +241,7 @@ const webPageJsonLd = JSON.stringify({
         <p class="ic-note"><strong>Wichtig:</strong> Die konkrete Teilnahme an Kursen und Veranstaltungen erfolgt je nach Verfügbarkeit, Projektphase und organisatorischen Rahmenbedingungen. Für einzelne Angebote können zusätzliche Teilnahmebeiträge anfallen.</p>
         <div class="card-grid ic-membership-grid">
           <article class="card feature-card"><h3>Ulpan-Kurse</h3><p>Mitglieder werden bevorzugt über neue Online- und Präsenzkurse informiert und können sich für verfügbare Plätze anmelden.</p></article>
+          <article class="card feature-card"><h3>Moodle-Lernplattform</h3><p>Zugang zur Vereins-Moodle-Instanz mit Kursmaterialien, Übungen und begleitenden Lernformaten — nach Aufnahme in den Verein.</p></article>
           <article class="card feature-card"><h3>Lernmaterialien</h3><p>Zugang zu ausgewählten Lernmaterialien, Übungsunterlagen, Links und Empfehlungen rund um Sprache und Bildung.</p></article>
           <article class="card feature-card"><h3>Gesprächs- und Sprachclubs</h3><p>Teilnahme an Gesprächsrunden, Sprachpraxisgruppen und Diskussionsformaten für Austausch.</p></article>
           <article class="card feature-card"><h3>Webinare & Expertenformate</h3><p>Einladungen zu Online- und Präsenzveranstaltungen mit Expertinnen und Experten zu Beruf, Bildung und Alltag.</p></article>
@@ -249,6 +250,7 @@ const webPageJsonLd = JSON.stringify({
         </div>
         <p class="ic-cta-row">
           <a href="/mitglied-werden" class="ic-btn ic-btn-primary" data-track="membership_intent">Mitglied werden und Angebote nutzen</a>
+          <a href={MOODLE_INFO_PATH} class="ic-btn ic-btn-outline">Moodle für Mitglieder</a>
         </p>
         <p class="ic-small">Die Mitgliedschaft ist ein Beitrag zur Vereinsarbeit. Einzelne Kurse oder Veranstaltungen können zusätzliche Beiträge oder eine separate Anmeldung erfordern.</p>
       </div>
@@ -649,6 +651,10 @@ const webPageJsonLd = JSON.stringify({
 
   .ic-cta-row {
     margin: 1.5rem 0 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
   }
 
   .ic-btn {

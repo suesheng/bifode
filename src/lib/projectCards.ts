@@ -30,9 +30,9 @@ export const PROJECT_CARDS: ProjectCard[] = [
     titleDe: 'Ulpan Next',
     titleEn: 'Ulpan Next',
     descriptionDe:
-      'Bildungsprojekt für modernes Hebräisch — Kurse, Community und Anmeldung über die Projektseite.',
+      'Bildungsprojekt für modernes Hebräisch — Kurse, Community, Moodle-Lernplattform und Anmeldung über die Projektseite.',
     descriptionEn:
-      'Educational project for modern Hebrew — courses, community, and sign-up on the project page.',
+      'Educational project for modern Hebrew — courses, community, Moodle learning platform, and sign-up on the project page.',
     href: '/projekte/ulpan-next',
     status: 'active',
   },
