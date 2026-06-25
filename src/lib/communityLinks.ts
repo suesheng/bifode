@@ -15,17 +15,29 @@ export const FB_GROUP_ISRAEL_HUB = FB_GROUP_ULPAN_NEXT;
 /** Events and community updates (Facebook group). */
 export const COMMUNITY_EVENTS_URL = FB_GROUP_ULPAN_NEXT;
 
+/** Membership application on /mitglied-werden (Jotform). */
+export const JOTFORM_MITGLIEDSCHAFT_URL =
+  'https://form.jotform.com/261744316807056';
+
+export function jotformMitgliedschaftUrl(): string {
+  const url = publicEnv('PUBLIC_JOTFORM_MITGLIEDSCHAFT_URL');
+  if (url?.startsWith('http')) return url;
+  return JOTFORM_MITGLIEDSCHAFT_URL;
+}
+
 export function jotformAnmeldungUrl(): string | undefined {
   const url = publicEnv('PUBLIC_JOTFORM_ANMELDUNG_URL');
   if (!url?.startsWith('http')) return undefined;
   return url;
 }
 
-/** Jotform on the Ulpan Next project page (falls back to event registration URL). */
-export function jotformUlpanUrl(): string | undefined {
+/** Ulpan Next interest / registration on /projekte/ulpan-next (Jotform). */
+export const JOTFORM_ULPAN_URL = 'https://form.jotform.com/261742322871052';
+
+export function jotformUlpanUrl(): string {
   const ulpan = publicEnv('PUBLIC_JOTFORM_ULPAN_URL');
   if (ulpan?.startsWith('http')) return ulpan;
-  return jotformAnmeldungUrl();
+  return JOTFORM_ULPAN_URL;
 }
 
 export function telegramIsraelHubUrl(): string | undefined {

@@ -104,16 +104,7 @@ const webPageJsonLd = JSON.stringify({
           Daten werden über <strong>Jotform</strong> verarbeitet (siehe{' '}
           <a href="/datenschutz">Datenschutz</a>).
         </p>
-        {
-          jotformUrl ? (
-            <JotformEmbed formUrl={jotformUrl} title="Anmeldung Ulpan Next" iframeLang="de" />
-          ) : (
-            <p class="un-form-fallback">
-              Das Anmeldeformular ist noch nicht hinterlegt. Bitte schreiben Sie uns über{' '}
-              <a href="/kontakt">Kontakt</a> oder treten Sie der Facebook-Gruppe bei.
-            </p>
-          )
-        }
+        <JotformEmbed formUrl={jotformUrl} title="Anmeldung Ulpan Next" iframeLang="de" flush />
       </div>
     </section>
 

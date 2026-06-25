@@ -3,23 +3,27 @@
  * Mitgliedschaft — landing for new Verein members (no tracking yet).
  */
 import MainLayout from '../layouts/MainLayout.astro';
+import JotformEmbed from '../components/JotformEmbed.astro';
 import {
-  MONTHLY_EUR,
+  ANNUAL_STANDARD_EUR,
+  ANNUAL_STUDENT_EUR,
   formatEur,
-  getMembershipFeeAmounts,
+  MONTHLY_STANDARD_EUR,
+  MONTHLY_STUDENT_EUR,
 } from '../lib/membershipFees';
-import { ULPAN_LANDING_PATH } from '../lib/communityLinks';
-import { SATZUNG_PAGE_DE } from '../lib/vereinDocs';
+import { jotformMitgliedschaftUrl, ULPAN_LANDING_PATH } from '../lib/communityLinks';
+
+const jotformUrl = jotformMitgliedschaftUrl();
 
 const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
-  'Mitgliedschaft bei BiFoDe e.V. ab 15 €/Monat (Studierende 10,50 €, Jahresbeitrag ab 162 €) — Unterstützung der Vereinsarbeit mit Zugang zu Bildungsangeboten nach Aufnahme.';
+  `Mitgliedschaft bei BiFoDe e.V. — ${formatEur(ANNUAL_STANDARD_EUR)} € / Jahr (Standard, ${formatEur(MONTHLY_STANDARD_EUR)} € / Monat) · Studierende / ermäßigt ${formatEur(ANNUAL_STUDENT_EUR)} € / Jahr — Unterstützung der Vereinsarbeit mit Zugang zu Bildungsangeboten nach Aufnahme.`;
 
 const ctaApply = 'Mitgliedschaft beantragen';
 
-const eur = formatEur;
-const { monthlyStudent, annualStandard, annualStudent, annualStandardFull, annualStudentFull } =
-  getMembershipFeeAmounts();
+const formSectionTitle = 'Mitglied werden bei BiFoDe e.V.';
+const formSectionIntro =
+  'Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. Nach Prüfung und Aufnahme erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan.Next, Lernmaterialien und Community-Formate, je nach Verfügbarkeit. Pflichtfelder sind mit * markiert.';
 
 const vereinServices = [
   {
@@ -48,74 +52,19 @@ const vereinServices = [
   }
 ];
 
-const pricingRows = [
-  {
-    label: 'Standard',
-    monthly: eur(MONTHLY_EUR),
-    monthlyNote: 'Regelbeitrag',
-    annual: eur(annualStandard),
-    annualRef: eur(annualStandardFull),
-    annualNote: 'bei jährlicher Zahlung',
-    highlight: false
-  },
-  {
-    label: 'Studierende',
-    monthly: eur(monthlyStudent),
-    monthlyRef: eur(MONTHLY_EUR),
-    monthlyNote: 'mit Ermäßigung',
-    annual: eur(annualStudent),
-    annualRef: eur(annualStudentFull),
-    annualNote: 'Ermäßigung · jährliche Zahlung',
-    highlight: true,
-    badge: 'Ermäßigung'
-  }
-];
-
 const steps = [
   {
     title: 'Aufnahme beantragen',
-    text: 'Online-Formular oder Beitrittserklärung ausfüllen — monatlicher oder jährlicher Mitgliedsbeitrag.'
+    text: 'Online-Formular ausfüllen — jährlicher Mitgliedsbeitrag (180 € bzw. 144 €).'
   },
   {
     title: 'Aufnahme & Zugang',
-    text: 'Nach Vereinsbeschluss und Beitrittserklärung erhalten Sie Zugang zu den Vereinsangeboten gemäß Satzung und Verfügbarkeit.'
+    text: 'Nach Prüfung und Vereinsbeschluss erhalten Sie Zugang zu den Vereinsangeboten gemäß Satzung und Verfügbarkeit.'
   },
   {
     title: 'Angebote nutzen',
     text: 'Ulpan, Materialien, Treffen und weitere Formate — je nach Programm und Kapazität.'
   }
-];
-
-const tariffOptions = [
-  {
-    value: 'standard_monthly',
-    label: `Standard — monatlich — ${eur(MONTHLY_EUR)} €`,
-    isStudent: false
-  },
-  {
-    value: 'student_monthly',
-    label: `Studierende — monatlich — ${eur(monthlyStudent)} € (Ermäßigung, Nachweis erforderlich)`,
-    isStudent: true
-  },
-  {
-    value: 'standard_yearly',
-    label: `Standard — jährlich — ${eur(annualStandard)} €`,
-    isStudent: false
-  },
-  {
-    value: 'student_yearly',
-    label: `Studierende — jährlich — ${eur(annualStudent)} € (Ermäßigung, Nachweis erforderlich)`,
-    isStudent: true
-  }
-];
-
-const interestOptions = [
-  'Demokratische Bildung & Schulen',
-  'Israel Community / Hebräisch',
-  'Veranstaltungen & Workshops',
-  'Kooperation & Netzwerk',
-  'Ehrenamt / Mitgestaltung',
-  'Sonstiges'
 ];
 
 const webPageJsonLd = JSON.stringify({
@@ -143,15 +92,15 @@ const webPageJsonLd = JSON.stringify({
           Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Arbeit von BiFoDe e.V. Nach Aufnahme und laufendem Mitgliedsbeitrag erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan, Lernmaterialien und gemeinsame Treffen — <strong>je nach Verfügbarkeit und Programm</strong>.
         </p>
         <p class="mw-price-hero">
-          <span class="mw-price-big">15 €</span>
-          <span class="mw-price-unit">pro Monat</span>
+          <span class="mw-price-big">{formatEur(ANNUAL_STANDARD_EUR)} €</span>
+          <span class="mw-price-unit">pro Jahr</span>
           <span class="mw-price-meta">
-            Studierende {eur(monthlyStudent)} € / Monat (Ermäßigung) · Jahresbeitrag ab {eur(annualStandard)} €
+            Standard · entspricht {formatEur(MONTHLY_STANDARD_EUR)} € / Monat · Studierende / ermäßigt{' '}
+            {formatEur(ANNUAL_STUDENT_EUR)} € / Jahr ({formatEur(MONTHLY_STUDENT_EUR)} € / Monat)
           </span>
         </p>
         <div class="mw-actions">
           <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
-          <a href="#preise" class="mw-btn mw-btn-secondary">Preistabelle</a>
         </div>
       </div>
     </section>
@@ -172,63 +121,6 @@ const webPageJsonLd = JSON.stringify({
         </div>
         <p class="mw-note">
           Die Teilnahme an konkreten Terminen erfolgt je nach Verfügbarkeit, Projektphase und Kapazität. Die Mitgliedschaft ist ein Vereinsbeitrag, kein Fernabsatzvertrag mit pauschaler Erfolgsgarantie.
-        </p>
-      </div>
-    </section>
-
-    <section class="mw-section mw-section-alt" id="beitrag" aria-labelledby="mw-fee-title">
-      <span id="preise" class="mw-anchor" aria-hidden="true"></span>
-      <div class="container">
-        <h2 id="mw-fee-title">Mitgliedsbeitrag</h2>
-        <p class="mw-lead">Alle Beträge in Euro. Die Tabelle zeigt die Mitgliedsbeiträge bei monatlicher bzw. jährlicher Zahlung.</p>
-
-        <div class="mw-table-wrap">
-          <table class="mw-price-table" aria-describedby="mw-fee-caption">
-            <caption id="mw-fee-caption" class="mw-table-caption">
-              Mitgliedsbeiträge BiFoDe e.V. — monatliche und jährliche Zahlung
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col">Mitgliedschaft</th>
-                <th scope="col">Monatlich</th>
-                <th scope="col">Jährlich</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pricingRows.map((row) => (
-                <tr class:list={[row.highlight && 'mw-table-row--highlight']}>
-                  <th scope="row">
-                    <span class="mw-table-label">{row.label}</span>
-                    {row.badge && <span class="mw-table-badge">{row.badge}</span>}
-                  </th>
-                  <td data-label="Monatlich">
-                    <span class="mw-table-amount">{row.monthly} €</span>
-                    {row.monthlyRef ? (
-                      <span class="mw-table-ref">
-                        statt <s>{row.monthlyRef} €</s> · {row.monthlyNote}
-                      </span>
-                    ) : (
-                      <span class="mw-table-ref">{row.monthlyNote}</span>
-                    )}
-                  </td>
-                  <td data-label="Jährlich">
-                    <span class="mw-table-amount">{row.annual} €</span>
-                    <span class="mw-table-ref">
-                      statt <s>{row.annualRef} €</s> · {row.annualNote}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p class="mw-table-foot">
-          Studierenden-Ermäßigung nach Vorlage eines Nachweises. Bei jährlicher Zahlung gilt der ausgewiesene Jahresbeitrag.
-        </p>
-
-        <p class="mw-cta-row">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
         </p>
       </div>
     </section>
@@ -266,122 +158,23 @@ const webPageJsonLd = JSON.stringify({
       </div>
     </section>
 
-    <section class="mw-section" id="anmeldung" aria-labelledby="mw-form-title">
-      <div class="container">
+    <section class="mw-section mw-section-alt mw-form-section" id="anmeldung" aria-labelledby="mw-form-title">
+      <div class="container mw-form-container">
         <div class="mw-form-stack">
-        <h2 id="mw-form-title">{ctaApply}</h2>
-        <p class="mw-lead">
-          Stellen Sie hier Ihre Anfrage auf Aufnahme als Mitglied bei BiFoDe e.V. Wir melden uns mit den nächsten Schritten. Pflichtfelder sind mit * markiert.
+        <h2 id="mw-form-title">{formSectionTitle}</h2>
+        <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
+        <JotformEmbed
+          formUrl={jotformUrl}
+          title="Mitgliedschaft bei BiFoDe e.V. beantragen"
+          iframeLang="de"
+          flush
+        />
+        <p class="form-note">
+          Fragen? Schreiben Sie an{' '}
+          <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>.
         </p>
-        <p class="mw-doc-link no-print">
-          <a href="/beitrittserklaerung" class="mw-doc-btn">Beitrittserklärung öffnen (HTML, als PDF speichern)</a>
-        </p>
-        <div class="mw-form-card">
-          <form class="contact-form" id="mw-membership-form" novalidate>
-            <input type="hidden" name="page_source" value="mitglied_werden_landing" />
 
-            <div class="mw-form-row">
-              <div class="form-group">
-                <label for="mw-firstName">Vorname *</label>
-                <input type="text" id="mw-firstName" name="firstName" required autocomplete="given-name" />
-              </div>
-              <div class="form-group">
-                <label for="mw-lastName">Nachname *</label>
-                <input type="text" id="mw-lastName" name="lastName" required autocomplete="family-name" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="mw-email">E-Mail *</label>
-              <input type="email" id="mw-email" name="email" required autocomplete="email" />
-            </div>
-
-            <div class="form-group">
-              <label for="mw-phone">Telefon</label>
-              <input type="tel" id="mw-phone" name="phone" autocomplete="tel" />
-            </div>
-
-            <fieldset class="mw-fieldset mw-address-fieldset">
-              <legend>Anschrift *</legend>
-              <div class="form-group">
-                <label for="mw-street">Straße und Hausnummer *</label>
-                <input type="text" id="mw-street" name="street" required autocomplete="street-address" />
-              </div>
-              <div class="mw-form-row">
-                <div class="form-group">
-                  <label for="mw-postalCode">PLZ *</label>
-                  <input type="text" id="mw-postalCode" name="postalCode" required autocomplete="postal-code" inputmode="numeric" />
-                </div>
-                <div class="form-group">
-                  <label for="mw-city">Ort *</label>
-                  <input type="text" id="mw-city" name="city" required autocomplete="address-level2" />
-                </div>
-              </div>
-            </fieldset>
-
-            <div class="form-group">
-              <label for="mw-membershipTariff">Mitgliedsbeitrag *</label>
-              <select id="mw-membershipTariff" name="membershipTariff" required>
-                <option value="">Bitte wählen</option>
-                {tariffOptions.map((opt) => (
-                  <option value={opt.value} data-label={opt.label} data-student={opt.isStudent ? '1' : '0'}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <fieldset class="mw-fieldset">
-              <legend>Interessenschwerpunkte (optional)</legend>
-              <div class="mw-checkbox-grid">
-                {interestOptions.map((opt) => (
-                  <label class="mw-checkbox-label">
-                    <input type="checkbox" name="interests" value={opt} />
-                    <span>{opt}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-
-            <div class="form-group">
-              <label for="mw-message">Nachricht / Fragen</label>
-              <textarea id="mw-message" name="message" rows="4" placeholder="Optional: Motivation, Fragen zur Aufnahme …"></textarea>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="mw-admission" name="admission" required />
-              <label for="mw-admission">
-                Ich beantrage die Aufnahme als Mitglied in BiFoDe e.V. und habe die{' '}
-                <a href={SATZUNG_PAGE_DE}>Satzung</a> zur Kenntnis genommen.
-                Die Mitgliedschaft erfolgt gemäß Satzung (einschließlich der Beitragsregelungen).
-              </label>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="mw-privacy" name="privacy" required />
-              <label for="mw-privacy">
-                Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Mitgliedschaftsanfrage gespeichert und verarbeitet werden. Weitere Informationen in der <a href="/datenschutz">Datenschutzerklärung</a>.
-              </label>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="mw-newsletter" name="newsletter" />
-              <label for="mw-newsletter">Ich möchte Informationen zu Vereinsveranstaltungen per E-Mail erhalten (optional).</label>
-            </div>
-
-            <div class="hp-field" aria-hidden="true">
-              <label for="mw-website">Website</label>
-              <input type="text" id="mw-website" name="website" tabindex="-1" autocomplete="off" />
-            </div>
-
-            <button type="submit" class="mw-btn mw-btn-primary">{ctaApply}</button>
-          </form>
-          <p class="form-note" id="mw-form-note" role="status" aria-live="polite">
-            Alternativ: <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>
-          </p>
-        </div>
-
-        <div class="mw-tax-box">
+        <div class="mw-tax-note">
           <h3>Steuerlicher Hinweis</h3>
           <p>
             Mitgliedsbeiträge an gemeinnützige Organisationen können in Deutschland grundsätzlich steuerlich berücksichtigt werden, sofern die gesetzlichen Voraussetzungen erfüllt sind. Nach entsprechender Anerkennung kann BiFoDe e.V. Zuwendungsbestätigungen ausstellen, soweit rechtlich zulässig.
@@ -415,7 +208,7 @@ const webPageJsonLd = JSON.stringify({
     --mw-navy: #0c1e34;
     --mw-blue: #163b63;
     --mw-sky: #d6e1fc;
-    --mw-bg: #f4f7fb;
+    --mw-bg: #ffffff;
     background: var(--mw-bg);
   }
 
@@ -495,193 +288,6 @@ const webPageJsonLd = JSON.stringify({
     box-sizing: border-box;
   }
 
-  .mw-table-wrap {
-    margin: 1.5rem 0 1rem;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: var(--radius, 18px);
-    box-shadow: var(--shadow);
-    border: 1px solid #c7d9f5;
-    background: #fff;
-    box-sizing: border-box;
-  }
-
-  .mw-price-table {
-    width: 100%;
-    min-width: min(520px, 100%);
-    border-collapse: collapse;
-    font-size: 0.95rem;
-  }
-
-  .mw-table-caption {
-    caption-side: top;
-    padding: 1rem 1.25rem 0.5rem;
-    text-align: left;
-    font-weight: 600;
-    color: var(--mw-navy);
-    font-size: 0.9rem;
-  }
-
-  .mw-price-table thead th {
-    background: linear-gradient(180deg, var(--mw-navy) 0%, var(--mw-blue) 100%);
-    color: #fff;
-    font-weight: 600;
-    text-align: left;
-    padding: 0.85rem 1.25rem;
-    font-size: 0.875rem;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  .mw-price-table thead th:first-child {
-    border-radius: 0;
-  }
-
-  .mw-price-table tbody th,
-  .mw-price-table tbody td {
-    padding: 1.15rem 1.25rem;
-    vertical-align: top;
-    border-bottom: 1px solid #e8eef7;
-  }
-
-  .mw-price-table tbody tr:last-child th,
-  .mw-price-table tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  .mw-table-row--highlight {
-    background: linear-gradient(90deg, #f0f6ff 0%, #fafcff 100%);
-  }
-
-  .mw-price-table tbody th {
-    font-weight: 600;
-    color: var(--mw-navy);
-    text-align: left;
-    width: 28%;
-    background: #f8fafc;
-  }
-
-  .mw-table-label {
-    display: block;
-    font-size: 1.05rem;
-  }
-
-  .mw-table-badge {
-    display: inline-block;
-    margin-top: 0.35rem;
-    padding: 0.2rem 0.55rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--mw-blue);
-    background: var(--mw-sky);
-    border-radius: 999px;
-  }
-
-  .mw-table-amount {
-    display: block;
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--mw-navy);
-    line-height: 1.2;
-    margin-bottom: 0.35rem;
-  }
-
-  .mw-table-ref {
-    display: block;
-    font-size: 0.82rem;
-    color: #64748b;
-    line-height: 1.45;
-  }
-
-  .mw-table-ref s {
-    color: #94a3b8;
-    text-decoration-thickness: 1px;
-  }
-
-  .mw-table-foot {
-    margin: 0 0 0.5rem;
-    font-size: 0.875rem;
-    color: #64748b;
-    line-height: 1.55;
-    max-width: 68ch;
-  }
-
-  .mw-cta-row {
-    margin-top: 1.5rem;
-  }
-
-  @media (max-width: 640px) {
-    .mw-table-wrap {
-      border: none;
-      box-shadow: none;
-      background: transparent;
-      overflow: visible;
-    }
-
-    .mw-price-table {
-      min-width: 0;
-      display: block;
-    }
-
-    .mw-price-table thead {
-      display: none;
-    }
-
-    .mw-price-table tbody {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .mw-price-table tbody tr {
-      display: block;
-      background: #fff;
-      border: 1px solid #dbe5f1;
-      border-radius: 14px;
-      padding: 0.25rem 0;
-      box-shadow: var(--shadow);
-    }
-
-    .mw-table-row--highlight {
-      border-color: var(--mw-blue);
-      background: linear-gradient(160deg, #eef4ff, #fff);
-    }
-
-    .mw-price-table tbody th,
-    .mw-price-table tbody td {
-      display: block;
-      width: 100%;
-      border: none;
-      padding: 0.75rem 1rem;
-    }
-
-    .mw-price-table tbody th {
-      background: transparent;
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid #eef3fa;
-    }
-
-    .mw-price-table tbody td::before {
-      content: attr(data-label);
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--mw-blue);
-      margin-bottom: 0.35rem;
-    }
-  }
-
-  .mw-anchor {
-    display: block;
-    height: 0;
-    scroll-margin-top: 5rem;
-  }
-
   .mw-section {
     padding: 2.75rem 0;
   }
@@ -732,7 +338,8 @@ const webPageJsonLd = JSON.stringify({
   .mw-note {
     margin-top: 1.25rem;
     padding: 0.85rem 1rem;
-    background: #eef3fc;
+    background: #fff;
+    border: 1px solid #e2e8f0;
     border-left: 4px solid var(--mw-blue);
     border-radius: 0 8px 8px 0;
     color: #1e293b;
@@ -845,9 +452,13 @@ const webPageJsonLd = JSON.stringify({
     color: #64748b;
   }
 
+  .mw-form-container {
+    max-width: 1280px;
+  }
+
   .mw-form-stack {
     width: 100%;
-    max-width: 640px;
+    max-width: 1280px;
     margin: 0 auto;
   }
 
@@ -855,187 +466,51 @@ const webPageJsonLd = JSON.stringify({
     max-width: none;
   }
 
-  .mw-doc-link {
-    margin: 0 0 1rem;
-    text-align: center;
-  }
-
-  .mw-doc-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.55rem 1rem;
-    border-radius: 0.5rem;
-    background: #eef3fc;
-    color: var(--mw-blue);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    border: 1px solid #c7d9f5;
-  }
-
-  .mw-doc-btn:hover {
-    background: var(--mw-sky);
-  }
-
   .mw-form-stack h2 {
     margin-top: 0;
   }
 
-  .mw-form-card {
-    width: 100%;
-    max-width: none;
-    margin: 1.25rem 0 0;
-    padding: 1.75rem;
+  .mw-form-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  .mw-form-section {
     background: #fff;
-    border: 1px solid #dbe5f1;
-    border-radius: var(--radius, 18px);
-    box-shadow: var(--shadow);
-    box-sizing: border-box;
-    overflow: hidden;
+    padding-top: 2rem;
   }
 
-  .mw-form-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    min-width: 0;
-  }
-
-  .mw-form-row > .form-group {
-    min-width: 0;
-  }
-
-  .contact-form {
-    display: grid;
-    gap: 1.1rem;
-    min-width: 0;
-    width: 100%;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    width: 100%;
-  }
-
-  .form-group label {
-    margin-bottom: 0.4rem;
-    font-weight: 600;
-    color: #374151;
-    font-size: 0.95rem;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 0.7rem 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    font-family: inherit;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    outline: 2px solid var(--mw-blue);
-    outline-offset: 1px;
-    border-color: var(--mw-blue);
-  }
-
-  .checkbox-group {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.5rem;
-    max-width: 100%;
-  }
-
-  .checkbox-group input {
-    width: auto;
-    margin-top: 0.2rem;
-    flex-shrink: 0;
-  }
-
-  .checkbox-group label {
-    font-weight: normal;
+  .mw-form-section :global(.jotform-embed-root) {
     margin: 0;
-    overflow-wrap: anywhere;
-  }
-
-  .mw-fieldset {
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 1rem;
-    margin: 0;
-    min-width: 0;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .mw-fieldset legend {
-    font-weight: 600;
-    padding: 0 0.25rem;
-  }
-
-  .mw-address-fieldset {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .form-note.form-note--error {
-    color: #b91c1c;
-  }
-
-  .mw-checkbox-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    min-width: 0;
-  }
-
-  .mw-checkbox-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.4rem;
-    font-size: 0.9rem;
-    color: #334155;
-    cursor: pointer;
-  }
-
-  .hp-field {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
   }
 
   .form-note {
-    margin-top: 1rem;
+    margin-top: 1.25rem;
     font-size: 0.875rem;
     color: #64748b;
+    line-height: 1.55;
   }
 
-  .mw-tax-box {
-    width: 100%;
-    max-width: none;
-    margin-top: 1.5rem;
-    padding: 1.25rem;
-    box-sizing: border-box;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+  .mw-tax-note {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
   }
 
-  .mw-tax-box h3 {
+  .mw-tax-note h3 {
     margin: 0 0 0.5rem;
     font-size: 1.05rem;
+    color: var(--mw-navy);
+  }
+
+  .mw-tax-note p {
+    margin: 0 0 0.75rem;
+    color: #475569;
+    line-height: 1.65;
+    font-size: 0.95rem;
+  }
+
+  .mw-tax-note p:last-child {
+    margin-bottom: 0;
   }
 
   .mw-final {
@@ -1062,105 +537,5 @@ const webPageJsonLd = JSON.stringify({
     .mw-actions .mw-btn {
       width: 100%;
     }
-
-    .mw-form-row {
-      grid-template-columns: 1fr;
-    }
-
-    .mw-checkbox-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .mw-form-card {
-      padding: 1.25rem;
-    }
   }
 </style>
-
-<script>
-  function initMembershipForm() {
-    const form = document.getElementById('mw-membership-form');
-    const note = document.getElementById('mw-form-note');
-    if (!(form instanceof HTMLFormElement) || !(note instanceof HTMLElement)) return;
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      const submitButton = form.querySelector('button[type="submit"]');
-      if (!(submitButton instanceof HTMLButtonElement)) return;
-
-      const data = new FormData(form);
-      const interests = data.getAll('interests').map((v) => String(v));
-      const tariffSelect = form.querySelector('#mw-membershipTariff');
-      const selectedOption =
-        tariffSelect instanceof HTMLSelectElement ? tariffSelect.selectedOptions[0] : null;
-      const membershipTariff = String(data.get('membershipTariff') || '');
-      const membershipLabel = selectedOption?.textContent?.trim() || membershipTariff;
-      const isStudent = selectedOption?.dataset.student === '1';
-
-      const payload = {
-        formSource: 'mitgliedschaft',
-        firstName: String(data.get('firstName') || ''),
-        lastName: String(data.get('lastName') || ''),
-        name: `${String(data.get('firstName') || '')} ${String(data.get('lastName') || '')}`.trim(),
-        email: String(data.get('email') || ''),
-        phone: String(data.get('phone') || ''),
-        street: String(data.get('street') || ''),
-        postalCode: String(data.get('postalCode') || ''),
-        city: String(data.get('city') || ''),
-        membershipTariff,
-        membershipType: membershipLabel,
-        billing: membershipLabel,
-        isStudent,
-        admissionAccepted: data.get('admission') === 'on',
-        interests,
-        message: String(data.get('message') || ''),
-        privacyAccepted: data.get('privacy') === 'on',
-        newsletter: data.get('newsletter') === 'on',
-        website: String(data.get('website') || ''),
-        page_source: String(data.get('page_source') || 'mitglied_werden_landing')
-      };
-
-      submitButton.disabled = true;
-      const originalText = submitButton.textContent || 'Mitgliedschaft beantragen';
-      submitButton.textContent = 'Wird gesendet…';
-      note.classList.remove('form-note--error');
-      note.textContent = 'Bitte kurz warten …';
-
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await response.json();
-
-        if (!response.ok || !result?.ok) {
-          throw new Error(result?.message || 'Versand fehlgeschlagen.');
-        }
-
-        form.reset();
-        note.textContent =
-          result.message ||
-          'Vielen Dank — wir haben Ihre Anfrage auf Mitgliedschaft erhalten. Wir melden uns in Kürze mit den nächsten Schritten zur Aufnahme.';
-      } catch (error) {
-        const message = error instanceof Error ? error.message : 'Versand fehlgeschlagen.';
-        note.classList.add('form-note--error');
-        note.textContent = `${message} Alternativ schreiben Sie an info@bifode.org.`;
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMembershipForm, { once: true });
-  } else {
-    initMembershipForm();
-  }
-</script>

@@ -1,0 +1,336 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { FB_GROUP_ULPAN_NEXT } from '../lib/communityLinks';
+import {
+  ADMISSION_FEE_EUR,
+  ANNUAL_STANDARD_EUR,
+  ANNUAL_STUDENT_EUR,
+  formatEur,
+  MONTHLY_STANDARD_EUR,
+  MONTHLY_STUDENT_EUR,
+} from '../lib/membershipFees';
+
+const pageTitle = 'Vielen Dank für Ihre Mitgliedschaftsanfrage | BiFoDe e.V.';
+const pageDescription =
+  'Ihre Mitgliedschaftsanfrage bei BiFoDe e.V. wurde erhalten. Wir prüfen Ihre Angaben und melden uns mit den nächsten Schritten.';
+
+const showUlpan = Astro.url.searchParams.get('ulpan') === '1';
+---
+
+<MainLayout
+  title={pageTitle}
+  description={pageDescription}
+  lang="de"
+  mainClass="bd-main"
+>
+  <div class="bd-page">
+    <div class="bd-visual" aria-hidden="true"></div>
+
+    <div class="container bd-wrap">
+      <article class="bd-card">
+        <div class="bd-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2.5"></circle>
+            <path
+              d="M14 24.5l7 7 13-14"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+
+        <h1>Vielen Dank für Ihre Mitgliedschaftsanfrage!</h1>
+
+        <p class="bd-lead">
+          Wir haben Ihre Angaben erhalten und prüfen diese zeitnah.
+        </p>
+
+        <div class="bd-notice" role="note">
+          <p>
+            <strong>Bitte beachten Sie:</strong> Die Mitgliedschaft wird erst nach Prüfung und Aufnahme durch
+            BiFoDe e.V. wirksam. Sie erhalten anschließend weitere Informationen per E-Mail.
+          </p>
+        </div>
+
+        {showUlpan && (
+          <section class="bd-section" aria-labelledby="bd-ulpan-title">
+            <h2 id="bd-ulpan-title">Ulpan.Next</h2>
+            <p>
+              Wenn Sie sich für Ulpan.Next interessieren, erhalten Sie nach Bestätigung Ihrer Mitgliedschaft
+              weitere Informationen zu Kursstart, Kurszeiten, Moodle-Zugang, Zoom-Unterricht und organisatorischem
+              Ablauf.
+            </p>
+          </section>
+        )}
+
+        <section class="bd-section" aria-labelledby="bd-fees-title">
+          <h2 id="bd-fees-title">Mitgliedsbeitrag</h2>
+          <p class="bd-fees-intro">Der Mitgliedsbeitrag wird jährlich erhoben:</p>
+
+          <ul class="bd-fee-list">
+            <li>
+              <strong>Standard-Mitgliedschaft:</strong> {formatEur(ANNUAL_STANDARD_EUR)}&nbsp;€ / Jahr
+              <span class="bd-fee-note">entspricht {formatEur(MONTHLY_STANDARD_EUR)}&nbsp;€ pro Monat</span>
+            </li>
+            <li>
+              <strong>Studierende / ermäßigt:</strong> {formatEur(ANNUAL_STUDENT_EUR)}&nbsp;€ / Jahr
+              <span class="bd-fee-note">entspricht {formatEur(MONTHLY_STUDENT_EUR)}&nbsp;€ pro Monat</span>
+            </li>
+          </ul>
+
+          <p class="bd-admission">
+            Bei Aufnahme in den Verein fällt zusätzlich ein einmaliger Aufnahmebeitrag in Höhe von{' '}
+            {formatEur(ADMISSION_FEE_EUR)}&nbsp;€ an.
+          </p>
+        </section>
+
+        <section class="bd-section bd-facebook" aria-labelledby="bd-fb-title">
+          <h2 id="bd-fb-title">Facebook-Gruppe</h2>
+          <p>
+            Für Fragen, Updates und Austausch rund um Ulpan.Next können Sie unserer Facebook-Gruppe beitreten:
+          </p>
+          <a
+            href={FB_GROUP_ULPAN_NEXT}
+            class="bd-btn bd-btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Zur Ulpan.Next Facebook-Gruppe
+          </a>
+        </section>
+
+        <div class="bd-actions">
+          <a href="https://www.bifode.org/" class="bd-btn bd-btn-secondary">Zurück zur Website</a>
+        </div>
+      </article>
+
+      <p class="bd-footer-note">
+        Fragen? Schreiben Sie uns an{' '}
+        <a href="mailto:info@bifode.org">info@bifode.org</a>.
+      </p>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  :global(.bd-main) {
+    padding: 0 !important;
+  }
+
+  .bd-page {
+    --bd-navy: #0c1e34;
+    --bd-blue: #163b63;
+    --bd-sky: #d6e1fc;
+    --bd-bg: #f4f7fb;
+    position: relative;
+    min-height: min(88vh, 920px);
+    padding: 2.5rem 0 3.5rem;
+    background: linear-gradient(165deg, #e8f2ff 0%, var(--bd-bg) 45%, #fff 100%);
+  }
+
+  .bd-visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 45% at 15% 20%, rgba(22, 59, 99, 0.08), transparent),
+      radial-gradient(ellipse 45% 40% at 85% 10%, rgba(214, 225, 252, 0.85), transparent);
+  }
+
+  .bd-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .bd-card {
+    background: #fff;
+    border: 1px solid #dbe5f1;
+    border-radius: 18px;
+    padding: 2rem 1.75rem 1.75rem;
+    box-shadow: 0 12px 40px rgba(12, 30, 52, 0.07);
+  }
+
+  .bd-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin: 0 auto 1.25rem;
+    color: var(--bd-blue);
+  }
+
+  .bd-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .bd-card h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.45rem, 4.5vw, 1.85rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--bd-navy);
+    text-align: center;
+  }
+
+  .bd-lead {
+    margin: 0 0 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #334155;
+    text-align: center;
+  }
+
+  .bd-notice {
+    margin-bottom: 1.75rem;
+    padding: 1rem 1.1rem;
+    background: #eef4ff;
+    border-left: 4px solid var(--bd-blue);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .bd-notice p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #1e293b;
+  }
+
+  .bd-section {
+    margin-bottom: 1.75rem;
+    padding-top: 0.25rem;
+  }
+
+  .bd-section h2 {
+    margin: 0 0 0.65rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--bd-blue);
+  }
+
+  .bd-section p {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #475569;
+  }
+
+  .bd-fees-intro {
+    margin-bottom: 0.85rem !important;
+  }
+
+  .bd-fee-list {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .bd-fee-list li {
+    padding: 0.85rem 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #1e293b;
+  }
+
+  .bd-fee-note {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 400;
+  }
+
+  .bd-admission {
+    margin: 0 !important;
+    padding: 0.85rem 1rem;
+    background: #f0f5fc;
+    border-radius: 10px;
+    font-size: 0.9rem !important;
+    color: #334155 !important;
+  }
+
+  .bd-facebook p {
+    margin-bottom: 1rem;
+  }
+
+  .bd-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e8eef5;
+  }
+
+  .bd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.65rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    text-align: center;
+  }
+
+  .bd-btn-primary {
+    background: var(--bd-blue);
+    color: #fff;
+    border-color: var(--bd-blue);
+  }
+
+  .bd-btn-primary:hover {
+    background: #0f2e50;
+    transform: translateY(-1px);
+  }
+
+  .bd-btn-secondary {
+    background: #fff;
+    color: var(--bd-blue);
+    border-color: #89a6cc;
+    flex: 1;
+    min-width: min(100%, 14rem);
+  }
+
+  .bd-btn-secondary:hover {
+    background: var(--bd-sky);
+  }
+
+  .bd-footer-note {
+    margin: 1.25rem 0 0;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.5;
+  }
+
+  .bd-footer-note a {
+    color: var(--bd-blue);
+    font-weight: 600;
+  }
+
+  @media (max-width: 520px) {
+    .bd-page {
+      padding: 1.5rem 0 2.5rem;
+    }
+
+    .bd-card {
+      padding: 1.5rem 1.15rem 1.25rem;
+      border-radius: 14px;
+    }
+
+    .bd-btn {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,36 @@
+/*
+  Jotform: Form Designer (Farbpinsel) → Styles → Inject Custom CSS
+  Mitgliedschaft: 261744316807056 · Ulpan Next: 261742322871052
+
+  Entfernt die hellblaue Karten-/Seiten-Unterlage und blendet das Formular
+  nahtlos in eine weiße Website ein.
+*/
+
+.form-section,
+.form-page-cover-wrapper,
+.supernova,
+.form-all,
+.main-wrapper,
+.form-background,
+.form-container-wrapper,
+.form-page-cover,
+.form-cover-wrapper,
+.form-wrapper,
+body {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+.form-header-group {
+  display: none !important;
+}
+
+.form-line-active {
+  background-color: #ffffff !important;
+}
+
+.form-pagebreak,
+.form-pagebreak-next,
+.form-pagebreak-back {
+  background: #ffffff !important;
+}

@@ -12,9 +12,11 @@ interface Props {
   title: string;
   /** e.g. "de" when the form UI is German on an English page */
   iframeLang?: string;
+  /** Match a white page section — sets Jotform background to #fff */
+  flush?: boolean;
 }
 
-const { formUrl, title, iframeLang } = Astro.props;
+const { formUrl, title, iframeLang, flush = false } = Astro.props;
 
 let formId = '';
 let embedSrc = formUrl;
@@ -26,6 +28,12 @@ try {
   const m = u.pathname.match(/\/(\d+)\/?$/);
   formId = m?.[1] ?? '';
   u.searchParams.set('isIframeEmbed', '1');
+  if (flush) {
+    u.searchParams.set('background', 'ffffff');
+    u.searchParams.set('bgcolor', 'ffffff');
+    u.searchParams.set('fontcolor', '0c1e34');
+    u.searchParams.set('headercolor', 'ffffff');
+  }
   embedSrc = u.href;
 } catch {
   /* keep raw formUrl */
@@ -34,13 +42,14 @@ try {
 const frameId = formId ? `JotFormIFrame-${formId}` : 'JotFormIFrame-embed';
 ---
 
-<div class="jotform-embed-root">
+<div class:list={['jotform-embed-root', flush && 'jotform-embed-root--flush']}>
   <iframe
     id={frameId}
     title={title}
     lang={iframeLang}
     src={embedSrc}
     allow="geolocation; microphone; camera; fullscreen; payment"
+    allowtransparency="true"
     loading="lazy"
     scrolling="no"
     class="jotform-iframe"
@@ -176,5 +185,12 @@ const frameId = formId ? `JotFormIFrame-${formId}` : 'JotFormIFrame-embed';
     margin: 0;
     padding: 0;
     border: 0;
+  }
+  .jotform-embed-root--flush {
+    background: #fff;
+  }
+
+  .jotform-embed-root--flush .jotform-iframe {
+    background: transparent;
   }
 </style>
