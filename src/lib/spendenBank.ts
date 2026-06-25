@@ -5,9 +5,9 @@ export const DEFAULT_SPENDEN_BANK = {
   bank: 'Sparkasse',
   iban: 'DE44 3425 0000 1000 1612 89',
   blz: '34250000',
-  accountHolder: 'BiFoDe e.V.',
-  paymentReferenceDe: 'Spende BiFoDe e.V.',
-  paymentReferenceEn: 'Donation BiFoDe e.V.',
+  accountHolder: 'Bildungsforum für Demokratie und Vielfalt NRW e.V.',
+  paymentReferenceDe: 'Vorname Nachname, Spende',
+  paymentReferenceEn: 'First name Last name, Donation',
 } as const;
 
 export type SpendenBankDetails = {
