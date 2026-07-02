@@ -1,0 +1,171 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const principles = [
+  {
+    q: 'Stärkt es die demokratische Resilienz?',
+    a: 'Hilft es Menschen, besser informiert zu sein? Stärkt es Vertrauen, erhöht es die staatsbürgerliche Verantwortung oder verbessert es den Dialog? Lautet die Antwort nein, sollten wir uns fragen, warum wir es überhaupt tun.'
+  },
+  {
+    q: 'Ist es bildend?',
+    a: 'Bildung ist unser wichtigstes Mittel. Nicht jede Aktivität muss ein Kurs sein, aber jede sollte Menschen etwas lernen lassen: Wissen, Fähigkeiten, kritisches Denken, Verständnis oder Dialog. Ohne einen Lerneffekt überdenken wir das Vorhaben.'
+  },
+  {
+    q: 'Beruht es auf Evidenz?',
+    a: 'Wir verbreiten keine Ideologie, sondern Evidenz. Fakten müssen überprüfbar, Forschung transparent und Statistiken verlässlich sein. Meinungen werden nie als Fakten ausgegeben. Unsere Glaubwürdigkeit beruht auf intellektueller Redlichkeit.'
+  },
+  {
+    q: 'Achtet es die Menschenwürde?',
+    a: 'Jedes Projekt muss die Würde jedes Menschen achten. Wir lehnen Diskriminierung, Kollektivschuld, Entmenschlichung und Hass gegen jede Gemeinschaft ab. Die Menschenwürde steht nie zur Verhandlung.'
+  },
+  {
+    q: 'Schafft es Dialog statt Spaltung?',
+    a: 'Meinungsverschiedenheit ist normal. Polarisierung ist nicht unvermeidlich. Wo immer möglich, wollen wir Menschen helfen, einander besser zu verstehen. Projekte, die Feindseligkeit vertiefen sollen, sind mit unserer Mission unvereinbar.'
+  },
+  {
+    q: 'Überdauert die Wirkung das Projekt?',
+    a: 'Ein gutes Projekt hinterlässt etwas: Wissen, Beziehungen, Bildungsmaterialien, neue Kooperationen, neue Verantwortliche oder stärkere Institutionen. Wir streben bleibenden Wert an, nicht kurzfristige Aktivität.'
+  },
+  {
+    q: 'Können wir diese Entscheidung öffentlich erklären?',
+    a: 'Transparenz ist ein demokratischer Wert. Jede wichtige Entscheidung sollte sich gegenüber Mitgliedern, Partnern, Fördernden und der Öffentlichkeit erklären lassen. Was wir nicht offen vertreten können, sollten wir vermutlich nicht tun.'
+  },
+  {
+    q: 'Stärkt es das Vertrauen?',
+    a: 'Vertrauen ist unser wertvollstes Gut. Jedes Projekt, jede Veröffentlichung, jede Kooperation und jede öffentliche Aussage sollte das Vertrauen in BiFoDe als unabhängige, professionelle und verantwortungsvolle Organisation stärken. Verlorenes Vertrauen ist schwer zurückzugewinnen — deshalb schützen wir es sorgfältig.'
+  },
+  {
+    q: 'Baut es Partnerschaften auf?',
+    a: 'Demokratie ist gemeinschaftlich. Wo immer möglich, wählen wir Zusammenarbeit statt Isolation. Projekte mit dauerhaften Partnerschaften wirken meist deutlich stärker als Alleingänge — und das Miteinander spiegelt genau die Werte wider, für die wir stehen.'
+  },
+  {
+    q: 'Würden wir so entscheiden, wenn niemand zusähe?',
+    a: 'Integrität zeigt sich, wenn der äußere Druck nachlässt. Wir treffen dieselben ethischen Entscheidungen, ob sie sichtbar sind oder nicht. Unsere Prinzipien sind keine Öffentlichkeitsarbeit. Sie sind, wer wir sind.'
+  }
+];
+---
+
+<MainLayout
+  title="Unsere Werte"
+  description="Die zehn Prinzipien hinter jeder Entscheidung von BiFoDe — unser Rahmen, um unserer Mission treu zu bleiben."
+>
+  <Hero
+    centered={false}
+    title="Unsere Werte"
+    subtitle="Jede Entscheidung prägt die Organisation, die wir werden. Diese zehn Prinzipien leiten unser Handeln."
+  />
+
+  <section class="container">
+    <div class="section-header"><h2>Warum es diesen Rahmen gibt</h2></div>
+    <p class="lead">
+      Organisationen verlieren ihren Zweck selten auf einen Schlag. Häufiger driften sie ab — ein Projekt, das nicht ganz passt, eine Kooperation, die man des Geldes wegen annimmt, ein Kompromiss, der harmlos erscheint, dann der nächste. BiFoDe wurde gegründet, um die demokratische Gesellschaft zu stärken. Um dem treu zu bleiben, wird jede wichtige Entscheidung an denselben Prinzipien gemessen. Dieser Rahmen schützt mehr als unseren Ruf. Er schützt unseren Zweck.
+    </p>
+    <p class="lead">Bevor wir etwas Größeres beschließen, stellen wir uns zehn Fragen.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>Die zehn Fragen</h2></div>
+    <ol class="principle-list">
+      {principles.map((item, index) => (
+        <li class="card principle-card">
+          <span class="principle-number" aria-hidden="true">{index + 1}</span>
+          <div>
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>Der Entscheidungstest</h2></div>
+    <p class="lead">
+      Lautet die ehrliche Antwort auf mehrere dieser Fragen „nein“, wird das Vorhaben überarbeitet oder abgelehnt. Nicht jede Gelegenheit ist die richtige Gelegenheit — und unserer Mission treu zu bleiben ist wichtiger, als schnell zu wachsen.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="section-header"><h2>Unser Versprechen</h2></div>
+    <div class="card promise-card">
+      <p>Wachstum ist nicht unsere höchste Priorität. Wirkung ist es.</p>
+      <p>Sichtbarkeit ist nicht unsere höchste Priorität. Vertrauen ist es.</p>
+      <p>Förderung ist nicht unsere höchste Priorität. Integrität ist es.</p>
+      <p class="promise-close">Jede Entscheidung sollte uns der Gesellschaft, die wir aufbauen wollen, ein Stück näherbringen. So verdienen sich Institutionen bleibenden Respekt.</p>
+    </div>
+  </section>
+
+  <section class="container cta-section">
+    <a class="btn-outline" href="/charta">Die vollständige Charta lesen →</a>
+  </section>
+</MainLayout>
+
+<style>
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .lead {
+    color: #475569;
+    line-height: 1.8;
+    max-width: 720px;
+  }
+
+  .principle-list {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .principle-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .principle-number {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8f1ff, #dbeafe);
+    color: #163b63;
+    font-weight: 700;
+  }
+
+  .principle-card h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+    color: #111827;
+  }
+
+  .principle-card p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.7;
+  }
+
+  .promise-card p {
+    margin: 0 0 0.65rem;
+    color: #334155;
+    line-height: 1.7;
+  }
+
+  .promise-close {
+    margin-top: 1rem !important;
+    color: #475569 !important;
+  }
+
+  .cta-section {
+    padding: 2rem 0 3rem;
+    text-align: center;
+  }
+</style>

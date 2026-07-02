@@ -3,10 +3,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 
 const team = [
-  { name: 'Name Vorname', role: 'Vorstand / Projektleitung' },
-  { name: 'Name Vorname', role: 'Bildungsarbeit & Workshops' },
-  { name: 'Name Vorname', role: 'Kooperationen & Netzwerk' },
-  { name: 'Name Vorname', role: 'Kommunikation & Öffentlichkeitsarbeit' },
+  { name: 'Denis Vilensky', role: '1. Vorsitzender' },
+  { name: 'Denis Berengolts', role: 'Stellvertretender Vorsitzender' },
+  { name: 'Ilja Litwin', role: 'Schatzmeister' },
 ];
 
 const timeline = [
@@ -40,10 +39,12 @@ const timeline = [
       <ul>
         <li>Eingetragener gemeinnütziger Verein (<strong>e.V.</strong>)</li>
         <li>Sitz und Tätigkeit in <strong>Nordrhein-Westfalen</strong></li>
+        <li>Migrantenselbstorganisation (<strong>MSO</strong>) in NRW</li>
+        <li>Überparteilich und konfessionell ungebunden</li>
         <li>Schwerpunkt: demokratische Bildung, Antisemitismusprävention, Medienkompetenz</li>
       </ul>
       <p class="legal-note">
-        Der Verein ist im Vereinsregister eingetragen. Die <a href="/satzung">Satzung</a> ist veröffentlicht.
+        Der Verein ist im Vereinsregister eingetragen. Die <a href="/satzung">Satzung</a>, unsere <a href="/charta">Charta</a> und unsere <a href="/werte">Werte</a> sind veröffentlicht.
       </p>
     </div>
   </section>
@@ -61,8 +62,8 @@ const timeline = [
   </section>
 
   <section class="container">
-    <div class="section-header"><h2>Team</h2></div>
-    <p class="lead">Unser Team wächst mit dem Pilotprojekt. Die folgenden Profile sind Platzhalter bis zur finalen Vorstellung.</p>
+    <div class="section-header"><h2>Vorstand</h2></div>
+    <p class="lead">Der Vorstand von BiFoDe e.V. gemäß § 26 BGB. Unser Team wächst mit dem Pilotprojekt.</p>
     <div class="card-grid team-grid">
       {team.map((member) => (
         <article class="card team-card">

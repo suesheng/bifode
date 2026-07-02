@@ -1,0 +1,620 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+
+type Para = { label?: string; text: string };
+type Section = { heading?: string; paras?: Para[]; bullets?: Para[]; sig?: string[] };
+type Part = { title: string; quote?: string; sections: Section[] };
+
+const parts: Part[] = [
+  {
+    title: 'Part I — Founder\u2019s Letter',
+    quote: '\u201CStronger democracies create less hatred. And stronger democracies begin with better education.\u201D',
+    sections: [
+      {
+        heading: 'Why BiFoDe Exists',
+        paras: [
+          { text: 'I never set out to start another nonprofit. BiFoDe came about because I reached a point where simply watching was no longer enough.' },
+          { text: 'On October 7, 2023, Hamas carried out one of the deadliest terrorist attacks against Jewish civilians since the Holocaust. Families were murdered in their homes. Children were taken hostage. Whole communities were shattered. Like millions of people around the world, I watched it with horror.' },
+          { text: 'What came next changed me just as deeply. Instead of the world uniting to condemn terrorism, I saw a wave of antisemitism spread across democratic societies unlike anything I had witnessed before. Demonstrations celebrated the massacre. Jewish students hid who they were on campus. Synagogues added security. Social media spread hatred faster than facts, debate grew more bitter, and misinformation traveled at frightening speed.' },
+          { text: 'That is when it became clear to me: antisemitism was not the start of the problem. It was one of its clearest symptoms.' }
+        ]
+      },
+      {
+        heading: 'Looking Beyond the Headlines',
+        paras: [
+          { text: 'The harder I tried to understand what was happening, the more one question stayed with me: how does a democratic society reach the point where hatred becomes acceptable again?' },
+          { text: 'History tells us this never happens overnight. Violence begins long before the first attack. It begins when facts become optional, when stereotypes stand in for knowledge, and when propaganda replaces thinking for yourself. It begins when people stop seeing one another as human beings and start seeing only members of the opposing side.' },
+          { text: 'Hatred grows slowly. It is learned. That realization became the foundation of BiFoDe.' }
+        ]
+      },
+      {
+        heading: 'Why Education?',
+        paras: [
+          { text: 'No one is born hating anyone else. Children are not born antisemitic, racist, or extremist. But they are not born democrats either. Everything that lets a democratic society thrive has to be learned: empathy, responsibility, respect, critical thinking. Hatred is learned too, and if it can be learned, it can also be unlearned.' },
+          { text: 'That simple belief defines who we are. Education is not one of our activities. It is our whole strategy. We are convinced that lasting change does not start with louder arguments. It starts with better education.' }
+        ]
+      },
+      {
+        heading: 'Why Democracy Matters',
+        paras: [
+          { text: 'Democracy is far more than elections. It is a culture built on freedom, responsibility, and mutual respect. Freedom of speech cannot survive without responsibility. Freedom of religion cannot survive without equal dignity. And pluralism cannot survive unless people are willing to live with disagreement.' },
+          { text: 'Democracy holds together because citizens choose, day after day, to defend these principles. When that culture weakens, hatred finds room to grow. So protecting democracy means much more than protecting political institutions. It means strengthening society itself.' }
+        ]
+      },
+      {
+        heading: 'Why We Talk About Antisemitism',
+        paras: [
+          { text: 'BiFoDe works to reduce hatred in all its forms, and focusing on antisemitism has never meant being indifferent to anyone else\u2019s suffering. Every life lost to violence and every family torn apart is a human tragedy, whoever they are. At the same time, we recognize that antisemitism holds a unique place in history.' },
+          { text: 'Time and again, rising antisemitism has turned out to be more than an isolated problem. It often shows up before broader attacks on democratic institutions, minority rights, academic freedom, independent journalism, and the rule of law. When a society starts to tolerate hatred of one group, no one stays safe for long. That is why fighting antisemitism is not only about protecting Jewish communities. It is about protecting democratic society itself.' }
+        ]
+      },
+      {
+        heading: 'What We Build',
+        paras: [
+          { text: 'A lot of organizations define themselves by the problems they fight. We would rather define ourselves by the future we want to build.' },
+          { text: 'We build educational opportunities, democratic resilience, and dialogue between communities. We build media literacy and critical thinking. We build partnerships, and we build trust.' },
+          { text: 'Our goal is not just to react to hatred. It is to reduce the conditions that let hatred take root in the first place.' }
+        ]
+      },
+      {
+        heading: 'Looking Ahead',
+        paras: [
+          { text: 'BiFoDe is still young, and we do not pretend to have all the answers. But we know the direction we have chosen.' },
+          { text: 'We want to help build a society where facts matter, where disagreement never turns into dehumanization, and where diversity is simply understood as part of being human. A society where freedom and responsibility go together, and where education prepares people not just for a job but for citizenship.' },
+          { text: 'Technology will change. Politics will change. Societies will change. Our principles will not.' },
+          { text: 'We believe stronger democracies create less hatred, and that stronger democracies begin with better education. That is why BiFoDe exists.' }
+        ],
+        sig: ['\u2014 Denis Vilensky, Founder and Chair (Vorstand), BiFoDe e.V.', 'North Rhine-Westphalia, Germany \u00B7 22 December 2025']
+      }
+    ]
+  },
+  {
+    title: 'Part II — Our Philosophy',
+    quote: '\u201CHatred is learned. Democracy is learned too.\u201D',
+    sections: [
+      {
+        heading: 'The Foundation',
+        paras: [
+          { text: 'Every society teaches. The only real question is what it teaches.' },
+          { text: 'It teaches children how to speak, how to treat other people, how to work through conflict, how to make sense of history, how to tell truth from manipulation, and how to respond to fear. And this does not start in school. It starts long before the first classroom.' },
+          { text: 'Families teach. So do communities, religious institutions, universities, the media, social networks, and politics. Whether they mean to or not, they all shape how people see the world.' },
+          { text: 'That is why education is never neutral. The values a society passes on today become the society it becomes tomorrow.' }
+        ]
+      },
+      {
+        heading: 'Hatred Is Not Human Nature',
+        paras: [
+          { text: 'Hatred does not come out of nowhere. People are not born afraid of those who are different. Nobody is born hating Jews, Muslims, Christians, or immigrants. Nobody is born believing conspiracy theories.' },
+          { text: 'Hatred develops, sometimes slowly, sometimes so quietly you barely notice. It grows through repeated stereotypes, misinformation, humiliation, fear, dehumanization, and silence. History shows this pattern over and over. Hatred is learned.' }
+        ]
+      },
+      {
+        heading: 'If Hatred Can Be Learned',
+        paras: [
+          { text: 'Then something else can be learned instead: empathy, responsibility, curiosity, respect, critical thinking, and a real habit of democratic participation.' },
+          { text: 'None of these appear on their own. They have to be practiced, explained, experienced, and protected. Every generation starts this work again from the beginning.' },
+          { text: 'Democracy comes with no permanent guarantee. It survives only as long as citizens keep learning how to live together across their differences.' }
+        ]
+      },
+      {
+        heading: 'Democracy Is More Than Politics',
+        paras: [
+          { text: 'Most people think of democracy as elections. We think it begins much earlier.' },
+          { text: 'Democracy is the ability to disagree without hatred, to criticize without dehumanizing, and to defend your own rights while protecting everyone else\u2019s. It is accepting election results, respecting independent courts, and rejecting violence as a political tool.' },
+          { text: 'Democracy is not just a constitutional system. It is a culture. And culture is learned.' }
+        ]
+      },
+      {
+        heading: 'Diversity Is Reality',
+        paras: [
+          { text: 'Human beings have always been different: different languages, religions, traditions, cultures, political views, and life stories. That diversity does not need to be created, and it cannot be erased.' },
+          { text: 'The challenge of democracy is not to make everyone the same. It is to build a society where our differences do not turn us into enemies. We believe diversity becomes a real strength only when people share the same democratic ground: equal dignity, equal rights, and equal responsibility.' }
+        ]
+      },
+      {
+        heading: 'Why We Care About Antisemitism',
+        paras: [
+          { text: 'As the Founder\u2019s Letter explains, antisemitism tends to appear before broader democratic decline, which is why protecting Jewish communities also protects democratic society as a whole. In philosophical terms, this shapes how we set priorities: fighting antisemitism is one of our central concerns. Not our only one, but an essential one \u2014 and never because one group\u2019s lives matter more than another\u2019s.' }
+        ]
+      },
+      {
+        heading: 'Building Instead of Fighting',
+        paras: [
+          { text: 'Plenty of organizations define themselves through opposition. We have chosen a different path. We do not exist because we need another enemy \u2014 we exist because society needs stronger foundations. Building knowledge, dialogue, and communities strong enough to resist hatred before it turns into violence is slower than fighting, but history suggests it is the approach that lasts.' }
+        ]
+      },
+      {
+        heading: 'Our Responsibility',
+        paras: [
+          { text: 'We do not believe perfect societies exist. Every generation faces new forms of extremism, new technologies, new propaganda, and new conflicts.' },
+          { text: 'Our job is not to preserve the past. It is to prepare society for the future: to help raise citizens who think critically, stay curious, defend democratic institutions, reject hatred no matter who it targets, and understand that human dignity is never up for negotiation.' },
+          { text: 'That is our philosophy. Everything else we do grows out of it.' }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Part III — The BiFoDe Model of Democratic Resilience',
+    quote: '\u201CDemocracy isn\u2019t protected by institutions alone. It\u2019s protected by educated citizens.\u201D',
+    sections: [
+      {
+        heading: 'A Different Way of Looking at Society',
+        paras: [
+          { text: 'Most conversations about democracy start with politics. We start with people.' },
+          { text: 'Political systems do not fail because constitutions suddenly vanish. They weaken when citizens slowly lose the habits that make democracy possible. Trust fades. Dialogue disappears. Facts become negotiable. Institutions lose legitimacy. Communities drift apart. Fear crowds out curiosity, and polarization crowds out cooperation.' },
+          { text: 'Only then does the political crisis become visible, but the real decline began much earlier. Democracy is not destroyed in parliaments. It starts to weaken in classrooms, in the media, in families, in online communities, and in everyday conversations. That is exactly where its defense has to begin, too.' }
+        ]
+      },
+      {
+        heading: 'What We Mean by Democratic Resilience',
+        paras: [
+          { text: 'We define democratic resilience as the capacity of individuals, communities, and institutions to hold on to democratic values, human dignity, and social cohesion in the face of misinformation, polarization, extremism, and conflict.' },
+          { text: 'Resilient societies are not societies without disagreement. They are societies that can handle disagreement peacefully.' }
+        ]
+      },
+      {
+        heading: 'The Five Pillars',
+        paras: [
+          { text: 'Every democratic society rests on five connected pillars. Weaken one, and the others eventually feel it. Strengthen one, and the whole system grows stronger.' },
+          { label: 'Pillar One — Knowledge.', text: 'Citizens need reliable knowledge: history, institutions, human rights, law, and how the media works. Without it, people are easy to manipulate. Education is democracy\u2019s first line of defense.' },
+          { label: 'Pillar Two — Critical Thinking.', text: 'Knowledge alone is not enough. People also need to evaluate what they read, spot emotional manipulation, tell evidence from opinion, and question a narrative without losing their grip on reality. Independent minds make for a stronger democracy.' },
+          { label: 'Pillar Three — Human Connection.', text: 'Fear grows where relationships disappear. Dialogue reduces prejudice, and meeting someone in person has a way of dismantling stereotypes. Communities are stronger when people know each other before a crisis hits. Trust cannot be legislated. It has to be lived.' },
+          { label: 'Pillar Four — Shared Democratic Values.', text: 'Pluralistic societies need common ground: freedom, responsibility, equality before the law, human dignity, and the peaceful resolution of conflict. These values do not erase our differences. They make them manageable.' },
+          { label: 'Pillar Five — Responsible Institutions.', text: 'Schools, universities, media, civil society, public authorities, religious communities, and families all shape democratic culture. No one of them can replace another, and democratic resilience depends on their working together.' }
+        ]
+      },
+      {
+        heading: 'Where Hatred Grows',
+        paras: [
+          { text: 'Hatred rarely starts with violence. It usually starts small. Facts start to matter less. Stereotypes feel normal. Language gets harsher. Conspiracy theories become acceptable. Empathy fades, communities separate, and trust disappears. Only then does violence become imaginable.' },
+          { text: 'Recognizing these early stages is what lets a society respond before the damage becomes irreversible.' }
+        ]
+      },
+      {
+        heading: 'The Role of BiFoDe',
+        paras: [
+          { text: 'We do not replace schools, governments, or families. We strengthen the connections between them.' },
+          { text: 'Our role is to provide knowledge, create dialogue, build educational tools, form partnerships, support communities, and strengthen democratic resilience wherever we can.' }
+        ]
+      },
+      {
+        heading: 'What Success Looks Like',
+        paras: [
+          { text: 'We do not measure success by the number of projects we finish. We measure it by stronger communities, better-informed citizens, more trust, more dialogue, less polarization, and greater resistance to hatred and extremism.' },
+          { text: 'When democratic resilience grows, hatred loses ground. That is the change we are after, not just for today, but for the generations that follow.' }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Part IV — What We Build',
+    quote: '\u201CProjects come and go. Institutions endure. Our goal isn\u2019t to organize events. It\u2019s to build the foundations of a more resilient democratic society.\u201D',
+    sections: [
+      {
+        heading: 'More Than Projects',
+        paras: [
+          { text: 'BiFoDe is not defined by any single project. Projects evolve, social challenges evolve, and technology evolves. Our mission stays the same.' },
+          { text: 'Every initiative we create serves one purpose: to strengthen democratic resilience by investing in people, knowledge, and communities. Everything we build belongs to one connected ecosystem, where each part reinforces the others.' }
+        ]
+      },
+      {
+        heading: 'Education',
+        paras: [
+          { text: 'Education is the foundation of everything we do. We develop programs that help people understand democracy, human rights, Jewish life, media literacy, and civic responsibility. They are designed for different generations: children, young people, parents, teachers, community leaders, and public institutions. In practice, this happens both in person \u2014 through workshops with schools across North Rhine-Westphalia \u2014 and online, through our Moodle learning platform for members.' },
+          { text: 'Education is not about telling people what to think. It is about giving them the ability to think for themselves.' }
+        ]
+      },
+      {
+        heading: 'Media Literacy',
+        paras: [
+          { text: 'We take in enormous amounts of information every day, and not all of it deserves the same trust. We help people understand how information spreads, how propaganda works, how manipulation shapes public opinion, how to verify a source, and how narratives influence democratic life.' },
+          { text: 'Critical media literacy is not optional anymore. It has become an essential democratic skill. We put it into practice through MediaCheck, our media-verification platform: paste in a link and it assesses how trustworthy the outlet, the journalist, and the underlying sources really are (see Part VI for details).' }
+        ]
+      },
+      {
+        heading: 'Dialogue Between Communities',
+        paras: [
+          { text: 'Democracy runs on relationships, and communities grow fragile when they stop talking to one another. We create chances for real encounters between people of different backgrounds, religions, and cultures.' },
+          { text: 'The point is not to erase disagreement. It is to replace stereotypes with real experience. Understanding grows through human contact. This is not theory for us: our partners include both the Jewish Community of D\u00FCsseldorf and the Maliki (Muslim) Community of D\u00FCsseldorf, alongside the World Zionist Organization \u2014 communities working side by side rather than past one another.' }
+        ]
+      },
+      {
+        heading: 'Jewish Life and Identity',
+        paras: [
+          { text: 'Understanding Jewish history, culture, and identity strengthens democratic society. Our programs introduce Jewish life not as something distant or exotic, but as an integral part of European history and of society today. That includes language, culture, history, traditions, and shared experience \u2014 for example through Ulpan Next, our Hebrew-language learning program.' },
+          { text: 'Knowledge reduces prejudice. Familiarity reduces fear.' }
+        ]
+      },
+      {
+        heading: 'Preventing Hatred',
+        paras: [
+          { text: 'We work to address hatred before it becomes violence, through education, dialogue, the early identification of worrying trends, responsible public communication, and partnerships. Prevention is always more effective than reaction.' }
+        ]
+      },
+      {
+        heading: 'Monitoring Democratic Risks',
+        paras: [
+          { text: 'Healthy democracies need awareness. We track developments that can threaten democratic values, including antisemitism, hate speech, extremist narratives, and organized disinformation.' },
+          { text: 'Monitoring on its own changes nothing. Its purpose is to provide reliable information so people can act responsibly, guided by facts rather than emotion.' }
+        ]
+      },
+      {
+        heading: 'Technology for Democracy',
+        paras: [
+          { text: 'Technology shapes modern life: artificial intelligence, digital platforms, data analysis, open-source intelligence. These tools can strengthen democracy or weaken it.' },
+          { text: 'We develop and support technology that improves transparency, media literacy, and civic participation while respecting privacy, the law, and human dignity. Innovation should serve society, never manipulate it.' }
+        ]
+      },
+      {
+        heading: 'Building Partnerships',
+        paras: [
+          { text: 'No organization builds resilient societies alone. We work with schools, universities, and municipalities; with Jewish communities, religious organizations, and migrant associations; with civil society groups, researchers, and international partners. Today that already includes the World Zionist Organization, the Jewish Community of D\u00FCsseldorf, and the Maliki (Muslim) Community of D\u00FCsseldorf. Every partnership increases what we can achieve together.' }
+        ]
+      },
+      {
+        heading: 'Developing Future Leaders',
+        paras: [
+          { text: 'The future of democracy depends on people willing to take responsibility. We invest in future educators, community leaders, volunteers, young professionals, researchers, parents, and teachers. We believe leadership begins with service, not authority.' }
+        ]
+      },
+      {
+        heading: 'Creating Long-Term Impact',
+        paras: [
+          { text: 'Events end. Projects wrap up. Funding cycles close. But communities remain, institutions remain, and future generations remain.' },
+          { text: 'Everything we build is meant to outlast individual grants and individual people. Our ambition is not to run more activities. It is to strengthen the democratic fabric of society itself. That is the work of BiFoDe.' }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Part V — Our Strategic Priorities (2026–2035)',
+    quote: '\u201CWe don\u2019t measure success by the number of projects we complete. We measure it by the strength of the democratic society we help build.\u201D',
+    sections: [
+      {
+        heading: 'Our Vision',
+        paras: [
+          { text: 'BiFoDe is rooted in North Rhine-Westphalia, and we are building outward from there. We started with schools, communities, and partners close to home, and over the long term we want to become one of Europe\u2019s most trusted centers for democratic resilience, civic education, and the prevention of hatred. The goal is not to be the largest organization, but one of the most trusted.' },
+          { text: 'Trust is earned through independence, professionalism, transparency, and measurable public value. Everything we do should strengthen those foundations.' }
+        ]
+      },
+      { heading: '1. Build Democratic Resilience Through Education', paras: [ { text: 'Education is still the most sustainable investment in democracy. Over the next decade we will expand programs that strengthen democratic literacy, critical thinking, media literacy, civic responsibility, historical understanding, and intercultural competence. Education is not preparation for democracy. It is democracy in practice.' } ] },
+      { heading: '2. Become a Center of Excellence for Antisemitism Prevention', paras: [ { text: 'Antisemitism is one of the oldest and most persistent forms of hatred. We want to become an internationally recognized center of expertise in preventing it, through education, research, and practical cooperation. That includes educational programs, teacher training, public awareness, monitoring, policy recommendations, partnerships with Jewish communities, and international cooperation. Preventing antisemitism strengthens democratic society as a whole.' } ] },
+      { heading: '3. Strengthen Media Literacy', paras: [ { text: 'Information has become one of the defining challenges for democratic societies. People increasingly struggle to tell journalism from propaganda, facts from manipulation, and evidence from opinion. We will develop practical tools that help people understand media, verify information, recognize manipulation, and navigate the digital world responsibly \u2014 turning a skill many still lack into something ordinary citizens can rely on every day.' } ] },
+      { heading: '4. Support Communities Before Crisis Hits', paras: [ { text: 'Healthy communities are built before they are tested. We will invest in local partnerships, dialogue initiatives, community leadership, volunteer networks, educational institutions, religious communities, and municipal cooperation. Strong communities recover faster from crises and resist polarization far better.' } ] },
+      { heading: '5. Build Democratic Technology', paras: [ { text: 'Technology increasingly shapes democratic life: artificial intelligence, digital media, data, algorithms, open-source intelligence. We will support the responsible development of tools that strengthen transparency, education, civic participation, and resilience. Technology should serve people, never replace human judgment.' } ] },
+      { heading: '6. Produce Knowledge That Shapes Society', paras: [ { text: 'Education alone is not enough. Societies also need ideas, research, analysis, and evidence. We will produce practical knowledge that supports educators, policymakers, journalists, researchers, and civil society groups. Over the long term, we want to become a trusted source of expertise on democratic resilience.' } ] },
+      { heading: '7. Build International Partnerships', paras: [ { text: 'The challenges facing democracies do not stop at national borders, and neither should our cooperation. We will actively build partnerships across Europe and beyond with universities, NGOs, Jewish organizations, public authorities, think tanks, technology partners, and international institutions. Democracy grows stronger when knowledge is shared.' } ] },
+      { heading: '8. Invest in Future Leaders', paras: [ { text: 'Institutions get stronger when the people in them do. We will identify, educate, and support future educators, researchers, community leaders, and civic innovators. Leadership is not a position. It is a responsibility, and every generation deserves the chance to learn it.' } ] },
+      { heading: '9. Measure Democratic Resilience', paras: [ { text: 'Good intentions are not enough. Societies improve when progress can actually be measured. We will develop practical frameworks and indicators to help assess democratic resilience, media literacy, community trust, and vulnerability to hatred and manipulation. Public policy should be guided by evidence, not assumptions.' } ] },
+      { heading: '10. Leave Stronger Institutions Behind', paras: [ { text: 'Projects end. Funding cycles end. People move on. Institutions remain. Our ultimate goal is not organizational growth but institutional impact. If future generations inherit stronger schools, stronger communities, stronger partnerships, and a stronger democratic culture, our work will have done its job.' } ] },
+      { heading: 'Looking Toward 2035', paras: [ { text: 'By 2035, we hope BiFoDe will not be seen as just another nonprofit, but as a trusted institution that helps democratic societies become more resilient, more informed, and more united. It is an ambitious goal. Democracy deserves ambitious goals. The work will take years, maybe generations, and that is exactly why we start today.' } ] }
+    ]
+  },
+  {
+    title: 'Part VI — Program Architecture',
+    quote: '\u201CEvery program serves a common mission. Different activities, one strategic purpose.\u201D',
+    sections: [
+      { heading: 'Our Program Ecosystem', paras: [ { text: 'We do not build isolated projects. Every program feeds into a larger system designed to strengthen democratic resilience: education, research, technology, dialogue, community development, and public engagement. Together they form an ecosystem where each program reinforces the rest.' } ] },
+      {
+        heading: 'Pillar I — Education',
+        paras: [
+          { label: 'Why.', text: 'Knowledge builds understanding, understanding reduces fear, and fear is the ground hatred grows in. That chain is why education sits at the base of everything else we do.' },
+          { label: 'Core activities:', text: 'civic education, democracy workshops, human rights education, historical education, teacher training, parent education, and educational materials.' },
+          { label: 'Expected impact:', text: 'citizens who think critically, communities that understand democratic values, and young people ready for responsible civic life.' }
+        ]
+      },
+      {
+        heading: 'Pillar II — Jewish Life & Antisemitism Prevention',
+        paras: [
+          { label: 'Why.', text: 'Antisemitism cannot be handled through security measures alone. Long-term prevention takes knowledge, because people protect what they understand. Education reduces prejudice, and personal encounters reduce stereotypes.' },
+          { label: 'Core activities:', text: 'Jewish culture, Hebrew language, Jewish history, Holocaust education, contemporary Jewish life, antisemitism prevention, and community partnerships.' },
+          { label: 'Expected impact:', text: 'greater understanding of Jewish communities, less prejudice, earlier recognition of antisemitism, and stronger democratic awareness.' }
+        ]
+      },
+      {
+        heading: 'Pillar III — Media Literacy & Information Integrity',
+        paras: [
+          { label: 'Why.', text: 'Modern democracies depend on informed citizens. Disinformation weakens democratic institutions, and media literacy builds resilience against it.' },
+          { label: 'Core activities:', text: 'MediaCheck, fact verification, AI literacy, source evaluation, journalism standards, public education, and workshops.' },
+          { label: 'MediaCheck', text: 'is our media-verification platform. You paste in a link \u2014 as easily as using a search engine \u2014 and it examines the outlet, the journalist, and the sources behind a story, flagging propaganda, misinformation, undisclosed conflicts of interest, and reliance on unreliable or anonymous sources. Each check produces an Integrity Index grounded in established journalism standards and binding law, giving both readers and the AI assistants people increasingly rely on a clear sense of how trustworthy a source really is. Verification of video content on platforms like YouTube, TikTok, and Instagram is in development.' },
+          { label: 'Expected impact:', text: 'better-informed citizens, stronger resistance to propaganda, and healthier public debate.' }
+        ]
+      },
+      {
+        heading: 'Pillar IV — Dialogue & Community Building',
+        paras: [
+          { label: 'Why.', text: 'People rarely hate those they actually know. Dialogue cannot solve every conflict, but it reduces fear, and trust is what makes communities resilient.' },
+          { label: 'Core activities:', text: 'interfaith dialogue, community events, cultural exchange, family programs, youth projects, and shared educational activities.' },
+          { label: 'Expected impact:', text: 'more trust, more cooperation, less isolation, and stronger local communities.' }
+        ]
+      },
+      {
+        heading: 'Pillar V — Research & Monitoring',
+        paras: [
+          { label: 'Why.', text: 'Democracy needs evidence. Without data, public debate turns into speculation. Research lets a society spot risks before they become crises.' },
+          { label: 'Core activities:', text: 'the Democratic Resilience Index, antisemitism monitoring, media monitoring, public opinion analysis, reports, and policy recommendations.' },
+          { label: 'The Democratic Resilience Index', text: 'is our attempt to make democratic resilience measurable. Instead of relying on gut feeling, it brings together a set of practical indicators \u2014 trust between communities, media literacy, civic participation, and vulnerability to hatred and disinformation \u2014 into a single picture of how a community or region is doing over time. It is not meant to rank or shame anyone. It is a diagnostic tool: it shows where things are healthy, where they are fragile, and where support is most needed, so that decisions rest on evidence rather than assumption.' },
+          { label: 'Expected impact:', text: 'better decisions, earlier interventions, and evidence-based public policy.' }
+        ]
+      },
+      {
+        heading: 'Pillar VI — Technology for Democracy',
+        paras: [
+          { label: 'Why.', text: 'Technology increasingly shapes public life. Artificial intelligence can strengthen democracy or weaken it, and responsible innovation calls for ethical leadership.' },
+          { label: 'Core activities:', text: 'AI for education, civic technology, democratic resilience tools, knowledge platforms, open-source intelligence, and digital learning.' },
+          { label: 'Expected impact:', text: 'technology that empowers citizens, more transparency, better access to knowledge, and greater civic participation.' }
+        ]
+      },
+      {
+        heading: 'Pillar VII — Leadership & Capacity Building',
+        paras: [
+          { label: 'Why.', text: 'Strong institutions need strong people, and the resilience of tomorrow\u2019s democracy depends on tomorrow\u2019s leaders.' },
+          { label: 'Core activities:', text: 'the Leadership Academy, volunteer development, community leadership, NGO capacity building, professional training, and international exchanges.' },
+          { label: 'The Leadership Academy', text: 'is where we invest in the people who will carry this work forward: future educators, community leaders, volunteers, and young professionals. It combines three things \u2014 solid knowledge of democracy, history, and media; practical skills for teaching, facilitating dialogue, and running projects; and a grounding in the kind of leadership we believe in, the kind that begins with service rather than authority. The aim is not to produce a handful of stars, but to leave communities with more people capable of holding them together.' },
+          { label: 'Expected impact:', text: 'a new generation of democratic leaders, a stronger civil society, and sustainable institutions.' }
+        ]
+      },
+      { heading: 'How Everything Connects', paras: [ { text: 'None of these programs stands alone. Education strengthens media literacy. Media literacy supports democratic resilience. Dialogue reduces prejudice. Research improves education. Technology supports every program, and leadership ties them all together. Each one contributes to a single mission: building democratic resilience through education.' } ] },
+      { heading: 'Our Long-Term Architecture', paras: [ { text: 'BiFoDe is designed as a learning organization. New programs may emerge, existing ones may evolve, technologies will change, and society will change. Our architecture stays stable, because every initiative has to answer one simple question: Does it strengthen democratic resilience? If the answer is yes, it belongs at BiFoDe.' } ] }
+    ]
+  },
+  {
+    title: 'Part VII — Our Decision Framework',
+    quote: '\u201CEvery decision shapes the organization we become.\u201D',
+    sections: [
+      {
+        heading: 'Why This Framework Exists',
+        paras: [
+          { text: 'Organizations rarely lose their purpose all at once. More often, they drift. One project that does not quite fit. One partnership accepted for the money. One compromise that seems harmless, then another. Years later the organization still exists, but no one is sure what it stands for anymore.' },
+          { text: 'BiFoDe was created to strengthen democratic society. To stay true to that, every important decision should be weighed against the same principles. This framework protects more than our reputation. It protects our purpose.' },
+          { text: 'Before approving anything major, we ask ourselves ten questions.' }
+        ]
+      },
+      {
+        heading: 'The Ten Questions',
+        paras: [
+          { label: '1. Does it strengthen democratic resilience?', text: 'Will it help people become better informed? Will it build trust, increase civic responsibility, or improve dialogue? If the answer is no, we should ask why we are doing it at all.' },
+          { label: '2. Is it educational?', text: 'Education is our main method. Not every activity has to be a classroom course, but every activity should help people learn something: knowledge, skills, critical thinking, understanding, or dialogue. If there is no learning in it, we reconsider.' },
+          { label: '3. Is it based on evidence?', text: 'We do not promote ideology. We promote evidence. Facts should be verifiable, research transparent, and statistics reliable. Opinions should never be dressed up as facts. Our credibility rests on intellectual honesty.' },
+          { label: '4. Does it respect human dignity?', text: 'Every project has to respect the dignity of every person. We reject discrimination, collective blame, dehumanization, and hatred aimed at any community. Human dignity is never up for negotiation.' },
+          { label: '5. Does it create dialogue rather than division?', text: 'Disagreement is normal. Polarization is not inevitable. Wherever we can, we should help people understand each other better. Any project meant to deepen hostility is incompatible with our mission.' },
+          { label: '6. Will the impact outlast the project?', text: 'A good project leaves something behind: knowledge, relationships, educational materials, new partnerships, new leaders, or stronger institutions. We aim for lasting value, not temporary activity.' },
+          { label: '7. Can we explain this decision publicly?', text: 'Transparency is a democratic value. Every significant decision should be something we can explain to our members, partners, donors, and the public. If we cannot defend it openly, we probably should not do it.' },
+          { label: '8. Does it strengthen trust?', text: 'Trust is our most valuable asset. Every project, publication, partnership, and public statement should build trust in BiFoDe as an independent, professional, and responsible organization. Once trust is lost, it is hard to rebuild, so we guard it carefully.' },
+          { label: '9. Does it build partnerships?', text: 'Democracy is collaborative. Wherever we can, we choose cooperation over isolation. Projects that create lasting partnerships tend to have far more impact than projects done alone, and working together reflects the very values we promote.' },
+          { label: '10. Would we make this decision if no one were watching?', text: 'Integrity shows up when the pressure is off. We should make the same ethical choices whether they are visible or not. Our principles are not public relations. They are who we are.' }
+        ]
+      },
+      { heading: 'The Decision Test', paras: [ { text: 'If the honest answer to several of these questions is \u201Cno,\u201D the initiative should be redesigned or turned down. Not every opportunity is the right opportunity, and staying faithful to our mission matters more than growing quickly.' } ] },
+      {
+        heading: 'Our Promise',
+        paras: [
+          { text: 'Growth is not our highest priority. Impact is. Visibility is not our highest priority. Trust is. Funding is not our highest priority. Integrity is.' },
+          { text: 'Every decision we make should move us a little closer to the society we hope to build. That is how institutions earn lasting respect.' }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Part VIII — Governance, Independence, and Accountability',
+    quote: '\u201CTrust isn\u2019t declared. It\u2019s earned through transparent governance and responsible leadership.\u201D',
+    sections: [
+      { heading: 'Why Governance Matters', paras: [ { text: 'Democracy begins with institutions people can trust, and the same is true for nonprofits. We do not see good governance as an administrative box to tick. It is part of our mission. If we expect society to trust democratic institutions, we have to hold ourselves to the same standard. Our governance exists to protect our independence, our credibility, and our long-term mission.' } ] },
+      { heading: 'Independence', paras: [ { text: 'BiFoDe is independent, non-partisan, non-denominational, and non-profit. As a migrant self-organization (Migrantenselbstorganisation), we are shaped in large part by people with their own migration histories, and we work closely with other migrant-led and civil-society groups. We work with governments, municipalities, Jewish communities, Muslim organizations, universities, schools, and international partners. None of those partnerships dictate our positions. Our principles are not for sale. Funding never defines our values, and partnership never replaces independence.' } ] },
+      { heading: 'Political Neutrality', paras: [ { text: 'We believe democracy needs political pluralism, so we do not support political parties or election campaigns. Our educational work may touch on political issues, but it must never become party-political. We encourage informed participation without telling anyone whom to vote for. Our role is to strengthen democratic culture, not to take sides in political competition.' } ] },
+      { heading: 'Evidence Before Ideology', paras: [ { text: 'Every publication, report, and program should rest on reliable evidence. We are clear about the difference between fact, analysis, professional opinion, and personal belief. Intellectual honesty is essential to public trust, so when we make mistakes, we correct them openly. Transparency strengthens credibility.' } ] },
+      { heading: 'Accountability', paras: [ { text: 'We are accountable to our members, our beneficiaries, our partners, our donors, public institutions, and society at large. Accountability means more than financial reporting. It includes ethical responsibility, professional standards, transparent decision-making, and responsible communication.' } ] },
+      { heading: 'Financial Integrity', paras: [ { text: 'Every resource entrusted to us should create measurable public value. We use donations and grants responsibly, keep financial oversight separate from program implementation, and disclose and manage any conflicts of interest. Financial transparency is not only a legal duty. It is an ethical commitment.' } ] },
+      { heading: 'Ethical Leadership', paras: [ { text: 'Leadership at BiFoDe is grounded in service. Authority exists to support the mission, not personal influence. Leaders should encourage initiative, welcome different opinions, accept honest criticism, share responsibility, and develop the next generation of leaders. Institutions grow stronger when leadership is shared.' } ] },
+      { heading: 'Responsible Partnerships', paras: [ { text: 'We actively seek cooperation, because partnership expands our knowledge, resources, experience, and impact. But every partnership has to respect this Charter. We will not compromise our principles for funding, political influence, or visibility. Shared projects require shared values.' } ] },
+      { heading: 'Data Protection and Privacy', paras: [ { text: 'Democratic organizations have to respect personal rights. We are committed to protecting personal data in line with the law and good professional practice. Privacy is not just a legal obligation. It reflects our respect for human dignity. Technology should empower people, never exploit them.' } ] },
+      { heading: 'Transparency', paras: [ { text: 'Wherever we can, we communicate openly about our strategy, programs, partnerships, funding, governance, and impact. Transparency creates trust, trust creates legitimacy, and legitimacy creates lasting impact.' } ] },
+      { heading: 'Our Commitment', paras: [ { text: 'Institutions are remembered not only for what they achieve, but for how they achieve it. We choose professionalism over improvisation, integrity over convenience, responsibility over popularity, and long-term trust over short-term wins. These principles guide our governance today, and they will keep guiding BiFoDe for the generations to come.' } ] }
+    ]
+  },
+  {
+    title: 'Part IX — Measuring Impact',
+    quote: '\u201CGood intentions aren\u2019t enough. Democratic resilience has to be measurable.\u201D',
+    sections: [
+      { heading: 'Why We Measure Impact', paras: [ { text: 'You cannot strengthen a democratic society on assumptions alone. Every program, partnership, and publication, and every euro of public or private money, should create measurable value. For us, accountability begins with evidence. So we do not just track what we do. We ask whether it actually creates meaningful, lasting change. Our goal is not activity. It is impact.' } ] },
+      { heading: 'What Success Means', paras: [ { text: 'Success is not the number of workshops we run, the number of participants who show up, or the number of followers we have online. Those numbers describe activity, not change. We measure success by asking a harder question: Did society become stronger because of our work?' } ] },
+      {
+        heading: 'Four Levels of Impact',
+        paras: [
+          { label: 'Level One — Reach.', text: 'Who did we reach? How many people took part? Which communities and regions benefited, and who was left out? Reach tells us whether our programs are actually accessible.' },
+          { label: 'Level Two — Learning.', text: 'What did participants learn? Did their knowledge grow? Did their critical thinking sharpen, their confidence increase, their understanding of democratic values deepen? Education without learning creates little value, so learning is our first real outcome.' },
+          { label: 'Level Three — Behavior.', text: 'Knowledge alone rarely changes a society. Behavior does. Did participants start verifying information more often? Did schools keep using our methods? Did communities build new partnerships? Did the dialogue continue after the project ended? Behavior shows whether education became practice.' },
+          { label: 'Level Four — Societal Change.', text: 'The highest level of impact is societal resilience, and it develops slowly: more trust between communities, less acceptance of hateful narratives, stronger civic participation, better institutional cooperation, greater confidence in democratic processes, and more resistance to manipulation. These changes take years, and they matter most.' }
+        ]
+      },
+      {
+        heading: 'Our Indicators',
+        paras: [ { text: 'We develop measurable indicators across several areas:' } ],
+        bullets: [
+          { label: 'Democratic literacy:', text: 'understanding democratic institutions, knowing your rights and responsibilities, and taking part in civic life.' },
+          { label: 'Critical thinking:', text: 'verifying information, recognizing misinformation, evaluating sources, and reasoning from evidence.' },
+          { label: 'Media literacy:', text: 'understanding journalism, spotting manipulation, using digital platforms responsibly, and AI literacy.' },
+          { label: 'Social cohesion:', text: 'trust between communities, dialogue, volunteer engagement, partnerships, and community participation.' },
+          { label: 'Prevention of hatred:', text: 'recognizing antisemitism, discrimination, and dehumanization, and being able to respond responsibly.' }
+        ]
+      },
+      { heading: 'Long-Term Evaluation', paras: [ { text: 'Not every result shows up right away. Some educational outcomes only become visible years later. That is why we combine short-term evaluation, medium-term follow-up, and long-term impact assessment. Our aim is continuous learning, not just reporting.' } ] },
+      { heading: 'A Learning Organization', paras: [ { text: 'We evaluate ourselves with the same honesty we expect from others. Successful projects get improved. Unsuccessful ones get redesigned. Mistakes get acknowledged, and evidence guides what we do next. Learning organizations get stronger over time.' } ] },
+      { heading: 'Looking Ahead', paras: [ { text: 'One of our long-term ambitions is to develop internationally recognized ways to measure democratic resilience. We believe it deserves the same serious attention we already give to public health, education, and economic development. Societies get stronger when they understand what makes them resilient, and helping answer that question is part of our mission.' } ] }
+    ]
+  },
+  {
+    title: 'Part X — Sustainability & Funding Philosophy',
+    quote: '\u201CFunding isn\u2019t our purpose. It\u2019s a tool that makes our mission possible.\u201D',
+    sections: [
+      { heading: 'Why Funding Matters', paras: [ { text: 'Every nonprofit depends on resources: people, knowledge, time, technology, and money. None of these are goals in themselves. They are the means by which public value gets created. So we treat funding as a responsibility, not a reward. Every euro entrusted to us represents someone\u2019s confidence that we will strengthen democratic society, and that trust has to be earned again and again.' } ] },
+      { heading: 'Independence Before Income', paras: [ { text: 'We will never reshape our mission to fit whatever funding happens to be available. Instead, we look for funding that supports the mission we already have. That distinction is fundamental. Projects may change, funding opportunities may change, and political priorities may change, but our principles have to stay constant. Financial sustainability should never require an ethical compromise.' } ] },
+      { heading: 'Diversified Funding', paras: [ { text: 'Healthy institutions are financially resilient, so we aim for a balanced mix of funding sources, which may include public grants, private foundations, corporate philanthropy, individual donors, membership contributions, educational services, research partnerships, and international cooperation. No single source should define our future. Diversification protects independence.' } ] },
+      { heading: 'Responsible Growth', paras: [ { text: 'Growth is only valuable when quality grows with it. We will never expand just for the sake of expanding. New programs should strengthen the work we already do, new partnerships should increase our impact, and new funding should improve our long-term sustainability. Growth without purpose weakens institutions. Purpose gives growth direction.' } ] },
+      { heading: 'Investing in Knowledge', paras: [ { text: 'One of our greatest assets is knowledge: educational materials, research, methodologies, digital tools, training programs, and publications. These investments keep creating value long after a particular grant has ended. Knowledge compounds over time.' } ] },
+      { heading: 'Investing in People', paras: [ { text: 'Strong organizations are built by strong people. We invest in educators, researchers, volunteers, community leaders, young professionals, and partners. Developing people gives the greatest long-term return. Buildings age. Technology changes. People keep creating impact.' } ] },
+      { heading: 'Ethical Fundraising', paras: [ { text: 'We welcome support from organizations and individuals who respect our Charter. But funding should never shape our conclusions. Research should never be written to please a donor, and educational content should never turn into political advertising. Transparency protects both donors and beneficiaries, and integrity remains our greatest asset.' } ] },
+      { heading: 'Partnership Instead of Sponsorship', paras: [ { text: 'We do not look for sponsors. We look for partners. A sponsor finances an activity. A partner shares responsibility for creating real social change. We value long-term cooperation over one-off transactions, because together we can achieve far more than any organization can alone.' } ] },
+      { heading: 'Financial Transparency', paras: [ { text: 'Transparency strengthens trust. Wherever we can, we will publish clear information about our annual income, major funding sources, program spending, administrative costs, and the impact we have achieved. Donors deserve to see how their support creates public value.' } ] },
+      { heading: 'Sustainability Beyond Funding', paras: [ { text: 'True sustainability is not only financial stability. It is institutional resilience. Can the organization keep learning? Can it attract talented people? Can it build lasting partnerships? Can it adapt to new challenges? Can society keep benefiting from its work? Those questions define a sustainable institution.' } ] },
+      { heading: 'Our Commitment', paras: [ { text: 'BiFoDe was not created to become financially successful. It was created to become socially valuable. Financial sustainability enables our mission. It never replaces it. Every resource entrusted to us carries one obligation: to leave democratic society stronger than we found it.' } ] }
+    ]
+  },
+  {
+    title: 'Part XI — Our Promise',
+    quote: '\u201CThe future isn\u2019t something we inherit. It\u2019s something we build together.\u201D',
+    sections: [
+      { heading: 'To Every Child', paras: [ { text: 'We promise to work for a society where hatred never limits your future, where your identity does not decide your opportunities, where curiosity is encouraged and questions are welcome, where learning never ends, and where differences become chances to learn instead of reasons to fear. You deserve nothing less.' } ] },
+      { heading: 'To Every Parent', paras: [ { text: 'We promise to support education that prepares children not just for careers, but for citizenship. We believe every child should grow up understanding responsibility, freedom, dignity, and respect. No parent should ever have to explain to their child why hatred has become normal. Our work exists to help prevent that future.' } ] },
+      { heading: 'To Every Teacher', paras: [ { text: 'You shape democracy every single day, long before elections, public debate, or headlines. We promise to support you with knowledge, practical tools, and partnerships that strengthen democratic learning. Teachers do not just prepare students for exams. They prepare them for society.' } ] },
+      { heading: 'To Every Community', paras: [ { text: 'Fear grows in isolation. Trust grows through relationships. We promise to create opportunities for dialogue, cooperation, and mutual understanding. Communities are stronger when people know each other before disagreements turn into conflicts. Democracy begins locally.' } ] },
+      { heading: 'To Every Partner', paras: [ { text: 'We promise honesty, professionalism, transparency, and reliability. We will protect our independence, and we will respect yours. We believe the strongest partnerships are built on shared purpose rather than shared ideology. Together we can do more than any of us can alone.' } ] },
+      { heading: 'To Every Donor', paras: [ { text: 'Your support is not just a financial contribution. It is an investment in democratic society. We promise to use every resource responsibly, to stay transparent, to evaluate our work honestly, and to put public benefit ahead of our own growth. Trust deserves accountability.' } ] },
+      { heading: 'To Every Volunteer', paras: [ { text: 'Your time is one of the most valuable gifts you can give. We promise to create meaningful opportunities for service, learning, and leadership. Democracy depends on citizens willing to give more than they take. Your contribution matters.' } ] },
+      { heading: 'To Every Public Institution', paras: [ { text: 'We seek cooperation, not confrontation. We believe public institutions and civil society share the responsibility of protecting democracy. We will offer knowledge, research, education, partnership, constructive dialogue, and independent expertise. Together we can strengthen democratic resilience.' } ] },
+      { heading: 'To Future Generations', paras: [ { text: 'We will never meet most of the people our work may touch. That is the nature of education. Its greatest successes often become visible only years later, and we accept that responsibility gladly. Every program we create, every partnership we build, every teacher we support, every student we inspire, and every community we connect is an investment in people we may never know. That is enough.' } ] },
+      {
+        heading: 'Our Commitment',
+        paras: [
+          { text: 'BiFoDe was founded after a moment that reminded the world how fast hatred can spread. But we refuse to believe hatred gets the last word, because history teaches us something else as well: democracy can be learned. So can empathy, responsibility, courage, and hope.' },
+          { text: 'Every generation faces the same choice: to inherit the world as it is, or to leave it better than we found it. BiFoDe has made its choice. We choose education. We choose dialogue. We choose truth. We choose responsibility. We choose democracy. Every day, for everyone.' }
+        ]
+      }
+    ]
+  },
+  {
+    title: 'Closing Statement',
+    sections: [
+      {
+        paras: [
+          { text: 'We believe stronger democracies create less hatred. We believe better education creates stronger democracies. And we believe every person has the ability, and the responsibility, to help build the society they want to leave behind.' },
+          { text: 'That is our promise. That is our work. That is BiFoDe.' }
+        ]
+      }
+    ]
+  }
+];
+---
+
+<MainLayout
+  lang="en"
+  title="Charter"
+  description="The BiFoDe Charter — the mission, philosophy, model, programs, and principles behind our work for democratic resilience."
+>
+  <Hero
+    lang="en"
+    centered={false}
+    title="The BiFoDe Charter"
+    subtitle="Bildungsforum für Demokratie und Vielfalt NRW e.V. — the mission, philosophy, and principles behind everything we do."
+  />
+
+  <article class="container charter">
+    {parts.map((part) => (
+      <section class="charter-part">
+        <h2>{part.title}</h2>
+        {part.quote && <p class="charter-quote">{part.quote}</p>}
+        {part.sections.map((sec) => (
+          <div class="charter-section">
+            {sec.heading && <h3>{sec.heading}</h3>}
+            {sec.paras && sec.paras.map((p) => (
+              <p>{p.label ? (<><strong>{p.label}</strong> {p.text}</>) : p.text}</p>
+            ))}
+            {sec.bullets && (
+              <ul class="charter-bullets">
+                {sec.bullets.map((b) => (
+                  <li>{b.label ? (<><strong>{b.label}</strong> {b.text}</>) : b.text}</li>
+                ))}
+              </ul>
+            )}
+            {sec.sig && sec.sig.map((line) => <p class="charter-sig">{line}</p>)}
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <p class="charter-footer-note">
+      This charter is also published as our <a href="/en/values">values</a> and alongside the association <a href="/en/statutes">statutes</a>.
+    </p>
+  </article>
+</MainLayout>
+
+<style>
+  .charter {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1rem 1rem 3rem;
+  }
+
+  .charter-part {
+    padding: 2rem 0;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .charter-part:first-of-type {
+    border-top: none;
+    padding-top: 0.5rem;
+  }
+
+  .charter-part h2 {
+    font-size: 1.75rem;
+    color: #111827;
+    margin: 0 0 0.75rem;
+    line-height: 1.25;
+  }
+
+  .charter-quote {
+    color: #163b63;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid #dbeafe;
+  }
+
+  .charter-section {
+    margin-bottom: 1.75rem;
+  }
+
+  .charter-section h3 {
+    font-size: 1.2rem;
+    color: #1f3148;
+    margin: 0 0 0.6rem;
+  }
+
+  .charter-section p {
+    color: #334155;
+    line-height: 1.8;
+    margin: 0 0 0.85rem;
+  }
+
+  .charter-bullets {
+    margin: 0 0 0.85rem;
+    padding-left: 1.25rem;
+    color: #334155;
+    line-height: 1.8;
+  }
+
+  .charter-bullets li {
+    margin-bottom: 0.4rem;
+  }
+
+  .charter-sig {
+    font-style: italic;
+    color: #475569 !important;
+    margin: 0 !important;
+    line-height: 1.6 !important;
+  }
+
+  .charter-footer-note {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .charter a {
+    color: #163b63;
+  }
+</style>

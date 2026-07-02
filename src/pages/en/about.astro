@@ -3,10 +3,9 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from '../../components/Hero.astro';
 
 const team = [
-  { name: 'Name Surname', role: 'Board / project lead' },
-  { name: 'Name Surname', role: 'Education & workshops' },
-  { name: 'Name Surname', role: 'Cooperation & network' },
-  { name: 'Name Surname', role: 'Communications & outreach' },
+  { name: 'Denis Vilensky', role: 'Chair' },
+  { name: 'Denis Berengolts', role: 'Deputy Chair' },
+  { name: 'Ilja Litwin', role: 'Treasurer' },
 ];
 
 const timeline = [
@@ -42,10 +41,12 @@ const timeline = [
       <ul>
         <li>Registered charitable association (<strong>e.V.</strong>)</li>
         <li>Based and active in <strong>North Rhine-Westphalia</strong></li>
+        <li>Migrant self-organisation (<strong>MSO</strong>) in NRW</li>
+        <li>Non-partisan and non-denominational</li>
         <li>Focus: democratic education, antisemitism prevention, media literacy</li>
       </ul>
       <p class="legal-note">
-        The association is registered in the German association register. The <a href="/en/statutes">statutes</a> are published on this website.
+        The association is registered in the German association register. Our <a href="/en/statutes">statutes</a>, <a href="/en/charter">charter</a>, and <a href="/en/values">values</a> are published on this website.
       </p>
     </div>
   </section>
@@ -63,8 +64,8 @@ const timeline = [
   </section>
 
   <section class="container">
-    <div class="section-header"><h2>Team</h2></div>
-    <p class="lead">Our team is growing with the pilot project. The profiles below are placeholders until final introductions are published.</p>
+    <div class="section-header"><h2>Board</h2></div>
+    <p class="lead">The board of BiFoDe e.V. (under § 26 of the German Civil Code). Our team is growing with the pilot project.</p>
     <div class="card-grid team-grid">
       {team.map((member) => (
         <article class="card team-card">
