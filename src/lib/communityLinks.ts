@@ -15,8 +15,11 @@ export function ulpanLandingPath(lang: 'de' | 'en' = 'de'): string {
 /** Ulpan Next — Bildungsprojekt (Facebook-Gruppe, linked from landing). */
 export const FB_GROUP_ULPAN_NEXT = 'https://www.facebook.com/groups/ulpan.next';
 
-/** @deprecated Use FB_GROUP_ULPAN_NEXT; kept for redirects from old bookmarks. */
-export const FB_GROUP_ISRAEL_HUB = FB_GROUP_ULPAN_NEXT;
+/** Israel Hub DACH — deutschsprachige Community zu Aliyah und Alltag in Israel. */
+export const FB_GROUP_ISRAEL_HUB_DACH = 'https://www.facebook.com/groups/israel.hub.dach';
+
+/** @deprecated Use FB_GROUP_ISRAEL_HUB_DACH. */
+export const FB_GROUP_ISRAEL_HUB = FB_GROUP_ISRAEL_HUB_DACH;
 
 /** Events and community updates (Facebook group). */
 export const COMMUNITY_EVENTS_URL = FB_GROUP_ULPAN_NEXT;

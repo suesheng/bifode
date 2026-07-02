@@ -1,14 +1,14 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import IsraelCommunityTracking from '../components/IsraelCommunityTracking.astro';
-import { FB_GROUP_ULPAN_NEXT, FB_PAGE_BIFODE, MOODLE_INFO_PATH } from '../lib/communityLinks';
+import { FB_GROUP_ISRAEL_HUB_DACH, FB_PAGE_BIFODE, MOODLE_INFO_PATH } from '../lib/communityLinks';
 
 const pageTitle = 'Community-Projekt | Sprache, Orientierung & Austausch | BiFoDe e.V.';
 const pageDescription =
   'Bildungs- und Community-Projekt von BiFoDe e.V.: Hebräisch und Ulpan, Orientierung zu Auslandsschritten, Beruf, Studium und Alltag — in Kooperation mit internationalen Partnern.';
 
 const FB_PAGE = FB_PAGE_BIFODE;
-const FB_GROUP = FB_GROUP_ULPAN_NEXT;
+const FB_GROUP = FB_GROUP_ISRAEL_HUB_DACH;
 
 function envUrl(key: string): string | null {
   const raw = import.meta.env[key];
@@ -144,7 +144,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="ic-community-title">Bleib mit uns verbunden</h2>
         <p class="ic-lead">
-          Folge unseren Kanälen für Kursankündigungen, Veranstaltungen, Webinare und Austausch — in der Facebook-Gruppe der Community und auf den offiziellen BiFoDe-Kanälen.
+          Folge unseren Kanälen für Kursankündigungen, Veranstaltungen, Webinare und Austausch — in der Facebook-Gruppe Israel Hub DACH und auf den offiziellen BiFoDe-Kanälen.
         </p>
         <div class="card-grid ic-community-grid">
           <article class="card feature-card">
@@ -162,14 +162,16 @@ const webPageJsonLd = JSON.stringify({
             </a>
           </article>
           <article class="card feature-card">
-            <h3>Facebook-Gruppe der Community</h3>
-            <p>Austausch, Fragen und Diskussionen zu Sprache, Orientierung, Alltag und persönlichen Erfahrungen — offen und respektvoll.</p>
+            <h3>Facebook-Gruppe Israel Hub DACH</h3>
+            <p>
+              Gruppe für Fragen zum Umzug nach Israel (Aliyah) — Sprache, Arbeit, Kinder, Medizin, Wohnen und mehr. Beiträge auf Deutsch; Antworten von erfahrenen Community-Mitgliedern.
+            </p>
             <a
               href={FB_GROUP}
               class="ic-btn ic-btn-primary ic-card-btn"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook-Gruppe Israel Hub Deutschland öffnen"
+              aria-label="Facebook-Gruppe Israel Hub DACH öffnen"
               data-track="facebook_group_click"
             >
               Facebook-Gruppe öffnen
