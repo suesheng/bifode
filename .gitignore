@@ -26,3 +26,4 @@ pnpm-debug.log*
 
 # codex local config
 .codex/
+.vercel
