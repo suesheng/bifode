@@ -4,12 +4,12 @@ import UlpanNextLanding from '../../../components/UlpanNextLanding.astro';
 import UlpanProjectTracking from '../../../components/UlpanProjectTracking.astro';
 
 const pageDescription =
-  'Ulpan Next is BiFoDe e.V.’s education project for modern Hebrew — courses, Moodle, and community for members.';
+  'Ulpan Ivrit is BiFoDe e.V.’s education project for modern Hebrew — courses, Moodle, and community for members.';
 
 const webPageJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Ulpan Next – BiFoDe e.V.',
+  name: 'Ulpan Ivrit – BiFoDe e.V.',
   url: 'https://www.bifode.org/en/projects/ulpan-next',
   description: pageDescription,
   inLanguage: 'en-GB',
@@ -19,14 +19,14 @@ const webPageJsonLd = JSON.stringify({
 
 <MainLayout
   lang="en"
-  title="Ulpan Next"
+  title="Ulpan Ivrit"
   description={pageDescription}
   titleSuffix={false}
   mainClass="un-main"
   breadcrumbs={[
     { label: 'Home', href: '/en' },
     { label: 'Projects', href: '/en/projects' },
-    { label: 'Ulpan Next' },
+    { label: 'Ulpan Ivrit' },
   ]}
 >
   <UlpanProjectTracking />

@@ -27,8 +27,8 @@ export const PROJECT_CARDS: ProjectCard[] = [
   },
   {
     id: 'ulpan-next',
-    titleDe: 'Ulpan Next',
-    titleEn: 'Ulpan Next',
+    titleDe: 'Ulpan Ivrit',
+    titleEn: 'Ulpan Ivrit',
     descriptionDe:
       'Bildungsprojekt für modernes Hebräisch — Kurse, Community und Moodle-Lernplattform für Mitglieder.',
     descriptionEn:

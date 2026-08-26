@@ -4,12 +4,12 @@ import UlpanNextLanding from '../../components/UlpanNextLanding.astro';
 import UlpanProjectTracking from '../../components/UlpanProjectTracking.astro';
 
 const pageDescription =
-  'Ulpan Next ist das Bildungsprojekt von BiFoDe e.V. für modernes Hebräisch — Kurse, Moodle und Community für Mitglieder.';
+  'Ulpan Ivrit ist das Bildungsprojekt von BiFoDe e.V. für modernes Hebräisch — Kurse, Moodle und Community für Mitglieder.';
 
 const webPageJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Ulpan Next – BiFoDe e.V.',
+  name: 'Ulpan Ivrit – BiFoDe e.V.',
   url: 'https://www.bifode.org/projekte/ulpan-next',
   description: pageDescription,
   inLanguage: 'de-DE',
@@ -18,14 +18,14 @@ const webPageJsonLd = JSON.stringify({
 ---
 
 <MainLayout
-  title="Ulpan Next"
+  title="Ulpan Ivrit"
   description={pageDescription}
   titleSuffix={false}
   mainClass="un-main"
   breadcrumbs={[
     { label: 'Startseite', href: '/' },
     { label: 'Projekte', href: '/projekte' },
-    { label: 'Ulpan Next' },
+    { label: 'Ulpan Ivrit' },
   ]}
 >
   <UlpanProjectTracking />

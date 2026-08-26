@@ -3,7 +3,7 @@ import { publicEnv } from './publicEnv';
 /** Official BiFoDe Facebook page. */
 export const FB_PAGE_BIFODE = 'https://www.facebook.com/bifode';
 
-/** Ulpan Next project page (Jotform + Meta Pixel). */
+/** Ulpan Ivrit project page (Jotform + Meta Pixel). */
 export const ULPAN_LANDING_PATH = '/projekte/ulpan-next';
 
 export const ULPAN_LANDING_PATH_EN = '/en/projects/ulpan-next';
@@ -12,7 +12,7 @@ export function ulpanLandingPath(lang: 'de' | 'en' = 'de'): string {
   return lang === 'en' ? ULPAN_LANDING_PATH_EN : ULPAN_LANDING_PATH;
 }
 
-/** Ulpan Next — Bildungsprojekt (Facebook-Gruppe, linked from landing). */
+/** Ulpan Ivrit — Bildungsprojekt (Facebook-Gruppe, linked from landing). */
 export const FB_GROUP_ULPAN_NEXT = 'https://www.facebook.com/groups/ulpan.next';
 
 /** Israel Hub DACH — deutschsprachige Community zu Aliyah und Alltag in Israel. */
@@ -40,10 +40,10 @@ export function jotformAnmeldungUrl(): string | undefined {
   return url;
 }
 
-/** Ulpan Next interest / registration on /projekte/ulpan-next (Jotform). */
+/** Ulpan Ivrit interest / registration on /projekte/ulpan-next (Jotform). */
 export const JOTFORM_ULPAN_URL = 'https://form.jotform.com/261742322871052';
 
-/** Moodle learning platform for Ulpan.Next members (separate subdomain). */
+/** Moodle learning platform for Ulpan Ivrit members (separate subdomain). */
 export const MOODLE_ULPAN_URL = 'https://ulpan.bifode.org/';
 
 export const MOODLE_INFO_PATH = '/moodle';
