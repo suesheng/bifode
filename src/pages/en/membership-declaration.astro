@@ -1,3 +1,4 @@
 ---
-return Astro.redirect('/en/membership#anmeldung', 301);
+import { MEINVEREIN_ANTRAG_URL } from '../../lib/communityLinks';
+return Astro.redirect(MEINVEREIN_ANTRAG_URL, 302);
 ---
