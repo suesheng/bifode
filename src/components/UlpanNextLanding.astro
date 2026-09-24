@@ -1,5 +1,15 @@
 ---
 import { FB_GROUP_ULPAN_NEXT, moodleUlpanUrl } from '../lib/communityLinks';
+import {
+  formatEur,
+  ULPAN_UE_MEMBER_EUR,
+  ULPAN_UE_NON_MEMBER_EUR,
+  ULPAN_COURSE_UE,
+  ULPAN_COURSE_MEMBER_EUR,
+  ULPAN_COURSE_NON_MEMBER_EUR,
+  ULPAN_RATE_MEMBER_EUR,
+  ULPAN_RATE_NON_MEMBER_EUR,
+} from '../lib/membershipFees';
 
 interface Props {
   lang?: 'de' | 'en';
@@ -13,6 +23,33 @@ const projectsPath = isEn ? '/en/projects' : '/projekte';
 const membershipPath = isEn ? '/en/membership' : '/mitglied-werden';
 const moodlePath = isEn ? '/en/moodle' : '/moodle';
 const contactPath = isEn ? '/en/contact' : '/kontakt';
+
+const eur = (n: number) => `${formatEur(n)} €`;
+const fees = isEn
+  ? {
+      title: 'Course fees',
+      lead: `Ulpan Ivrit Düsseldorf A1: ${ULPAN_COURSE_UE} teaching units (45 min.). The course is open to everyone; members of BiFoDe e.V. (membership is free) pay the reduced fee.`,
+      colItem: 'Fee',
+      colMember: 'Members',
+      colNonMember: 'Non-members',
+      rowUe: 'Per teaching unit (45 min.)',
+      rowTotal: `Total course fee (${ULPAN_COURSE_UE} UE)`,
+      rowMonthly: 'Monthly (8 instalments, Dec 2026 – Jul 2027)',
+      note: 'Payment by SEPA direct debit on the 1st of each month. Registration is binding for the whole course. Reductions on request (students, low income).',
+      linkLabel: 'Fee regulations (German)',
+    }
+  : {
+      title: 'Teilnahmeentgelt',
+      lead: `Ulpan Ivrit Düsseldorf A1: ${ULPAN_COURSE_UE} Unterrichtseinheiten (45 Min.). Der Kurs steht allen offen; Mitglieder von BiFoDe e.V. (Mitgliedschaft beitragsfrei) zahlen das ermäßigte Entgelt.`,
+      colItem: 'Entgelt',
+      colMember: 'Mitglieder',
+      colNonMember: 'Nichtmitglieder',
+      rowUe: 'Pro Unterrichtseinheit (45 Min.)',
+      rowTotal: `Kurs gesamt (${ULPAN_COURSE_UE} UE)`,
+      rowMonthly: 'Monatlich (8 Raten, Dez 2026 – Jul 2027)',
+      note: 'Zahlung per SEPA-Lastschrift jeweils zum 1. des Monats. Die Anmeldung gilt verbindlich für den gesamten Kurs. Ermäßigung auf Antrag (z. B. Schüler, Studierende, geringes Einkommen).',
+      linkLabel: 'Entgeltordnung',
+    };
 
 const copy = isEn
   ? {
@@ -147,6 +184,42 @@ const copy = isEn
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="un-section un-section-alt" id="kosten" aria-labelledby="un-fees-title">
+    <div class="container un-narrow">
+      <h2 id="un-fees-title">{fees.title}</h2>
+      <p class="un-lead">{fees.lead}</p>
+      <div class="un-fee-wrap">
+        <table class="un-fee-table">
+          <thead>
+            <tr>
+              <th scope="col">{fees.colItem}</th>
+              <th scope="col">{fees.colMember}</th>
+              <th scope="col">{fees.colNonMember}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{fees.rowTotal}</th>
+              <td><strong>{eur(ULPAN_COURSE_MEMBER_EUR)}</strong></td>
+              <td><strong>{eur(ULPAN_COURSE_NON_MEMBER_EUR)}</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">{fees.rowMonthly}</th>
+              <td><strong>{eur(ULPAN_RATE_MEMBER_EUR)}</strong></td>
+              <td><strong>{eur(ULPAN_RATE_NON_MEMBER_EUR)}</strong></td>
+            </tr>
+            <tr>
+              <th scope="row">{fees.rowUe}</th>
+              <td>{eur(ULPAN_UE_MEMBER_EUR)}</td>
+              <td>{eur(ULPAN_UE_NON_MEMBER_EUR)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="un-fee-note">{fees.note} <a href="/entgeltordnung" class="un-link">{fees.linkLabel}</a></p>
     </div>
   </section>
 
@@ -340,6 +413,52 @@ const copy = isEn
   .un-link:hover {
     color: var(--un-navy);
     border-bottom-color: var(--un-navy);
+  }
+
+  .un-fee-wrap {
+    overflow-x: auto;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .un-fee-table {
+    width: 100%;
+    min-width: 420px;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #dbe5f1;
+    border-radius: 12px;
+    font-size: 0.95rem;
+  }
+
+  .un-fee-table th,
+  .un-fee-table td {
+    padding: 0.7rem 0.85rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .un-fee-table thead th {
+    background: #f0f5fc;
+    color: var(--un-navy);
+    font-weight: 700;
+  }
+
+  .un-fee-table tbody th {
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .un-fee-table td {
+    color: var(--un-navy);
+    white-space: nowrap;
+  }
+
+  .un-fee-note {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.6;
   }
 
   .un-moodle-note {
