@@ -3,18 +3,13 @@
  * Mitgliedschaft — landing for new Verein members (no tracking yet).
  */
 import MainLayout from '../layouts/MainLayout.astro';
-import {
-  formatEur,
-  ULPAN_UE_MEMBER_EUR,
-  ULPAN_UE_NON_MEMBER_EUR,
-} from '../lib/membershipFees';
 import { MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 
 const meinVereinAntragUrl = 'https://web.meinverein.de/profile/120572/member-request-application';
 
 const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
-  `Mitgliedschaft bei BiFoDe e.V. — beitragsfrei. Mitglieder unterstützen die Vereinsarbeit und erhalten ermäßigte Teilnahmeentgelte, z. B. Ulpan Ivrit ${formatEur(ULPAN_UE_MEMBER_EUR)} € statt ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € pro Unterrichtseinheit.`;
+  'Mitgliedschaft bei BiFoDe e.V. — beitragsfrei. Mitglieder unterstützen die Vereinsarbeit und erhalten ermäßigte Teilnahmeentgelte für die Bildungsprojekte des Vereins.';
 
 const ctaApply = 'Mitgliedschaft beantragen';
 
@@ -25,7 +20,7 @@ const formSectionIntro =
 const vereinServices = [
   {
     title: 'Ulpan vor Ort & online',
-    text: `Hebräisch lernen in Präsenz- und Online-Formaten — offen für alle, für Mitglieder zum ermäßigten Entgelt (${formatEur(ULPAN_UE_MEMBER_EUR)} € statt ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € pro Unterrichtseinheit).`
+    text: 'Hebräisch lernen in Präsenz- und Online-Formaten — offen für alle, für Mitglieder zum ermäßigten Teilnahmeentgelt. Kosten und Zahlungsweise auf der Projektseite Ulpan Ivrit.'
   },
   {
     title: 'Lernmaterialien & Moodle',
@@ -91,8 +86,7 @@ const webPageJsonLd = JSON.stringify({
         <p class="mw-price-hero">
           <span class="mw-price-unit">Die Mitgliedschaft bei BiFoDe e.V. ist beitragsfrei.</span>
           <span class="mw-price-meta">
-            Beitragsfrei · kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende ·
-            Ulpan Ivrit für Mitglieder {formatEur(ULPAN_UE_MEMBER_EUR)} € statt {formatEur(ULPAN_UE_NON_MEMBER_EUR)} € pro Unterrichtseinheit
+            Beitragsfrei · kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende
           </span>
         </p>
         <div class="mw-actions">
