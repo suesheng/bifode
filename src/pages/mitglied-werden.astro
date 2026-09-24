@@ -11,11 +11,11 @@ const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
   'Mitgliedschaft bei BiFoDe e.V. — beitragsfrei. Mitglieder unterstützen die Vereinsarbeit und erhalten ermäßigte Teilnahmeentgelte für die Bildungsprojekte des Vereins.';
 
-const ctaApply = 'Mitgliedschaft beantragen';
+const ctaApply = 'Kostenlose Mitgliedschaft beantragen';
 
 const formSectionTitle = 'Mitglied werden bei BiFoDe e.V.';
 const formSectionIntro =
-  'Die Mitgliedschaft ist beitragsfrei. Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. und erhalten ermäßigte Teilnahmeentgelte für unsere Kurse. Über die Aufnahme entscheidet der Vorstand. Pflichtfelder sind mit * markiert.';
+  'Die Mitgliedschaft ist beitragsfrei. Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. und erhalten ermäßigte Teilnahmeentgelte für unsere Kurse. Über die Aufnahme entscheidet der Vorstand.';
 
 const vereinServices = [
   {
@@ -86,11 +86,11 @@ const webPageJsonLd = JSON.stringify({
         <p class="mw-price-hero">
           <span class="mw-price-unit">Die Mitgliedschaft bei BiFoDe e.V. ist beitragsfrei.</span>
           <span class="mw-price-meta">
-            Beitragsfrei · kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende
+            Kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende
           </span>
         </p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
         </div>
       </div>
     </section>
@@ -154,7 +154,7 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-form-title">{formSectionTitle}</h2>
         <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
         <div class="mw-antrag">
-          <p class="mw-antrag-text">Füllen Sie den digitalen Mitgliedsantrag aus. Die Mitgliedschaft ist beitragsfrei. Nach Eingang wird Ihr Antrag vom Vorstand geprüft.</p>
+          <p class="mw-antrag-text">Füllen Sie den digitalen Mitgliedsantrag aus. Nach Eingang wird Ihr Antrag vom Vorstand geprüft.</p>
           <p class="mw-antrag-text">Für einzelne Bildungsangebote, Kurse oder Veranstaltungen können unabhängig von der Mitgliedschaft gesonderte Teilnahmeentgelte anfallen. Die jeweiligen Bedingungen werden vor der Anmeldung mitgeteilt.</p>
           <a
             href={meinVereinAntragUrl}
@@ -162,7 +162,7 @@ const webPageJsonLd = JSON.stringify({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Kostenlose Mitgliedschaft beantragen
+            {ctaApply}
           </a>
           <p class="mw-antrag-note">Das Antragsformular wird sicher über WISO MeinVerein geöffnet.</p>
         </div>
@@ -187,7 +187,7 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-final-title">Fragen vor der Aufnahme?</h2>
         <p class="mw-lead">Noch unsicher? Schreiben Sie uns — oder stellen Sie direkt Ihre Anfrage.</p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
           <a href="/kontakt" class="mw-btn mw-btn-secondary">Kontakt</a>
           <a href={ULPAN_LANDING_PATH} class="mw-btn mw-btn-outline">Ulpan Ivrit</a>
           <a href={MOODLE_INFO_PATH} class="mw-btn mw-btn-outline">Moodle</a>
