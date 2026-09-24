@@ -1,14 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import { FB_GROUP_ULPAN_NEXT, MOODLE_INFO_PATH } from '../lib/communityLinks';
-import {
-  ADMISSION_FEE_EUR,
-  ANNUAL_STANDARD_EUR,
-  ANNUAL_STUDENT_EUR,
-  formatEur,
-  MONTHLY_STANDARD_EUR,
-  MONTHLY_STUDENT_EUR,
-} from '../lib/membershipFees';
+import { formatEur, ULPAN_UE_MEMBER_EUR, ULPAN_UE_NON_MEMBER_EUR } from '../lib/membershipFees';
 
 const pageTitle = 'Vielen Dank für Ihre Mitgliedschaftsanfrage | BiFoDe e.V.';
 const pageDescription =
@@ -66,22 +59,17 @@ const showUlpan = Astro.url.searchParams.get('ulpan') === '1';
 
         <section class="bd-section" aria-labelledby="bd-fees-title">
           <h2 id="bd-fees-title">Mitgliedsbeitrag</h2>
-          <p class="bd-fees-intro">Der Mitgliedsbeitrag wird jährlich erhoben:</p>
+          <p class="bd-fees-intro">Die Mitgliedschaft bei BiFoDe e.V. ist <strong>beitragsfrei</strong>. Ein Aufnahmebeitrag wird nicht erhoben.</p>
 
           <ul class="bd-fee-list">
             <li>
-              <strong>Standard-Mitgliedschaft:</strong> {formatEur(ANNUAL_STANDARD_EUR)}&nbsp;€ / Jahr
-              <span class="bd-fee-note">entspricht {formatEur(MONTHLY_STANDARD_EUR)}&nbsp;€ pro Monat</span>
-            </li>
-            <li>
-              <strong>Studierende / ermäßigt:</strong> {formatEur(ANNUAL_STUDENT_EUR)}&nbsp;€ / Jahr
-              <span class="bd-fee-note">entspricht {formatEur(MONTHLY_STUDENT_EUR)}&nbsp;€ pro Monat</span>
+              <strong>Ulpan Ivrit für Mitglieder:</strong> {formatEur(ULPAN_UE_MEMBER_EUR)}&nbsp;€ pro Unterrichtseinheit
+              <span class="bd-fee-note">statt {formatEur(ULPAN_UE_NON_MEMBER_EUR)}&nbsp;€ für Nichtmitglieder (siehe <a href="/entgeltordnung">Entgeltordnung</a>)</span>
             </li>
           </ul>
 
           <p class="bd-admission">
-            Bei Aufnahme in den Verein fällt zusätzlich ein einmaliger Aufnahmebeitrag in Höhe von{' '}
-            {formatEur(ADMISSION_FEE_EUR)}&nbsp;€ an.
+            Austritt jederzeit in Textform mit einer Frist von einem Monat zum Monatsende (§ 8 der Satzung).
           </p>
         </section>
 

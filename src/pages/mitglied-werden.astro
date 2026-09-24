@@ -5,11 +5,9 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import JotformEmbed from '../components/JotformEmbed.astro';
 import {
-  ANNUAL_STANDARD_EUR,
-  ANNUAL_STUDENT_EUR,
   formatEur,
-  MONTHLY_STANDARD_EUR,
-  MONTHLY_STUDENT_EUR,
+  ULPAN_UE_MEMBER_EUR,
+  ULPAN_UE_NON_MEMBER_EUR,
 } from '../lib/membershipFees';
 import { jotformMitgliedschaftUrl, MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 
@@ -17,18 +15,18 @@ const jotformUrl = jotformMitgliedschaftUrl();
 
 const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
-  `Mitgliedschaft bei BiFoDe e.V. — ${formatEur(ANNUAL_STANDARD_EUR)} € / Jahr (Standard, ${formatEur(MONTHLY_STANDARD_EUR)} € / Monat) · Studierende / ermäßigt ${formatEur(ANNUAL_STUDENT_EUR)} € / Jahr — Unterstützung der Vereinsarbeit mit Zugang zu Bildungsangeboten nach Aufnahme.`;
+  `Mitgliedschaft bei BiFoDe e.V. — beitragsfrei. Mitglieder unterstützen die Vereinsarbeit und erhalten ermäßigte Teilnahmeentgelte, z. B. Ulpan Ivrit ${formatEur(ULPAN_UE_MEMBER_EUR)} € statt ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € pro Unterrichtseinheit.`;
 
 const ctaApply = 'Mitgliedschaft beantragen';
 
 const formSectionTitle = 'Mitglied werden bei BiFoDe e.V.';
 const formSectionIntro =
-  'Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. Nach Prüfung und Aufnahme erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan Ivrit, Lernmaterialien und Community-Formate, je nach Verfügbarkeit. Pflichtfelder sind mit * markiert.';
+  'Die Mitgliedschaft ist beitragsfrei. Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. und erhalten ermäßigte Teilnahmeentgelte für unsere Kurse. Über die Aufnahme entscheidet der Vorstand. Pflichtfelder sind mit * markiert.';
 
 const vereinServices = [
   {
     title: 'Ulpan vor Ort & online',
-    text: 'Hebräisch lernen in Präsenz- und Online-Formaten — für Mitglieder des Vereins.'
+    text: `Hebräisch lernen in Präsenz- und Online-Formaten — offen für alle, für Mitglieder zum ermäßigten Entgelt (${formatEur(ULPAN_UE_MEMBER_EUR)} € statt ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € pro Unterrichtseinheit).`
   },
   {
     title: 'Lernmaterialien & Moodle',
@@ -55,11 +53,11 @@ const vereinServices = [
 const steps = [
   {
     title: 'Aufnahme beantragen',
-    text: 'Online-Formular ausfüllen — jährlicher Mitgliedsbeitrag (180 € bzw. 144 €).'
+    text: 'Online-Formular ausfüllen — die Mitgliedschaft ist beitragsfrei, ein Aufnahmebeitrag wird nicht erhoben.'
   },
   {
     title: 'Aufnahme & Zugang',
-    text: 'Nach Prüfung und Vereinsbeschluss erhalten Sie Zugang zu den Vereinsangeboten gemäß Satzung und Verfügbarkeit.'
+    text: 'Nach Prüfung entscheidet der Vorstand über die Aufnahme. Die Mitgliedschaft beginnt mit der Bestätigung per E-Mail.'
   },
   {
     title: 'Angebote nutzen',
@@ -89,14 +87,14 @@ const webPageJsonLd = JSON.stringify({
         <h1 id="mw-hero-title">Mitglied werden</h1>
         <p class="mw-hero-sub">Gemeinsam Bildung stärken — demokratisch, vielfältig und mit klarem gesellschaftlichem Auftrag.</p>
         <p class="mw-lead">
-          Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Arbeit von BiFoDe e.V. Nach Aufnahme und laufendem Mitgliedsbeitrag erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan, Lernmaterialien und gemeinsame Treffen — <strong>je nach Verfügbarkeit und Programm</strong>.
+          Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Arbeit von BiFoDe e.V. Die Mitgliedschaft ist <strong>beitragsfrei</strong>. Für Kurse wie Ulpan Ivrit zahlen Mitglieder ein ermäßigtes Teilnahmeentgelt — <strong>je nach Verfügbarkeit und Programm</strong>.
         </p>
         <p class="mw-price-hero">
-          <span class="mw-price-big">{formatEur(ANNUAL_STANDARD_EUR)} €</span>
-          <span class="mw-price-unit">pro Jahr</span>
+          <span class="mw-price-big">0 €</span>
+          <span class="mw-price-unit">Mitgliedsbeitrag</span>
           <span class="mw-price-meta">
-            Standard · entspricht {formatEur(MONTHLY_STANDARD_EUR)} € / Monat · Studierende / ermäßigt{' '}
-            {formatEur(ANNUAL_STUDENT_EUR)} € / Jahr ({formatEur(MONTHLY_STUDENT_EUR)} € / Monat)
+            Beitragsfrei · kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende ·
+            Ulpan Ivrit für Mitglieder {formatEur(ULPAN_UE_MEMBER_EUR)} € statt {formatEur(ULPAN_UE_NON_MEMBER_EUR)} € pro Unterrichtseinheit
           </span>
         </p>
         <div class="mw-actions">
@@ -109,7 +107,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="mw-services-title">Was die Mitgliedschaft ermöglicht</h2>
         <p class="mw-lead">
-          Nach Aufnahme als Mitglied und mit laufendem Mitgliedsbeitrag können Sie die Angebote von BiFoDe e.V. nutzen — ein gemeinsamer Zugang zur Vereinsarbeit, nicht pro Einzelleistung.
+          Unsere Bildungsangebote stehen allen Interessierten offen. Als Mitglied unterstützen Sie die Vereinsarbeit, bleiben informiert und nehmen zu ermäßigten Teilnahmeentgelten teil (siehe <a href="/entgeltordnung">Entgeltordnung</a>).
         </p>
         <div class="card-grid">
           {vereinServices.map((item) => (
@@ -120,7 +118,7 @@ const webPageJsonLd = JSON.stringify({
           ))}
         </div>
         <p class="mw-note">
-          Die Teilnahme an konkreten Terminen erfolgt je nach Verfügbarkeit, Projektphase und Kapazität. Die Mitgliedschaft ist ein Vereinsbeitrag, kein Fernabsatzvertrag mit pauschaler Erfolgsgarantie.
+          Die Teilnahme an konkreten Terminen erfolgt je nach Verfügbarkeit, Projektphase und Kapazität. Neue Mitglieder werden in der Regel als außerordentliche Mitglieder (ohne Stimmrecht in der Mitgliederversammlung) aufgenommen; über eine ordentliche Mitgliedschaft mit Stimmrecht entscheidet der Vorstand auf Antrag. Grundlage sind die <a href="/satzung">Satzung</a> und die <a href="/beitragsordnung">Beitragsordnung</a>.
         </p>
       </div>
     </section>
@@ -177,7 +175,7 @@ const webPageJsonLd = JSON.stringify({
         <div class="mw-tax-note">
           <h3>Steuerlicher Hinweis</h3>
           <p>
-            Mitgliedsbeiträge an gemeinnützige Organisationen können in Deutschland grundsätzlich steuerlich berücksichtigt werden, sofern die gesetzlichen Voraussetzungen erfüllt sind. BiFoDe e.V. stellt Zuwendungsbestätigungen aus, soweit rechtlich zulässig.
+            Die Mitgliedschaft ist beitragsfrei. Spenden an BiFoDe e.V. können unter den gesetzlichen Voraussetzungen steuerlich berücksichtigt werden; wir stellen hierfür Zuwendungsbestätigungen aus. Teilnahmeentgelte für Kurse sind keine Spenden und werden nicht bescheinigt.
           </p>
           <p class="mw-small">Diese Angabe ersetzt keine steuerliche Beratung.</p>
         </div>
