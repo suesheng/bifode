@@ -27,7 +27,11 @@ export const COMMUNITY_EVENTS_URL = FB_GROUP_ULPAN_NEXT;
 /** Ulpan Ivrit course registration incl. optional free membership (Jotform). */
 export const JOTFORM_ULPAN_ANMELDUNG_URL = 'https://form.jotform.com/261742322871052';
 
-/** Membership application on /mitglied-werden (Jotform). */
+/** Digital membership application (WISO MeinVerein). All "apply" CTAs link here directly. */
+export const MEINVEREIN_ANTRAG_URL =
+  'https://web.meinverein.de/profile/120572/member-request-application';
+
+/** @deprecated Former Jotform membership form — no longer embedded. */
 export const JOTFORM_MITGLIEDSCHAFT_URL =
   'https://form.jotform.com/261744316807056';
 
