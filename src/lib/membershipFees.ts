@@ -1,26 +1,23 @@
-/** Canonical membership fees (annual billing; monthly equivalents for display). */
-export const MONTHLY_STANDARD_EUR = 15;
-export const MONTHLY_STUDENT_EUR = 12;
-export const ANNUAL_STANDARD_EUR = 180;
-export const ANNUAL_STUDENT_EUR = 144;
-export const ADMISSION_FEE_EUR = 49;
+/**
+ * Canonical fees.
+ * Membership in BiFoDe e.V. is free of charge (Beitragsordnung).
+ * Course fees (Teilnahmeentgelte) are set by the board in the Entgeltordnung.
+ */
+export const MEMBERSHIP_FEE_EUR = 0;
 
-/** @deprecated Use MONTHLY_STANDARD_EUR */
-export const MONTHLY_EUR = MONTHLY_STANDARD_EUR;
+/** Ulpan Ivrit: fee per teaching unit (45 min.). */
+export const ULPAN_UE_MEMBER_EUR = 8;
+export const ULPAN_UE_NON_MEMBER_EUR = 16;
+/** Ulpan Ivrit Düsseldorf A1: 60 UE, 8 monthly instalments. */
+export const ULPAN_COURSE_UE = 60;
+export const ULPAN_COURSE_MEMBER_EUR = 480;
+export const ULPAN_COURSE_NON_MEMBER_EUR = 960;
+export const ULPAN_RATE_MEMBER_EUR = 60;
+export const ULPAN_RATE_NON_MEMBER_EUR = 120;
 
 export function formatEur(amount: number): string {
   return amount.toLocaleString('de-DE', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   });
-}
-
-export function getMembershipFeeAmounts() {
-  return {
-    monthlyStandard: MONTHLY_STANDARD_EUR,
-    monthlyStudent: MONTHLY_STUDENT_EUR,
-    annualStandard: ANNUAL_STANDARD_EUR,
-    annualStudent: ANNUAL_STUDENT_EUR,
-    admissionFee: ADMISSION_FEE_EUR,
-  };
 }

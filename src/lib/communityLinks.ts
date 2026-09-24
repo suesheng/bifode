@@ -24,6 +24,9 @@ export const FB_GROUP_ISRAEL_HUB = FB_GROUP_ISRAEL_HUB_DACH;
 /** Events and community updates (Facebook group). */
 export const COMMUNITY_EVENTS_URL = FB_GROUP_ULPAN_NEXT;
 
+/** Ulpan Ivrit course registration incl. optional free membership (Jotform). */
+export const JOTFORM_ULPAN_ANMELDUNG_URL = 'https://form.jotform.com/261742322871052';
+
 /** Membership application on /mitglied-werden (Jotform). */
 export const JOTFORM_MITGLIEDSCHAFT_URL =
   'https://form.jotform.com/261744316807056';
