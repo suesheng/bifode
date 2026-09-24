@@ -5,11 +5,9 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import JotformEmbed from '../../components/JotformEmbed.astro';
 import {
-  ANNUAL_STANDARD_EUR,
-  ANNUAL_STUDENT_EUR,
   formatEur,
-  MONTHLY_STANDARD_EUR,
-  MONTHLY_STUDENT_EUR,
+  ULPAN_UE_MEMBER_EUR,
+  ULPAN_UE_NON_MEMBER_EUR,
 } from '../../lib/membershipFees';
 import { jotformMitgliedschaftUrl, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
 
@@ -17,7 +15,7 @@ const jotformUrl = jotformMitgliedschaftUrl();
 
 const pageTitle = 'Become a member | BiFoDe e.V.';
 const pageDescription =
-  `Membership in BiFoDe e.V. — ${formatEur(ANNUAL_STANDARD_EUR)} € / year (standard, ${formatEur(MONTHLY_STANDARD_EUR)} € / month) · students / reduced ${formatEur(ANNUAL_STUDENT_EUR)} € / year — support the association’s work with access to programmes after admission.`;
+  `Membership in BiFoDe e.V. is free of charge — members support our work and pay reduced course fees, e.g. Ulpan Ivrit ${formatEur(ULPAN_UE_MEMBER_EUR)} € instead of ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € per teaching unit.`;
 
 const ctaApply = 'Apply for membership';
 
@@ -28,7 +26,7 @@ const formSectionIntro =
 const vereinServices = [
   {
     title: 'Ulpan on site & online',
-    text: 'Learn Hebrew in in-person and online formats — for members of the association.',
+    text: `Learn Hebrew in in-person and online formats — open to everyone, reduced fee for members (${formatEur(ULPAN_UE_MEMBER_EUR)} € instead of ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € per teaching unit).`,
   },
   {
     title: 'Learning materials & Moodle',
@@ -55,7 +53,7 @@ const vereinServices = [
 const steps = [
   {
     title: 'Apply for admission',
-    text: `Complete the online form — annual membership fee (${formatEur(ANNUAL_STANDARD_EUR)} € or ${formatEur(ANNUAL_STUDENT_EUR)} € reduced).`,
+    text: 'Complete the online form — membership is free of charge, no admission fee.',
   },
   {
     title: 'Admission & access',
@@ -89,14 +87,14 @@ const webPageJsonLd = JSON.stringify({
         <h1 id="mw-hero-title">Become a member</h1>
         <p class="mw-hero-sub">Strengthening education together — democratic, diverse, and with a clear social mission.</p>
         <p class="mw-lead">
-          Through your membership you support the non-profit work of BiFoDe e.V. After admission and payment of the ongoing membership fee you gain access to association programmes — such as Ulpan, learning materials, and community meetings — <strong>subject to availability and programme capacity</strong>.
+          Through your membership you support the non-profit work of BiFoDe e.V. Membership is <strong>free of charge</strong>; members pay reduced fees for courses such as Ulpan Ivrit — <strong>subject to availability and programme capacity</strong>.
         </p>
         <p class="mw-price-hero">
-          <span class="mw-price-big">{formatEur(ANNUAL_STANDARD_EUR)} €</span>
-          <span class="mw-price-unit">per year</span>
+          <span class="mw-price-big">0 €</span>
+          <span class="mw-price-unit">membership fee</span>
           <span class="mw-price-meta">
-            Standard · equivalent to {formatEur(MONTHLY_STANDARD_EUR)} € / month · students / reduced{' '}
-            {formatEur(ANNUAL_STUDENT_EUR)} € / year ({formatEur(MONTHLY_STUDENT_EUR)} € / month)
+            Free of charge · no admission fee · cancel with one month’s notice to the end of a month ·
+            Ulpan Ivrit for members {formatEur(ULPAN_UE_MEMBER_EUR)} € instead of {formatEur(ULPAN_UE_NON_MEMBER_EUR)} € per teaching unit
           </span>
         </p>
         <div class="mw-actions">
@@ -109,7 +107,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="mw-services-title">What membership includes</h2>
         <p class="mw-lead">
-          After admission and payment of the ongoing membership fee you can use BiFoDe e.V. programmes — shared access to the association’s work, not a fee per individual service.
+          Our education programmes are open to everyone. As a member you support the association, stay informed, and take part at reduced course fees.
         </p>
         <div class="card-grid">
           {vereinServices.map((item) => (
@@ -120,7 +118,7 @@ const webPageJsonLd = JSON.stringify({
           ))}
         </div>
         <p class="mw-note">
-          Participation in specific events depends on availability, project phase, and capacity. Membership is an association contribution, not a distance contract with a guaranteed outcome.
+          Participation in specific events depends on availability, project phase, and capacity. New members are usually admitted as associate members (without voting rights in the general assembly); full membership with voting rights is granted by the board on request.
         </p>
       </div>
     </section>
@@ -177,7 +175,7 @@ const webPageJsonLd = JSON.stringify({
         <div class="mw-tax-note">
           <h3>Tax information</h3>
           <p>
-            Membership fees paid to charitable organisations may be tax-deductible in Germany where the legal requirements are met. BiFoDe e.V. issues donation receipts where legally permitted.
+            Membership is free of charge. Donations to BiFoDe e.V. may be tax-deductible in Germany where the legal requirements are met; we issue donation receipts for them. Course fees are not donations and are not receipted.
           </p>
           <p class="mw-small">This does not constitute tax advice.</p>
         </div>
