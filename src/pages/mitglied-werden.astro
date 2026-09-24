@@ -13,9 +13,6 @@ const pageDescription =
 
 const ctaApply = 'Kostenlose Mitgliedschaft beantragen';
 
-const formSectionTitle = 'Mitglied werden bei BiFoDe e.V.';
-const formSectionIntro =
-  'Die Mitgliedschaft ist beitragsfrei. Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. und erhalten ermäßigte Teilnahmeentgelte für unsere Kurse. Über die Aufnahme entscheidet der Vorstand.';
 
 const vereinServices = [
   {
@@ -80,17 +77,19 @@ const webPageJsonLd = JSON.stringify({
         <p class="mw-eyebrow">BiFoDe e.V. · Bildungsforum für Demokratie und Vielfalt NRW</p>
         <h1 id="mw-hero-title">Mitglied werden</h1>
         <p class="mw-hero-sub">Gemeinsam Bildung stärken — demokratisch, vielfältig und mit klarem gesellschaftlichem Auftrag.</p>
-        <p class="mw-lead">
-          Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Arbeit von BiFoDe e.V. Die Mitgliedschaft ist <strong>beitragsfrei</strong>. Für Kurse wie Ulpan Ivrit zahlen Mitglieder ein ermäßigtes Teilnahmeentgelt — <strong>je nach Verfügbarkeit und Programm</strong>.
-        </p>
-        <p class="mw-price-hero">
-          <span class="mw-price-unit">Die Mitgliedschaft bei BiFoDe e.V. ist beitragsfrei.</span>
-          <span class="mw-price-meta">
-            Kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende
-          </span>
-        </p>
-        <div class="mw-actions">
-          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+        <div class="mw-antrag mw-antrag-hero" id="anmeldung">
+          <p class="mw-antrag-title">Die Mitgliedschaft bei BiFoDe e.V. ist beitragsfrei.</p>
+          <p class="mw-antrag-text">
+            Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. und erhalten ermäßigte Teilnahmeentgelte für unsere Kurse. Kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende.
+          </p>
+          <p class="mw-antrag-text">
+            Füllen Sie den digitalen Mitgliedsantrag aus. Nach Eingang wird Ihr Antrag vom Vorstand geprüft. Für einzelne Bildungsangebote, Kurse oder Veranstaltungen können unabhängig von der Mitgliedschaft gesonderte Teilnahmeentgelte anfallen; die Bedingungen werden vor der Anmeldung mitgeteilt.
+          </p>
+          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary mw-btn-antrag" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+          <p class="mw-antrag-note">
+            Das Antragsformular wird sicher über WISO MeinVerein geöffnet. Fragen?
+            <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>
+          </p>
         </div>
       </div>
     </section>
@@ -148,29 +147,9 @@ const webPageJsonLd = JSON.stringify({
       </div>
     </section>
 
-    <section class="mw-section mw-section-alt mw-form-section" id="anmeldung" aria-labelledby="mw-form-title">
+    <section class="mw-section mw-section-alt mw-form-section" aria-label="Steuerlicher Hinweis">
       <div class="container mw-form-container">
         <div class="mw-form-stack">
-        <h2 id="mw-form-title">{formSectionTitle}</h2>
-        <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
-        <div class="mw-antrag">
-          <p class="mw-antrag-text">Füllen Sie den digitalen Mitgliedsantrag aus. Nach Eingang wird Ihr Antrag vom Vorstand geprüft.</p>
-          <p class="mw-antrag-text">Für einzelne Bildungsangebote, Kurse oder Veranstaltungen können unabhängig von der Mitgliedschaft gesonderte Teilnahmeentgelte anfallen. Die jeweiligen Bedingungen werden vor der Anmeldung mitgeteilt.</p>
-          <a
-            href={meinVereinAntragUrl}
-            class="mw-btn mw-btn-primary mw-btn-antrag"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {ctaApply}
-          </a>
-          <p class="mw-antrag-note">Das Antragsformular wird sicher über WISO MeinVerein geöffnet.</p>
-        </div>
-        <p class="form-note">
-          Fragen? Schreiben Sie an{' '}
-          <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>.
-        </p>
-
         <div class="mw-tax-note">
           <h3>Steuerlicher Hinweis</h3>
           <p>
@@ -484,6 +463,24 @@ const webPageJsonLd = JSON.stringify({
     border-radius: 14px;
   }
 
+  .mw-antrag-hero {
+    margin-top: 1.25rem;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 32px rgba(12, 30, 52, 0.06);
+  }
+
+  .mw-antrag-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--mw-navy);
+  }
+
+  .mw-antrag-note a {
+    color: var(--mw-blue);
+    font-weight: 600;
+  }
+
   .mw-antrag-text {
     margin: 0 0 1.25rem;
     color: #334155;
@@ -522,9 +519,7 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .mw-tax-note {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e2e8f0;
+    margin: 0;
   }
 
   .mw-tax-note h3 {
