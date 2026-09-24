@@ -4,18 +4,13 @@
  */
 import MainLayout from '../../layouts/MainLayout.astro';
 import JotformEmbed from '../../components/JotformEmbed.astro';
-import {
-  formatEur,
-  ULPAN_UE_MEMBER_EUR,
-  ULPAN_UE_NON_MEMBER_EUR,
-} from '../../lib/membershipFees';
 import { jotformMitgliedschaftUrl, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
 
 const jotformUrl = jotformMitgliedschaftUrl();
 
 const pageTitle = 'Become a member | BiFoDe e.V.';
 const pageDescription =
-  `Membership in BiFoDe e.V. is free of charge — members support our work and pay reduced course fees, e.g. Ulpan Ivrit ${formatEur(ULPAN_UE_MEMBER_EUR)} € instead of ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € per teaching unit.`;
+  'Membership in BiFoDe e.V. is free of charge — members support our work and pay reduced fees for the association’s education projects.';
 
 const ctaApply = 'Apply for membership';
 
@@ -26,7 +21,7 @@ const formSectionIntro =
 const vereinServices = [
   {
     title: 'Ulpan on site & online',
-    text: `Learn Hebrew in in-person and online formats — open to everyone, reduced fee for members (${formatEur(ULPAN_UE_MEMBER_EUR)} € instead of ${formatEur(ULPAN_UE_NON_MEMBER_EUR)} € per teaching unit).`,
+    text: 'Learn Hebrew in in-person and online formats — open to everyone, reduced fee for members. Costs and payment details on the Ulpan Ivrit project page.',
   },
   {
     title: 'Learning materials & Moodle',
@@ -90,11 +85,9 @@ const webPageJsonLd = JSON.stringify({
           Through your membership you support the non-profit work of BiFoDe e.V. Membership is <strong>free of charge</strong>; members pay reduced fees for courses such as Ulpan Ivrit — <strong>subject to availability and programme capacity</strong>.
         </p>
         <p class="mw-price-hero">
-          <span class="mw-price-big">0 €</span>
-          <span class="mw-price-unit">membership fee</span>
+          <span class="mw-price-unit">Membership in BiFoDe e.V. is free of charge.</span>
           <span class="mw-price-meta">
-            Free of charge · no admission fee · cancel with one month’s notice to the end of a month ·
-            Ulpan Ivrit for members {formatEur(ULPAN_UE_MEMBER_EUR)} € instead of {formatEur(ULPAN_UE_NON_MEMBER_EUR)} € per teaching unit
+            Free of charge · no admission fee · cancel with one month’s notice to the end of a month
           </span>
         </p>
         <div class="mw-actions">
