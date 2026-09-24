@@ -3,32 +3,21 @@
  * Mitgliedschaft — landing for new Verein members (no tracking yet).
  */
 import MainLayout from '../layouts/MainLayout.astro';
-import JotformEmbed from '../components/JotformEmbed.astro';
-import {
-  ANNUAL_STANDARD_EUR,
-  ANNUAL_STUDENT_EUR,
-  formatEur,
-  MONTHLY_STANDARD_EUR,
-  MONTHLY_STUDENT_EUR,
-} from '../lib/membershipFees';
-import { jotformMitgliedschaftUrl, MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { MEINVEREIN_ANTRAG_URL, MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 
-const jotformUrl = jotformMitgliedschaftUrl();
+const meinVereinAntragUrl = MEINVEREIN_ANTRAG_URL;
 
 const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
-  `Mitgliedschaft bei BiFoDe e.V. — ${formatEur(ANNUAL_STANDARD_EUR)} € / Jahr (Standard, ${formatEur(MONTHLY_STANDARD_EUR)} € / Monat) · Studierende / ermäßigt ${formatEur(ANNUAL_STUDENT_EUR)} € / Jahr — Unterstützung der Vereinsarbeit mit Zugang zu Bildungsangeboten nach Aufnahme.`;
+  'Mitgliedschaft bei BiFoDe e.V. — beitragsfrei. Mitglieder unterstützen die Vereinsarbeit und erhalten ermäßigte Teilnahmeentgelte für die Bildungsprojekte des Vereins.';
 
-const ctaApply = 'Mitgliedschaft beantragen';
+const ctaApply = 'Kostenlose Mitgliedschaft beantragen';
 
-const formSectionTitle = 'Mitglied werden bei BiFoDe e.V.';
-const formSectionIntro =
-  'Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. Nach Prüfung und Aufnahme erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan Ivrit, Lernmaterialien und Community-Formate, je nach Verfügbarkeit. Pflichtfelder sind mit * markiert.';
 
 const vereinServices = [
   {
     title: 'Ulpan vor Ort & online',
-    text: 'Hebräisch lernen in Präsenz- und Online-Formaten — für Mitglieder des Vereins.'
+    text: 'Hebräisch lernen in Präsenz- und Online-Formaten — offen für alle, für Mitglieder zum ermäßigten Teilnahmeentgelt. Kosten und Zahlungsweise auf der Projektseite Ulpan Ivrit.'
   },
   {
     title: 'Lernmaterialien & Moodle',
@@ -55,11 +44,11 @@ const vereinServices = [
 const steps = [
   {
     title: 'Aufnahme beantragen',
-    text: 'Online-Formular ausfüllen — jährlicher Mitgliedsbeitrag (180 € bzw. 144 €).'
+    text: 'Online-Formular ausfüllen — die Mitgliedschaft ist beitragsfrei, ein Aufnahmebeitrag wird nicht erhoben.'
   },
   {
     title: 'Aufnahme & Zugang',
-    text: 'Nach Prüfung und Vereinsbeschluss erhalten Sie Zugang zu den Vereinsangeboten gemäß Satzung und Verfügbarkeit.'
+    text: 'Nach Prüfung entscheidet der Vorstand über die Aufnahme. Die Mitgliedschaft beginnt mit der Bestätigung per E-Mail.'
   },
   {
     title: 'Angebote nutzen',
@@ -88,19 +77,19 @@ const webPageJsonLd = JSON.stringify({
         <p class="mw-eyebrow">BiFoDe e.V. · Bildungsforum für Demokratie und Vielfalt NRW</p>
         <h1 id="mw-hero-title">Mitglied werden</h1>
         <p class="mw-hero-sub">Gemeinsam Bildung stärken — demokratisch, vielfältig und mit klarem gesellschaftlichem Auftrag.</p>
-        <p class="mw-lead">
-          Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Arbeit von BiFoDe e.V. Nach Aufnahme und laufendem Mitgliedsbeitrag erhalten Sie Zugang zu Vereinsangeboten — etwa Ulpan, Lernmaterialien und gemeinsame Treffen — <strong>je nach Verfügbarkeit und Programm</strong>.
-        </p>
-        <p class="mw-price-hero">
-          <span class="mw-price-big">{formatEur(ANNUAL_STANDARD_EUR)} €</span>
-          <span class="mw-price-unit">pro Jahr</span>
-          <span class="mw-price-meta">
-            Standard · entspricht {formatEur(MONTHLY_STANDARD_EUR)} € / Monat · Studierende / ermäßigt{' '}
-            {formatEur(ANNUAL_STUDENT_EUR)} € / Jahr ({formatEur(MONTHLY_STUDENT_EUR)} € / Monat)
-          </span>
-        </p>
-        <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+        <div class="mw-antrag mw-antrag-hero" id="anmeldung">
+          <p class="mw-antrag-title">Die Mitgliedschaft bei BiFoDe e.V. ist beitragsfrei.</p>
+          <p class="mw-antrag-text">
+            Mit Ihrer Mitgliedschaft unterstützen Sie die gemeinnützige Bildungs-, Kultur- und Community-Arbeit von BiFoDe e.V. und erhalten ermäßigte Teilnahmeentgelte für unsere Kurse. Kein Aufnahmebeitrag · Austritt jederzeit mit einer Frist von einem Monat zum Monatsende.
+          </p>
+          <p class="mw-antrag-text">
+            Füllen Sie den digitalen Mitgliedsantrag aus. Nach Eingang wird Ihr Antrag vom Vorstand geprüft. Für einzelne Bildungsangebote, Kurse oder Veranstaltungen können unabhängig von der Mitgliedschaft gesonderte Teilnahmeentgelte anfallen; die Bedingungen werden vor der Anmeldung mitgeteilt.
+          </p>
+          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary mw-btn-antrag" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+          <p class="mw-antrag-note">
+            Das Antragsformular wird sicher über WISO MeinVerein geöffnet. Fragen?
+            <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>
+          </p>
         </div>
       </div>
     </section>
@@ -109,7 +98,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="mw-services-title">Was die Mitgliedschaft ermöglicht</h2>
         <p class="mw-lead">
-          Nach Aufnahme als Mitglied und mit laufendem Mitgliedsbeitrag können Sie die Angebote von BiFoDe e.V. nutzen — ein gemeinsamer Zugang zur Vereinsarbeit, nicht pro Einzelleistung.
+          Unsere Bildungsangebote stehen allen Interessierten offen. Als Mitglied unterstützen Sie die Vereinsarbeit, bleiben informiert und nehmen zu ermäßigten Teilnahmeentgelten teil (siehe <a href="/entgeltordnung">Entgeltordnung</a>).
         </p>
         <div class="card-grid">
           {vereinServices.map((item) => (
@@ -120,7 +109,7 @@ const webPageJsonLd = JSON.stringify({
           ))}
         </div>
         <p class="mw-note">
-          Die Teilnahme an konkreten Terminen erfolgt je nach Verfügbarkeit, Projektphase und Kapazität. Die Mitgliedschaft ist ein Vereinsbeitrag, kein Fernabsatzvertrag mit pauschaler Erfolgsgarantie.
+          Die Teilnahme an konkreten Terminen erfolgt je nach Verfügbarkeit, Projektphase und Kapazität. Neue Mitglieder werden in der Regel als außerordentliche Mitglieder (ohne Stimmrecht in der Mitgliederversammlung) aufgenommen; über eine ordentliche Mitgliedschaft mit Stimmrecht entscheidet der Vorstand auf Antrag. Grundlage sind die <a href="/satzung">Satzung</a> und die <a href="/beitragsordnung">Beitragsordnung</a>.
         </p>
       </div>
     </section>
@@ -158,26 +147,13 @@ const webPageJsonLd = JSON.stringify({
       </div>
     </section>
 
-    <section class="mw-section mw-section-alt mw-form-section" id="anmeldung" aria-labelledby="mw-form-title">
+    <section class="mw-section mw-section-alt mw-form-section" aria-label="Steuerlicher Hinweis">
       <div class="container mw-form-container">
         <div class="mw-form-stack">
-        <h2 id="mw-form-title">{formSectionTitle}</h2>
-        <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
-        <JotformEmbed
-          formUrl={jotformUrl}
-          title="Mitgliedschaft bei BiFoDe e.V. beantragen"
-          iframeLang="de"
-          flush
-        />
-        <p class="form-note">
-          Fragen? Schreiben Sie an{' '}
-          <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>.
-        </p>
-
         <div class="mw-tax-note">
           <h3>Steuerlicher Hinweis</h3>
           <p>
-            Mitgliedsbeiträge an gemeinnützige Organisationen können in Deutschland grundsätzlich steuerlich berücksichtigt werden, sofern die gesetzlichen Voraussetzungen erfüllt sind. BiFoDe e.V. stellt Zuwendungsbestätigungen aus, soweit rechtlich zulässig.
+            Die Mitgliedschaft ist beitragsfrei. Spenden an BiFoDe e.V. können unter den gesetzlichen Voraussetzungen steuerlich berücksichtigt werden; wir stellen hierfür Zuwendungsbestätigungen aus. Teilnahmeentgelte für Kurse sind keine Spenden und werden nicht bescheinigt.
           </p>
           <p class="mw-small">Diese Angabe ersetzt keine steuerliche Beratung.</p>
         </div>
@@ -190,7 +166,7 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-final-title">Fragen vor der Aufnahme?</h2>
         <p class="mw-lead">Noch unsicher? Schreiben Sie uns — oder stellen Sie direkt Ihre Anfrage.</p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
           <a href="/kontakt" class="mw-btn mw-btn-secondary">Kontakt</a>
           <a href={ULPAN_LANDING_PATH} class="mw-btn mw-btn-outline">Ulpan Ivrit</a>
           <a href={MOODLE_INFO_PATH} class="mw-btn mw-btn-outline">Moodle</a>
@@ -480,8 +456,59 @@ const webPageJsonLd = JSON.stringify({
     padding-top: 2rem;
   }
 
-  .mw-form-section :global(.jotform-embed-root) {
-    margin: 0;
+  .mw-antrag {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #dbe5f1;
+    border-radius: 14px;
+  }
+
+  .mw-antrag-hero {
+    margin-top: 1.25rem;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 32px rgba(12, 30, 52, 0.06);
+  }
+
+  .mw-antrag-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--mw-navy);
+  }
+
+  .mw-antrag-note a {
+    color: var(--mw-blue);
+    font-weight: 600;
+  }
+
+  .mw-antrag-text {
+    margin: 0 0 1.25rem;
+    color: #334155;
+    line-height: 1.65;
+  }
+
+  .mw-btn-antrag {
+    font-size: 1.05rem;
+    padding: 0.85rem 1.6rem;
+  }
+
+  .mw-btn:focus-visible {
+    outline: 3px solid var(--mw-navy);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--mw-sky);
+  }
+
+  .mw-antrag-note {
+    margin: 0.85rem 0 0;
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 768px) {
+    .mw-btn-antrag {
+      width: 100%;
+    }
   }
 
   .form-note {
@@ -492,9 +519,7 @@ const webPageJsonLd = JSON.stringify({
   }
 
   .mw-tax-note {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e2e8f0;
+    margin: 0;
   }
 
   .mw-tax-note h3 {

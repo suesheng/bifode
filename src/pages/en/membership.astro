@@ -3,32 +3,22 @@
  * Membership — English landing for new Verein members.
  */
 import MainLayout from '../../layouts/MainLayout.astro';
-import JotformEmbed from '../../components/JotformEmbed.astro';
-import {
-  ANNUAL_STANDARD_EUR,
-  ANNUAL_STUDENT_EUR,
-  formatEur,
-  MONTHLY_STANDARD_EUR,
-  MONTHLY_STUDENT_EUR,
-} from '../../lib/membershipFees';
-import { jotformMitgliedschaftUrl, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
-
-const jotformUrl = jotformMitgliedschaftUrl();
+import { MEINVEREIN_ANTRAG_URL, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
 
 const pageTitle = 'Become a member | BiFoDe e.V.';
 const pageDescription =
-  `Membership in BiFoDe e.V. — ${formatEur(ANNUAL_STANDARD_EUR)} € / year (standard, ${formatEur(MONTHLY_STANDARD_EUR)} € / month) · students / reduced ${formatEur(ANNUAL_STUDENT_EUR)} € / year — support the association’s work with access to programmes after admission.`;
+  'Membership in BiFoDe e.V. is free of charge — members support our work and pay reduced fees for the association’s education projects.';
 
-const ctaApply = 'Apply for membership';
+const ctaApply = 'Apply for free membership';
 
 const formSectionTitle = 'Become a member of BiFoDe e.V.';
 const formSectionIntro =
-  'Through your membership you support the non-profit education, cultural, and community work of BiFoDe e.V. After review and admission you gain access to association programmes — such as Ulpan Ivrit, learning materials, and community formats, subject to availability. Fields marked * are required.';
+  'Through your membership you support the non-profit education, cultural, and community work of BiFoDe e.V. After review and admission you gain access to association programmes — such as Ulpan Ivrit, learning materials, and community formats, subject to availability.';
 
 const vereinServices = [
   {
     title: 'Ulpan on site & online',
-    text: 'Learn Hebrew in in-person and online formats — for members of the association.',
+    text: 'Learn Hebrew in in-person and online formats — open to everyone, reduced fee for members. Costs and payment details on the Ulpan Ivrit project page.',
   },
   {
     title: 'Learning materials & Moodle',
@@ -55,7 +45,7 @@ const vereinServices = [
 const steps = [
   {
     title: 'Apply for admission',
-    text: `Complete the online form — annual membership fee (${formatEur(ANNUAL_STANDARD_EUR)} € or ${formatEur(ANNUAL_STUDENT_EUR)} € reduced).`,
+    text: 'Complete the online form — membership is free of charge, no admission fee.',
   },
   {
     title: 'Admission & access',
@@ -89,18 +79,16 @@ const webPageJsonLd = JSON.stringify({
         <h1 id="mw-hero-title">Become a member</h1>
         <p class="mw-hero-sub">Strengthening education together — democratic, diverse, and with a clear social mission.</p>
         <p class="mw-lead">
-          Through your membership you support the non-profit work of BiFoDe e.V. After admission and payment of the ongoing membership fee you gain access to association programmes — such as Ulpan, learning materials, and community meetings — <strong>subject to availability and programme capacity</strong>.
+          Through your membership you support the non-profit work of BiFoDe e.V. Membership is <strong>free of charge</strong>; members pay reduced fees for courses such as Ulpan Ivrit — <strong>subject to availability and programme capacity</strong>.
         </p>
         <p class="mw-price-hero">
-          <span class="mw-price-big">{formatEur(ANNUAL_STANDARD_EUR)} €</span>
-          <span class="mw-price-unit">per year</span>
+          <span class="mw-price-unit">Membership in BiFoDe e.V. is free of charge.</span>
           <span class="mw-price-meta">
-            Standard · equivalent to {formatEur(MONTHLY_STANDARD_EUR)} € / month · students / reduced{' '}
-            {formatEur(ANNUAL_STUDENT_EUR)} € / year ({formatEur(MONTHLY_STUDENT_EUR)} € / month)
+            Free of charge · no admission fee · cancel with one month’s notice to the end of a month
           </span>
         </p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+          <a href={MEINVEREIN_ANTRAG_URL} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
         </div>
       </div>
     </section>
@@ -109,7 +97,7 @@ const webPageJsonLd = JSON.stringify({
       <div class="container">
         <h2 id="mw-services-title">What membership includes</h2>
         <p class="mw-lead">
-          After admission and payment of the ongoing membership fee you can use BiFoDe e.V. programmes — shared access to the association’s work, not a fee per individual service.
+          Our education programmes are open to everyone. As a member you support the association, stay informed, and take part at reduced course fees.
         </p>
         <div class="card-grid">
           {vereinServices.map((item) => (
@@ -120,7 +108,7 @@ const webPageJsonLd = JSON.stringify({
           ))}
         </div>
         <p class="mw-note">
-          Participation in specific events depends on availability, project phase, and capacity. Membership is an association contribution, not a distance contract with a guaranteed outcome.
+          Participation in specific events depends on availability, project phase, and capacity. New members are usually admitted as associate members (without voting rights in the general assembly); full membership with voting rights is granted by the board on request.
         </p>
       </div>
     </section>
@@ -163,12 +151,14 @@ const webPageJsonLd = JSON.stringify({
         <div class="mw-form-stack">
         <h2 id="mw-form-title">{formSectionTitle}</h2>
         <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
-        <JotformEmbed
-          formUrl={jotformUrl}
-          title="Apply for membership in BiFoDe e.V."
-          iframeLang="en"
-          flush
-        />
+        <div class="mw-antrag">
+          <p class="mw-antrag-text">Complete the digital membership application (in German). Once received, your application is reviewed by the board.</p>
+          <p class="mw-antrag-text">Separate participation fees may apply to individual courses, education programmes or events, independent of membership. The conditions are communicated before registration.</p>
+          <a href={MEINVEREIN_ANTRAG_URL} class="mw-btn mw-btn-primary mw-btn-antrag" target="_blank" rel="noopener noreferrer">
+            {ctaApply}
+          </a>
+          <p class="mw-antrag-note">The application form opens securely via WISO MeinVerein.</p>
+        </div>
         <p class="form-note">
           Questions? Email{' '}
           <a href="mailto:info@bifode.org?subject=Membership%20BiFoDe%20e.V.">info@bifode.org</a>.
@@ -177,7 +167,7 @@ const webPageJsonLd = JSON.stringify({
         <div class="mw-tax-note">
           <h3>Tax information</h3>
           <p>
-            Membership fees paid to charitable organisations may be tax-deductible in Germany where the legal requirements are met. BiFoDe e.V. issues donation receipts where legally permitted.
+            Membership is free of charge. Donations to BiFoDe e.V. may be tax-deductible in Germany where the legal requirements are met; we issue donation receipts for them. Course fees are not donations and are not receipted.
           </p>
           <p class="mw-small">This does not constitute tax advice.</p>
         </div>
@@ -190,7 +180,7 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-final-title">Questions before applying?</h2>
         <p class="mw-lead">Still unsure? Write to us — or submit your application directly.</p>
         <div class="mw-actions">
-          <a href="#anmeldung" class="mw-btn mw-btn-primary">{ctaApply}</a>
+          <a href={MEINVEREIN_ANTRAG_URL} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
           <a href="/en/contact" class="mw-btn mw-btn-secondary">Contact</a>
           <a href={ULPAN_LANDING_PATH_EN} class="mw-btn mw-btn-outline">Ulpan Ivrit</a>
           <a href="/en/moodle" class="mw-btn mw-btn-outline">Moodle</a>
@@ -480,8 +470,41 @@ const webPageJsonLd = JSON.stringify({
     padding-top: 2rem;
   }
 
-  .mw-form-section :global(.jotform-embed-root) {
-    margin: 0;
+  .mw-antrag {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #dbe5f1;
+    border-radius: 14px;
+  }
+
+  .mw-antrag-text {
+    margin: 0 0 1.25rem;
+    color: #334155;
+    line-height: 1.65;
+  }
+
+  .mw-btn-antrag {
+    font-size: 1.05rem;
+    padding: 0.85rem 1.6rem;
+  }
+
+  .mw-btn:focus-visible {
+    outline: 3px solid var(--mw-navy);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--mw-sky);
+  }
+
+  .mw-antrag-note {
+    margin: 0.85rem 0 0;
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 768px) {
+    .mw-btn-antrag {
+      width: 100%;
+    }
   }
 
   .form-note {
