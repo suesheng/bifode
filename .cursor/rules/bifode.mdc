@@ -37,7 +37,7 @@ NGO site for **BiFoDe e.V.** — production **https://www.bifode.org** (Vercel).
 
 ## Env (never commit `.env`)
 
-See `.env.example`: `SMTP_*`, `CONTACT_*`, `PUBLIC_JOTFORM_ANMELDUNG_URL`. Use `import.meta.env` in code.
+See `.env.example`: `SMTP_*`, `CONTACT_*`, `ADMIN_EMAILS`. Use `import.meta.env` in code.
 
 ## Workflow
 

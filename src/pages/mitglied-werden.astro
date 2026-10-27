@@ -3,9 +3,9 @@
  * Mitgliedschaft — landing for new Verein members (no tracking yet).
  */
 import MainLayout from '../layouts/MainLayout.astro';
-import { MEINVEREIN_ANTRAG_URL, MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
+import { MEMBERSHIP_APPLY_PATH, MOODLE_INFO_PATH, ULPAN_LANDING_PATH } from '../lib/communityLinks';
 
-const meinVereinAntragUrl = MEINVEREIN_ANTRAG_URL;
+const membershipApplyUrl = MEMBERSHIP_APPLY_PATH;
 
 const pageTitle = 'Mitglied werden | BiFoDe e.V.';
 const pageDescription =
@@ -85,9 +85,9 @@ const webPageJsonLd = JSON.stringify({
           <p class="mw-antrag-text">
             Füllen Sie den digitalen Mitgliedsantrag aus. Nach Eingang wird Ihr Antrag vom Vorstand geprüft. Für einzelne Bildungsangebote, Kurse oder Veranstaltungen können unabhängig von der Mitgliedschaft gesonderte Teilnahmeentgelte anfallen; die Bedingungen werden vor der Anmeldung mitgeteilt.
           </p>
-          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary mw-btn-antrag" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+          <a href={membershipApplyUrl} class="mw-btn mw-btn-primary mw-btn-antrag">{ctaApply}</a>
           <p class="mw-antrag-note">
-            Das Antragsformular wird sicher über WISO MeinVerein geöffnet. Fragen?
+            Fragen?
             <a href="mailto:info@bifode.org?subject=Mitgliedschaft%20BiFoDe%20e.V.">info@bifode.org</a>
           </p>
         </div>
@@ -166,7 +166,7 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-final-title">Fragen vor der Aufnahme?</h2>
         <p class="mw-lead">Noch unsicher? Schreiben Sie uns — oder stellen Sie direkt Ihre Anfrage.</p>
         <div class="mw-actions">
-          <a href={meinVereinAntragUrl} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+          <a href={membershipApplyUrl} class="mw-btn mw-btn-primary">{ctaApply}</a>
           <a href="/kontakt" class="mw-btn mw-btn-secondary">Kontakt</a>
           <a href={ULPAN_LANDING_PATH} class="mw-btn mw-btn-outline">Ulpan Ivrit</a>
           <a href={MOODLE_INFO_PATH} class="mw-btn mw-btn-outline">Moodle</a>

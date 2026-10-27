@@ -3,7 +3,7 @@
  * Membership — English landing for new Verein members.
  */
 import MainLayout from '../../layouts/MainLayout.astro';
-import { MEINVEREIN_ANTRAG_URL, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
+import { MEMBERSHIP_APPLY_PATH_EN, ULPAN_LANDING_PATH_EN } from '../../lib/communityLinks';
 
 const pageTitle = 'Become a member | BiFoDe e.V.';
 const pageDescription =
@@ -88,7 +88,7 @@ const webPageJsonLd = JSON.stringify({
           </span>
         </p>
         <div class="mw-actions">
-          <a href={MEINVEREIN_ANTRAG_URL} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+          <a href={MEMBERSHIP_APPLY_PATH_EN} class="mw-btn mw-btn-primary">{ctaApply}</a>
         </div>
       </div>
     </section>
@@ -152,12 +152,11 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-form-title">{formSectionTitle}</h2>
         <p class="mw-lead mw-form-intro">{formSectionIntro}</p>
         <div class="mw-antrag">
-          <p class="mw-antrag-text">Complete the digital membership application (in German). Once received, your application is reviewed by the board.</p>
+          <p class="mw-antrag-text">Complete the digital membership application. Once received, your application is reviewed by the board.</p>
           <p class="mw-antrag-text">Separate participation fees may apply to individual courses, education programmes or events, independent of membership. The conditions are communicated before registration.</p>
-          <a href={MEINVEREIN_ANTRAG_URL} class="mw-btn mw-btn-primary mw-btn-antrag" target="_blank" rel="noopener noreferrer">
+          <a href={MEMBERSHIP_APPLY_PATH_EN} class="mw-btn mw-btn-primary mw-btn-antrag">
             {ctaApply}
           </a>
-          <p class="mw-antrag-note">The application form opens securely via WISO MeinVerein.</p>
         </div>
         <p class="form-note">
           Questions? Email{' '}
@@ -180,7 +179,7 @@ const webPageJsonLd = JSON.stringify({
         <h2 id="mw-final-title">Questions before applying?</h2>
         <p class="mw-lead">Still unsure? Write to us — or submit your application directly.</p>
         <div class="mw-actions">
-          <a href={MEINVEREIN_ANTRAG_URL} class="mw-btn mw-btn-primary" target="_blank" rel="noopener noreferrer">{ctaApply}</a>
+          <a href={MEMBERSHIP_APPLY_PATH_EN} class="mw-btn mw-btn-primary">{ctaApply}</a>
           <a href="/en/contact" class="mw-btn mw-btn-secondary">Contact</a>
           <a href={ULPAN_LANDING_PATH_EN} class="mw-btn mw-btn-outline">Ulpan Ivrit</a>
           <a href="/en/moodle" class="mw-btn mw-btn-outline">Moodle</a>

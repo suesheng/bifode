@@ -82,7 +82,7 @@ List pages filter drafts where applicable. Event ICS routes: `src/pages/events.i
 Never commit `.env` or secrets. See `.env.example`:
 
 - **SMTP_***, **CONTACT_FROM_EMAIL**, **CONTACT_TO_EMAIL** — contact API
-- **PUBLIC_JOTFORM_ANMELDUNG_URL** — event registration (Jotform); `/anmeldung` and `/en/registration` redirect
+- **ADMIN_EMAILS**, **SITE_URL**, **DATABASE_PATH** — member admin (`/admin`); `/anmeldung` and `/en/registration` redirect to the own application form
 
 ## Coding conventions
 
