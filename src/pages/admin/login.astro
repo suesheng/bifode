@@ -1,0 +1,27 @@
+---
+import AdminLayout from '../../components/AdminLayout.astro';
+import { publicOrigin, requestLogin, sameOrigin } from '../../lib/auth';
+
+let sent = false;
+if (Astro.request.method === 'POST' && sameOrigin(Astro.request)) {
+  const form = await Astro.request.formData();
+  try {
+    await requestLogin(String(form.get('email') || ''), publicOrigin(Astro.request));
+  } catch (error) {
+    console.error('Admin login mail failed:', error);
+  }
+  sent = true;
+}
+---
+
+<AdminLayout title="Anmelden">
+  <h1>Anmelden</h1>
+  {sent ? (
+    <p>Wenn die Adresse berechtigt ist, wurde ein Anmeldelink gesendet (15 Minuten gültig).</p>
+  ) : (
+    <form method="post">
+      <p><label>E-Mail<br /><input type="email" name="email" required autocomplete="email" /></label></p>
+      <button type="submit" class="btn-primary">Anmeldelink senden</button>
+    </form>
+  )}
+</AdminLayout>

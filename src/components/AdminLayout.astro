@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  email?: string | null;
+}
+const { title, email } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} | BiFoDe Admin</title>
+  </head>
+  <body>
+    <header>
+      <strong>BiFoDe Admin</strong>
+      {email && (
+        <span>
+          {email}
+          <form method="post" action="/admin/logout"><button type="submit">Abmelden</button></form>
+        </span>
+      )}
+    </header>
+    <main><slot /></main>
+  </body>
+</html>
+
+<style is:global>
+  body { font-family: system-ui, sans-serif; margin: 0; color: #0c1e34; background: #f5f7fa; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #fff; border-bottom: 1px solid #dde3ea; }
+  header span { display: flex; gap: 12px; align-items: center; font-size: 14px; }
+  header form { margin: 0; }
+  main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e7ebf0; vertical-align: top; }
+  th { background: #eef2f6; }
+  button, .btn { font: inherit; padding: 6px 12px; border: 1px solid #0c1e34; background: #fff; border-radius: 6px; cursor: pointer; text-decoration: none; color: inherit; display: inline-block; }
+  .btn-primary { background: #0c1e34; color: #fff; }
+  input[type='email'] { font: inherit; padding: 8px; width: 280px; max-width: 100%; }
+  .tabs { display: flex; gap: 8px; margin: 12px 0; }
+  .tabs .on { background: #0c1e34; color: #fff; }
+  .actions { display: flex; gap: 6px; }
+  .actions form { margin: 0; }
+  .note { color: #5a6b7d; font-size: 14px; }
+</style>

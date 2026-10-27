@@ -12,9 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^10.0.5",
+    "@astrojs/node": "^10.1.4",
     "@fontsource/inter": "^5.2.8",
-    "astro": "^6.1.9",
+    "astro": "^6.4.8",
     "nodemailer": "^8.0.7"
   },
   "overrides": {

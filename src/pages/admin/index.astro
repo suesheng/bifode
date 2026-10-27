@@ -1,0 +1,68 @@
+---
+import AdminLayout from '../../components/AdminLayout.astro';
+import { getDb } from '../../lib/db';
+import { sessionEmail } from '../../lib/auth';
+
+const email = sessionEmail(Astro.cookies);
+if (!email) return Astro.redirect('/admin/login');
+
+const tabs = [
+  ['pending', 'Neue Anträge'],
+  ['active', 'Mitglieder'],
+  ['rejected', 'Abgelehnt'],
+  ['left', 'Ausgetreten']
+] as const;
+const status = tabs.some(([k]) => k === Astro.url.searchParams.get('status')) ? Astro.url.searchParams.get('status')! : 'pending';
+
+type Row = { id: number; first_name: string; last_name: string; email: string; phone: string; street: string; postal_code: string; city: string; newsletter: number; locale: string; created_at: string };
+const rows = getDb().prepare('SELECT * FROM members WHERE status = ? ORDER BY id DESC').all(status) as Row[];
+const counts = Object.fromEntries(
+  (getDb().prepare('SELECT status, COUNT(*) AS n FROM members GROUP BY status').all() as { status: string; n: number }[]).map((r) => [r.status, r.n])
+);
+const next: Record<string, [string, string][]> = {
+  pending: [['active', 'Annehmen'], ['rejected', 'Ablehnen']],
+  active: [['left', 'Ausgetreten']],
+  rejected: [['pending', 'Zurück zu neu']],
+  left: [['active', 'Wieder aktiv']]
+};
+---
+
+<AdminLayout title="Mitglieder" email={email}>
+  <h1>Mitglieder</h1>
+  <div class="tabs">
+    {tabs.map(([k, label]) => (
+      <a class:list={['btn', k === status && 'on']} href={`/admin?status=${k}`}>{label} ({counts[k] || 0})</a>
+    ))}
+    <a class="btn" href="/admin/export.csv" style="margin-left:auto">CSV-Export (alle)</a>
+  </div>
+  {rows.length === 0 ? <p class="note">Keine Einträge.</p> : (
+    <table>
+      <thead><tr><th>Name</th><th>Kontakt</th><th>Adresse</th><th>Eingang</th><th></th></tr></thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td>{r.first_name} {r.last_name}<br /><span class="note">{r.locale.toUpperCase()}{r.newsletter ? ' · Newsletter' : ''}</span></td>
+            <td><a href={`mailto:${r.email}`}>{r.email}</a><br />{r.phone}</td>
+            <td>{r.street}<br />{r.postal_code} {r.city}</td>
+            <td>{new Date(r.created_at).toLocaleDateString('de-DE')}</td>
+            <td>
+              <div class="actions">
+                {next[status].map(([to, label]) => (
+                  <form method="post" action="/admin/decide">
+                    <input type="hidden" name="id" value={r.id} />
+                    <input type="hidden" name="status" value={to} />
+                    <input type="hidden" name="back" value={status} />
+                    {(to === 'active' || to === 'rejected') && status === 'pending' && (
+                      <label class="note"><input type="checkbox" name="notify" value="1" checked /> E-Mail</label>
+                    )}
+                    <button type="submit">{label}</button>
+                  </form>
+                ))}
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</AdminLayout>
