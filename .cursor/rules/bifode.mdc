@@ -1,15 +1,15 @@
 ---
-description: BiFoDe e.V. website (Astro 6, DE/EN, Vercel) — stack, i18n, build, workflow
+description: BiFoDe e.V. website (Astro 6, DE/EN, Podway) — stack, i18n, build, workflow
 alwaysApply: true
 ---
 
 # BiFoDe website (absent-altitude)
 
-NGO site for **BiFoDe e.V.** — production **https://www.bifode.org** (Vercel). Full details: `AGENTS.md`.
+NGO site for **BiFoDe e.V.** — production **https://bifode.org** (Podway pod). Full details: `AGENTS.md`.
 
 ## Stack & commands
 
-- Astro 6, `@astrojs/vercel`, `output: 'server'`
+- Astro 6, `@astrojs/node`, `output: 'server'`
 - **Node 24** — `nvm use` (`.nvmrc`)
 - Root: `npm run dev` → http://localhost:4321 · `npm run build` before merge · no lint/test script
 - Rollup via `@rollup/wasm-node` (`package.json` overrides) — do not remove without reason
@@ -19,7 +19,6 @@ NGO site for **BiFoDe e.V.** — production **https://www.bifode.org** (Vercel).
 - `src/pages/` — German routes; `src/pages/en/` — English mirror
 - `src/content/{projekte,aktuelles,events}/` — collections (`src/content.config.ts`)
 - `src/pages/api/contact.ts` — SMTP contact form
-- `vercel.json` — bifode.de → www.bifode.org redirects only
 
 ## i18n
 
@@ -48,5 +47,5 @@ See `.env.example`: `SMTP_*`, `CONTACT_*`, `ADMIN_EMAILS`. Use `import.meta.env`
 
 ## Codex / agents
 
-- Verify with `nvm use && npm run build` (1–2 min; Vercel bundling may pause ~60s)
+- Verify with `nvm use && npm run build` (1–2 min)
 - Codex: run build **outside sandbox** if it hangs; use Node 24, not only Codex.app Node for installs

@@ -242,14 +242,14 @@ const langDeHref = isEn ? counterpartPath : currentPath;
 const langEnHref = isEn ? currentPath : counterpartPath;
 
 const siteYear = new Date().getFullYear();
-const canonicalURL = new URL(Astro.url.pathname, 'https://www.bifode.org');
+const canonicalURL = new URL(Astro.url.pathname, 'https://bifode.org');
 const orgJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'BiFoDe e.V.',
   alternateName: 'Bildungsforum für Demokratie und Vielfalt NRW e.V.',
-  url: 'https://www.bifode.org/',
-  logo: 'https://www.bifode.org/logos/logo-light.svg',
+  url: 'https://bifode.org/',
+  logo: 'https://bifode.org/logos/logo-light.svg',
   email: 'info@bifode.org',
 });
 ---

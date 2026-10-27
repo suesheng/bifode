@@ -8,6 +8,6 @@ end: '2026-09-10T17:00:00+02:00'
 location: Online (Zoom)
 locationEn: Online (Zoom)
 online: true
-registrationUrl: https://www.bifode.org/anmeldung
+registrationUrl: https://bifode.org/anmeldung
 draft: false
 ---
