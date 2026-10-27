@@ -86,13 +86,31 @@ export function publicOrigin(request: Request): string {
   return `${proto}://${host}`;
 }
 
+/** Hosts allowed as Origin: the request host, SITE_URL, TRUSTED_HOSTS (comma list) and the public domains. */
+function trustedHosts(request: Request): string[] {
+  const hosts = ['www.bifode.org', 'bifode.org'];
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+  if (host) hosts.push(host);
+  const site = env('SITE_URL');
+  if (site) {
+    try {
+      hosts.push(new URL(site).host);
+    } catch {
+      /* ignore malformed SITE_URL */
+    }
+  }
+  hosts.push(...String(env('TRUSTED_HOSTS') || '').split(',').map((h) => h.trim()).filter(Boolean));
+  return hosts;
+}
+
 /** Same-origin check for state-changing admin POSTs (cookie is also SameSite=Lax). */
 export function sameOrigin(request: Request): boolean {
   const origin = request.headers.get('origin');
   if (!origin) return false;
-  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
   try {
-    return new URL(origin).host === host;
+    const ok = trustedHosts(request).includes(new URL(origin).host);
+    if (!ok) console.warn('Admin POST rejected: untrusted origin', { origin, host: request.headers.get('host') });
+    return ok;
   } catch {
     return false;
   }
