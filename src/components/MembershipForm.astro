@@ -1,0 +1,95 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+const { lang = 'de' } = Astro.props;
+const t = {
+  de: {
+    first: 'Vorname', last: 'Nachname', email: 'E-Mail', phone: 'Telefon (optional)', street: 'Straße und Hausnummer',
+    zip: 'PLZ', city: 'Ort', newsletter: 'Ich möchte den Newsletter erhalten (optional).',
+    admission: 'Ich beantrage die Aufnahme als Mitglied bei BiFoDe e.V. und erkenne die Satzung an.',
+    privacy: 'Ich habe die Datenschutzhinweise gelesen.', submit: 'Mitgliedsantrag senden', sending: 'Wird gesendet…',
+    fail: 'Versand fehlgeschlagen. Bitte später erneut versuchen.', privacyHref: '/datenschutz', satzungHref: '/satzung'
+  },
+  en: {
+    first: 'First name', last: 'Last name', email: 'Email', phone: 'Phone (optional)', street: 'Street and number',
+    zip: 'Postal code', city: 'City', newsletter: 'I would like to receive the newsletter (optional).',
+    admission: 'I apply for membership at BiFoDe e.V. and accept the statutes.',
+    privacy: 'I have read the privacy notice.', submit: 'Submit application', sending: 'Sending…',
+    fail: 'Sending failed. Please try again later.', privacyHref: '/en/privacy', satzungHref: '/en/statutes'
+  }
+}[lang];
+---
+
+<form class="mf" id="membership-form" data-locale={lang} data-fail={t.fail} data-sending={t.sending} novalidate>
+  <div class="mf-row">
+    <div class="mf-group"><label for="mf-first">{t.first} *</label><input id="mf-first" name="firstName" required autocomplete="given-name" /></div>
+    <div class="mf-group"><label for="mf-last">{t.last} *</label><input id="mf-last" name="lastName" required autocomplete="family-name" /></div>
+  </div>
+  <div class="mf-row">
+    <div class="mf-group"><label for="mf-email">{t.email} *</label><input id="mf-email" type="email" name="email" required autocomplete="email" /></div>
+    <div class="mf-group"><label for="mf-phone">{t.phone}</label><input id="mf-phone" name="phone" autocomplete="tel" /></div>
+  </div>
+  <div class="mf-group"><label for="mf-street">{t.street} *</label><input id="mf-street" name="street" required autocomplete="street-address" /></div>
+  <div class="mf-row">
+    <div class="mf-group"><label for="mf-zip">{t.zip} *</label><input id="mf-zip" name="postalCode" required autocomplete="postal-code" /></div>
+    <div class="mf-group"><label for="mf-city">{t.city} *</label><input id="mf-city" name="city" required autocomplete="address-level2" /></div>
+  </div>
+  <label class="mf-check"><input type="checkbox" name="admissionAccepted" required /> <span>{t.admission} <a href={t.satzungHref}>→</a></span></label>
+  <label class="mf-check"><input type="checkbox" name="privacyAccepted" required /> <span>{t.privacy} <a href={t.privacyHref}>→</a></span></label>
+  <label class="mf-check"><input type="checkbox" name="newsletter" /> <span>{t.newsletter}</span></label>
+  <div class="mf-hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+  <button type="submit" class="button">{t.submit}</button>
+  <p class="mf-note" id="mf-note" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  const form = document.getElementById('membership-form');
+  const note = document.getElementById('mf-note');
+  if (form instanceof HTMLFormElement && note) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const label = button.textContent;
+      const data = new FormData(form);
+      const payload: Record<string, unknown> = { locale: form.dataset.locale };
+      data.forEach((v, k) => (payload[k] = v));
+      for (const k of ['admissionAccepted', 'privacyAccepted', 'newsletter']) payload[k] = data.get(k) === 'on';
+      button.disabled = true;
+      button.textContent = form.dataset.sending || '';
+      note.textContent = '';
+      try {
+        const response = await fetch('/api/membership', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (!response.ok || !result?.ok) throw new Error(result?.message || form.dataset.fail);
+        form.reset();
+        note.textContent = result.message;
+      } catch (error) {
+        note.textContent = error instanceof Error ? error.message : form.dataset.fail || '';
+      } finally {
+        button.disabled = false;
+        button.textContent = label;
+      }
+    });
+  }
+</script>
+
+<style>
+  .mf { display: grid; gap: 1rem; max-width: 720px; }
+  .mf-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .mf-group { display: grid; gap: 0.35rem; }
+  .mf-group label { font-weight: 600; color: #111827; }
+  .mf input:not([type='checkbox']) { padding: 0.65rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.4rem; font: inherit; }
+  .mf-check { display: flex; gap: 0.6rem; align-items: flex-start; color: #374151; }
+  .mf-check input { margin-top: 0.3rem; }
+  .mf-hp { position: absolute; left: -9999px; }
+  .mf-note { min-height: 1.5em; color: #0c1e34; }
+</style>

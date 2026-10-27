@@ -3,7 +3,6 @@
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-import CookieBanner from '../components/CookieBanner.astro';
 import FloatingCta from '../components/FloatingCta.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { buildBreadcrumbs, type BreadcrumbCrumb } from '../lib/breadcrumbs';
@@ -178,12 +177,16 @@ const footerLegalLinks: FooterLink[] = isEn
   ? [
       { href: '/en/legal-notice', label: 'Legal Notice' },
       { href: '/en/statutes', label: 'Statutes' },
-      { href: '/en/privacy', label: 'Privacy Policy' }
+      { href: '/en/privacy', label: 'Privacy Policy' },
+      { href: '/en/cookie-policy', label: 'Cookies' }
     ]
   : [
       { href: '/impressum', label: 'Impressum' },
       { href: '/satzung', label: 'Satzung' },
-      { href: '/datenschutz', label: 'Datenschutz' }
+      { href: '/datenschutz', label: 'Datenschutz' },
+      { href: '/teilnahmebedingungen', label: 'Teilnahmebedingungen' },
+      { href: '/widerruf', label: 'Widerrufsbelehrung' },
+      { href: '/cookie-richtlinien', label: 'Cookies' }
     ];
 
 const footerDisclaimer = isEn
@@ -242,14 +245,14 @@ const langDeHref = isEn ? counterpartPath : currentPath;
 const langEnHref = isEn ? currentPath : counterpartPath;
 
 const siteYear = new Date().getFullYear();
-const canonicalURL = new URL(Astro.url.pathname, 'https://www.bifode.org');
+const canonicalURL = new URL(Astro.url.pathname, 'https://bifode.org');
 const orgJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'BiFoDe e.V.',
   alternateName: 'Bildungsforum für Demokratie und Vielfalt NRW e.V.',
-  url: 'https://www.bifode.org/',
-  logo: 'https://www.bifode.org/logos/logo-light.svg',
+  url: 'https://bifode.org/',
+  logo: 'https://bifode.org/logos/logo-light.svg',
   email: 'info@bifode.org',
 });
 ---
@@ -446,11 +449,6 @@ const orgJsonLd = JSON.stringify({
                                                                                 <a href={item.href}>{item.label}</a>
                                                                         </li>
                                                                 ))}
-                                                                <li>
-                                                                        <button type="button" class="footer-cookie-button" id="footer-cookie-settings">
-                                                                                {isEn ? 'Cookie Settings' : 'Cookie-Einstellungen'}
-                                                                        </button>
-                                                                </li>
                                                                 <li class="footer-stack-gap" aria-hidden="true"></li>
                                                                 <li>
                                                                         <a
@@ -479,8 +477,6 @@ const orgJsonLd = JSON.stringify({
                         </footer>
                 </div>
 
-                <!-- Cookie Banner -->
-                <CookieBanner lang={locale} />
 
                 <FloatingCta lang={isEn ? 'en' : 'de'} />
 
@@ -580,10 +576,6 @@ const orgJsonLd = JSON.stringify({
 					}
 				});
 
-                                const footerCookieSettings = document.getElementById('footer-cookie-settings');
-                                footerCookieSettings?.addEventListener('click', () => {
-                                        window.dispatchEvent(new CustomEvent('open-cookie-settings'));
-                                });
                         });
                 </script>
         </body>
@@ -1027,19 +1019,7 @@ const orgJsonLd = JSON.stringify({
                 transition: color 0.2s ease;
         }
 
-        .footer-cookie-button {
-                background: transparent;
-                border: none;
-                padding: 0;
-                color: #94a3b8;
-                font: inherit;
-                font-size: 0.9rem;
-                cursor: pointer;
-                text-align: left;
-        }
-
-        .footer a:hover,
-        .footer-cookie-button:hover {
+        .footer a:hover {
                 color: #ffffff;
         }
 

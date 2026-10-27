@@ -1,0 +1,33 @@
+---
+import AdminLayout from '../../components/AdminLayout.astro';
+import { publicOrigin, requestLogin, sameOrigin } from '../../lib/auth';
+
+let sent = false;
+if (Astro.request.method === 'POST' && sameOrigin(Astro.request)) {
+  const form = await Astro.request.formData();
+  try {
+    await requestLogin(String(form.get('email') || ''), publicOrigin(Astro.request));
+  } catch (error) {
+    console.error('Admin login mail failed:', error);
+  }
+  sent = true;
+}
+---
+
+<AdminLayout title="Вход" bare>
+  <div class="card login-card">
+    <h1>Вход в админку</h1>
+    <p class="mut">BiFoDe e.V. · заявки на членство</p>
+    {sent ? (
+      <div class="notice warn" style="margin:14px 0 0">
+        Если адрес есть в списке администраторов, мы отправили ссылку для входа. Она действует 15 минут и срабатывает один раз.
+      </div>
+    ) : (
+      <form method="post" style="margin-top:14px">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" name="email" required autocomplete="email" />
+        <button type="submit" class="btn">Получить ссылку для входа</button>
+      </form>
+    )}
+  </div>
+</AdminLayout>

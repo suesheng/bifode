@@ -1,5 +1,5 @@
 ---
-import { FB_GROUP_ULPAN_NEXT, MEINVEREIN_ANTRAG_URL, moodleUlpanUrl } from '../lib/communityLinks';
+import { FB_GROUP_ULPAN_NEXT, membershipApplyPath, moodleUlpanUrl } from '../lib/communityLinks';
 import {
   formatEur,
   ULPAN_UE_MEMBER_EUR,
@@ -157,7 +157,7 @@ const copy = isEn
       <p class="un-hero-sub">{copy.heroSub}</p>
       <p class="un-lead">{copy.lead}</p>
       <div class="un-actions">
-        <a href={MEINVEREIN_ANTRAG_URL} class="un-btn un-btn-primary" data-track="membership_intent" target="_blank" rel="noopener noreferrer">{copy.ctaMember}</a>
+        <a href={membershipApplyPath(lang)} class="un-btn un-btn-primary" data-track="membership_intent">{copy.ctaMember}</a>
         <a href={moodlePath} class="un-btn un-btn-secondary">{copy.ctaMoodle}</a>
         <a
           href={FB_GROUP_ULPAN_NEXT}
@@ -245,7 +245,7 @@ const copy = isEn
       <h2 id="un-bifode-title">{copy.bifodeTitle}</h2>
       <p class="un-lead">{copy.bifodeLead}</p>
       <p>
-        <a href={MEINVEREIN_ANTRAG_URL} class="un-link" target="_blank" rel="noopener noreferrer">{copy.linkMember}</a>
+        <a href={membershipApplyPath(lang)} class="un-link">{copy.linkMember}</a>
         {' · '}
         <a href={moodlePath} class="un-link">{copy.linkMoodle}</a>
         {' · '}

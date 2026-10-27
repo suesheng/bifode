@@ -1,0 +1,14 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import MembershipForm from '../../components/MembershipForm.astro';
+---
+
+<MainLayout title="Mitgliedsantrag" description="Mitgliedschaft bei BiFoDe e.V. beantragen — beitragsfrei, Prüfung durch den Vorstand.">
+  <section class="container" style="padding: 3rem 0">
+    <h1>Mitgliedsantrag</h1>
+    <p style="max-width: 720px; color: #475569; line-height: 1.7">
+      Die Mitgliedschaft bei BiFoDe e.V. ist beitragsfrei. Nach Eingang prüft der Vorstand Ihren Antrag; die Bestätigung erhalten Sie per E-Mail.
+    </p>
+    <MembershipForm lang="de" />
+  </section>
+</MainLayout>

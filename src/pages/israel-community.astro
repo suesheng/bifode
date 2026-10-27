@@ -1,7 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import IsraelCommunityTracking from '../components/IsraelCommunityTracking.astro';
-import { FB_GROUP_ISRAEL_HUB_DACH, FB_PAGE_BIFODE, MEINVEREIN_ANTRAG_URL, MOODLE_INFO_PATH } from '../lib/communityLinks';
+import { FB_GROUP_ISRAEL_HUB_DACH, FB_PAGE_BIFODE, MEMBERSHIP_APPLY_PATH, MOODLE_INFO_PATH } from '../lib/communityLinks';
 
 const pageTitle = 'Community-Projekt | Sprache, Orientierung & Austausch | BiFoDe e.V.';
 const pageDescription =
@@ -73,10 +72,10 @@ const webPageJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: pageTitle,
-  url: 'https://www.bifode.org/israel-community',
+  url: 'https://bifode.org/israel-community',
   description: pageDescription,
   inLanguage: 'de-DE',
-  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://www.bifode.org/' },
+  isPartOf: { '@type': 'WebSite', name: 'BiFoDe e.V.', url: 'https://bifode.org/' },
   about: {
     '@type': 'EducationalOrganization',
     name: 'Community-Projekt BiFoDe e.V.',
@@ -86,7 +85,6 @@ const webPageJsonLd = JSON.stringify({
 ---
 
 <MainLayout title={pageTitle} description={pageDescription} titleSuffix={false} mainClass="ic-main">
-  <IsraelCommunityTracking />
   <script type="application/ld+json" set:html={webPageJsonLd} />
 
   <div class="ic-page">
@@ -103,7 +101,7 @@ const webPageJsonLd = JSON.stringify({
         <div class="ic-hero-actions">
           <a href="#kontakt" class="ic-btn ic-btn-primary" data-track="contact_cta">Interesse anmelden</a>
           <a href="#kontakt" class="ic-btn ic-btn-secondary" data-track="contact_cta">Direkt eine Frage stellen</a>
-          <a href={MEINVEREIN_ANTRAG_URL} target="_blank" rel="noopener noreferrer" class="ic-btn ic-btn-outline" data-track="membership_intent">Mitglied werden</a>
+          <a href={MEMBERSHIP_APPLY_PATH} class="ic-btn ic-btn-outline" data-track="membership_intent">Mitglied werden</a>
           <a
             href="#spenden"
             class="ic-btn ic-btn-ghost"
@@ -251,7 +249,7 @@ const webPageJsonLd = JSON.stringify({
           <article class="card feature-card"><h3>Merch & Vereinsmaterialien</h3><p>Zugang zu ausgewählten Vereinsmaterialien und Community-Merch, sofern verfügbar und passend zum jeweiligen Projektformat.</p></article>
         </div>
         <p class="ic-cta-row">
-          <a href={MEINVEREIN_ANTRAG_URL} target="_blank" rel="noopener noreferrer" class="ic-btn ic-btn-primary" data-track="membership_intent">Mitglied werden und Angebote nutzen</a>
+          <a href={MEMBERSHIP_APPLY_PATH} class="ic-btn ic-btn-primary" data-track="membership_intent">Mitglied werden und Angebote nutzen</a>
           <a href={MOODLE_INFO_PATH} class="ic-btn ic-btn-outline">Moodle für Mitglieder</a>
         </p>
         <p class="ic-small">Die Mitgliedschaft ist beitragsfrei. Für einzelne Kurse oder Veranstaltungen können Teilnahmeentgelte oder eine separate Anmeldung erforderlich sein.</p>
@@ -366,7 +364,7 @@ const webPageJsonLd = JSON.stringify({
           <li>die Entwicklung neuer Bildungsangebote aktiv unterstützen.</li>
         </ul>
         <p class="ic-cta-row">
-          <a href={MEINVEREIN_ANTRAG_URL} target="_blank" rel="noopener noreferrer" class="ic-btn ic-btn-primary" data-track="membership_intent">Mitgliedschaft anfragen</a>
+          <a href={MEMBERSHIP_APPLY_PATH} class="ic-btn ic-btn-primary" data-track="membership_intent">Mitgliedschaft anfragen</a>
         </p>
         <div class="ic-tax-box">
           <h3>Steuerlicher Vorteil</h3>
@@ -498,7 +496,7 @@ const webPageJsonLd = JSON.stringify({
         </p>
         <div class="ic-hero-actions">
           <a href="#kontakt" class="ic-btn ic-btn-primary" data-track="contact_cta">Frage stellen</a>
-          <a href={MEINVEREIN_ANTRAG_URL} target="_blank" rel="noopener noreferrer" class="ic-btn ic-btn-secondary" data-track="membership_intent">Mitglied werden</a>
+          <a href={MEMBERSHIP_APPLY_PATH} class="ic-btn ic-btn-secondary" data-track="membership_intent">Mitglied werden</a>
           <a
             href={FB_GROUP}
             class="ic-btn ic-btn-outline"

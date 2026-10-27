@@ -2,11 +2,11 @@
 
 ## Project
 
-Static + server-rendered site for **BiFoDe e.V.** (bildungs- und präventionsorientierte NGO). Production: **https://www.bifode.org** (Vercel). Repo name: `absent-altitude`.
+Static + server-rendered site for **BiFoDe e.V.** (bildungs- und präventionsorientierte NGO). Production: **https://bifode.org** (own Podway pod; `www.bifode.org` redirects to it). Repo name: `absent-altitude`.
 
 ## Stack
 
-- **Astro 6** with `@astrojs/vercel` adapter (`output: 'server'`)
+- **Astro 6** with `@astrojs/node` adapter (standalone, `output: 'server'`)
 - **Node.js 24.x** (see `package.json` `engines`)
 - **TypeScript** in content config and API routes; pages mostly `.astro`
 - **nodemailer** for contact form (`src/pages/api/contact.ts`)
@@ -33,9 +33,9 @@ This repo uses an npm **`overrides`** entry so Rollup runs as **`@rollup/wasm-no
 
 When verifying code in Codex:
 
-1. Use **Node 24** (`nvm use 24` or Codex’s bundled Node 24 runtime) — matches `package.json` `engines` and Vercel.
+1. Use **Node 24** (`nvm use 24` or Codex’s bundled Node 24 runtime) — matches `package.json` `engines`.
 2. Run **`npm run build` outside the sandbox** — approve Codex when it asks to escalate / run without sandbox restrictions.
-3. Expect **1–2 minutes** total; the `@astrojs/vercel` “Bundling function…” step can sit silent for ~60s — that is normal, not a freeze.
+3. Expect **1–2 minutes** total; the build can sit silent for a while — that is normal, not a freeze.
 4. If a previous build/dev is stuck, approve `pkill -f "astro"` (or stop from Codex) before retrying.
 5. Prefer **`npm run build`** over `npm run dev` for automated checks unless you explicitly need the dev server.
 
@@ -54,7 +54,7 @@ src/
   pages/api/       # Server endpoints (contact)
 public/            # Static assets
 astro.config.mjs
-vercel.json        # Host redirects (bifode.de → www.bifode.org)
+(no vercel.json: hosting is a Podway pod, started via `podway startup` as `node dist/server/entry.mjs`)
 .env.example       # Documented env vars (copy to .env locally)
 ```
 
@@ -82,7 +82,7 @@ List pages filter drafts where applicable. Event ICS routes: `src/pages/events.i
 Never commit `.env` or secrets. See `.env.example`:
 
 - **SMTP_***, **CONTACT_FROM_EMAIL**, **CONTACT_TO_EMAIL** — contact API
-- **PUBLIC_JOTFORM_ANMELDUNG_URL** — event registration (Jotform); `/anmeldung` and `/en/registration` redirect
+- **ADMIN_EMAILS**, **SITE_URL**, **DATABASE_PATH** — member admin (`/admin`); `/anmeldung` and `/en/registration` redirect to the own application form
 
 ## Coding conventions
 
@@ -100,5 +100,5 @@ Never commit `.env` or secrets. See `.env.example`:
 
 ## Deployment
 
-- Hosted on **Vercel**; adapter config in `astro.config.mjs`.
-- `vercel.json` handles domain redirects only; do not break `www.bifode.org` canonical URLs without explicit request.
+- Hosted on a **Podway pod**; adapter config in `astro.config.mjs`.
+- Do not break the canonical `https://bifode.org` URLs without explicit request.

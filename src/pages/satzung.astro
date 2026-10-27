@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import SatzungDocument from '../components/SatzungDocument.astro';
-import { MEINVEREIN_ANTRAG_URL } from '../lib/communityLinks';
+import { MEMBERSHIP_APPLY_PATH } from '../lib/communityLinks';
 ---
 
 <MainLayout
@@ -16,7 +16,7 @@ import { MEINVEREIN_ANTRAG_URL } from '../lib/communityLinks';
     <SatzungDocument />
     <p class="satzung-footer-note">
       Fragen: <a href="mailto:info@bifode.org">info@bifode.org</a> ·{' '}
-      <a href={MEINVEREIN_ANTRAG_URL} target="_blank" rel="noopener noreferrer">Mitgliedschaft beantragen</a> ·{' '}
+      <a href={MEMBERSHIP_APPLY_PATH}>Mitgliedschaft beantragen</a> ·{' '}
       <a href="/satzung-entwurf">Entwurf Satzungsänderung (Fassung 1.5)</a> ·{' '}
       <a href="/beitragsordnung">Beitragsordnung</a> · <a href="/entgeltordnung">Entgeltordnung</a>
     </p>

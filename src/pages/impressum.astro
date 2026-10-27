@@ -1,138 +1,68 @@
 ---
-// src/pages/impressum.astro
-import MainLayout from '../layouts/MainLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
 import { SATZUNG_PAGE_DE } from '../lib/vereinDocs';
 ---
 
-<MainLayout title="Impressum" description="Impressum des Bildungsforum für Demokratie und Vielfalt NRW e.V. ">
-  <div class="container">
-    <h1>Impressum</h1>
-
-    <div class="content-section">
-      <h2>Angaben gemäß § 5 DDG</h2>
-      <p>
-        <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V. </strong><br>
-        BiFoDe e.V. 
-      </p>
-      <p>
-        <strong>Vertreten durch den Vorstand (§ 26 BGB):</strong><br>
-        Denis Vilensky (1. Vorsitzender, einzelvertretungsberechtigt)<br>
-        Denis Berengolts (stellv. Vorsitzender)<br>
-        Ilja Litwin (Schatzmeister)
-      </p>
-      <p>
-        <strong>Kontakt:</strong><br>
-        E-Mail: info@bifode.org
-      </p>
-      <p>
-        <strong>Anschrift:</strong><br>
-        Allgäustr. 45<br>
-        42651 Solingen
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Registereintrag</h2>
-      <p>
-        Eingetragen im Vereinsregister.<br>
-        Registergericht: Amtsgericht Wuppertal<br>
-        Registernummer: VR 31702
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Satzung</h2>
-      <p>
-        Die Satzung von BiFoDe e.V. ist auf der Website veröffentlicht:
-        <a href={SATZUNG_PAGE_DE}>Satzung</a>.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Verantwortlich für den Inhalt</h2>
-      <p>
-        Denis Vilensky<br>
-        Allgäustr. 45, 42651 Solingen<br>
-        E-Mail: info@bifode.org
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Haftung für Inhalte</h2>
-      <p>
-        Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität übernehmen wir keine Gewähr. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte verantwortlich.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Haftung für Links</h2>
-      <p>
-        Externe Links führen zu Inhalten Dritter. Wir haben keinen Einfluss auf diese Inhalte und distanzieren uns ausdrücklich von rechtswidrigen Inhalten.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Urheberrecht</h2>
-      <p>
-        Die Inhalte dieser Website unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung oder Verwertung bedarf der schriftlichen Zustimmung des Urhebers.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Streitschlichtung</h2>
-      <p>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>
-      </p>
-    </div>
+<LegalPage title="Impressum" description="Impressum des Bildungsforum für Demokratie und Vielfalt NRW e.V." stand="27. Oktober 2026">
+  <div class="content-section">
+    <p>bifode.org ist die Website des Vereins BiFoDe e.V. Das Hebräischangebot Ulpan Ivrit (ulpan-ivrit.de) wird ebenfalls von BiFoDe e.V. getragen.</p>
   </div>
-</MainLayout>
 
-<style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
+  <div class="content-section">
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>
+      <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V. (BiFoDe e.V.)</strong><br />
+      Allgäustr. 45<br />
+      42651 Solingen
+    </p>
+    <p>
+      <strong>Vertreten durch den Vorstand (§ 26 BGB):</strong><br />
+      Denis Vilensky (1. Vorsitzender, einzelvertretungsberechtigt)<br />
+      Denis Berengolts (stellv. Vorsitzender)<br />
+      Ilja Litwin (Schatzmeister)
+    </p>
+    <p>
+      <strong>Kontakt:</strong><br />
+      E-Mail: <a href="mailto:info@bifode.org">info@bifode.org</a>
+    </p>
+  </div>
 
-  h1 {
-    color: #111827;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
+  <div class="content-section">
+    <h2>Registereintrag</h2>
+    <p>
+      Eingetragen im Vereinsregister.<br />
+      Registergericht: Amtsgericht Wuppertal<br />
+      Registernummer: VR 31702
+    </p>
+  </div>
 
-  .content-section {
-    margin-bottom: 2rem;
-  }
+  <div class="content-section">
+    <h2>Satzung</h2>
+    <p>Die Satzung von BiFoDe e.V. ist auf der Website veröffentlicht: <a href={SATZUNG_PAGE_DE}>Satzung</a>.</p>
+  </div>
 
-  .content-section h2 {
-    color: #111827;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
+  <div class="content-section">
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>
+      Denis Vilensky<br />
+      Allgäustr. 45, 42651 Solingen<br />
+      E-Mail: <a href="mailto:info@bifode.org">info@bifode.org</a>
+    </p>
+  </div>
 
-  .content-section p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: #374151;
-  }
+  <div class="content-section">
+    <h2>Haftung für Inhalte und Links</h2>
+    <p>Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität übernehmen wir keine Gewähr. Als Diensteanbieter sind wir nach § 7 Abs. 1 DDG für eigene Inhalte verantwortlich.</p>
+    <p>Externe Links (zum Beispiel zu Partnern, Moodle oder Facebook) führen zu Inhalten Dritter. Auf diese Inhalte haben wir keinen Einfluss und distanzieren uns von rechtswidrigen Inhalten.</p>
+  </div>
 
-  .content-section p:last-child {
-    margin-bottom: 0;
-  }
+  <div class="content-section">
+    <h2>Urheberrecht</h2>
+    <p>Die Inhalte dieser Website unterliegen dem deutschen Urheberrecht. Vervielfältigung oder Verwertung außerhalb der gesetzlichen Schranken bedarf der Zustimmung des Rechteinhabers.</p>
+  </div>
 
-  a {
-    color: #3b82f6;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  strong {
-    font-weight: 600;
-  }
-</style>
+  <div class="content-section">
+    <h2>Streitbeilegung</h2>
+    <p>Hinweis nach § 36 VSBG: Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </div>
+</LegalPage>

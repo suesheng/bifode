@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
+import { env } from '../../lib/env';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
@@ -215,12 +216,12 @@ export const POST: APIRoute = async ({ request }) => {
       return json({ ok: false, message: t.invalidEmail }, 400);
     }
 
-    const host = import.meta.env.SMTP_HOST;
-    const port = Number(import.meta.env.SMTP_PORT || '587');
-    const user = import.meta.env.SMTP_USER;
-    const pass = import.meta.env.SMTP_PASS;
-    const fromEmail = import.meta.env.CONTACT_FROM_EMAIL || user;
-    const toEmail = import.meta.env.CONTACT_TO_EMAIL;
+    const host = env('SMTP_HOST');
+    const port = Number(env('SMTP_PORT') || '587');
+    const user = env('SMTP_USER');
+    const pass = env('SMTP_PASS');
+    const fromEmail = env('CONTACT_FROM_EMAIL') || user;
+    const toEmail = env('CONTACT_TO_EMAIL');
 
     if (!host || !port || !user || !pass || !fromEmail || !toEmail) {
       console.error('Missing contact mail env vars.');
