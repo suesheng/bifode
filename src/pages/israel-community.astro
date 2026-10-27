@@ -1,6 +1,5 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import IsraelCommunityTracking from '../components/IsraelCommunityTracking.astro';
 import { FB_GROUP_ISRAEL_HUB_DACH, FB_PAGE_BIFODE, MEMBERSHIP_APPLY_PATH, MOODLE_INFO_PATH } from '../lib/communityLinks';
 
 const pageTitle = 'Community-Projekt | Sprache, Orientierung & Austausch | BiFoDe e.V.';
@@ -86,7 +85,6 @@ const webPageJsonLd = JSON.stringify({
 ---
 
 <MainLayout title={pageTitle} description={pageDescription} titleSuffix={false} mainClass="ic-main">
-  <IsraelCommunityTracking />
   <script type="application/ld+json" set:html={webPageJsonLd} />
 
   <div class="ic-page">

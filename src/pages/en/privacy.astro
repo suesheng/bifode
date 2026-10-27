@@ -1,128 +1,78 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
+import LegalPage from '../../components/LegalPage.astro';
 ---
 
-<MainLayout lang="en" title="Privacy Policy" description="How BiFoDe e.V. processes personal data on this website.">
-  <div class="container">
-    <h1>Privacy Policy</h1>
-
-    <div class="content-section">
-      <h2>1. General</h2>
-      <p>
-        We process personal data only in accordance with applicable law (in particular the GDPR). This policy explains what data we collect on this website and for what purpose.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>2. Controller</h2>
-      <p>
-        <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V.</strong> (BiFoDe e.V.)<br />
-        Represented by: Denis Vilensky, Board member<br />
-        <strong>Email:</strong> info@bifode.org
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>3. Server log data & hosting</h2>
-      <p>
-        When you visit the site, technical data (e.g. IP address, time of request, browser type) may be processed to deliver and secure the website.
-      </p>
-      <p>
-        The site is hosted on <strong>Vercel Inc.</strong> (USA). Vercel processes access data as a processor; depending on configuration, EU data centres may be used. See{' '}
-        <a href="https://vercel.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Vercel’s privacy policy</a>.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>4. Contact</h2>
-      <p>
-        If you contact us by email or via the contact form, we use the information you provide solely to handle your request (Art. 6(1)(b) or (f) GDPR). Messages are sent through the SMTP provider configured for this website.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>5. Cookies</h2>
-      <p>
-        We use cookies that are technically necessary for the site to function. Optional categories (e.g. functional, analytics) are only set if you consent via the cookie banner. Legal basis for necessary cookies: Art. 6(1)(f) GDPR.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>6. Embedded services</h2>
-      <p>
-        If you submit a membership application through our form, we store the data you enter (name, address, email address, optionally phone number, newsletter choice) on our own server and use it to process your application. We do not pass it on to third parties for this purpose.
-      </p>
-      <p>
-        We do not use external trackers such as Google Analytics unless you allow optional analytics cookies in the cookie settings.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>7. Your rights</h2>
-      <p>
-        You have the right to access, rectification, erasure, restriction of processing, objection, and data portability where applicable. Contact us informally at info@bifode.org.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>8. Complaints</h2>
-      <p>You may lodge a complaint with a supervisory authority in your country or state.</p>
-    </div>
-
-    <div class="content-section">
-      <h2>9. Security</h2>
-      <p>We use appropriate technical and organisational measures to protect your data against loss, misuse, and unauthorised access.</p>
-    </div>
-
-    <div class="content-section">
-      <h2>10. Last updated</h2>
-      <p>May 2026</p>
-    </div>
+<LegalPage lang="en" title="Privacy policy" description="Privacy policy of Bildungsforum für Demokratie und Vielfalt NRW e.V. for bifode.org" stand="27 October 2026">
+  <div class="content-section">
+    <p>This policy applies to bifode.org. ulpan-ivrit.de and the learning platform Moodle have their own privacy notices. This English version is a convenience translation; the German version is authoritative.</p>
   </div>
-</MainLayout>
 
-<style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
+  <div class="content-section">
+    <h2>1. Controller</h2>
+    <p>
+      Responsible for the processing of personal data on this website:<br />
+      <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V. (BiFoDe e.V.)</strong><br />
+      Represented by: Denis Vilensky, board<br />
+      Email: <a href="mailto:info@bifode.org">info@bifode.org</a><br />
+      Address: Allgäustr. 45, 42651 Solingen, Germany
+    </p>
+  </div>
 
-  h1 {
-    color: #111827;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
+  <div class="content-section">
+    <h2>2. Hosting and server log files</h2>
+    <p>The website runs on a server of Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Germany. When you visit, technically necessary log data arises: IP address, time, requested URL, referrer, browser type and operating system.</p>
+    <p>Purpose: delivery, stability and protection against abuse. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in secure operation). The data is not combined with other sources and is deleted or shortened under the host's retention periods.</p>
+    <p>Hetzner acts as a processor. Hetzner's privacy policy: <a href="https://www.hetzner.com/de/rechtliches/datenschutz" rel="noopener noreferrer" target="_blank">hetzner.com</a>. Traffic runs through the hosting platform Podway and is routed through a proxy of Fly.io, Inc. (USA). Data processing agreements are in place with these providers.</p>
+  </div>
 
-  .content-section {
-    margin-bottom: 2rem;
-  }
+  <div class="content-section">
+    <h2>3. Contact form and email</h2>
+    <p>If you write to us via the contact form or by email, we process the fields you enter (name, organisation, email address, subject, message). Purpose: handling your enquiry. Legal basis: Art. 6(1)(b) GDPR (pre-contractual steps) and Art. 6(1)(f) GDPR (handling enquiries).</p>
+    <p>The message is delivered by email to <a href="mailto:info@bifode.org">info@bifode.org</a>; you receive an automatic acknowledgement. We send these emails through our mailbox at Google Workspace (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland) as a processor; Google may transfer data to Google LLC in the USA on the basis of the EU-US Data Privacy Framework or standard contractual clauses. We do not store the form contents in a database of our own.</p>
+    <p>We keep your enquiry only as long as needed to handle it and delete it once the purpose has ceased and no statutory retention period applies.</p>
+  </div>
 
-  .content-section h2 {
-    color: #111827;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
+  <div class="content-section">
+    <h2>4. Israel Community form</h2>
+    <p>On the Israel Community page you can tell us about your interest. We process first name, last name, email address, optionally phone/WhatsApp and city, your area of interest, your wishes for offers, your message and, if you tick it, your wish to receive the newsletter. Delivery and legal bases are as in section 3.</p>
+    <p>If you reach the page through a link with campaign parameters (utm_source, utm_medium, utm_campaign, utm_content, utm_term), we send them together with the form to see which link the enquiry came from. No cookie is set and nothing is stored on your device; the parameters come from the address you opened. Legal basis: Art. 6(1)(f) GDPR.</p>
+  </div>
 
-  .content-section p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: #374151;
-  }
+  <div class="content-section">
+    <h2>5. Membership application</h2>
+    <p>If you submit a membership application through our form, we process the data you enter: first name, last name, address, email address, optionally phone number and your declarations (statutes, privacy notice, optionally newsletter). The data is stored in a database on our own server and viewed only by authorised staff of the association's administration. We also receive an email notification at <a href="mailto:info@bifode.org">info@bifode.org</a>, and you receive emails about the receipt of and decision on your application (via Google Workspace, see section 3).</p>
+    <p>Purpose: reviewing the application and managing members. Legal basis: Art. 6(1)(b) GDPR (membership). Membership is free of charge. We keep member data for the duration of membership and afterwards only as far as statutory retention periods require; data of rejected applications is kept only as long as necessary.</p>
+  </div>
 
-  a {
-    color: #3b82f6;
-    text-decoration: none;
-  }
+  <div class="content-section">
+    <h2>6. Donations</h2>
+    <p>Donations are possible by bank transfer to the account named on the donation page. Optionally you can donate online via Stripe. When you click the button you leave our website and reach the payment page of Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, D02 H210, Ireland. Stripe processes name, email address, payment data, amount and technical data of your device (including IP address) to carry out the payment and prevent fraud. Legal basis: Art. 6(1)(b) GDPR. Stripe may transfer data to Stripe, Inc. in the USA on the basis of the EU-US Data Privacy Framework or standard contractual clauses. No connection to Stripe is made beforehand. Stripe's privacy notice: <a href="https://stripe.com/privacy" rel="noopener noreferrer" target="_blank">stripe.com/privacy</a>.</p>
+    <p>Payment details are kept within the statutory retention periods (in particular Section 147 AO, Section 257 HGB; Art. 6(1)(c) GDPR).</p>
+  </div>
 
-  a:hover {
-    text-decoration: underline;
-  }
+  <div class="content-section">
+    <h2>7. Cookies and device access (TDDDG)</h2>
+    <p>When you view the website we set no cookies and store nothing in localStorage or sessionStorage. There is no analytics or marketing tracking, and we embed no third-party tracking services. Fonts are hosted by us. A consent banner is therefore not needed. Details and the table of processing are in the <a href="/en/cookie-policy">cookie policy</a>.</p>
+  </div>
 
-  strong {
-    font-weight: 600;
-  }
-</style>
+  <div class="content-section">
+    <h2>8. External links</h2>
+    <p>Links to Facebook, Moodle (ulpan.bifode.org), partner sites and Stripe lead to third-party websites. Their privacy policies apply once you click.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>9. Your rights</h2>
+    <p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection to processing based on Art. 6(1)(f) GDPR. Informally to <a href="mailto:info@bifode.org">info@bifode.org</a>.</p>
+    <p>Complaints: Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), <a href="https://www.ldi.nrw.de/" rel="noopener noreferrer" target="_blank">ldi.nrw.de</a>.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>10. Obligation to provide data</h2>
+    <p>You do not have to give us any data to read the public pages. Mandatory form fields are only needed if you want to write to us or submit an application.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>11. Data security</h2>
+    <p>The website is delivered encrypted via HTTPS (TLS). The administration area is accessible only to authorised staff and protected by personal sign-in.</p>
+  </div>
+</LegalPage>

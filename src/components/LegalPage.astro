@@ -1,0 +1,39 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'de' | 'en';
+  stand: string;
+}
+const { title, description, lang = 'de', stand } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<MainLayout lang={lang} title={title} description={description}>
+  <div class="container legal">
+    <h1>{title}</h1>
+    <slot />
+    <p class="legal-stand">{isEn ? 'As of' : 'Stand'}: {stand}</p>
+  </div>
+</MainLayout>
+
+<style is:global>
+  .legal.container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+  .legal h1 { color: #111827; font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; text-align: center; }
+  .legal .content-section { margin-bottom: 2rem; }
+  .legal .content-section h2 { color: #111827; font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+  .legal .content-section h3 { color: #111827; font-size: 1.15rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+  .legal .content-section p { margin-bottom: 1rem; line-height: 1.6; color: #374151; }
+  .legal .content-section p:last-child { margin-bottom: 0; }
+  .legal ul { margin: 1rem 0; padding-left: 1.5rem; }
+  .legal li { margin-bottom: 0.5rem; line-height: 1.6; color: #374151; }
+  .legal a { color: #3b82f6; text-decoration: none; }
+  .legal a:hover { text-decoration: underline; }
+  .legal strong { font-weight: 600; }
+  .legal table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+  .legal th, .legal td { border: 1px solid #e5e7eb; padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; color: #374151; }
+  .legal th { background: #f9fafb; color: #111827; }
+  .legal .legal-stand { color: #6b7280; font-size: 0.9rem; margin-top: 2rem; }
+</style>

@@ -1,202 +1,78 @@
 ---
-// src/pages/datenschutz.astro
-import MainLayout from '../layouts/MainLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
 ---
 
-<MainLayout title="Datenschutzerklärung" description="Datenschutzerklärung des Bildungsforum für Demokratie und Vielfalt NRW e.V. ">
-  <div class="container">
-    <h1>Datenschutzerklärung</h1>
-
-    <div class="content-section">
-      <h2>1. Allgemeine Hinweise</h2>
-      <p>
-        Der Schutz Ihrer persönlichen Daten ist uns wichtig. Wir verarbeiten Ihre Daten ausschließlich im Rahmen der gesetzlichen Bestimmungen (DSGVO, BDSG).
-      </p>
-      <p>
-        Diese Datenschutzerklärung informiert Sie darüber, welche Daten wir auf unserer Website erfassen und wie wir diese verwenden.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>2. Verantwortlicher</h2>
-      <p>
-        Verantwortlich für die Datenverarbeitung auf dieser Website ist:
-      </p>
-      <p>
-        <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V. </strong><br>
-        BiFoDe e.V. 
-      </p>
-      <p>
-        <strong>Vertreten durch:</strong><br>
-        Denis Vilensky, Vorstand
-      </p>
-      <p>
-        <strong>E-Mail:</strong> info@bifode.org
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>3. Zugriffsdaten (Server-Logfiles)</h2>
-      <p>
-        Beim Besuch unserer Website werden automatisch Informationen durch den Hosting-Provider erfasst. Dazu gehören:
-      </p>
-      <ul>
-        <li>IP-Adresse</li>
-        <li>Datum und Uhrzeit der Anfrage</li>
-        <li>Browsertyp und -version</li>
-        <li>Betriebssystem</li>
-        <li>Referrer-URL</li>
-      </ul>
-      <p>
-        Diese Daten dienen der technischen Bereitstellung und Sicherheit der Website und werden nicht mit anderen Datenquellen zusammengeführt.
-      </p>
-      <p>
-        Die Website wird über die Hosting-Plattform <strong>Vercel Inc.</strong> (USA) bereitgestellt. Vercel verarbeitet Zugriffsdaten als Auftragsverarbeiter; es können je nach Konfiguration Rechenzentren in der EU zum Einsatz kommen. Weitere Informationen bietet die{' '}
-        <a href="https://vercel.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Datenschutzerklärung von Vercel</a>.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>4. Kontaktaufnahme</h2>
-      <p>
-        Wenn Sie uns per E-Mail oder über ein Formular kontaktieren, werden Ihre Angaben zur Bearbeitung Ihrer Anfrage gespeichert.
-      </p>
-      <p>
-        Dies betrifft insbesondere:
-      </p>
-      <ul>
-        <li>Name</li>
-        <li>E-Mail-Adresse</li>
-        <li>Nachricht</li>
-      </ul>
-      <p>
-        Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Anbahnung oder Durchführung einer Zusammenarbeit).
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>5. Verwendung von Cookies</h2>
-      <p>
-        Technisch notwendige Cookies setzen wir für den Betrieb der Website (z. B. Speicherung Ihrer Cookie-Einstellungen). Optional können Sie über unseren Cookie-Banner weitere Kategorien (z. B. funktional, Analyse) zulassen; diese werden erst nach Einwilligung gesetzt (Art. 6 Abs. 1 lit. a DSGVO).
-      </p>
-      <p>
-        Für notwendige Cookies ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>6. Externe Inhalte und Dienste</h2>
-      <p>
-        Wenn Sie über unser Formular einen Mitgliedsantrag stellen, speichern wir die von Ihnen eingegebenen Daten (Name, Anschrift, E-Mail-Adresse, optional Telefonnummer, Angaben zum Newsletter) auf unserem eigenen Server und verwenden sie zur Bearbeitung Ihres Antrags. Eine Weitergabe an Dritte findet dazu nicht statt.
-      </p>
-      <p>
-        Für den Versand von Nachrichten über unser Kontaktformular nutzen wir einen SMTP-Dienst (z. B. E-Mail-Anbieter); die Verarbeitung erfolgt zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO).
-      </p>
-      <p>
-        Es werden keine externen Tracking- oder Analyse-Dienste wie Google Analytics eingesetzt, sofern Sie keine optionalen Analyse-Cookies über unsere Cookie-Einstellungen zulassen.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>7. Ihre Rechte</h2>
-      <p>
-        Sie haben jederzeit das Recht auf:
-      </p>
-      <ul>
-        <li>Auskunft über Ihre gespeicherten Daten</li>
-        <li>Berichtigung unrichtiger Daten</li>
-        <li>Löschung Ihrer Daten</li>
-        <li>Einschränkung der Verarbeitung</li>
-        <li>Widerspruch gegen die Verarbeitung</li>
-      </ul>
-      <p>
-        Hierzu genügt eine formlose Mitteilung per E-Mail an: info@bifode.org
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>8. Beschwerderecht</h2>
-      <p>
-        Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren.
-      </p>
-      <p>
-        Zuständig ist in der Regel die Aufsichtsbehörde Ihres Bundeslandes.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>9. Datensicherheit</h2>
-      <p>
-        Wir setzen technische und organisatorische Maßnahmen ein, um Ihre Daten vor Verlust, Manipulation oder unberechtigtem Zugriff zu schützen.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>10. Stand</h2>
-      <p>
-        Diese Datenschutzerklärung hat den Stand: Mai 2026
-      </p>
-    </div>
+<LegalPage title="Datenschutzerklärung" description="Datenschutzerklärung des Bildungsforum für Demokratie und Vielfalt NRW e.V. für bifode.org" stand="27. Oktober 2026">
+  <div class="content-section">
+    <p>Diese Erklärung gilt für bifode.org. Für ulpan-ivrit.de und die Lernplattform Moodle gelten die dortigen eigenen Datenschutzhinweise.</p>
   </div>
-</MainLayout>
 
-<style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
+  <div class="content-section">
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website:<br />
+      <strong>Bildungsforum für Demokratie und Vielfalt NRW e.V. (BiFoDe e.V.)</strong><br />
+      Vertreten durch: Denis Vilensky, Vorstand<br />
+      E-Mail: <a href="mailto:info@bifode.org">info@bifode.org</a><br />
+      Anschrift: Allgäustr. 45, 42651 Solingen
+    </p>
+  </div>
 
-  h1 {
-    color: #111827;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
+  <div class="content-section">
+    <h2>2. Hosting und Server-Logfiles</h2>
+    <p>Die Website wird auf einem Server der Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Deutschland, betrieben. Beim Abruf entstehen technisch notwendige Protokolldaten: IP-Adresse, Zeitpunkt, aufgerufene URL, Referrer, Browsertyp und Betriebssystem.</p>
+    <p>Zweck: Auslieferung, Stabilität und Abwehr von Missbrauch. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb). Die Daten werden nicht mit anderen Quellen zusammengeführt und nach den Fristen des Hosters gelöscht bzw. gekürzt.</p>
+    <p>Hetzner handelt als Auftragsverarbeiter. Datenschutzerklärung von Hetzner: <a href="https://www.hetzner.com/de/rechtliches/datenschutz" rel="noopener noreferrer" target="_blank">hetzner.com</a>. Der Datenverkehr läuft über die Hosting-Plattform Podway und wird dabei über einen Proxy der Fly.io, Inc. (USA) geleitet. Mit den Dienstleistern bestehen Verträge zur Auftragsverarbeitung.</p>
+  </div>
 
-  .content-section {
-    margin-bottom: 2rem;
-  }
+  <div class="content-section">
+    <h2>3. Kontaktformular und E-Mail</h2>
+    <p>Wenn Sie uns über das Kontaktformular oder per E-Mail schreiben, verarbeiten wir die von Ihnen eingegebenen Felder (Name, Organisation, E-Mail-Adresse, Betreff, Nachricht). Zweck ist die Bearbeitung Ihrer Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Schritte) sowie Art. 6 Abs. 1 lit. f DSGVO (Bearbeitung von Anfragen).</p>
+    <p>Die Nachricht wird per E-Mail an <a href="mailto:info@bifode.org">info@bifode.org</a> zugestellt; Sie erhalten eine automatische Eingangsbestätigung. Diese E-Mails versenden wir über unser Postfach bei Google Workspace (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) als Auftragsverarbeiter; Google kann Daten an die Google LLC in den USA übermitteln, Grundlage ist der EU-US Data Privacy Framework bzw. Standardvertragsklauseln. Die Formularinhalte selbst speichern wir nicht in einer eigenen Datenbank.</p>
+    <p>Wir speichern Ihre Anfrage nur so lange, wie es zur Bearbeitung erforderlich ist, und löschen sie, sobald der Zweck entfallen ist und keine gesetzlichen Aufbewahrungsfristen entgegenstehen.</p>
+  </div>
 
-  .content-section h2 {
-    color: #111827;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
+  <div class="content-section">
+    <h2>4. Israel-Community-Formular</h2>
+    <p>Über die Seite Israel Community können Sie uns Ihr Interesse mitteilen. Verarbeitet werden Vorname, Nachname, E-Mail-Adresse, optional Telefon/WhatsApp und Stadt, Ihr Interessensbereich, Ihre Angebotswünsche, Ihre Nachricht und, wenn Sie das ankreuzen, Ihr Wunsch nach dem Newsletter. Der Versand und die Rechtsgrundlagen entsprechen Abschnitt 3.</p>
+    <p>Wenn Sie über einen Link mit Kampagnenparametern (utm_source, utm_medium, utm_campaign, utm_content, utm_term) auf die Seite kommen, übermitteln wir diese Angaben zusammen mit dem Formular, um nachzuvollziehen, über welchen Link die Anfrage entstand. Dafür wird kein Cookie gesetzt und nichts auf Ihrem Gerät gespeichert; die Parameter stammen aus der aufgerufenen Adresse. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
+  </div>
 
-  .content-section p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: #374151;
-  }
+  <div class="content-section">
+    <h2>5. Mitgliedsantrag</h2>
+    <p>Wenn Sie über unser Formular einen Mitgliedsantrag stellen, verarbeiten wir die von Ihnen eingegebenen Daten: Vorname, Nachname, Anschrift, E-Mail-Adresse, optional Telefonnummer sowie Ihre Erklärungen (Satzung, Datenschutzhinweis, optional Newsletter). Die Daten werden auf unserem eigenen Server in einer Datenbank gespeichert und nur von berechtigten Mitarbeitenden der Vereinsverwaltung eingesehen. Zusätzlich erhalten wir eine Benachrichtigung per E-Mail an <a href="mailto:info@bifode.org">info@bifode.org</a>, und Sie erhalten E-Mails zum Eingang und zur Entscheidung über Ihren Antrag (über Google Workspace, siehe Abschnitt 3).</p>
+    <p>Zweck ist die Prüfung des Antrags und die Mitgliederverwaltung. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Mitgliedschaft). Die Mitgliedschaft ist beitragsfrei. Daten von Mitgliedern speichern wir für die Dauer der Mitgliedschaft und danach nur, soweit gesetzliche Aufbewahrungsfristen es erfordern; Daten abgelehnter Anträge speichern wir nur so lange, wie es erforderlich ist.</p>
+  </div>
 
-  .content-section p:last-child {
-    margin-bottom: 0;
-  }
+  <div class="content-section">
+    <h2>6. Spenden</h2>
+    <p>Spenden sind per Überweisung auf das auf der Spendenseite genannte Konto möglich. Optional können Sie online über Stripe spenden. Mit dem Klick auf die Schaltfläche verlassen Sie unsere Website und gelangen zur Bezahlseite von Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, D02 H210, Irland. Stripe verarbeitet dabei Name, E-Mail-Adresse, Zahlungsdaten, Betrag sowie technische Daten Ihres Geräts (u. a. IP-Adresse) zur Durchführung der Zahlung und zur Betrugsprävention. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Stripe kann Daten an die Stripe, Inc. in den USA übermitteln; Grundlage ist der EU-US Data Privacy Framework bzw. Standardvertragsklauseln. Vorher wird keine Verbindung zu Stripe aufgebaut. Datenschutzhinweise von Stripe: <a href="https://stripe.com/de/privacy" rel="noopener noreferrer" target="_blank">stripe.com/de/privacy</a>.</p>
+    <p>Angaben aus der Zahlung speichern wir im Rahmen der gesetzlichen Aufbewahrungsfristen (insbesondere § 147 AO, § 257 HGB; Art. 6 Abs. 1 lit. c DSGVO).</p>
+  </div>
 
-  ul {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-  }
+  <div class="content-section">
+    <h2>7. Cookies und Endgerätezugriff (TDDDG)</h2>
+    <p>Wenn Sie die Website ansehen, setzen wir keine Cookies und speichern nichts in localStorage oder sessionStorage. Es gibt kein Analyse- oder Marketing-Tracking, und wir binden keine Tracking-Dienste Dritter ein. Schriftarten liegen auf unserem Host. Ein Consent-Banner ist deshalb nicht nötig. Einzelheiten und die Tabelle der Verarbeitungen stehen im <a href="/cookie-richtlinien">Cookie-Konzept</a>.</p>
+  </div>
 
-  li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
-    color: #374151;
-  }
+  <div class="content-section">
+    <h2>8. Externe Links</h2>
+    <p>Links zu Facebook, Moodle (ulpan.bifode.org), Partnerseiten und Stripe führen zu Websites Dritter. Beim Klick gelten deren Datenschutzerklärungen.</p>
+  </div>
 
-  a {
-    color: #3b82f6;
-    text-decoration: none;
-  }
+  <div class="content-section">
+    <h2>9. Ihre Rechte</h2>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Formlos an <a href="mailto:info@bifode.org">info@bifode.org</a>.</p>
+    <p>Beschwerde: Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), <a href="https://www.ldi.nrw.de/" rel="noopener noreferrer" target="_blank">ldi.nrw.de</a>.</p>
+  </div>
 
-  a:hover {
-    text-decoration: underline;
-  }
+  <div class="content-section">
+    <h2>10. Pflicht zur Angabe</h2>
+    <p>Sie müssen uns keine Daten übermitteln, um die öffentlichen Seiten zu lesen. Pflichtfelder in Formularen sind nur nötig, wenn Sie uns schreiben oder einen Antrag stellen wollen.</p>
+  </div>
 
-  strong {
-    font-weight: 600;
-  }
-</style>
+  <div class="content-section">
+    <h2>11. Datensicherheit</h2>
+    <p>Die Website wird verschlüsselt über HTTPS (TLS) ausgeliefert. Der Verwaltungsbereich ist nur für berechtigte Mitarbeitende zugänglich und durch eine persönliche Anmeldung geschützt.</p>
+  </div>
+</LegalPage>

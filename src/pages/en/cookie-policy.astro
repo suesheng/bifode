@@ -1,125 +1,70 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
+import LegalPage from '../../components/LegalPage.astro';
 ---
 
-<MainLayout lang="en" title="Cookie Policy" description="Information about the use of cookies on this website.">
-  <div class="container">
-    <h1>Cookie policy</h1>
-
-    <div class="content-section">
-      <h2>What are cookies?</h2>
-      <p>
-        Cookies are small text files stored on your device when you visit our website.
-        They help us provide a better user experience and improve the site.
-      </p>
-    </div>
-
-    <div class="content-section">
-      <h2>Types of cookies we use</h2>
-
-      <div class="cookie-type">
-        <h3>Essential cookies</h3>
-        <p>
-          These cookies are required for the website to function. They enable basic features
-          such as security, network management, and accessibility. They are activated automatically
-          and cannot be disabled.
-        </p>
-        <p><strong>Retention:</strong> Session or up to 1 year</p>
-      </div>
-
-      <div class="cookie-type">
-        <h3>Functional cookies</h3>
-        <p>
-          These cookies allow the website to offer enhanced functionality and personalisation,
-          such as language or display preferences.
-        </p>
-        <p><strong>Retention:</strong> Up to 1 year</p>
-      </div>
-
-      <div class="cookie-type">
-        <h3>Analytics cookies</h3>
-        <p>
-          These cookies help us understand how visitors use the website. Information is aggregated
-          and used in anonymised form where possible.
-        </p>
-        <p><strong>Retention:</strong> Up to 2 years</p>
-        <p><strong>Services:</strong> Google Analytics, Matomo (if enabled)</p>
-      </div>
-
-      <div class="cookie-type">
-        <h3>Marketing cookies</h3>
-        <p>
-          These cookies are used to measure reach and relevance of communications, including via
-          Meta/Facebook (e.g. for education and community programmes). They are loaded only after consent.
-        </p>
-        <p><strong>Retention:</strong> Up to 2 years</p>
-        <p><strong>Services:</strong> Meta Pixel (if enabled)</p>
-      </div>
-    </div>
-
-    <div class="content-section">
-      <h2>Managing your cookie settings</h2>
-      <p>
-        You can change your cookie preferences at any time via the cookie settings link in the footer
-        or the settings button in the cookie banner.
-      </p>
-    </div>
+<LegalPage lang="en" title="Cookie policy" description="Whether and how bifode.org stores information on your device: no tracking cookies." stand="27 October 2026">
+  <div class="content-section">
+    <p>This policy describes whether and how bifode.org stores information on your device (Section 25 TDDDG) and processes personal data in doing so (GDPR). This English version is a convenience translation; the German version is authoritative.</p>
   </div>
-</MainLayout>
 
-<style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
+  <div class="content-section">
+    <h2>Principle</h2>
+    <p><strong>We do not use tracking, analytics or marketing cookies.</strong> If you only view the website, nothing is stored on your device: no cookies, no localStorage or sessionStorage. A consent banner is therefore not required. Fonts are served from our own server.</p>
+  </div>
 
-  h1 {
-    color: #111827;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
+  <div class="content-section">
+    <h2>Inventory</h2>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Provider</th><th>Purpose</th><th>Duration</th><th>Legal basis</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Visitors</td>
+          <td>—</td>
+          <td>No cookies or storage entries are set.</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>bf_admin</td>
+          <td>BiFoDe e.V. (this website)</td>
+          <td>Keeps signed-in association staff logged in to the closed administration area. Affects administrators only, not visitors.</td>
+          <td>12 hours</td>
+          <td>Section 25(2) no. 2 TDDDG; Art. 6(1)(f) GDPR</td>
+        </tr>
+        <tr>
+          <td>bf-theme</td>
+          <td>BiFoDe e.V. (this website)</td>
+          <td>Remembers the chosen colour scheme in the closed administration area (localStorage). Only there, not on the public pages.</td>
+          <td>until deleted in the browser</td>
+          <td>Section 25(2) no. 2 TDDDG</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  .content-section {
-    margin-bottom: 2rem;
-  }
+  <div class="content-section">
+    <h2>External sites</h2>
+    <p>If you open the Stripe page to donate, you leave our website. There, Stripe Payments Europe, Ltd. (Ireland) may set its own cookies for fraud prevention; Stripe's notices apply. The same applies to links to Facebook, Moodle and partner sites: their statements apply once you click. No connection to these providers is made beforehand.</p>
+  </div>
 
-  .content-section h2 {
-    color: #111827;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
+  <div class="content-section">
+    <h2>Data processing without cookies</h2>
+    <p>Data can still arise without cookies. It is listed here for completeness; it is not device storage under Section 25 TDDDG.</p>
+    <ul>
+      <li>Server log files at the host (Hetzner): IP address, time, URL: Art. 6(1)(f) GDPR, operation and security.</li>
+      <li>Form or email content you send: Art. 6(1)(b)/(f) GDPR, handling your enquiry or membership application.</li>
+    </ul>
+  </div>
 
-  .content-section p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: #374151;
-  }
+  <div class="content-section">
+    <h2>Categories for the future</h2>
+    <p>If analytics or marketing is added, consent comes first (Art. 6(1)(a) GDPR and Section 25(1) TDDDG), then setting. Refusing must be as easy as agreeing. Technically necessary means remain permitted without consent (Section 25(2) TDDDG).</p>
+  </div>
 
-  .cookie-type {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: #f9fafb;
-    border-radius: 0.5rem;
-    border: 1px solid #e5e7eb;
-  }
-
-  .cookie-type h3 {
-    margin: 0 0 0.75rem;
-    font-size: 1.1rem;
-    color: #111827;
-  }
-
-  .cookie-type p {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    color: #4b5563;
-  }
-
-  .cookie-type p:last-child {
-    margin-bottom: 0;
-  }
-</style>
+  <div class="content-section">
+    <h2>Control in your browser</h2>
+    <p>You can view and delete cookies and storage in your browser settings. Nothing from us is stored on the public pages of this domain.</p>
+  </div>
+</LegalPage>

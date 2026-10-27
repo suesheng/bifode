@@ -1,7 +1,6 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import UlpanNextLanding from '../../../components/UlpanNextLanding.astro';
-import UlpanProjectTracking from '../../../components/UlpanProjectTracking.astro';
 
 const pageDescription =
   'Ulpan Ivrit is BiFoDe e.V.’s education project for modern Hebrew — courses open to everyone, reduced fees for members.';
@@ -29,7 +28,6 @@ const webPageJsonLd = JSON.stringify({
     { label: 'Ulpan Ivrit' },
   ]}
 >
-  <UlpanProjectTracking />
   <script type="application/ld+json" set:html={webPageJsonLd} />
   <UlpanNextLanding lang="en" />
 </MainLayout>
