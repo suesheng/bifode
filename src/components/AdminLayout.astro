@@ -1,48 +1,118 @@
 ---
+import '../styles/admin.css';
+
 interface Props {
   title: string;
+  /** Signed-in admin email; omitted on the login page. */
   email?: string | null;
+  /** Active nav status (pending | active | rejected | left). */
+  active?: string;
+  counts?: Record<string, number>;
+  /** Centered single card without sidebar (login). */
+  bare?: boolean;
 }
-const { title, email } = Astro.props;
+const { title, email, active, counts = {}, bare = false } = Astro.props;
+
+const nav = [
+  { key: 'pending', label: 'Новые заявки', icon: 'M12 5v14M5 12h14' },
+  { key: 'active', label: 'Члены', icon: 'M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0ZM4 20a8 8 0 0 1 16 0' },
+  { key: 'rejected', label: 'Отклонённые', icon: 'M6 6l12 12M18 6 6 18' },
+  { key: 'left', label: 'Вышедшие', icon: 'M9 4H5v16h4M16 8l4 4-4 4M20 12H9' }
+];
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>{title} | BiFoDe Admin</title>
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('bf-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
   </head>
   <body>
-    <header>
-      <strong>BiFoDe Admin</strong>
-      {email && (
-        <span>
-          {email}
-          <form method="post" action="/admin/logout"><button type="submit">Abmelden</button></form>
-        </span>
-      )}
-    </header>
-    <main><slot /></main>
+    {bare ? (
+      <main class="bare"><slot /></main>
+    ) : (
+      <div class="app">
+        <aside class="sidebar" id="sidebar">
+          <div class="brand">
+            <div class="logo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="M3 13l9 5 9-5" /></svg>
+            </div>
+            <div>BiFoDe<small>Заявки на членство</small></div>
+          </div>
+          <div class="ng">Членство</div>
+          {nav.map((n) => (
+            <a class:list={['nb', active === n.key && 'on']} href={`/admin?status=${n.key}`}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={n.icon} /></svg>
+              {n.label}
+              {n.key === 'pending' && counts.pending ? <span class="cnt">{counts.pending}</span> : null}
+            </a>
+          ))}
+          <div class="ng">Данные</div>
+          <a class="nb" href="/admin/export.csv">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14" /></svg>
+            Экспорт CSV
+          </a>
+          <div class="sfoot">
+            <div class="who"><b>{email}</b><span class="mut">Администратор</span></div>
+            <form method="post" action="/admin/logout" style="margin:0"><button class="btn sec sm" type="submit">Выйти</button></form>
+          </div>
+        </aside>
+        <div class="content">
+          <div class="topbar">
+            <button class="ibtn" id="burger" type="button" aria-label="Меню">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+            <div class="crumb">BiFoDe · <b>{title}</b></div>
+            <button class="ibtn" id="theme" type="button" aria-label="Тема">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" /></svg>
+            </button>
+          </div>
+          <main><slot /></main>
+        </div>
+        <div class="scrim" id="scrim"></div>
+      </div>
+    )}
+    <script is:inline>
+      (function () {
+        var side = document.getElementById('sidebar');
+        var scrim = document.getElementById('scrim');
+        function toggle(open) {
+          if (!side) return;
+          side.classList.toggle('open', open);
+          if (scrim) scrim.classList.toggle('on', open);
+        }
+        var burger = document.getElementById('burger');
+        if (burger) burger.addEventListener('click', function () { toggle(!side.classList.contains('open')); });
+        if (scrim) scrim.addEventListener('click', function () { toggle(false); });
+        var themeBtn = document.getElementById('theme');
+        if (themeBtn) themeBtn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var dark = root.getAttribute('data-theme') === 'dark' ||
+            (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          var next = dark ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          try { localStorage.setItem('bf-theme', next); } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>
 
 <style is:global>
-  body { font-family: system-ui, sans-serif; margin: 0; color: #0c1e34; background: #f5f7fa; }
-  header { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: #fff; border-bottom: 1px solid #dde3ea; }
-  header span { display: flex; gap: 12px; align-items: center; font-size: 14px; }
-  header form { margin: 0; }
-  main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
-  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e7ebf0; vertical-align: top; }
-  th { background: #eef2f6; }
-  button, .btn { font: inherit; padding: 6px 12px; border: 1px solid #0c1e34; background: #fff; border-radius: 6px; cursor: pointer; text-decoration: none; color: inherit; display: inline-block; }
-  .btn-primary { background: #0c1e34; color: #fff; }
-  input[type='email'] { font: inherit; padding: 8px; width: 280px; max-width: 100%; }
-  .tabs { display: flex; gap: 8px; margin: 12px 0; }
-  .tabs .on { background: #0c1e34; color: #fff; }
-  .actions { display: flex; gap: 6px; }
-  .actions form { margin: 0; }
-  .note { color: #5a6b7d; font-size: 14px; }
+  a.nb { text-decoration: none; }
+  main.bare { display: grid; place-items: center; min-height: 100vh; padding: 16px; max-width: none; }
+  .st.rejected { background: var(--bad-soft); color: var(--bad); }
+  .st.left { background: var(--surface-2); color: var(--mut); border: 1px solid var(--line); }
+  .st.pending { background: var(--warn-soft); color: var(--warn); }
+  .login-card { width: min(420px, 100%); margin: 0; }
+  .login-card h1 { font-size: 20px; margin-bottom: 4px; }
+  .login-card .btn { width: 100%; margin-top: 12px; }
 </style>
